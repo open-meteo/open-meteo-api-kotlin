@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0-RC'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.open-meteo'
+            artifactId = 'api'
+            version = '0.0.1-alpha.0'
+
+            from components.java
+        }
+    }
+}
