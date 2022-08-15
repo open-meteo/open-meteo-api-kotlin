@@ -4,6 +4,9 @@ import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
+/**
+ * A simple HTTP/S client
+ */
 fun interface Http<T> {
 
     /**
@@ -29,5 +32,5 @@ fun interface Http<T> {
     fun get(url: URL) =
         response(connect(url))
 
-    // we could implement more methods/logic, but we don't need it :)
+    // we could implement more methods/logic, but we don't need them :)
 }

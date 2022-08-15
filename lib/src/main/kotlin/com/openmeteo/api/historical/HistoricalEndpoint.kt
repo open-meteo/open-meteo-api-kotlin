@@ -1,16 +1,19 @@
 package com.openmeteo.api.historical
 
+import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
 import com.openmeteo.api.historical.params.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import java.util.TimeZone
 import java.net.URL
 
 class HistoricalEndpoint(
     val latitude: Float = 52.5235f,
     val longitude: Float = 13.4115f,
-    override val context: URL = URL("https://archive-api.open-meteo.com/v1/era5/")
-) : Endpoint {
+    context: URL = URL("https://archive-api.open-meteo.com/v1/era5/")
+) : Endpoint(context) {
+    @ExperimentalSerializationApi
     operator fun invoke(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
@@ -23,7 +26,7 @@ class HistoricalEndpoint(
         precipitationUnit: PrecipitationUnit? = null,
         timeFormat: TimeFormat? = null,
         timeZone: TimeZone? = null,
-    ) = query(
+    ) = query<BadRequest>(
         "latitude" to latitude,
         "longitude" to longitude,
         "start_date" to startDate,

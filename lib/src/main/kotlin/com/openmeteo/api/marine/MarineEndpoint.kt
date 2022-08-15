@@ -1,16 +1,19 @@
 package com.openmeteo.api.marine
 
+import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
 import com.openmeteo.api.marine.params.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import java.util.TimeZone
 import java.net.URL
 
 class MarineEndpoint(
     val latitude: Float = 54.3213f,
     val longitude: Float = 10.1348f,
-    override val context: URL = URL("https://marine-api.open-meteo.com/v1/marine/")
-) : Endpoint {
+    context: URL = URL("https://marine-api.open-meteo.com/v1/marine/")
+) : Endpoint(context) {
+    @ExperimentalSerializationApi
     operator fun invoke(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
@@ -21,7 +24,7 @@ class MarineEndpoint(
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
-    ) = query(
+    ) = query<BadRequest>(
         "latitude" to latitude,
         "longitude" to longitude,
         "hourly" to hourly?.joinToString(","),

@@ -1,16 +1,19 @@
 package com.openmeteo.api.forecast
 
+import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
 import com.openmeteo.api.forecast.params.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import java.util.TimeZone
 import java.net.URL
 
 class ForecastEndpoint(
     val latitude: Float = 52.5235f,
     val longitude: Float = 13.4115f,
-    override val context: URL = URL("https://api.open-meteo.com/v1/forecast/")
-) : Endpoint {
+    context: URL = URL("https://api.open-meteo.com/v1/forecast/")
+) : Endpoint(context) {
+    @ExperimentalSerializationApi
     operator fun invoke(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
@@ -25,7 +28,7 @@ class ForecastEndpoint(
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
-    ) = query(
+    ) = query<BadRequest>(
         "latitude" to latitude,
         "longitude" to longitude,
         "hourly" to hourly?.joinToString(","),
