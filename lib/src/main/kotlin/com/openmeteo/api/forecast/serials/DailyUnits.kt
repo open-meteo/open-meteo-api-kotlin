@@ -1,7 +1,9 @@
 package com.openmeteo.api.forecast.serials
 
 import com.openmeteo.api.common.params.TimeFormat
+import kotlinx.serialization.Serializable
 
+@Serializable
 class DailyUnits(
     val time: TimeFormat,
     val temperature_2m_max: String? = null,
