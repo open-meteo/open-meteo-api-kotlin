@@ -1,6 +1,5 @@
 package com.openmeteo.api.common
 
-import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
@@ -12,13 +11,13 @@ fun interface Http<T> {
     /**
      * A simple response callback
      */
-    fun response(data: InputStream, code: Int, message: String): T
+    fun response(connection: HttpsURLConnection, code: Int): T
 
     /**
      * The response callback wrapper
      */
     private fun response(connection: HttpsURLConnection) =
-        response(connection.inputStream, connection.responseCode, connection.responseMessage)
+        response(connection, connection.responseCode)
 
     /**
      * Open a new HTTPS connection

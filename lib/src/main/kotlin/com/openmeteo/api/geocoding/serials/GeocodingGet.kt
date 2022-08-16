@@ -11,6 +11,7 @@ class GeocodingGet(
     val name: String,
     val latitude: Float,
     val longitude: Float,
+    val ranking: Float,
     val elevation: Float,
     @Serializable(with = TimeZoneSerializer::class)
     val timezone: TimeZone,

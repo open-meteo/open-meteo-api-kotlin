@@ -14,6 +14,6 @@ class Ecmwf(
     @Serializable(with = TimeZoneSerializer::class)
     val timezone: TimeZone,
     val timezone_abbreviation: String,
-    val hourly: Hourly,
-    val hourly_units: HourlyUnits,
+    val hourly: Hourly? = null,
+    val hourly_units: HourlyUnits? = null,
 )

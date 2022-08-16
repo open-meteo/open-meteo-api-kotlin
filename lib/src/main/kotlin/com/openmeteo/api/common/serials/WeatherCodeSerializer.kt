@@ -8,7 +8,7 @@ object WeatherCodeSerializer : KSerializer<WeatherCode> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("WeatherCode", PrimitiveKind.SHORT)
     override fun serialize(encoder: Encoder, value: WeatherCode) = encoder.encodeShort(value.code)
     override fun deserialize(decoder: Decoder): WeatherCode {
-        val code = decoder.decodeShort()
+        val code = decoder.decodeFloat().toInt().toShort()
         return WeatherCode.values()
             .first { it.code == code }
         // TODO: use nulls instead of throwing?

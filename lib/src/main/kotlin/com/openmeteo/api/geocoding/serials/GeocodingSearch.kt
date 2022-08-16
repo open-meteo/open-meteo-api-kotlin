@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class GeocodingSearch(
-    val results: Array<GeocodingGet>
+    val results: Array<GeocodingGet>,
+    val generationtime_ms: Float,
 )

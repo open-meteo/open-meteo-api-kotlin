@@ -9,6 +9,7 @@ import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.net.URL
+import javax.net.ssl.HttpsURLConnection
 
 /**
  * An API endpoint
@@ -47,11 +48,11 @@ abstract class Endpoint(
      *  - else throws a generic error
      */
     @ExperimentalSerializationApi
-    override fun response(data: InputStream, code: Int, message: String) =
+    override fun response(connection: HttpsURLConnection, code: Int) =
         when (code) {
-            200 -> data
-            400 -> throw json<BadRequest>(data)
-            else -> throw Error("Response: $message ($code)")
+            200 -> connection.inputStream
+            400 -> throw json<BadRequest>(connection.errorStream)
+            else -> throw Error("Response: ${connection.responseMessage} ($code)")
         }
 
     /**
