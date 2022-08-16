@@ -1,0 +1,24 @@
+package com.openmeteo.api.forecast.serials
+
+import com.openmeteo.api.common.params.TimeFormat
+
+class DailyUnits(
+    val time: TimeFormat,
+    val temperature_2m_max: String? = null,
+    val temperature_2m_min: String? = null,
+    val apparent_temperature_max: String? = null,
+    val apparent_temperature_min: String? = null,
+    val precipitation_sum: String? = null,
+    val rain_sum: String? = null,
+    val showers_sum: String? = null,
+    val snowfall_sum: String? = null,
+    val precipitation_hours: String? = null,
+    val weathercode: String? = null,
+    val sunrise: String? = null,
+    val sunset: String? = null,
+    val windspeed_10m_max: String? = null,
+    val windgusts_10m_max: String? = null,
+    val winddirection_10m_dominant: String? = null,
+    val shortwave_radiation_sum: String? = null,
+    val et0_fao_evapotranspiration: String? = null,
+)

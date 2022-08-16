@@ -13,24 +13,21 @@ class GeocodingGet(
     val longitude: Float,
     val elevation: Float,
     @Serializable(with = TimeZoneSerializer::class)
-    val timeZone: TimeZone,
+    val timezone: TimeZone,
     // https://www.geonames.org/export/codes.html enum?
-    @SerialName("feature_code")
-    val featureCode: String,
+    val feature_code: String,
     // https://en.wikipedia.org/wiki/List_of_FIPS_country_codes enum?
-    @SerialName("country_code")
-    val countryCode: String,
+    val country_code: String,
     val country: String,
-    @SerialName("country_id")
-    val countryId: Int,
+    val country_id: Int,
     val population: Int,
-    val postCodes: Array<String>,
+    val postcodes: Array<String>,
     val admin1: String? = null,
     val admin2: String? = null,
     val admin3: String? = null,
     val admin4: String? = null,
-    val admin1Id: Int? = null,
-    val admin2Id: Int? = null,
-    val admin3Id: Int? = null,
-    val admin4Id: Int? = null,
+    val admin1_id: Int? = null,
+    val admin2_id: Int? = null,
+    val admin3_id: Int? = null,
+    val admin4_id: Int? = null,
 )

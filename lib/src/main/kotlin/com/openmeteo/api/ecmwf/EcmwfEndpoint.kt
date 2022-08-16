@@ -1,9 +1,10 @@
 package com.openmeteo.api.ecmwf
 
-import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
-import com.openmeteo.api.ecmwf.params.*
+import com.openmeteo.api.common.serials.BadRequest
+import com.openmeteo.api.ecmwf.params.Hourly
+import com.openmeteo.api.ecmwf.serials.Ecmwf
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 
@@ -20,18 +21,17 @@ class EcmwfEndpoint(
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
         precipitationUnit: PrecipitationUnit? = null,
-        timeFormat: TimeFormat? = null,
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
-    ) = query<BadRequest>(
+    ) = query<Ecmwf>(
         "latitude" to latitude,
         "longitude" to longitude,
         "hourly" to hourly?.joinToString(","),
         "temperature_unit" to temperatureUnit,
         "windspeed_unit" to windSpeedUnit,
         "precipitation_unit" to precipitationUnit,
-        "timeformat" to timeFormat,
+        "timeformat" to TimeFormat.unixtime,
         "past_days" to pastDays?.takeIf { it in 0..2 },
         "start_date" to startDate,
         "end_date" to endDate,

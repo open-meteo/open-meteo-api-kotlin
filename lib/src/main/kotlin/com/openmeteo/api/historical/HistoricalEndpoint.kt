@@ -1,12 +1,13 @@
 package com.openmeteo.api.historical
 
-import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
-import com.openmeteo.api.historical.params.*
+import com.openmeteo.api.common.serials.BadRequest
+import com.openmeteo.api.historical.params.Daily
+import com.openmeteo.api.historical.params.Hourly
 import kotlinx.serialization.ExperimentalSerializationApi
-import java.util.TimeZone
 import java.net.URL
+import java.util.*
 
 class HistoricalEndpoint(
     val latitude: Float = 52.5235f,
@@ -24,7 +25,6 @@ class HistoricalEndpoint(
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
         precipitationUnit: PrecipitationUnit? = null,
-        timeFormat: TimeFormat? = null,
         timeZone: TimeZone? = null,
     ) = query<BadRequest>(
         "latitude" to latitude,
@@ -36,7 +36,7 @@ class HistoricalEndpoint(
         "temperature_unit" to temperatureUnit,
         "windspeed_unit" to windSpeedUnit,
         "precipitation_unit" to precipitationUnit,
-        "timeformat" to timeFormat,
+        "timeformat" to TimeFormat.unixtime,
         "timezone" to timeZone?.id,
     )
 }

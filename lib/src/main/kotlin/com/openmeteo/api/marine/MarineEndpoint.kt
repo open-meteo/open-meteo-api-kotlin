@@ -1,12 +1,14 @@
 package com.openmeteo.api.marine
 
-import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.common.Endpoint
-import com.openmeteo.api.common.params.*
-import com.openmeteo.api.marine.params.*
+import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.serials.BadRequest
+import com.openmeteo.api.marine.params.Daily
+import com.openmeteo.api.marine.params.Hourly
 import kotlinx.serialization.ExperimentalSerializationApi
-import java.util.TimeZone
 import java.net.URL
+import java.util.*
 
 class MarineEndpoint(
     val latitude: Float = 54.3213f,
@@ -19,7 +21,6 @@ class MarineEndpoint(
         longitude: Float = this.longitude,
         hourly: Iterable<Hourly>? = null,
         daily: Iterable<Daily>? = null,
-        timeFormat: TimeFormat? = null,
         timeZone: TimeZone? = null,
         pastDays: Int? = null,
         startDate: IsoDate? = null,
@@ -29,7 +30,7 @@ class MarineEndpoint(
         "longitude" to longitude,
         "hourly" to hourly?.joinToString(","),
         "daily" to daily?.joinToString(","),
-        "timeformat" to timeFormat,
+        "timeformat" to TimeFormat.unixtime,
         "timezone" to timeZone?.id,
         "past_days" to pastDays?.takeIf { it in 0..2 },
         "start_date" to startDate,
