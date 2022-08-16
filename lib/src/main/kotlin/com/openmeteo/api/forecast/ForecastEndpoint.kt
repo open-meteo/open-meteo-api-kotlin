@@ -2,9 +2,9 @@ package com.openmeteo.api.forecast
 
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
-import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.forecast.params.Daily
 import com.openmeteo.api.forecast.params.Hourly
+import com.openmeteo.api.forecast.serials.Forecast
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 import java.util.*
@@ -28,7 +28,7 @@ class ForecastEndpoint(
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
-    ) = query<BadRequest>(
+    ) = query<Forecast>(
         "latitude" to latitude,
         "longitude" to longitude,
         "hourly" to hourly?.joinToString(","),

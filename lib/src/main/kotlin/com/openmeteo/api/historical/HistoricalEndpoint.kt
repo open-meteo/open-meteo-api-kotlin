@@ -5,6 +5,7 @@ import com.openmeteo.api.common.params.*
 import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.historical.params.Daily
 import com.openmeteo.api.historical.params.Hourly
+import com.openmeteo.api.historical.serials.Historical
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 import java.util.*
@@ -26,7 +27,7 @@ class HistoricalEndpoint(
         windSpeedUnit: WindSpeedUnit? = null,
         precipitationUnit: PrecipitationUnit? = null,
         timeZone: TimeZone? = null,
-    ) = query<BadRequest>(
+    ) = query<Historical>(
         "latitude" to latitude,
         "longitude" to longitude,
         "start_date" to startDate,

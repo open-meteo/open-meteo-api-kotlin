@@ -6,6 +6,7 @@ import com.openmeteo.api.common.params.TimeFormat
 import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.marine.params.Daily
 import com.openmeteo.api.marine.params.Hourly
+import com.openmeteo.api.marine.serials.Marine
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 import java.util.*
@@ -25,7 +26,7 @@ class MarineEndpoint(
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
-    ) = query<BadRequest>(
+    ) = query<Marine>(
         "latitude" to latitude,
         "longitude" to longitude,
         "hourly" to hourly?.joinToString(","),

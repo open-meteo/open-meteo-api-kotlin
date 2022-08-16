@@ -1,7 +1,6 @@
-package com.openmeteo.api.forecast.serials
+package com.openmeteo.api.historical.serials
 
 import com.openmeteo.api.common.serials.Time
-import com.openmeteo.api.common.serials.WeatherCode
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,10 +12,8 @@ class Daily(
     val apparent_temperature_min: Array<Float?>? = null,
     val precipitation_sum: Array<Float?>? = null,
     val rain_sum: Array<Float?>? = null,
-    val showers_sum: Array<Float?>? = null,
     val snowfall_sum: Array<Float?>? = null,
     val precipitation_hours: Array<Float?>? = null,
-    val weathercode: Array<WeatherCode?>? = null,
     val sunrise: Array<Float?>? = null,
     val sunset: Array<Float?>? = null,
     val windspeed_10m_max: Array<Float?>? = null,

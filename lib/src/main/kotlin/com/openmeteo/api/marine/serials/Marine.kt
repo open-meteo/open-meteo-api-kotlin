@@ -1,14 +1,13 @@
-package com.openmeteo.api.forecast.serials
+package com.openmeteo.api.marine.serials
 
 import com.openmeteo.api.common.serials.TimeZoneSerializer
 import kotlinx.serialization.Serializable
 import java.util.*
 
 @Serializable
-class Forecast(
+class Marine(
     val latitude: Float,
     val longitude: Float,
-    val elevation: Float,
     val generationtime_ms: Double,
     val utc_offset_seconds: Int,
     @Serializable(with = TimeZoneSerializer::class)
@@ -18,5 +17,4 @@ class Forecast(
     val hourly_units: HourlyUnits? = null,
     val daily: Daily? = null,
     val daily_units: DailyUnits? = null,
-    val current_weather: CurrentWeather? = null,
 )
