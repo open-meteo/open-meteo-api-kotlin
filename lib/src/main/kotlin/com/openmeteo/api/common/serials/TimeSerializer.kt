@@ -5,6 +5,9 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.descriptors.*
 import java.util.Date
 
+/**
+ * Serializer of [Time] values
+ */
 object TimeSerializer : KSerializer<Time> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Time", PrimitiveKind.LONG)
     override fun serialize(encoder: Encoder, value: Time) = encoder.encodeLong(value.time)

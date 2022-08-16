@@ -2,8 +2,12 @@ package com.openmeteo.api.common.serials
 
 import kotlinx.serialization.Serializable
 
+/**
+ * A list of "wmo code"s, following [the official docs](https://open-meteo.com/en/docs#api_form)
+ */
 @Serializable(with = WeatherCodeSerializer::class)
 enum class WeatherCode(val code: Short, val message: String) {
+    UNKNOWN(-1, "Unknown"), // fallback
     CLEAR_SKY(0, "Clear sky"),
     MAINLY_CLEAR(1, "Mainly clear"),
     PARTLY_CLOUDY(2, "Partly cloudy"),
