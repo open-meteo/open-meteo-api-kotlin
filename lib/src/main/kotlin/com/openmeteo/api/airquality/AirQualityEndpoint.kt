@@ -8,6 +8,13 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import java.util.TimeZone
 import java.net.URL
 
+/**
+ * The Air Quality API endpoint
+ *
+ * @param latitude Default value for the latitude parameter
+ * @param longitude Default value for the longitude parameter
+ * @param context The URL of the endpoint (defaults to the public one)
+ */
 class AirQualityEndpoint(
     val latitude: Float = 52.5235f,
     val longitude: Float = 13.4115f,

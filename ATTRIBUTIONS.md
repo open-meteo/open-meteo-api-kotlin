@@ -42,3 +42,4 @@ This document may not be exhaustive or attribute everyone: feel free to open a p
  - [How to publish a Java / Kotlin library to Jitpack (Sami Eljabali)](https://sami.eljabali.org/how-to-publish-a-kotlin-library-to-jitpack/)
  - [Creating your own HTTP API wrapper library: Design Patterns (Tompee Balauag)](https://medium.com/tompee/creating-your-own-http-api-wrapper-library-design-patterns-10b2e232e92d)
  - [How to Publish Android Library on JitPack.io with GitHub?](https://vtsen.hashnode.dev/how-to-publish-android-library-on-jitpackio-with-github)
+ - [Automating Android library release using Github Actions](https://proandroiddev.com/automating-android-library-release-using-github-actions-c783e44ea216)

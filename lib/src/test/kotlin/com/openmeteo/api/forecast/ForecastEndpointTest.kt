@@ -1,5 +1,6 @@
 package com.openmeteo.api.forecast
 
+import com.openmeteo.api.common.params.IsoDate
 import kotlinx.serialization.ExperimentalSerializationApi
 import com.openmeteo.api.forecast.params.*
 import java.util.*
@@ -13,7 +14,7 @@ class ForecastEndpointTest {
 
     @Test
     @ExperimentalSerializationApi
-    fun `Empty query returns 200`() {
+    fun `Empty query doesn't throw`() {
         forecastEndpoint().getOrThrow()
     }
 
@@ -28,6 +29,6 @@ class ForecastEndpointTest {
         val dailyWeatherCode = daily.weathercode!!
         val dailyTimeZipWeatherCode = dailyTime.zip(dailyWeatherCode)
         for ((time, weatherCode) in dailyTimeZipWeatherCode)
-            println("On $time the weather is going to be: ${weatherCode.message}")
+            println("On ${IsoDate(time)} the weather is going to be: ${weatherCode.message}")
     }
 }

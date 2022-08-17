@@ -1,5 +1,6 @@
 package com.openmeteo.api.common.params
 
+import com.openmeteo.api.common.serials.Time
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -16,6 +17,9 @@ class IsoDate(date: Long) : Date(date) {
         format.format(this)
     constructor(date: Date) : this(
         date.time
+    )
+    constructor(date: Time) : this(
+        date.time*1000
     )
     constructor(date: String) : this(
         format.parse(date)

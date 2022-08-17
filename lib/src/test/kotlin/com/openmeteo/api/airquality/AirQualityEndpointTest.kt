@@ -11,7 +11,7 @@ class AirQualityEndpointTest {
 
     @Test
     @ExperimentalSerializationApi
-    fun `pm10, carbonMonoxide, nitrogenDioxide (scoped)`() {
+    fun `Hourly pm10, carbonMonoxide and nitrogenDioxide arrays are not null`() {
         val response = endpoint(
             hourly = listOf(
                 Hourly.pm10, Hourly.carbon_monoxide, Hourly.nitrogen_dioxide
