@@ -1,4 +1,4 @@
-# ☁️ Open-Meteo Kotlin Library
+# :cloud:️ Open-Meteo Kotlin Library
 
 [![Kotlin Stability: Alpha](https://img.shields.io/badge/stability-alpha-kotlin.svg?color=DB3683&logo=kotlin&logoColor=ffffff&logoWidth=12&style=for-the-badge)](https://kotlinlang.org/docs/components-stability.html)&emsp;
 [![GitHub license: MIT](https://img.shields.io/github/license/open-meteo/open-meteo-api-kotlin?logo=github&logoWidth=14&style=for-the-badge)](LICENSE.md)&emsp;
@@ -11,24 +11,26 @@ This library would be (nearly) useless without the public API servers: please, c
 
 ---
 
-## ⚠️ Warning
+## :warning: Warning
 
 Because it's still in early development, some breaking changes **WILL** occur.
 Using the library is discouraged until version 1.0.0 is published: single commits could break code and remove some features.
 
 ---
 
-## 📑 Index
+## :bookmark_tabs: Index
 
- - [📘 Installation](INSTALLATION.md#📘-Installation)
+ - [:blue_book: Installation](INSTALLATION.md#:blue_book:-Installation)
    - [Gradle](INSTALLATION.md#Gradle)
    - [Android (gradle)](INSTALLATION.md#Android)
    - [Maven](INSTALLATION.md#Maven)
- - [📗 Usage](#📗-Usage)
- - [📝 TODO](https://github.com/users/DadiBit/projects/1)
- - [⚖️ Legal](#⚖️-Legal)
+ - [:green_book: Usage](#:green_book:-Usage)
+ - [:memo: TODO](https://github.com/users/DadiBit/projects/1)
+ - [:balance_scale:️Legal](#:balance_scale:-Legal)
+   - [LICENSE](LICENSE.md)
+   - [ATTRIBUTIONS](ATTRIBUTIONS.md)
 
-## 📗 Usage
+## :green_book: Usage
 
 Here's a quick example:
 ```kotlin
@@ -53,6 +55,6 @@ Research is going to be done to find out which array could have `null`s and redu
 
 The library will include some examples with comments in the tests and in the documentation.
 
-## ⚖️ Legal
+## :balance_scale: Legal
 
 You are free to do pretty much whatever you want with this library, as long as you honour the [LICENSE](LICENSE.md) and the [ATTRIBUTIONS](ATTRIBUTIONS.md).

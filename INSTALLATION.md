@@ -1,4 +1,4 @@
-# 📘 Installation
+# :blue_book: Installation
 
 The library is published on [jitpack.io](https://jitpack.io).
 Please note that a custom domain for the group id is used: it's an "alias" for `com.github.open-meteo`.
