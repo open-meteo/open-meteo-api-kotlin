@@ -1,0 +1,127 @@
+name: Release
+
+on:
+  # push:
+    # tags:
+      # - '[0-9]+.[0-9]+.[0-9]+' # no pre-release suffix
+      # - '[0-9]+.[0-9]+.[0-9]+-[0-9A-Za-z]+' # pre-release suffix, no ID
+      # - '[0-9]+.[0-9]+.[0-9]+-[0-9A-Za-z]+.[0-9]+' # pre-release suffix
+      # - '!0[0-9]+*' # MAJOR only absolute integer
+      # - '!*.0[0-9]+*' # MINOR, PATCH and ID only absolute integer
+      # - '!*-0[0-9]+' # NAME only absolute integer, no ID
+      # - '!*-0[0-9]+.*' # NAME only absolute integer
+      
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        type: string
+      title:
+        description: 'Title'
+        required: true
+        type: string
+
+env:
+  version: ${{ github.event.inputs.version }}
+  title: ${{ github.event.inputs.title }}
+  actor: ${{ github.actor }}
+  regex: "((0|[1-9][0-9]*)\.){2}(0|[1-9][0-9]*)(-(alpha|beta|rc)(\.(0|[1-9][0-9]*))?)?"
+
+jobs:
+
+  verify:
+    name: Verify input
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Verify version
+      id: verify_version
+      run: grep -qE "^$regex$" <<< "$version"
+
+  update:
+    name: Update the library version
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      id: checkout
+      uses: actions/checkout@v3
+
+    - name: Config git
+      id: config_git
+      run: |
+        git config user.name "$actor"
+        git config user.email "$actor@users.noreply.github.com"
+
+    - name: Update INSTALLATION.md
+      id: update_installation_md
+      run: sed -E "s/$regex/$version/g" INSTALLATION.md
+
+    - name: Update lib/build.gradle
+      id: update_lib_build_gradle
+      run: sed -E "s/version = '$regex'/version = '$version'/g" lib/build.gradle
+
+    - name: Stage updated files
+      id: stage_files
+      run: git add INSTALLATION.md lib/build.gradle
+
+    - name: Commit updated files
+      id: commit_files
+      run: git commit -m "Update version in INSTALLATION.md and lib/build.gradle"
+
+    - name: Push staged files
+      id: push_files
+      run: git push origin $GITHUB_REF_NAME
+
+  release:
+    name: Draft the new release
+    needs: update
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      id: checkout
+      uses: actions/checkout@v3
+
+    - name: Create version tag
+      id: create_tag
+      run: git tag $version -m "$title"
+
+    - name: Push version tag
+      id: push_tag
+      run: git push origin $version
+
+    - name: Release on GitHub
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: refs/tags/${{ env.version }}
+        release_name: ${{ env.title }}
+        body: |
+          ## New Feautures
+
+            - None
+
+          ## Refactoring
+
+            - Plenty
+
+          ## Fixes
+
+            - A few
+
+          ## Documentation
+
+            - None
+
+          ## Tests
+
+            - Some
+
+        draft: true
+        # '-' appears only if the pre-release suffix is present
+        prerelease: ${{ contains(env.version, '-') }}
+

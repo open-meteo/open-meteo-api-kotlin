@@ -14,7 +14,7 @@ This library would be (nearly) useless without the public API servers: please, c
 ## ⚠️ Warning
 
 Because it's still in early development, some breaking changes **WILL** occur.
-Using the library is discouraged until a version 1.0.0 is published: single commits could break code and remove some features.
+Using the library is discouraged until version 1.0.0 is published: single commits could break code and remove some features.
 
 ---
 
@@ -25,8 +25,7 @@ Using the library is discouraged until a version 1.0.0 is published: single comm
    - [Android (gradle)](INSTALLATION.md#Android)
    - [Maven](INSTALLATION.md#Maven)
  - [📗 Usage](#📗-Usage)
- - [🔬 Analysis](#🔬-Analysis)
- - [📝 TODO](#📝-TODO)
+ - [📝 TODO](https://github.com/users/DadiBit/projects/1)
  - [⚖️ Legal](#⚖️-Legal)
 
 ## 📗 Usage
@@ -52,25 +51,8 @@ println(weatherCode[0])
 Please note that some arrays may be filled with `null`s, hence you might want to use `?.get(0)` instead.
 Research is going to be done to find out which array could have `null`s and reduce uncertainties.
 
-The library will include some useful examples in the tests and the documentation.
-
-## 🔬 Analysis
-
-### Versioning
-
-The [Semantic Versioning](https://semver.org/) standard is used.
-To ease the github release workflow, a stricter and simpler (but not standard) matching pattern is used:
-
- - the version name should be `<MAJOR>.<MINOR>.<PATCH>`, with an optional `-<NAME>.<ID>` pre-release suffix
- - `<MAJOR>`, `<MINOR>` and `<PATCH>`: non-empty sequence of digits (`[0-9]+`, caution: `01` is non-standard)
- - Pre-release `<NAME>`: non-empty sequence of alphanumeric characters (`[A-Za-z0-9]+`)
- - Pre-release `<ID>`: non-empty sequence of digits (`[0-9]+`)
-
-## 📝 TODO
-
-[A dedicated Github project](https://github.com/users/DadiBit/projects/1) is used to keep organized.
+The library will include some examples with comments in the tests and in the documentation.
 
 ## ⚖️ Legal
 
 You are free to do pretty much whatever you want with this library, as long as you honour the [LICENSE](LICENSE.md) and the [ATTRIBUTIONS](ATTRIBUTIONS.md).
-
