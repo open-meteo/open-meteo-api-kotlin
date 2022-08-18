@@ -1,34 +1,38 @@
 package com.openmeteo.api.geocoding.serials
 
 import com.openmeteo.api.common.serials.TimeZoneSerializer
-import kotlinx.serialization.SerialName
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 import java.util.*
 
 @Serializable
+@ExperimentalSerializationApi
 class GeocodingGet(
     val id: Int,
-    val name: String,
-    val latitude: Float,
-    val longitude: Float,
-    val ranking: Float,
-    val elevation: Float,
-    @Serializable(with = TimeZoneSerializer::class)
-    val timezone: TimeZone,
+    val name: String, // #2
+    private val _3: String? = null,
+    val latitude: Float, // #4
+    val longitude: Float, // #5
+    val ranking: Float, // #6
+    val elevation: Float, // #7
     // https://www.geonames.org/export/codes.html enum?
-    val feature_code: String,
+    val feature_code: String, // #8
     // https://en.wikipedia.org/wiki/List_of_FIPS_country_codes enum?
-    val country_code: String,
-    val country: String,
+    val country_code: String, // #9
+    val admin1_id: Int? = null, // #10
+    val admin2_id: Int? = null, // #11
+    val admin3_id: Int? = null, // #12
+    val admin4_id: Int? = null, // #13
+    @Serializable(with = TimeZoneSerializer::class)
+    val timezone: TimeZone, // #14
+    val population: Int,  // #15
+    private val _16: Int? = null,
+    val postcodes: Array<String>, // #17
     val country_id: Int,
-    val population: Int,
-    val postcodes: Array<String>,
+    val country: String,
     val admin1: String? = null,
     val admin2: String? = null,
     val admin3: String? = null,
     val admin4: String? = null,
-    val admin1_id: Int? = null,
-    val admin2_id: Int? = null,
-    val admin3_id: Int? = null,
-    val admin4_id: Int? = null,
 )
