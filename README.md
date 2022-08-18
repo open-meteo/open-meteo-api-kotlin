@@ -20,13 +20,13 @@ Using the library is discouraged until version 1.0.0 is published: single commit
 
 ## :bookmark_tabs: Index
 
- - [:blue_book: Installation](INSTALLATION.md#:blue_book:-Installation)
-   - [Gradle](INSTALLATION.md#Gradle)
-   - [Android (gradle)](INSTALLATION.md#Android)
-   - [Maven](INSTALLATION.md#Maven)
- - [:green_book: Usage](#:green_book:-Usage)
+ - [:blue_book: Installation](INSTALLATION.md#blue_book-installation)
+   - [Gradle](INSTALLATION.md#gradle)
+   - [Android (gradle)](INSTALLATION.md#android)
+   - [Maven](INSTALLATION.md#maven)
+ - [:green_book: Usage](#green_book-usage)
  - [:memo: TODO](https://github.com/users/DadiBit/projects/1)
- - [:balance_scale:️Legal](#:balance_scale:-Legal)
+ - [:balance_scale: Legal](#balance_scale-legal)
    - [LICENSE](LICENSE.md)
    - [ATTRIBUTIONS](ATTRIBUTIONS.md)
 
