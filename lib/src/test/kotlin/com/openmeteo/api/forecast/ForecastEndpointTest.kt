@@ -29,6 +29,6 @@ class ForecastEndpointTest {
         val dailyWeatherCode = daily.weathercode!!
         val dailyTimeZipWeatherCode = dailyTime.zip(dailyWeatherCode)
         for ((time, weatherCode) in dailyTimeZipWeatherCode)
-            println("On ${IsoDate(time)} the weather is going to be: ${weatherCode.message}")
+            println("On ${IsoDate(time)} the weather is going to be: $weatherCode")
     }
 }
