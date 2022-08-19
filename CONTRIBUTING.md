@@ -23,4 +23,41 @@ A stricter variation of the [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 Some valid tags are: `0.0.0`, `0.2.0-beta`, `1.0.0-alpha.0`, `314.159.265.-alpha.3589793`, `9999.0.0-rc.1`
 You can validate a version tag with this regex: `^((0|[1-9][0-9]*)\.){2}(0|[1-9][0-9]*)(-(alpha|beta|rc)(\.(0|[1-9][0-9]*))?)?$`
-Please note that this regex is also used in the github "Release" workflow to verify the actor "Version" input.
+Please note that this regex is also used in the github "Release" workflow to verify the "Version" input.
+
+## Commits
+
+### Files
+
+> :warning: The project is still in early development: expect commits breaking code anyway
+
+A commit shall not break any code. If possible, it should only contain related changes:
+
+ - using a new naming convention
+ - updating the library version in multiple files
+
+### Message
+
+A stricter variation of the [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) standard is used.
+The commit message should look like this:
+```
+<type>[!]: <description>
+
+[body]
+```
+
+ - The first line is a brief (< 50 characters, if possible) description of what changed.
+ - The `<type>` should be one of:
+   - `feat` adds a new feature
+   - `fix` fixes a bug
+   - `refactor` refactors code (eg: move code into a private method)
+   - `style` changes whitespaces, new-lines, scoped variables renaming
+   - `docs` updates documentation (README, GitHub wiki, or other markdown files)
+   - `test` adds or updates tests
+   - `chore` changes not source or test code (eg: update dependencies)
+   - `build` changes the build process (eg: new dependencies)
+   - `revert` reverts a previous commit
+ - An optional `!` can be placed after the `<type>` if the commit includes breaking changes
+
+If the `<type>` field is not valid/missing, the commit won't be used to automate changelogs.
+After the first major release, a new major release must be released if breaking changes are introduced.
