@@ -1,18 +1,17 @@
 package com.openmeteo.api.geocoding
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import java.util.*
 import kotlin.test.*
 
 class GeocodingGetEndpointTest {
     companion object {
-        val geocodingGetEndpoint = GeocodingGetEndpoint()
+        val endpoint = GeocodingGetEndpoint()
     }
 
     @Test
     @ExperimentalSerializationApi
     fun Berlin() {
-        val response = geocodingGetEndpoint(
+        val response = endpoint(
             2950159,
         ).getOrThrow()
         with(response) {

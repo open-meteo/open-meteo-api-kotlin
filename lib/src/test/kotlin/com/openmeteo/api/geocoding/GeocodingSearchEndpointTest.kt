@@ -7,7 +7,7 @@ import kotlin.test.*
 
 class GeocodingSearchEndpointTest {
     companion object {
-        val geocodingSearchEndpoint = GeocodingSearchEndpoint()
+        val endpoint = GeocodingSearchEndpoint()
     }
 
     @ExperimentalSerializationApi
@@ -40,7 +40,7 @@ class GeocodingSearchEndpointTest {
     @Test
     @ExperimentalSerializationApi
     fun `Berlin (json)`() {
-        val response = geocodingSearchEndpoint(
+        val response = endpoint(
             "Berlin",
             1,
         ).getOrThrow().results[0]
@@ -50,7 +50,7 @@ class GeocodingSearchEndpointTest {
     @Test
     @ExperimentalSerializationApi
     fun `Berlin (protobuf)`() {
-        val response = geocodingSearchEndpoint(
+        val response = endpoint(
             "Berlin",
             1,
             format = ContentFormat.protobuf,

@@ -5,13 +5,13 @@ import kotlin.test.*
 
 class ElevationEndpointTest {
     companion object {
-        val elevationEndpoint = ElevationEndpoint()
+        val endpoint = ElevationEndpoint()
     }
 
     @Test
     @ExperimentalSerializationApi
     fun Berlin() {
-        val response = elevationEndpoint(
+        val response = endpoint(
             52.5235f to 13.4115f,
         ).getOrThrow()
         assertContentEquals(floatArrayOf(38f), response.elevation)
@@ -20,7 +20,7 @@ class ElevationEndpointTest {
     @Test
     @ExperimentalSerializationApi
     fun `Berlin, Tokyo`() {
-        val response = elevationEndpoint(
+        val response = endpoint(
             52.5235f to 13.4115f,
             35.6785f to 139.6823f,
         ).getOrThrow()

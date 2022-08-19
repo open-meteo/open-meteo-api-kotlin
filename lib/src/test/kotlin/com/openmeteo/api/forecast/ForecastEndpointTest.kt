@@ -9,19 +9,19 @@ import kotlin.test.*
 class ForecastEndpointTest {
 
     companion object {
-        val forecastEndpoint = ForecastEndpoint()
+        val endpoint = ForecastEndpoint()
     }
 
     @Test
     @ExperimentalSerializationApi
     fun `Empty query doesn't throw`() {
-        forecastEndpoint().getOrThrow()
+        endpoint().getOrThrow()
     }
 
     @Test
     @ExperimentalSerializationApi
     fun `Weather codes of the upcoming days`() {
-        val response = forecastEndpoint(daily = listOf(
+        val response = endpoint(daily = listOf(
             Daily.weathercode
         ), timeZone = TimeZone.getTimeZone("Europe/Berlin")).getOrThrow()
         val daily = response.daily!!
