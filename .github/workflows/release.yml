@@ -90,6 +90,10 @@ jobs:
       id: checkout
       uses: actions/checkout@v3
 
+    - name: Generate release body
+      id: make_body
+      run: .github/workflows/body.sh > body.md
+
     - name: Create version tag
       id: create_tag
       run: git tag $version -m "$title"
@@ -106,28 +110,7 @@ jobs:
       with:
         tag_name: refs/tags/${{ env.version }}
         release_name: ${{ env.title }}
-        body: |
-          ## New Feautures
-
-            - None
-
-          ## Refactoring
-
-            - Plenty
-
-          ## Fixes
-
-            - A few
-
-          ## Documentation
-
-            - None
-
-          ## Tests
-
-            - Some
-
-        draft: true
+        body_path: body.md
         # '-' appears only if the pre-release suffix is present
         prerelease: ${{ contains(env.version, '-') }}
         draft: ${{ github.event.inputs.draft }}
