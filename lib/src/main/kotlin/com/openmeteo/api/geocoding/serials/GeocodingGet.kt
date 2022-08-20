@@ -1,11 +1,9 @@
 package com.openmeteo.api.geocoding.serials
 
 import com.openmeteo.api.common.TimeZone
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@ExperimentalSerializationApi
 class GeocodingGet(
     val id: Int,
     val name: String, // #2
