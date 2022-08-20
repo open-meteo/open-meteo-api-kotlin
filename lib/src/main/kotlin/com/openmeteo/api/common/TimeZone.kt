@@ -18,9 +18,11 @@ class TimeZone(rawOffset: Int, id: String) : SimpleTimeZone(rawOffset, id) {
         this.rawOffset = tz.rawOffset
         this.id = tz.id
     }
+
     constructor(zoneId: java.time.ZoneId) : this(0, zoneId.id) {
         val tz = java.util.TimeZone.getTimeZone(zoneId)
         this.rawOffset = tz.rawOffset
     }
+
     override fun toString(): String = id
 }

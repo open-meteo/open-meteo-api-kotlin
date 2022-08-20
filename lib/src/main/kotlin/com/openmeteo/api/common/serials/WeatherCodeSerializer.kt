@@ -13,6 +13,7 @@ import kotlinx.serialization.encoding.Encoder
 object WeatherCodeSerializer : KSerializer<WeatherCode> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("WeatherCode", PrimitiveKind.SHORT)
+
     override fun serialize(encoder: Encoder, value: WeatherCode) = encoder.encodeShort(value.code)
     override fun deserialize(decoder: Decoder): WeatherCode {
         val code = decoder.decodeFloat().toInt().toShort()

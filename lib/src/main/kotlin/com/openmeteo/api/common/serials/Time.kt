@@ -9,6 +9,6 @@ import java.util.*
 @Serializable(with = TimeSerializer::class)
 class Time(
     seconds: Long,
-) : Date(seconds*1000) {
-    override fun getTime(): Long = super.getTime()/1000
+) : Date(seconds * 1000) {
+    override fun getTime(): Long = super.getTime() / 1000
 }

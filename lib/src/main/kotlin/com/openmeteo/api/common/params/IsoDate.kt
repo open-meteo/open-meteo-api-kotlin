@@ -13,14 +13,18 @@ class IsoDate(date: Long) : Date(date) {
     companion object {
         val format: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     }
+
     override fun toString(): String =
         format.format(this)
+
     constructor(date: Date) : this(
         date.time
     )
+
     constructor(date: Time) : this(
-        date.time*1000
+        date.time * 1000
     )
+
     constructor(date: String) : this(
         format.parse(date)
     )

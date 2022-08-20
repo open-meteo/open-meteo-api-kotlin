@@ -61,7 +61,7 @@ abstract class Endpoint(
     private fun queryOf(params: Map<String, Any?>) =
         if (params.isEmpty()) ""
         else "?" + params
-            .mapNotNull { (k,v) -> v?.let { "$k=$v" } }
+            .mapNotNull { (k, v) -> v?.let { "$k=$v" } }
             .joinToString("&")
 
     /**
@@ -73,10 +73,12 @@ abstract class Endpoint(
         format: ContentFormat? = params["format"] as? ContentFormat,
     ) = runCatching { URL(context, queryOf(params)) }
         .mapCatching { get(it) }
-        .mapCatching { when(format) {
-            ContentFormat.json, null -> json<T>(it)
-            ContentFormat.protobuf -> protoBuf(it)
-        } }
+        .mapCatching {
+            when (format) {
+                ContentFormat.json, null -> json<T>(it)
+                ContentFormat.protobuf -> protoBuf(it)
+            }
+        }
 
     /**
      * Query the endpoint with a list of parameters

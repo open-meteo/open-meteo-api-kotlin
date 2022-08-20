@@ -36,5 +36,6 @@ enum class WeatherCode(val code: Short, val message: String) {
     THUNDERSTORM_SLIGHT(95, "Slight or moderate thunderstorm"),
     THUNDERSTORM_SLIGHT_HAIL(96, "Thunderstorm with slight hail"),
     THUNDERSTORM_HEAVY_HAIL(99, "Thunderstorm with heavy hail");
+
     override fun toString(): String = message
 }

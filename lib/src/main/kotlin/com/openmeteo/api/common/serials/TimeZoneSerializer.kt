@@ -12,7 +12,9 @@ import kotlinx.serialization.encoding.Encoder
  * Get a [TimeZone] from a string like `"Europe/Berlin"`
  */
 object TimeZoneSerializer : KSerializer<TimeZone> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("TimeZone", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("TimeZone", PrimitiveKind.STRING)
+
     override fun serialize(encoder: Encoder, value: TimeZone) = encoder.encodeString(value.id)
     override fun deserialize(decoder: Decoder): TimeZone = TimeZone(decoder.decodeString())
 }
