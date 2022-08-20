@@ -34,4 +34,17 @@ class MarineEndpointTest {
         for ((time, waveHeightMax) in dailyTimeZipWaveHeightMax)
             println("On ${IsoDate(time)} the max wave height is going to be $waveHeightMax $dailyWaveHeightMaxUnit")
     }
+
+    @Test
+    @ExperimentalSerializationApi
+    fun `Daily auto timeZone`() {
+        val response = endpoint(
+            daily = listOf(
+                Daily.wave_height_max
+            ), timeZone = TimeZone("auto")
+        ).getOrThrow()
+        response.daily_units!!.wave_height_max!!
+        response.daily!!.wave_height_max!!
+        assertEquals("Europe/Berlin", response.timezone.id)
+    }
 }
