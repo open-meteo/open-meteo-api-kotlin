@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.serials
+package com.openmeteo.api.forecast.serials
 
 import kotlinx.serialization.Serializable
 

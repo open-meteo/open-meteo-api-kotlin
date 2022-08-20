@@ -1,6 +1,6 @@
 package com.openmeteo.api.forecast.serials
 
-import com.openmeteo.api.common.TimeZone
+import com.openmeteo.api.common.params.TimeZone
 import kotlinx.serialization.Serializable
 
 @Serializable
