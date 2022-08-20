@@ -48,8 +48,8 @@ The commit message should look like this:
 
  - The first line is a brief (< 50 characters, if possible) description of what changed.
  - The `<type>` should be one of:
-   - `feat` adds a new feature
-   - `fix` fixes a bug
+   - `feat` adds a new feature (bump `<minor>`)
+   - `fix` fixes a bug (bump `<patch>`)
    - `refactor` refactors code (eg: move code into a private method)
    - `style` changes whitespaces, new-lines, scoped variables renaming
    - `docs` updates documentation (README, GitHub wiki, or other markdown files)
@@ -57,7 +57,7 @@ The commit message should look like this:
    - `chore` changes not source or test code (eg: update dependencies)
    - `build` changes the build process (eg: new dependencies)
    - `revert` reverts a previous commit
- - An optional `!` can be placed after the `<type>` if the commit includes breaking changes
+ - `!` can be placed after `<type>` if the commit includes breaking changes (bump `<major>`)
 
 If the `<type>` field is not valid/missing, the commit won't be used to automate changelogs.
 After the first major release, a new major release must be released if breaking changes are introduced.
