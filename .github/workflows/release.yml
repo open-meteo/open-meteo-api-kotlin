@@ -42,6 +42,7 @@ jobs:
   update:
     name: Update the library version
     runs-on: ubuntu-latest
+    needs: verify
 
     steps:
     - name: Checkout code
