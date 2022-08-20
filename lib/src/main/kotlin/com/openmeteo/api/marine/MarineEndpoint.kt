@@ -31,7 +31,7 @@ class MarineEndpoint(
         "hourly" to hourly?.joinToString(","),
         "daily" to daily?.joinToString(","),
         "timeformat" to TimeFormat.unixtime,
-        "timezone" to timeZone,
+        "timezone" to (timeZone ?: daily?.let { "auto" } ),
         "past_days" to pastDays?.takeIf { it in 0..2 },
         "start_date" to startDate,
         "end_date" to endDate,

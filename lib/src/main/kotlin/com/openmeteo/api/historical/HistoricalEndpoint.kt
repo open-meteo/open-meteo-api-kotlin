@@ -37,6 +37,6 @@ class HistoricalEndpoint(
         "windspeed_unit" to windSpeedUnit,
         "precipitation_unit" to precipitationUnit,
         "timeformat" to TimeFormat.unixtime,
-        "timezone" to timeZone,
+        "timezone" to (timeZone ?: daily?.let { "auto" } ),
     )
 }
