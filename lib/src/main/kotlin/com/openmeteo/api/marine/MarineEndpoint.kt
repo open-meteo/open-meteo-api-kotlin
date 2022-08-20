@@ -3,7 +3,7 @@ package com.openmeteo.api.marine
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.IsoDate
 import com.openmeteo.api.common.params.TimeFormat
-import com.openmeteo.api.common.params.TimeZone
+import com.openmeteo.api.common.TimeZone
 import com.openmeteo.api.marine.params.Daily
 import com.openmeteo.api.marine.params.Hourly
 import com.openmeteo.api.marine.serials.Marine

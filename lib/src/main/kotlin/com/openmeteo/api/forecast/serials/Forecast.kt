@@ -1,8 +1,7 @@
 package com.openmeteo.api.forecast.serials
 
-import com.openmeteo.api.common.serials.TimeZoneSerializer
+import com.openmeteo.api.common.TimeZone
 import kotlinx.serialization.Serializable
-import java.util.*
 
 @Serializable
 class Forecast(
@@ -11,7 +10,6 @@ class Forecast(
     val elevation: Float,
     val generationtime_ms: Double,
     val utc_offset_seconds: Int,
-    @Serializable(with = TimeZoneSerializer::class)
     val timezone: TimeZone,
     val timezone_abbreviation: String,
     val hourly: Hourly? = null,

@@ -1,6 +1,7 @@
 package com.openmeteo.api.forecast
 
 import com.openmeteo.api.common.Endpoint
+import com.openmeteo.api.common.TimeZone
 import com.openmeteo.api.common.params.*
 import com.openmeteo.api.forecast.params.Daily
 import com.openmeteo.api.forecast.params.Hourly

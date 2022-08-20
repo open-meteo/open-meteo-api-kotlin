@@ -1,8 +1,7 @@
 package com.openmeteo.api.ecmwf.serials
 
-import com.openmeteo.api.common.serials.TimeZoneSerializer
+import com.openmeteo.api.common.TimeZone
 import kotlinx.serialization.Serializable
-import java.util.*
 
 @Serializable
 class Ecmwf(
@@ -10,7 +9,6 @@ class Ecmwf(
     val longitude: Float,
     val generationtime_ms: Double,
     val utc_offset_seconds: Int,
-    @Serializable(with = TimeZoneSerializer::class)
     val timezone: TimeZone,
     val timezone_abbreviation: String,
     val hourly: Hourly? = null,

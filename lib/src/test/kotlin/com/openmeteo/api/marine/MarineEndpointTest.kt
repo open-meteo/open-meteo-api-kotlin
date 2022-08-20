@@ -1,7 +1,7 @@
 package com.openmeteo.api.marine
 
 import com.openmeteo.api.common.params.IsoDate
-import com.openmeteo.api.common.params.TimeZone
+import com.openmeteo.api.common.TimeZone
 import com.openmeteo.api.marine.params.Daily
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.test.*

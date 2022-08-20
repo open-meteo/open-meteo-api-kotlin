@@ -1,5 +1,7 @@
-package com.openmeteo.api.common.params
+package com.openmeteo.api.common
 
+import com.openmeteo.api.common.serials.TimeZoneSerializer
+import kotlinx.serialization.Serializable
 import java.util.*
 
 /**
@@ -8,6 +10,7 @@ import java.util.*
  * The constructor uses [java.util.TimeZone.getTimeZone] to resolve arguments
  * Please note that "auto" is a valid string id
  */
+@Serializable(with = TimeZoneSerializer::class)
 class TimeZone(rawOffset: Int, id: String) : SimpleTimeZone(rawOffset, id) {
     constructor(id: String = "auto") : this(0, id) {
         if (id == "auto") return
