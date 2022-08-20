@@ -1,6 +1,7 @@
 package com.openmeteo.api.historical.serials
 
 import com.openmeteo.api.common.params.TemperatureUnit
+import com.openmeteo.api.common.params.WindSpeedUnit
 import com.openmeteo.api.common.params.TimeFormat
 import kotlinx.serialization.Serializable
 
@@ -24,11 +25,11 @@ class HourlyUnits(
     val direct_radiation: String? = null,
     val direct_normal_irradiance: String? = null,
     val diffuse_radiation: String? = null,
-    val windspeed_10m: String? = null,
-    val windspeed_100m: String? = null,
-    val winddirection_10m: String? = null,
-    val winddirection_100m: String? = null,
-    val windgusts_10m: String? = null,
+    val windspeed_10m: WindSpeedUnit? = null,
+    val windspeed_100m: WindSpeedUnit? = null,
+    val winddirection_10m: WindSpeedUnit? = null,
+    val winddirection_100m: WindSpeedUnit? = null,
+    val windgusts_10m: WindSpeedUnit? = null,
     val et0_fao_evapotranspiration: String? = null,
     val vapor_pressure_deficit: String? = null,
     val soil_temperature_0_to_7cm: TemperatureUnit? = null,

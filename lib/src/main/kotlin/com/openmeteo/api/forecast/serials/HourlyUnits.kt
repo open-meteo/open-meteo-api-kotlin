@@ -1,6 +1,7 @@
 package com.openmeteo.api.forecast.serials
 
 import com.openmeteo.api.common.params.TemperatureUnit
+import com.openmeteo.api.common.params.WindSpeedUnit
 import com.openmeteo.api.common.params.TimeFormat
 import kotlinx.serialization.Serializable
 
@@ -17,15 +18,15 @@ class HourlyUnits(
     val cloudcover_low: String? = null,
     val cloudcover_mid: String? = null,
     val cloudcover_high: String? = null,
-    val windspeed_10m: String? = null,
-    val windspeed_80m: String? = null,
-    val windspeed_120m: String? = null,
-    val windspeed_180m: String? = null,
+    val windspeed_10m: WindSpeedUnit? = null,
+    val windspeed_80m: WindSpeedUnit? = null,
+    val windspeed_120m: WindSpeedUnit? = null,
+    val windspeed_180m: WindSpeedUnit? = null,
     val winddirection_10m: String? = null,
     val winddirection_80m: String? = null,
     val winddirection_120m: String? = null,
     val winddirection_180m: String? = null,
-    val windgusts_10m: String? = null,
+    val windgusts_10m: WindSpeedUnit? = null,
     val shortwave_radiation: String? = null,
     val direct_radiation: String? = null,
     val direct_normal_irradiance: String? = null,

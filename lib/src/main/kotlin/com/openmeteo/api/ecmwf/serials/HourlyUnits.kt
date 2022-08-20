@@ -2,6 +2,7 @@ package com.openmeteo.api.ecmwf.serials
 
 import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.params.WindSpeedUnit
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -31,16 +32,16 @@ class HourlyUnits(
     val geopotential_height_250hPa: String? = null,
     val geopotential_height_200hPa: String? = null,
     val geopotential_height_50hPa: String? = null,
-    val windspeed_10m: String? = null,
-    val windspeed_1000hPa: String? = null,
-    val windspeed_925hPa: String? = null,
-    val windspeed_850hPa: String? = null,
-    val windspeed_700hPa: String? = null,
-    val windspeed_500hPa: String? = null,
-    val windspeed_300hPa: String? = null,
-    val windspeed_250hPa: String? = null,
-    val windspeed_200hPa: String? = null,
-    val windspeed_50hPa: String? = null,
+    val windspeed_10m: WindSpeedUnit? = null,
+    val windspeed_1000hPa: WindSpeedUnit? = null,
+    val windspeed_925hPa: WindSpeedUnit? = null,
+    val windspeed_850hPa: WindSpeedUnit? = null,
+    val windspeed_700hPa: WindSpeedUnit? = null,
+    val windspeed_500hPa: WindSpeedUnit? = null,
+    val windspeed_300hPa: WindSpeedUnit? = null,
+    val windspeed_250hPa: WindSpeedUnit? = null,
+    val windspeed_200hPa: WindSpeedUnit? = null,
+    val windspeed_50hPa: WindSpeedUnit? = null,
     val winddirection_10m: String? = null,
     val winddirection_1000hPa: String? = null,
     val winddirection_925hPa: String? = null,
