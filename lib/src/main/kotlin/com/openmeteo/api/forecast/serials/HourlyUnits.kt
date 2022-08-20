@@ -1,15 +1,16 @@
 package com.openmeteo.api.forecast.serials
 
+import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.TimeFormat
 import kotlinx.serialization.Serializable
 
 @Serializable
 class HourlyUnits(
     val time: TimeFormat,
-    val temperature_2m: String? = null,
+    val temperature_2m: TemperatureUnit? = null,
     val relativehumidity_2m: String? = null,
-    val dewpoint_2m: String? = null,
-    val apparent_temperature: String? = null,
+    val dewpoint_2m: TemperatureUnit? = null,
+    val apparent_temperature: TemperatureUnit? = null,
     val pressure_msl: String? = null,
     val surface_pressure: String? = null,
     val cloudcover: String? = null,
@@ -39,10 +40,10 @@ class HourlyUnits(
     val weathercode: String? = null,
     val snow_depth: String? = null,
     val freezinglevel_height: String? = null,
-    val soil_temperature_0cm: String? = null,
-    val soil_temperature_6cm: String? = null,
-    val soil_temperature_18cm: String? = null,
-    val soil_temperature_54cm: String? = null,
+    val soil_temperature_0cm: TemperatureUnit? = null,
+    val soil_temperature_6cm: TemperatureUnit? = null,
+    val soil_temperature_18cm: TemperatureUnit? = null,
+    val soil_temperature_54cm: TemperatureUnit? = null,
     val soil_moisture_0_1cm: String? = null,
     val soil_moisture_1_3cm: String? = null,
     val soil_moisture_3_9cm: String? = null,

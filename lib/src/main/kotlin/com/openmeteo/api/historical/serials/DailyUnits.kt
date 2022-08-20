@@ -1,15 +1,16 @@
 package com.openmeteo.api.historical.serials
 
+import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.TimeFormat
 import kotlinx.serialization.Serializable
 
 @Serializable
 class DailyUnits(
     val time: TimeFormat,
-    val temperature_2m_max: String? = null,
-    val temperature_2m_min: String? = null,
-    val apparent_temperature_max: String? = null,
-    val apparent_temperature_min: String? = null,
+    val temperature_2m_max: TemperatureUnit? = null,
+    val temperature_2m_min: TemperatureUnit? = null,
+    val apparent_temperature_max: TemperatureUnit? = null,
+    val apparent_temperature_min: TemperatureUnit? = null,
     val precipitation_sum: String? = null,
     val rain_sum: String? = null,
     val snowfall_sum: String? = null,

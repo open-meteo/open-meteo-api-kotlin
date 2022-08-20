@@ -1,5 +1,6 @@
 package com.openmeteo.api.ecmwf.serials
 
+import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.TimeFormat
 import kotlinx.serialization.Serializable
 
@@ -8,19 +9,19 @@ class HourlyUnits(
     val time: TimeFormat,
     val pressure_msl: String? = null,
     val surface_air_pressure: String? = null,
-    val skin_temperature: String? = null,
-    val soil_temperature_0_7cm: String? = null,
+    val skin_temperature: TemperatureUnit? = null,
+    val soil_temperature_0_7cm: TemperatureUnit? = null,
     val total_column_integrated_water_vapour: String? = null,
-    val temperature_2m: String? = null,
-    val temperature_1000hPa: String? = null,
-    val temperature_925hPa: String? = null,
-    val temperature_850hPa: String? = null,
-    val temperature_700hPa: String? = null,
-    val temperature_500hPa: String? = null,
-    val temperature_300hPa: String? = null,
-    val temperature_250hPa: String? = null,
-    val temperature_200hPa: String? = null,
-    val temperature_50hPa: String? = null,
+    val temperature_2m: TemperatureUnit? = null,
+    val temperature_1000hPa: TemperatureUnit? = null,
+    val temperature_925hPa: TemperatureUnit? = null,
+    val temperature_850hPa: TemperatureUnit? = null,
+    val temperature_700hPa: TemperatureUnit? = null,
+    val temperature_500hPa: TemperatureUnit? = null,
+    val temperature_300hPa: TemperatureUnit? = null,
+    val temperature_250hPa: TemperatureUnit? = null,
+    val temperature_200hPa: TemperatureUnit? = null,
+    val temperature_50hPa: TemperatureUnit? = null,
     val geopotential_height_1000hPa: String? = null,
     val geopotential_height_925hPa: String? = null,
     val geopotential_height_850hPa: String? = null,
