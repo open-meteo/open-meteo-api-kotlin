@@ -24,7 +24,7 @@ on:
       draft:
         description: 'Draft'
         required: true
-        default: true
+        default: false
         type: boolean
 
 env:
@@ -58,6 +58,10 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    - name: Fetch tags
+      id: fetch_tags
+      run: git fetch --prune --unshallow --tags
 
     - name: Generate release body
       id: make_body
