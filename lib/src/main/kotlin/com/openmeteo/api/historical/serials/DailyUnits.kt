@@ -1,24 +1,24 @@
 package com.openmeteo.api.historical.serials
 
-import com.openmeteo.api.common.serials.Time
+import com.openmeteo.api.common.params.TimeFormat
 import kotlinx.serialization.Serializable
 
 @Serializable
 class DailyUnits(
-    val time: Array<Time>,
-    val temperature_2m_max: Array<Float?>? = null,
-    val temperature_2m_min: Array<Float?>? = null,
-    val apparent_temperature_max: Array<Float?>? = null,
-    val apparent_temperature_min: Array<Float?>? = null,
-    val precipitation_sum: Array<Float?>? = null,
-    val rain_sum: Array<Float?>? = null,
-    val snowfall_sum: Array<Float?>? = null,
-    val precipitation_hours: Array<Float?>? = null,
-    val sunrise: Array<Float?>? = null,
-    val sunset: Array<Float?>? = null,
-    val windspeed_10m_max: Array<Float?>? = null,
-    val windgusts_10m_max: Array<Float?>? = null,
-    val winddirection_10m_dominant: Array<Float?>? = null,
-    val shortwave_radiation_sum: Array<Float?>? = null,
-    val et0_fao_evapotranspiration: Array<Float?>? = null,
+    val time: TimeFormat,
+    val temperature_2m_max: String? = null,
+    val temperature_2m_min: String? = null,
+    val apparent_temperature_max: String? = null,
+    val apparent_temperature_min: String? = null,
+    val precipitation_sum: String? = null,
+    val rain_sum: String? = null,
+    val snowfall_sum: String? = null,
+    val precipitation_hours: String? = null,
+    val sunrise: TimeFormat? = null,
+    val sunset: TimeFormat? = null,
+    val windspeed_10m_max: String? = null,
+    val windgusts_10m_max: String? = null,
+    val winddirection_10m_dominant: String? = null,
+    val shortwave_radiation_sum: String? = null,
+    val et0_fao_evapotranspiration: String? = null,
 )
