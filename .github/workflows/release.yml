@@ -78,19 +78,15 @@ jobs:
 
     - name: Commit updated files
       id: commit_files
-      run: git commit -m "Update version in INSTALLATION.md and lib/build.gradle"
+      run: git commit -m "Bump version to $version"
 
     - name: Push staged files
       id: push_files
-      run: git push origin $GITHUB_REF_NAME
+      run: git push
 
-    - name: Create version tag
-      id: create_tag
-      run: git tag $version -m "$title"
-
-    - name: Push version tag
-      id: push_tag
-      run: git push origin $version
+    - name: Get commit hash
+      id: get_commitish
+      run: echo "commitish=$(git rev-parse @)" >> $GITHUB_ENV
 
     - name: Release on GitHub
       id: create_release
@@ -99,6 +95,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: refs/tags/${{ env.version }}
+        commitish: ${{ env.commitish }}
         release_name: ${{ env.title }}
         body: ${{ env.body }}
         # '-' appears only if the pre-release suffix is present
