@@ -51,13 +51,13 @@ The commit message should look like this:
    - `feat` adds a new feature (bump `<minor>`)
    - `fix` fixes a bug (bump `<patch>`)
    - `refactor` refactors code (eg: move code into a private method)
-   - `style` changes whitespaces, new-lines, scoped variables renaming
-   - `docs` updates documentation (README, GitHub wiki, or other markdown files)
+   - `style` changes whitespaces, new-lines, scoped variables name
+   - `docs` updates documentation (README, GitHub wiki, and in-code documentation)
    - `test` adds or updates tests
    - `chore` changes not source or test code (eg: update dependencies)
-   - `build` changes the build process (eg: new dependencies)
+   - `build` changes the build config or development tools
    - `revert` reverts a previous commit
  - `!` can be placed after `<type>` if the commit includes breaking changes (bump `<major>`)
 
-If the `<type>` field is not valid/missing, the commit won't be used to automate changelogs.
-After the first major release, a new major release must be released if breaking changes are introduced.
+If the `<type>` field is not valid/missing, the commit won't be inserted in the release notes.
+Breaking changes won't trigger a new `<major>` release before the first major release (1.0.0).
