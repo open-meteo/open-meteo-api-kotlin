@@ -62,11 +62,11 @@ jobs:
 
     - name: Update INSTALLATION.md
       id: update_installation_md
-      run: sed -E "s/$regex/$version/g" INSTALLATION.md
+      run: sed -i -E "s/$regex/$version/g" INSTALLATION.md
 
     - name: Update lib/build.gradle
       id: update_lib_build_gradle
-      run: sed -E "s/version = '$regex'/version = '$version'/g" lib/build.gradle
+      run: sed -i -E "s/version = '$regex'/version = '$version'/g" lib/build.gradle
 
     - name: Stage updated files
       id: stage_files
