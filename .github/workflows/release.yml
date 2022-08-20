@@ -98,7 +98,7 @@ jobs:
 
     - name: Generate release body
       id: make_body
-      run: .github/workflows/body.sh > body.md
+      run: .github/workflows/body.sh >> $GITHUB_ENV
 
     - name: Create version tag
       id: create_tag
@@ -116,7 +116,7 @@ jobs:
       with:
         tag_name: refs/tags/${{ env.version }}
         release_name: ${{ env.title }}
-        body_path: body.md
+        body: ${{ env.body }}
         # '-' appears only if the pre-release suffix is present
         prerelease: ${{ contains(env.version, '-') }}
         draft: ${{ github.event.inputs.draft }}

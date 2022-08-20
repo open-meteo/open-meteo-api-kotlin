@@ -16,6 +16,7 @@ changes() {
 git log "$(git describe --tags --abbrev=0 @^)"..@ \
 --pretty=format:" - [\`%h\`](../../commit/%H) - %s" > commits
 
+echo "body<<EOF"
 changes ":rocket: New features" "feat"
 changes ":bug: Fixes" "fix"
 changes ":orange_book: Docs" "docs"
@@ -25,3 +26,4 @@ changes ":test_tube: Tests" "test"
 #changes "Chore" "chore"
 changes ":hammer: Build" "build"
 changes ":leftwards_arrow_with_hook: Reverted commits" "revert"
+echo "EOF"
