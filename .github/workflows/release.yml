@@ -21,6 +21,11 @@ on:
         description: 'Title'
         required: true
         type: string
+      draft:
+        description: 'Draft'
+        required: true
+        default: true
+        type: boolean
 
 env:
   version: ${{ github.event.inputs.version }}
@@ -125,4 +130,4 @@ jobs:
         draft: true
         # '-' appears only if the pre-release suffix is present
         prerelease: ${{ contains(env.version, '-') }}
-
+        draft: ${{ github.event.inputs.draft }}
