@@ -7,7 +7,6 @@ import com.openmeteo.api.forecast.params.Hourly
 import com.openmeteo.api.forecast.serials.Forecast
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
-import java.util.*
 
 class ForecastEndpoint(
     val latitude: Float = 52.5235f,
@@ -38,7 +37,7 @@ class ForecastEndpoint(
         "windspeed_unit" to windSpeedUnit,
         "precipitation_unit" to precipitationUnit,
         "timeformat" to TimeFormat.unixtime,
-        "timezone" to timeZone?.id,
+        "timezone" to timeZone,
         "past_days" to pastDays?.takeIf { it in 0..2 },
         "start_date" to startDate,
         "end_date" to endDate,

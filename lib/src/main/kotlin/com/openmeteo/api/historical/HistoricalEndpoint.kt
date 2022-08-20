@@ -8,7 +8,6 @@ import com.openmeteo.api.historical.params.Hourly
 import com.openmeteo.api.historical.serials.Historical
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
-import java.util.*
 
 class HistoricalEndpoint(
     val latitude: Float = 52.5235f,
@@ -38,6 +37,6 @@ class HistoricalEndpoint(
         "windspeed_unit" to windSpeedUnit,
         "precipitation_unit" to precipitationUnit,
         "timeformat" to TimeFormat.unixtime,
-        "timezone" to timeZone?.id,
+        "timezone" to timeZone,
     )
 }

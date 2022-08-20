@@ -1,9 +1,9 @@
 package com.openmeteo.api.marine
 
 import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.common.params.TimeZone
 import com.openmeteo.api.marine.params.Daily
 import kotlinx.serialization.ExperimentalSerializationApi
-import java.util.*
 import kotlin.test.*
 
 class MarineEndpointTest {
@@ -23,7 +23,7 @@ class MarineEndpointTest {
         val response = endpoint(
             daily = listOf(
                 Daily.wave_height_max
-            ), timeZone = TimeZone.getTimeZone("Europe/Berlin")
+            ), timeZone = TimeZone("Europe/Berlin")
         ).getOrThrow()
         val dailyUnits = response.daily_units!!
         val dailyWaveHeightMaxUnit = dailyUnits.wave_height_max!!
