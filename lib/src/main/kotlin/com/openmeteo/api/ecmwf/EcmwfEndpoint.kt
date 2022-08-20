@@ -2,7 +2,6 @@ package com.openmeteo.api.ecmwf
 
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
-import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.ecmwf.params.Hourly
 import com.openmeteo.api.ecmwf.serials.Ecmwf
 import kotlinx.serialization.ExperimentalSerializationApi

@@ -1,8 +1,9 @@
 package com.openmeteo.api.marine
 
 import com.openmeteo.api.common.Endpoint
-import com.openmeteo.api.common.params.*
-import com.openmeteo.api.common.serials.BadRequest
+import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.params.TimeZone
 import com.openmeteo.api.marine.params.Daily
 import com.openmeteo.api.marine.params.Hourly
 import com.openmeteo.api.marine.serials.Marine

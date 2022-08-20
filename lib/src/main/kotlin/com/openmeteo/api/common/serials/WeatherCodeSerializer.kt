@@ -1,8 +1,11 @@
 package com.openmeteo.api.common.serials
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.encoding.*
-import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Serializer of [WeatherCode] values

@@ -2,7 +2,6 @@ package com.openmeteo.api.historical
 
 import com.openmeteo.api.common.Endpoint
 import com.openmeteo.api.common.params.*
-import com.openmeteo.api.common.serials.BadRequest
 import com.openmeteo.api.historical.params.Daily
 import com.openmeteo.api.historical.params.Hourly
 import com.openmeteo.api.historical.serials.Historical

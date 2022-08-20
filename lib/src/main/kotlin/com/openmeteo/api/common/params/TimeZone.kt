@@ -1,6 +1,6 @@
 package com.openmeteo.api.common.params
 
-import java.util.SimpleTimeZone
+import java.util.*
 
 /**
  * A [SimpleTimeZone] class wrapper

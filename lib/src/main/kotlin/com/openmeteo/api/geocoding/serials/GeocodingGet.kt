@@ -3,7 +3,6 @@ package com.openmeteo.api.geocoding.serials
 import com.openmeteo.api.common.serials.TimeZoneSerializer
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.protobuf.ProtoNumber
 import java.util.*
 
 @Serializable

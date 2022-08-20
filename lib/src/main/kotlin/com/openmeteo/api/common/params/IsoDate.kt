@@ -2,7 +2,7 @@ package com.openmeteo.api.common.params
 
 import com.openmeteo.api.common.serials.Time
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 /**
  * A [Date] which is ISO-8601 formatted when converted to string

@@ -1,7 +1,6 @@
 package com.openmeteo.api.ecmwf.serials
 
 import com.openmeteo.api.common.serials.Time
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
