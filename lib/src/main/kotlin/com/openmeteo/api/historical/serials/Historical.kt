@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 class Historical(
     val latitude: Float,
     val longitude: Float,
+    val elevation: Float,
     val generationtime_ms: Double,
     val utc_offset_seconds: Int,
     val timezone: TimeZone,
