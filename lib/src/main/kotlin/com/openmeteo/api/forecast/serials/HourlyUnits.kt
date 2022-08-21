@@ -1,9 +1,9 @@
 package com.openmeteo.api.forecast.serials
 
-import com.openmeteo.api.common.params.TemperatureUnit
-import com.openmeteo.api.common.params.WindSpeedUnit
-import com.openmeteo.api.common.params.TimeFormat
 import com.openmeteo.api.common.params.PrecipitationUnit
+import com.openmeteo.api.common.params.TemperatureUnit
+import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.params.WindSpeedUnit
 import kotlinx.serialization.Serializable
 
 @Serializable

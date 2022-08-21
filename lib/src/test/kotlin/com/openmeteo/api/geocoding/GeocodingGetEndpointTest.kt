@@ -1,7 +1,9 @@
 package com.openmeteo.api.geocoding
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class GeocodingGetEndpointTest {
     companion object {

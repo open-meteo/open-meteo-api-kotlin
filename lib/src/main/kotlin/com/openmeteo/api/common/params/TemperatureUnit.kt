@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
 enum class TemperatureUnit {
     @SerialName("°C")
     celsius,
+
     @SerialName("°F")
     fahrenheit,
 }

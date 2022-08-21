@@ -1,9 +1,10 @@
 package com.openmeteo.api.ecmwf
 
 import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.ecmwf.params.Hourly
 import kotlinx.serialization.ExperimentalSerializationApi
-import com.openmeteo.api.ecmwf.params.*
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
 
 class EcmwfEndpointTest {
 
@@ -27,15 +28,17 @@ class EcmwfEndpointTest {
         ).getOrThrow()
         val hourly = response.hourly!!
         val hourlyWindSpeed = hourly.windspeed_10m!!
-        assertContentEquals(arrayOf(
-            14.1f,
-            10.5f,
-            14.9f,
-            15.1f,
-            11.2f,
-            14.4f,
-            9.4f,
-            6.1f,
-        ), hourlyWindSpeed)
+        assertContentEquals(
+            arrayOf(
+                14.1f,
+                10.5f,
+                14.9f,
+                15.1f,
+                11.2f,
+                14.4f,
+                9.4f,
+                6.1f,
+            ), hourlyWindSpeed
+        )
     }
 }

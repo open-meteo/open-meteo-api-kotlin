@@ -3,7 +3,9 @@ package com.openmeteo.api.historical
 import com.openmeteo.api.common.params.IsoDate
 import com.openmeteo.api.historical.params.Daily
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
 
 class HistoricalEndpointTest {
     companion object {

@@ -1,6 +1,7 @@
 package com.openmeteo.api.common.params
 
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class PrecipitationUnitTest {
 

@@ -2,7 +2,9 @@ package com.openmeteo.api.airquality
 
 import com.openmeteo.api.airquality.params.Hourly
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class AirQualityEndpointTest {
     companion object {
@@ -18,7 +20,7 @@ class AirQualityEndpointTest {
             )
         ).getOrThrow()
         val hourly = response.hourly!!
-        with (hourly) {
+        with(hourly) {
             assertNotNull(pm10)
             assertNull(pm2_5)
             assertNotNull(carbon_monoxide)

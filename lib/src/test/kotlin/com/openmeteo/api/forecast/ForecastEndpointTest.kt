@@ -1,10 +1,10 @@
 package com.openmeteo.api.forecast
 
-import com.openmeteo.api.common.params.IsoDate
 import com.openmeteo.api.common.TimeZone
+import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.forecast.params.Daily
 import kotlinx.serialization.ExperimentalSerializationApi
-import com.openmeteo.api.forecast.params.*
-import kotlin.test.*
+import kotlin.test.Test
 
 class ForecastEndpointTest {
 
@@ -21,9 +21,10 @@ class ForecastEndpointTest {
     @Test
     @ExperimentalSerializationApi
     fun `Weather codes of the upcoming days`() {
-        val response = endpoint(daily = listOf(
-            Daily.weathercode
-        ), timeZone = TimeZone("Europe/Berlin")
+        val response = endpoint(
+            daily = listOf(
+                Daily.weathercode
+            ), timeZone = TimeZone("Europe/Berlin")
         ).getOrThrow()
         val daily = response.daily!!
         val dailyTime = daily.time

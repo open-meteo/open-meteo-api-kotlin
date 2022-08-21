@@ -1,7 +1,8 @@
 package com.openmeteo.api.elevation
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
 
 class ElevationEndpointTest {
     companion object {
