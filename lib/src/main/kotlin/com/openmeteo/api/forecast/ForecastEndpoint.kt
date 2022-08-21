@@ -36,7 +36,7 @@ class ForecastEndpoint(
         "current_weather" to currentWeather,
         "temperature_unit" to temperatureUnit,
         "windspeed_unit" to windSpeedUnit,
-        "precipitation_unit" to precipitationUnit,
+        "precipitation_unit" to precipitationUnit?.param(),
         "timeformat" to TimeFormat.unixtime,
         "timezone" to (timeZone ?: daily?.let { "auto" }),
         "past_days" to pastDays?.takeIf { it in 0..2 },

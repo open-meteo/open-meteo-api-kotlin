@@ -35,7 +35,7 @@ class HistoricalEndpoint(
         "daily" to daily?.joinToString(","),
         "temperature_unit" to temperatureUnit,
         "windspeed_unit" to windSpeedUnit,
-        "precipitation_unit" to precipitationUnit,
+        "precipitation_unit" to precipitationUnit?.param(),
         "timeformat" to TimeFormat.unixtime,
         "timezone" to (timeZone ?: daily?.let { "auto" }),
     )

@@ -29,7 +29,7 @@ class EcmwfEndpoint(
         "hourly" to hourly?.joinToString(","),
         "temperature_unit" to temperatureUnit,
         "windspeed_unit" to windSpeedUnit,
-        "precipitation_unit" to precipitationUnit,
+        "precipitation_unit" to precipitationUnit?.param(),
         "timeformat" to TimeFormat.unixtime,
         "past_days" to pastDays?.takeIf { it in 0..2 },
         "start_date" to startDate,
