@@ -23,6 +23,7 @@ class EcmwfEndpoint(
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
+        vararg params: Pair<String, Any>,
     ) = query<Ecmwf>(
         "latitude" to latitude,
         "longitude" to longitude,
@@ -34,5 +35,6 @@ class EcmwfEndpoint(
         "past_days" to pastDays,
         "start_date" to startDate,
         "end_date" to endDate,
+        *params,
     )
 }

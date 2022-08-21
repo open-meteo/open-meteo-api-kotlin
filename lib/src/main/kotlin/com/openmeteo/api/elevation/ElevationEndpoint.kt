@@ -12,6 +12,7 @@ class ElevationEndpoint(
     @ExperimentalSerializationApi
     operator fun invoke(
         coordinates: Map<Float, Float>,
+        vararg params: Pair<String, Any>,
     ) = if (coordinates.isEmpty())
         throw Error("Please provide at least one coordinate")
     else if (coordinates.size > 100)
@@ -19,6 +20,7 @@ class ElevationEndpoint(
     else query<Elevation>(
         "latitude" to coordinates.keys.joinToString(","),
         "longitude" to coordinates.values.joinToString(","),
+        *params,
     )
 
     @ExperimentalSerializationApi

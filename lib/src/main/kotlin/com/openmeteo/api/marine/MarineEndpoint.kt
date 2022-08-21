@@ -25,6 +25,7 @@ class MarineEndpoint(
         pastDays: Int? = null,
         startDate: IsoDate? = null,
         endDate: IsoDate? = null,
+        vararg params: Pair<String, Any>,
     ) = query<Marine>(
         "latitude" to latitude,
         "longitude" to longitude,
@@ -35,5 +36,6 @@ class MarineEndpoint(
         "past_days" to pastDays,
         "start_date" to startDate,
         "end_date" to endDate,
+        *params,
     )
 }

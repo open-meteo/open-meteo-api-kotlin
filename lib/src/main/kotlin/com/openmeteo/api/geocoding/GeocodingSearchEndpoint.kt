@@ -15,10 +15,12 @@ class GeocodingSearchEndpoint(
         count: Int? = null,
         format: ContentFormat? = null,
         language: String? = null,
+        vararg params: Pair<String, Any>,
     ) = query<GeocodingSearch>(
         "name" to name,
         "count" to count,
         "format" to format,
         "language" to language,
+        *params,
     )
 }

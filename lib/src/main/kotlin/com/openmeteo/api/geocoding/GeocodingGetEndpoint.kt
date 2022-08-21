@@ -11,5 +11,6 @@ class GeocodingGetEndpoint(
     @ExperimentalSerializationApi
     operator fun invoke(
         id: Int,
-    ) = query<GeocodingGet>("id" to id)
+        vararg params: Pair<String, Any>,
+    ) = query<GeocodingGet>("id" to id, *params)
 }

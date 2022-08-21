@@ -26,6 +26,7 @@ class HistoricalEndpoint(
         windSpeedUnit: WindSpeedUnit? = null,
         precipitationUnit: PrecipitationUnit? = null,
         timeZone: TimeZone? = null,
+        vararg params: Pair<String, Any>,
     ) = query<Historical>(
         "latitude" to latitude,
         "longitude" to longitude,
@@ -38,5 +39,6 @@ class HistoricalEndpoint(
         "precipitation_unit" to precipitationUnit?.param(),
         "timeformat" to TimeFormat.unixtime,
         "timezone" to (timeZone ?: daily?.let { "auto" }),
+        *params,
     )
 }
