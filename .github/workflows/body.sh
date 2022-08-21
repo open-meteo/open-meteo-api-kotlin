@@ -13,8 +13,13 @@ changes() {
   fi
 }
 
-git log "$(git describe --tags --abbrev=0 @^)"..@ \
+git log "$(git describe --tags --abbrev=0)"..@ \
 --pretty=format:" - [\`%h\`](../../commit/%H) - %s" > commits
+
+if [ ! -s commits ]; then
+  echo "No new commits since last tag: impossible to create changelog"
+  exit 1
+fi
 
 echo "body<<EOF"
 changes ":rocket: New features" "feat"
