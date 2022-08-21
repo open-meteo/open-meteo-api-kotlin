@@ -3,6 +3,7 @@ package com.openmeteo.api.forecast.serials
 import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.WindSpeedUnit
 import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.params.PrecipitationUnit
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -32,12 +33,12 @@ class HourlyUnits(
     val direct_normal_irradiance: String? = null,
     val diffuse_radiation: String? = null,
     val vapor_pressure_deficit: String? = null,
-    val evapotranspiration: String? = null,
-    val et0_fao_evapotranspiration: String? = null,
-    val precipitation: String? = null,
-    val snowfall: String? = null,
-    val rain: String? = null,
-    val showers: String? = null,
+    val evapotranspiration: PrecipitationUnit? = null,
+    val et0_fao_evapotranspiration: PrecipitationUnit? = null,
+    val precipitation: PrecipitationUnit? = null,
+    val snowfall: PrecipitationUnit? = null,
+    val rain: PrecipitationUnit? = null,
+    val showers: PrecipitationUnit? = null,
     val weathercode: String? = null,
     val snow_depth: String? = null,
     val freezinglevel_height: String? = null,

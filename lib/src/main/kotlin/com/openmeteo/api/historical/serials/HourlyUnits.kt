@@ -3,6 +3,7 @@ package com.openmeteo.api.historical.serials
 import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.WindSpeedUnit
 import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.params.PrecipitationUnit
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,9 +15,9 @@ class HourlyUnits(
     val apparent_temperature: TemperatureUnit? = null,
     val pressure_msl: String? = null,
     val surface_pressure: String? = null,
-    val precipitation: String? = null,
-    val rain: String? = null,
-    val snowfall: String? = null,
+    val precipitation: PrecipitationUnit? = null,
+    val rain: PrecipitationUnit? = null,
+    val snowfall: PrecipitationUnit? = null,
     val cloudcover: String? = null,
     val cloudcover_low: String? = null,
     val cloudcover_mid: String? = null,
@@ -30,7 +31,7 @@ class HourlyUnits(
     val winddirection_10m: WindSpeedUnit? = null,
     val winddirection_100m: WindSpeedUnit? = null,
     val windgusts_10m: WindSpeedUnit? = null,
-    val et0_fao_evapotranspiration: String? = null,
+    val et0_fao_evapotranspiration: PrecipitationUnit? = null,
     val vapor_pressure_deficit: String? = null,
     val soil_temperature_0_to_7cm: TemperatureUnit? = null,
     val soil_temperature_7_to_28cm: TemperatureUnit? = null,

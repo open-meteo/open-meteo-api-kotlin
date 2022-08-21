@@ -1,5 +1,6 @@
 package com.openmeteo.api.forecast.serials
 
+import com.openmeteo.api.common.params.PrecipitationUnit
 import com.openmeteo.api.common.params.TemperatureUnit
 import com.openmeteo.api.common.params.TimeFormat
 import com.openmeteo.api.common.params.WindSpeedUnit
@@ -12,10 +13,10 @@ class DailyUnits(
     val temperature_2m_min: TemperatureUnit? = null,
     val apparent_temperature_max: TemperatureUnit? = null,
     val apparent_temperature_min: TemperatureUnit? = null,
-    val precipitation_sum: String? = null,
-    val rain_sum: String? = null,
-    val showers_sum: String? = null,
-    val snowfall_sum: String? = null,
+    val precipitation_sum: PrecipitationUnit? = null,
+    val rain_sum: PrecipitationUnit? = null,
+    val showers_sum: PrecipitationUnit? = null,
+    val snowfall_sum: PrecipitationUnit? = null,
     val precipitation_hours: String? = null,
     val weathercode: String? = null,
     val sunrise: TimeFormat? = null,
