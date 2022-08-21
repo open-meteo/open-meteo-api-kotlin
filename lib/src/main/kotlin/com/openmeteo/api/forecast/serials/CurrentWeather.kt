@@ -1,7 +1,6 @@
 package com.openmeteo.api.forecast.serials
 
 import com.openmeteo.api.common.serials.Time
-import com.openmeteo.api.common.serials.WeatherCode
 import kotlinx.serialization.Serializable
 
 @Serializable
