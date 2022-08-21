@@ -34,21 +34,15 @@ env:
 
 jobs:
 
-  verify:
-    name: Verify input
+  release:
+    name: Update the docs and release
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Verify version
       id: verify_version
       run: grep -qE "^$regex$" <<< "$version"
 
-  release:
-    name: Update the docs and release
-    runs-on: ubuntu-latest
-    needs: verify
-
-    steps:
     - name: Checkout code
       id: checkout
       uses: actions/checkout@v3
