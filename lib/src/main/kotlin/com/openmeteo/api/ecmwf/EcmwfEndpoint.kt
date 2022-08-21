@@ -31,7 +31,7 @@ class EcmwfEndpoint(
         "windspeed_unit" to windSpeedUnit,
         "precipitation_unit" to precipitationUnit?.param(),
         "timeformat" to TimeFormat.unixtime,
-        "past_days" to pastDays?.takeIf { it in 0..2 },
+        "past_days" to pastDays,
         "start_date" to startDate,
         "end_date" to endDate,
     )
