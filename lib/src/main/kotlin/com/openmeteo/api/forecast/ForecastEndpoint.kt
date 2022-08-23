@@ -7,7 +7,7 @@ import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.common.time.TimeFormat
 import com.openmeteo.api.forecast.params.Daily
 import com.openmeteo.api.forecast.params.Hourly
-import com.openmeteo.api.forecast.serials.Forecast
+import com.openmeteo.api.forecast.response.Forecast
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 

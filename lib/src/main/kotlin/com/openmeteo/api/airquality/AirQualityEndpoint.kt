@@ -2,7 +2,7 @@ package com.openmeteo.api.airquality
 
 import com.openmeteo.api.airquality.params.Domains
 import com.openmeteo.api.airquality.params.Hourly
-import com.openmeteo.api.airquality.serials.AirQuality
+import com.openmeteo.api.airquality.response.AirQuality
 import com.openmeteo.api.common.net.Endpoint
 import com.openmeteo.api.common.time.TimeZone
 import com.openmeteo.api.common.time.IsoDate

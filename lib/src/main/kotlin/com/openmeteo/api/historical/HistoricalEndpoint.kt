@@ -7,7 +7,7 @@ import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.common.time.TimeFormat
 import com.openmeteo.api.historical.params.Daily
 import com.openmeteo.api.historical.params.Hourly
-import com.openmeteo.api.historical.serials.Historical
+import com.openmeteo.api.historical.response.Historical
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 

@@ -1,7 +1,7 @@
 package com.openmeteo.api.geocoding
 
 import com.openmeteo.api.common.net.ContentFormat
-import com.openmeteo.api.geocoding.serials.GeocodingGet
+import com.openmeteo.api.geocoding.response.GeocodingGet
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.test.Test
 import kotlin.test.assertEquals

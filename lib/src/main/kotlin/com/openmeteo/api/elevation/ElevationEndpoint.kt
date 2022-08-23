@@ -1,7 +1,7 @@
 package com.openmeteo.api.elevation
 
 import com.openmeteo.api.common.net.Endpoint
-import com.openmeteo.api.elevation.serials.Elevation
+import com.openmeteo.api.elevation.response.Elevation
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 

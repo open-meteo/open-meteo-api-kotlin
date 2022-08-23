@@ -5,7 +5,7 @@ import com.openmeteo.api.common.units.*
 import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.common.time.TimeFormat
 import com.openmeteo.api.ecmwf.params.Hourly
-import com.openmeteo.api.ecmwf.serials.Ecmwf
+import com.openmeteo.api.ecmwf.response.Ecmwf
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 

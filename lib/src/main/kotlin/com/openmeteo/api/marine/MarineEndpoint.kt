@@ -6,7 +6,7 @@ import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.common.time.TimeFormat
 import com.openmeteo.api.marine.params.Daily
 import com.openmeteo.api.marine.params.Hourly
-import com.openmeteo.api.marine.serials.Marine
+import com.openmeteo.api.marine.response.Marine
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 

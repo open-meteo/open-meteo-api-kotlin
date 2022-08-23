@@ -2,7 +2,7 @@ package com.openmeteo.api.geocoding
 
 import com.openmeteo.api.common.net.Endpoint
 import com.openmeteo.api.common.net.ContentFormat
-import com.openmeteo.api.geocoding.serials.GeocodingSearch
+import com.openmeteo.api.geocoding.response.GeocodingSearch
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 
