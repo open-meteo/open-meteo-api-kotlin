@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.serials
+package com.openmeteo.api.common.time
 
 import kotlinx.serialization.Serializable
 import java.util.*

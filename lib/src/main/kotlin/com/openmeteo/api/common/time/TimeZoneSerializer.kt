@@ -1,6 +1,6 @@
-package com.openmeteo.api.common.serials
+package com.openmeteo.api.common.time
 
-import com.openmeteo.api.common.TimeZone
+import com.openmeteo.api.common.time.TimeZone
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor

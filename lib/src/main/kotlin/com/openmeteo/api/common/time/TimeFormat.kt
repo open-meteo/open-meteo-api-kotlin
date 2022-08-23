@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.params
+package com.openmeteo.api.common.time
 
 /**
  * How timestamps should be formatted

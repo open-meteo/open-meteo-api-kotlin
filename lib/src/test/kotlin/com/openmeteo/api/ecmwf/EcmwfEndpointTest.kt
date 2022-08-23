@@ -1,6 +1,6 @@
 package com.openmeteo.api.ecmwf
 
-import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.ecmwf.params.Hourly
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.test.Test

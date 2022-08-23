@@ -1,7 +1,7 @@
 package com.openmeteo.api.forecast
 
-import com.openmeteo.api.common.TimeZone
-import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.common.time.TimeZone
+import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.forecast.params.Daily
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.test.Test

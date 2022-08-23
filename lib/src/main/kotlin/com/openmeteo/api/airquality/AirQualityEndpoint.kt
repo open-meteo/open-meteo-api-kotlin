@@ -3,10 +3,10 @@ package com.openmeteo.api.airquality
 import com.openmeteo.api.airquality.params.Domains
 import com.openmeteo.api.airquality.params.Hourly
 import com.openmeteo.api.airquality.serials.AirQuality
-import com.openmeteo.api.common.Endpoint
-import com.openmeteo.api.common.TimeZone
-import com.openmeteo.api.common.params.IsoDate
-import com.openmeteo.api.common.params.TimeFormat
+import com.openmeteo.api.common.net.Endpoint
+import com.openmeteo.api.common.time.TimeZone
+import com.openmeteo.api.common.time.IsoDate
+import com.openmeteo.api.common.time.TimeFormat
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL
 

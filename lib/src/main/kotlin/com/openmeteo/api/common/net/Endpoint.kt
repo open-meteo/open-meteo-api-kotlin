@@ -1,7 +1,5 @@
-package com.openmeteo.api.common
+package com.openmeteo.api.common.net
 
-import com.openmeteo.api.common.params.ContentFormat
-import com.openmeteo.api.common.serials.BadRequest
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json

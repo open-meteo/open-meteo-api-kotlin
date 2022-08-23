@@ -1,6 +1,5 @@
-package com.openmeteo.api.common.params
+package com.openmeteo.api.common.time
 
-import com.openmeteo.api.common.serials.Time
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,6 +1,5 @@
-package com.openmeteo.api.common
+package com.openmeteo.api.common.time
 
-import com.openmeteo.api.common.serials.TimeZoneSerializer
 import kotlinx.serialization.Serializable
 import java.util.*
 

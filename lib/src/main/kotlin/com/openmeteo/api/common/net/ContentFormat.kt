@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.params
+package com.openmeteo.api.common.net
 
 /**
  * How the content should be encoded

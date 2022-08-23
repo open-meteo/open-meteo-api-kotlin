@@ -1,6 +1,6 @@
 package com.openmeteo.api.geocoding
 
-import com.openmeteo.api.common.Endpoint
+import com.openmeteo.api.common.net.Endpoint
 import com.openmeteo.api.geocoding.serials.GeocodingGet
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.net.URL

@@ -1,6 +1,6 @@
 package com.openmeteo.api.historical
 
-import com.openmeteo.api.common.params.IsoDate
+import com.openmeteo.api.common.time.IsoDate
 import com.openmeteo.api.historical.params.Daily
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.test.Test

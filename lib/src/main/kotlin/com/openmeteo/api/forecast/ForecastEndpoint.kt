@@ -1,8 +1,10 @@
 package com.openmeteo.api.forecast
 
-import com.openmeteo.api.common.Endpoint
-import com.openmeteo.api.common.TimeZone
-import com.openmeteo.api.common.params.*
+import com.openmeteo.api.common.net.Endpoint
+import com.openmeteo.api.common.time.TimeZone
+import com.openmeteo.api.common.units.*
+import com.openmeteo.api.common.time.IsoDate
+import com.openmeteo.api.common.time.TimeFormat
 import com.openmeteo.api.forecast.params.Daily
 import com.openmeteo.api.forecast.params.Hourly
 import com.openmeteo.api.forecast.serials.Forecast

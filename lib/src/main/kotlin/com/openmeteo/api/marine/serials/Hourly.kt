@@ -1,6 +1,6 @@
 package com.openmeteo.api.marine.serials
 
-import com.openmeteo.api.common.serials.Time
+import com.openmeteo.api.common.time.Time
 import kotlinx.serialization.Serializable
 
 @Serializable

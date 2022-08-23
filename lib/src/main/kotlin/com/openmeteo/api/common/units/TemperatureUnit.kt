@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.params
+package com.openmeteo.api.common.units
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

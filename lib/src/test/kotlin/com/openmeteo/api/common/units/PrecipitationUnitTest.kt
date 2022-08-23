@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.params
+package com.openmeteo.api.common.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

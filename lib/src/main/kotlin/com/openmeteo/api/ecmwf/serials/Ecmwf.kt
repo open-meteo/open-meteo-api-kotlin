@@ -1,6 +1,6 @@
 package com.openmeteo.api.ecmwf.serials
 
-import com.openmeteo.api.common.TimeZone
+import com.openmeteo.api.common.time.TimeZone
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -1,4 +1,4 @@
-package com.openmeteo.api.common
+package com.openmeteo.api.common.net
 
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
