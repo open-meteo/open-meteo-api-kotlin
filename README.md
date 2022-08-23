@@ -50,10 +50,10 @@ val weatherCode = hourly.weathercode!!
 println(weatherCode[0])
 ```
 
-Please note that some arrays may be filled with `null`s, hence you might want to use `?.get(0)` instead.
+Please note that some arrays may be be `null`s, hence you should use `?.get(0)` instead of `[0]`.
 Research is going to be done to find out which array could have `null`s and reduce uncertainties.
 
-The library will include some examples with comments in the tests and in the documentation.
+The library includes some examples in the [tests](lib/src/test/kotlin/com/openmeteo/api).
 
 ## :balance_scale: Legal
 
