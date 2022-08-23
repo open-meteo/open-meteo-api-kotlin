@@ -25,8 +25,6 @@ class HistoricalEndpointTest {
         val daily = response.daily!!
         val sunsets = daily.sunset!!
         assertContentEquals(
-            // listOf(1641049506L, 1641135975L, 1641222444L)
-            // bug: all times are 2 seconds "early"!?
             listOf(1641049504L, 1641135973L, 1641222442L),
             sunsets.map { it.time },
         )
@@ -46,8 +44,6 @@ class HistoricalEndpointTest {
         val daily = response.daily!!
         val sunsets = daily.sunset!!
         assertContentEquals(
-            // listOf(1654111265L, 1654197733L, 1654284201L)
-            // bug: all times are 1 second "late"!?
             listOf(1654111266L, 1654197734L, 1654284202L),
             sunsets.map { it.time },
         )
