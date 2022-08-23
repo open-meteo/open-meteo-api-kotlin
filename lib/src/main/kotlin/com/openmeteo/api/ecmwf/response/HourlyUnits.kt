@@ -2,14 +2,15 @@ package com.openmeteo.api.ecmwf.response
 
 import com.openmeteo.api.common.units.TemperatureUnit
 import com.openmeteo.api.common.time.TimeFormat
+import com.openmeteo.api.common.units.PressureUnit
 import com.openmeteo.api.common.units.WindSpeedUnit
 import kotlinx.serialization.Serializable
 
 @Serializable
 class HourlyUnits(
     val time: TimeFormat,
-    val pressure_msl: String? = null,
-    val surface_air_pressure: String? = null,
+    val pressure_msl: PressureUnit? = null,
+    val surface_air_pressure: PressureUnit? = null,
     val skin_temperature: TemperatureUnit? = null,
     val soil_temperature_0_7cm: TemperatureUnit? = null,
     val total_column_integrated_water_vapour: String? = null,
