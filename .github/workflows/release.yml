@@ -29,6 +29,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Verify input version against regex
+      # Please note that automatic versioning (fix) will be enabled after 1.0.0
+      run: |
+        [[ "$version" =~ ^$regex$ ]] || exit 1
+
     - name: Checkout code
       id: checkout
       uses: actions/checkout@v3
@@ -50,10 +55,6 @@ jobs:
       env:
         latest: ${{ env.latest }}
       run: .github/workflows/release/body.sh >> $GITHUB_ENV
-
-    - name: Verify version against regex
-      run: |
-        [[ "$version" =~ ^$regex$ ]] || exit 1
 
     - name: Fix version
       env:
