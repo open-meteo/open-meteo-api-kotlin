@@ -3,6 +3,7 @@ package com.openmeteo.api.forecast.response
 import com.openmeteo.api.common.units.PrecipitationUnit
 import com.openmeteo.api.common.units.TemperatureUnit
 import com.openmeteo.api.common.time.TimeFormat
+import com.openmeteo.api.common.units.TimeUnit
 import com.openmeteo.api.common.units.WindSpeedUnit
 import kotlinx.serialization.Serializable
 
@@ -17,7 +18,7 @@ class DailyUnits(
     val rain_sum: PrecipitationUnit? = null,
     val showers_sum: PrecipitationUnit? = null,
     val snowfall_sum: PrecipitationUnit? = null,
-    val precipitation_hours: String? = null,
+    val precipitation_hours: TimeUnit? = null,
     val weathercode: String? = null,
     val sunrise: TimeFormat? = null,
     val sunset: TimeFormat? = null,
