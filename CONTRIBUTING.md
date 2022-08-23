@@ -22,7 +22,9 @@ A stricter variation of the [Semantic Versioning 2.0.0](https://semver.org/spec/
  - Pre-release `<id>`, if present, must be an absolute integer
 
 Some valid tags are: `0.0.0`, `0.2.0-beta`, `1.0.0-alpha.0`, `314.159.265.-alpha.3589793`, `9999.0.0-rc.1`
+
 You can validate a version tag with this regex: `^((0|[1-9][0-9]*)\.){2}(0|[1-9][0-9]*)(-(alpha|beta|rc)(\.(0|[1-9][0-9]*))?)?$`
+
 Please note that this regex is also used in the github "Release" workflow to verify the "Version" input.
 
 ## Commits
@@ -38,8 +40,7 @@ A commit shall not break any code. If possible, it should only contain related c
 
 ### Message
 
-A stricter variation of the [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) standard is used.
-The commit message should look like this:
+A stricter variation of the [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) standard is used:
 ```
 <type>[!]: <description>
 
@@ -60,4 +61,5 @@ The commit message should look like this:
  - `!` can be placed after `<type>` if the commit includes breaking changes (bump `<major>`)
 
 If the `<type>` field is not valid/missing, the commit won't be inserted in the release notes.
+
 Breaking changes won't trigger a new `<major>` release before the first major release (1.0.0).
