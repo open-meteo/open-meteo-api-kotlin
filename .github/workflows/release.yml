@@ -12,11 +12,6 @@ on:
         required: true
         default: false
         type: boolean
-      fix:
-        description: 'Fix version'
-        required: true
-        default: false
-        type: boolean
 
 env:
   version: ${{ github.event.inputs.version }}
@@ -26,7 +21,7 @@ env:
 jobs:
 
   update:
-    name: Update files
+    name: Release
     runs-on: ubuntu-latest
 
     steps:
@@ -56,13 +51,6 @@ jobs:
       env:
         latest: ${{ env.latest }}
       run: .github/workflows/release/body.sh >> $GITHUB_ENV
-
-    - name: Fix version
-      env:
-        old: ${{ env.latest }}
-        new: ${{ env.version }}
-      run: .github/workflows/release/semver.sh >> $GITHUB_ENV
-      if: ${{ github.event.inputs.fix }}
 
     - name: Update INSTALLATION.md
       id: update_installation_md
