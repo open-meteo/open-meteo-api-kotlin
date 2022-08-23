@@ -49,6 +49,8 @@ if [ $valid == 0 ]; then
     if [[ $level == 4 ]]; then
         ver[$level]=$(( ${ver[$level]}+1 ))
     elif [[ $level == 3 ]]; then
+        # if we increase pre-release name we also reset the id
+        ver=(${ver[@]::4})
         if [ "${ver[3]}" == "alpha" ]; then
             ver[3]="beta"
         elif [ "${ver[3]}" == "beta" ]; then
@@ -58,8 +60,11 @@ if [ $valid == 0 ]; then
             ver[2]=$(( ${ver[2]}+1 ))
         fi
     else
-        ver=(${ver[@]::3}) # leave pre-release stage
+        ver=(${ver[@]::3}) # no pre-release
         ver[$level]=$(( ${ver[$level]}+1 ))
+        # if we increase major/minor we want to also reset minor/patch
+        [[ $level == 0 ]] && ver[1]=0
+        [[ $level == 0 ]] || [[ $level == 1 ]] && ver[2]=0
     fi
 fi
 
