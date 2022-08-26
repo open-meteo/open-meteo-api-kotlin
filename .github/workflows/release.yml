@@ -1,90 +1,61 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version'
-        required: true
-        type: string
-      draft:
-        description: 'Draft'
-        required: true
-        default: false
-        type: boolean
+  push:
+    tags:
+    - '[0-9]+.[0-9]+.[0-9]+' # <major>.<minor>.<patch>
+    - '[0-9]+.[0-9]+.[0-9]+-[a-z]+' # <major>.<minor>.<patch>-<name>
+    - '[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+' # <major>.<minor>.<patch>-<name>.<id>
+    - '!0[0-9]+.*' # only 0 or positive integers in <major>
+    - '!*.0[0-9]+*' # only 0 or positive integers in <minor>, <patch> and <id>
 
 env:
-  version: ${{ github.event.inputs.version }}
-  fix: ${{ github.event.inputs.fix }}
-  regex: ((0|[1-9][0-9]*)\.){2}(0|[1-9][0-9]*)(-(alpha|beta|rc)(\.(0|[1-9][0-9]*))?)?
+  regex: ((0|[1-9][0-9]*)\.){2}(0|[1-9][0-9]*)(-[a-z]+(\.(0|[1-9][0-9]*))?)?
+  sha: ${{ github.sha }}
+  name: ${{ github.ref_name }}
 
 jobs:
 
-  update:
+  release:
     name: Release
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Verify input version against regex
-      # Please note that automatic versioning (fix) will be enabled after 1.0.0
-      run: |
-        [[ "$version" =~ ^$regex$ ]] || exit 1
 
     - name: Checkout code
       id: checkout
       uses: actions/checkout@v3
 
-    - name: Config git
-      id: config_git
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-    - name: Fetch tags
-      id: fetch_tags
+    - name: Fetch all tags
       run: git fetch --prune --unshallow --tags
 
-    - name: Get latest version release tag
-      run: .github/workflows/release/latest.sh >> $GITHUB_ENV
+    - name: Get previous release
+      run: echo "prev=$(git -c 'versionsort.suffix=-' tag --sort=-v:refname --no-contains "$sha" | grep -E -o -m 1 "$regex" | head -1)" >> $GITHUB_ENV
+
+    - name: Get commits list
+      run: |
+        git log "$prev".."$sha" --pretty=format:"[\`%h\`](../../commit/%H) %s" > commits
+        [ ! -s commits ] \
+        && echo "Error: no new commits since '$prev'" 1>&2 \
+        && exit 1
+        echo >> commits
 
     - name: Generate body
-      env:
-        latest: ${{ env.latest }}
-      run: .github/workflows/release/body.sh >> $GITHUB_ENV
+      run: .github/scripts/body.sh > body.md
 
-    - name: Update INSTALLATION.md
-      id: update_installation_md
-      run: sed -i -E "s/$regex/$version/g" INSTALLATION.md
-
-    - name: Update lib/build.gradle
-      id: update_lib_build_gradle
-      run: sed -i -E "s/version = '$regex'/version = '$version'/g" lib/build.gradle
-
-    - name: Stage updated files
-      id: stage_files
-      run: git add INSTALLATION.md lib/build.gradle
-
-    - name: Commit updated files
-      id: commit_files
-      run: git commit -m "Bump version to $version"
-
-    - name: Push staged files
-      id: push_files
-      run: git push
-
-    - name: Get commit hash
-      id: get_commitish
-      run: echo "commitish=$(git rev-parse @)" >> $GITHUB_ENV
+    - name: Append changelog link to body
+      run: |
+        echo "**Full Changelog**: [\`$prev..$name\`](../../compare/$prev..$name)" >> body.md
 
     - name: Release on GitHub
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: refs/tags/${{ env.version }}
-        commitish: ${{ env.commitish }}
-        release_name: ${{ env.version }}
-        body_path: BODY.md
-        # '-' appears only if the pre-release suffix is present
-        prerelease: ${{ contains(env.version, '-') }}
-        draft: ${{ github.event.inputs.draft }}
+        tag_name: ${{ github.ref }}
+        commitish: ${{ github.sha }} # you may want to update files
+        release_name: ${{ github.ref_name }}
+        body_path: body.md
+        # '-' appears only if a pre-release suffix is present
+        prerelease: ${{ contains(github.ref_name, '-') }}
+        draft: true
