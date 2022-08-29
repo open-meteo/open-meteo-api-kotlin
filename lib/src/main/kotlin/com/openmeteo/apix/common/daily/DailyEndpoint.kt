@@ -1,9 +1,7 @@
 package com.openmeteo.apix.common.daily
 
-import com.openmeteo.apix.common.http.Endpoint
-import com.openmeteo.apix.common.time.TimeZone
+import com.openmeteo.apix.common.time.TimeZoneEndpoint
 
-interface DailyEndpoint : Endpoint {
+interface DailyEndpoint : TimeZoneEndpoint {
     val daily: Iterable<DailyParams>?
-    val timeZone: TimeZone?
 }
