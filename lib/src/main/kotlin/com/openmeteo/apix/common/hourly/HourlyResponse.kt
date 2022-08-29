@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 
 interface HourlyResponse {
     @SerialName("hourly_units")
-    val hourlyUnits: HourlyUnits
+    val hourlyUnits: HourlyUnits?
     @SerialName("hourly")
-    val hourlyValues: HourlyValues
+    val hourlyValues: HourlyValues?
 }

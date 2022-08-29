@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 
 interface DailyResponse : TimeZoneResponse {
     @SerialName("hourly_units")
-    val dailyUnits: DailyUnits
+    val dailyUnits: DailyUnits?
     @SerialName("hourly")
-    val dailyValues: DailyValues
+    val dailyValues: DailyValues?
 }
