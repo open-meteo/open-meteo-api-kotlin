@@ -1,3 +1,7 @@
 package com.openmeteo.apix.common.daily
 
-interface DailyValues
+import com.openmeteo.apix.common.time.Time
+
+interface DailyValues {
+    val time: Array<Time>
+}

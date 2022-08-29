@@ -1,3 +1,7 @@
 package com.openmeteo.apix.common.hourly
 
-interface HourlyUnits
+import com.openmeteo.api.common.time.TimeFormat
+
+interface HourlyUnits {
+    val time: TimeFormat
+}

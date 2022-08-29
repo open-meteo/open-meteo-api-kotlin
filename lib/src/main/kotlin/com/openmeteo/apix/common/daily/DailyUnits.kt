@@ -1,3 +1,7 @@
 package com.openmeteo.apix.common.daily
 
-interface DailyUnits
+import com.openmeteo.api.common.time.TimeFormat
+
+interface DailyUnits {
+    val time: TimeFormat
+}

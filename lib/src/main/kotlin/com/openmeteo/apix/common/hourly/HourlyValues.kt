@@ -1,3 +1,7 @@
 package com.openmeteo.apix.common.hourly
 
-interface HourlyValues
+import com.openmeteo.apix.common.time.Time
+
+interface HourlyValues {
+    val time: Array<Time>
+}
