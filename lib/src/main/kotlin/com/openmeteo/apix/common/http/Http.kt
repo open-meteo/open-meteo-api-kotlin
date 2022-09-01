@@ -3,18 +3,15 @@ package com.openmeteo.apix.common.http
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-interface Http<T> {
+/**
+ * A simple HTTP/S client
+ */
+interface Http<out T> {
 
     /**
      * A simple response callback
      */
-    fun response(connection: HttpsURLConnection, code: Int): T
-
-    /**
-     * The response callback wrapper
-     */
-    private fun response(connection: HttpsURLConnection) =
-        response(connection, connection.responseCode)
+    fun response(connection: HttpsURLConnection) : T
 
     /**
      * Open a new HTTPS connection

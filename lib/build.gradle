@@ -9,6 +9,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.4.0'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.10'
 }
 
 publishing {
