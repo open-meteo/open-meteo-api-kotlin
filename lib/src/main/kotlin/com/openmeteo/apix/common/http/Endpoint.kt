@@ -1,80 +1,73 @@
 package com.openmeteo.apix.common.http
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Transient
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
-import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-interface Endpoint : Http<InputStream> {
-
-    val context: URL
-    val serializer: DeserializationStrategy<*>
-
-    /**
-     * Parse a Json 400 BadRequest error from an [InputStream]
-     */
-    @ExperimentalSerializationApi
-    private fun badRequest(data: InputStream) =
-        Json.decodeFromStream(BadRequest.serializer(), data)
+abstract class Endpoint(
+    private val context: URL
+) : Http<InputStream>, Query {
 
     /**
-     * Parse some Json from an [InputStream]
-     */
-    @ExperimentalSerializationApi
-    private fun json(data: InputStream) =
-        Json.decodeFromStream(serializer, data)
-
-    /**
-     * Parse ProtoBuf from an [InputStream]
-     */
-    @ExperimentalSerializationApi
-    private fun protoBuf(data: InputStream) =
-        ProtoBuf.decodeFromByteArray(serializer, data.readBytes())
-
-    /**
-     * Implement the response callback logic:
+     * An API Bad Request (400) error object
      *
-     *  - OK (200) should return the raw data
-     *  - BAD REQUEST (400) should be parsed as Json
-     *  - else throws a generic error
+     * It inherits from [Error], easing `throw`s
      */
-    @ExperimentalSerializationApi
-    override fun response(connection: HttpsURLConnection, code: Int) =
-        when (code) {
-            200 -> connection.inputStream
-            400 -> throw badRequest(connection.errorStream)
-            else -> throw Error("Response: ${connection.responseMessage} ($code)")
-        }
+    @Serializable
+    class BadRequest(
+        private val error: Boolean,
+        @SerialName("reason")
+        override val message: String?
+    ) : Error()
 
     /**
-     * Create a query string from a map of parameters
+     * Parse JSON from a [String]
      */
-    private fun queryOf(params: Map<String, Any?>) =
-        if (params.isEmpty()) ""
-        else "?" + params
-            .mapNotNull { (k, v) -> v?.let { "$k=$v" } }
-            .joinToString("&")
+    internal fun <R : @Serializable Any> json(
+        string: String,
+        deserializationStrategy: DeserializationStrategy<R>,
+    ) = Json.decodeFromString(deserializationStrategy, string)
 
+    /**
+     * Parse JSON from an [InputStream]
+     */
+    internal fun <R : @Serializable Any> json(
+        inputStream: InputStream,
+        deserializationStrategy: DeserializationStrategy<R>,
+    ) = json(inputStream.use { it.bufferedReader().readText() }, deserializationStrategy)
 
-    @ExperimentalSerializationApi
-    fun query(
-        params: Map<String, Any?>,
-        format: ContentFormat =
-            (params["format"] ?: ContentFormat.json) as ContentFormat
-    ) = runCatching  { URL(context, queryOf(params)) }
-        .mapCatching { get(it) }
-        .mapCatching {
-            when (format) {
-                ContentFormat.json -> json(it)
-                ContentFormat.protobuf -> protoBuf(it)
+    /**
+     * Handle responses based on their status code:
+     * - 200: return the inputStream
+     * - 400: parse JSON error as [BadRequest]
+     * - else: return a generic error with the url and the response code/message
+     */
+    override fun response(connection: HttpsURLConnection): InputStream =
+        with (connection) {
+            when (responseCode) {
+                200 -> inputStream
+                400 -> throw json(errorStream, BadRequest.serializer())
+                else -> throw Error("\"$url\" returned $responseCode ($responseMessage)")
             }
         }
 
-    @ExperimentalSerializationApi
-    fun query(vararg params: Pair<String, Any?>) =
-        query(mapOf(*params))
+    /**
+     * Get a query URL with non-extension properties declared in `obj`.
+     * By default `this` is used.
+     */
+    fun query(obj: Query = this) =
+        runCatching { obj.apply(context) }
+
+    /**
+     * Query the endpoint with non-extension properties declared in `obj`.
+     * By default `this` is used.
+     */
+    fun invoke(obj: Query = this) = query(obj)
+        .mapCatching { get(it) }
+
 }
