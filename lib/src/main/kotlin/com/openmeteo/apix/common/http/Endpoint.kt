@@ -1,9 +1,8 @@
 package com.openmeteo.apix.common.http
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.Transient
+import com.openmeteo.apix.common.query.Query
+import com.openmeteo.apix.common.query.QueryContentFormat
+import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.net.URL
