@@ -4,41 +4,33 @@ import com.openmeteo.apix.common.query.Query
 import com.openmeteo.apix.common.query.QueryContentFormat
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 abstract class Endpoint(
-    private val context: URL
+    val context: URL,
 ) : Http<InputStream>, Query {
-
-    /**
-     * An API Bad Request (400) error object
-     *
-     * It inherits from [Error], easing `throw`s
-     */
-    @Serializable
-    class BadRequest(
-        private val error: Boolean,
-        @SerialName("reason")
-        override val message: String?
-    ) : Error()
 
     /**
      * Parse JSON from a [String]
      */
-    internal fun <R : @Serializable Any> json(
-        string: String,
-        deserializationStrategy: DeserializationStrategy<R>,
-    ) = Json.decodeFromString(deserializationStrategy, string)
+    private inline fun <reified T> json(string: String) =
+        Json.decodeFromString<T>(string)
 
     /**
      * Parse JSON from an [InputStream]
      */
-    internal fun <R : @Serializable Any> json(
-        inputStream: InputStream,
-        deserializationStrategy: DeserializationStrategy<R>,
-    ) = json(inputStream.use { it.bufferedReader().readText() }, deserializationStrategy)
+    private inline fun <reified T> json(inputStream: InputStream) =
+        json<T>(inputStream.use { it.bufferedReader().readText() })
+
+    /**
+     * Parse ProtoBuf from an [InputStream]
+     */
+    @OptIn(ExperimentalSerializationApi::class)
+    private inline fun <reified T> protoBuf(inputStream: InputStream) =
+        ProtoBuf.decodeFromByteArray<T>(inputStream.readAllBytes())
 
     /**
      * Handle responses based on their status code:
@@ -50,23 +42,20 @@ abstract class Endpoint(
         with (connection) {
             when (responseCode) {
                 200 -> inputStream
-                400 -> throw json(errorStream, BadRequest.serializer())
-                else -> throw Error("\"$url\" returned $responseCode ($responseMessage)")
+                400 -> throw json<BadRequest>(errorStream)
+                else -> throw Error("`$url` response code: $responseCode ($responseMessage)")
             }
         }
 
-    /**
-     * Get a query URL with non-extension properties declared in `obj`.
-     * By default `this` is used.
-     */
-    fun query(obj: Query = this) =
-        runCatching { obj.apply(context) }
+    private inline fun <reified T> get(query: Query = this) =
+        runCatching { query.toURL(context) }
+            .mapCatching { get(it) }
 
-    /**
-     * Query the endpoint with non-extension properties declared in `obj`.
-     * By default `this` is used.
-     */
-    fun invoke(obj: Query = this) = query(obj)
-        .mapCatching { get(it) }
-
+    internal inline operator fun <reified T> invoke(extra: Query? = null) =
+        with (extra?.let { this + it } ?: this) {
+            get<T>(this).mapCatching {
+                if (this is QueryContentFormat && format == ContentFormat.ProtoBuf) protoBuf(it)
+                else json<T>(it)
+            }
+        }
 }

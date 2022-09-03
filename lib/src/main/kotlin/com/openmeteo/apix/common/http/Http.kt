@@ -6,7 +6,7 @@ import javax.net.ssl.HttpsURLConnection
 /**
  * A simple HTTP/S client
  */
-interface Http<out T> {
+fun interface Http<out T> {
 
     /**
      * A simple response callback
@@ -24,4 +24,5 @@ interface Http<out T> {
      */
     fun get(url: URL) =
         response(connect(url))
+
 }
