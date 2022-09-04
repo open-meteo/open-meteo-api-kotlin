@@ -27,11 +27,9 @@ interface Query {
         @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
         internal fun value(any: Any?) : String =
             when (any) {
-                is Iterable<*> -> any
-                    .joinToString(",") { value(it) }
-                is Enum<*> -> any
-                    .javaClass.kotlin.serializer().descriptor
-                    .let { it.getElementName(it.getElementIndex(any.name)) }
+                is Iterable<*> -> any.joinToString(",") { value(it) }
+                is Enum<*> -> any.javaClass.kotlin.serializer()
+                    .descriptor.getElementName(any.ordinal)
                 else -> any.toString()
             }
 
