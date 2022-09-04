@@ -8,4 +8,6 @@ interface QueryDateRange : Query {
     val startDate: Date
     @SerialName("end_date")
     val endDate: Date
+    @SerialName("past_days")
+    val pastDays: Int
 }
