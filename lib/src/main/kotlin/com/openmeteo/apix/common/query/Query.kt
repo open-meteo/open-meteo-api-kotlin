@@ -4,10 +4,7 @@ import kotlinx.serialization.*
 import java.net.URL
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
-import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.full.findAnnotation
-import kotlin.reflect.full.hasAnnotation
-import kotlin.reflect.full.superclasses
+import kotlin.reflect.full.*
 
 interface Query {
 
@@ -38,8 +35,8 @@ interface Query {
     private fun value(property: KProperty1<Query, *>) =
         property.get(this)?.let { Companion.value(it) }
 
-    private val nonTransientDeclaredMemberProperties get() =
-        javaClass.kotlin.declaredMemberProperties
+    private val memberProperties get() =
+        javaClass.kotlin.memberProperties
             .filter { !it.hasAnnotation<Transient>() }
 
     /**
@@ -48,7 +45,7 @@ interface Query {
      * Please note that pairs with null values are filtered out.
      */
     fun toList () =
-        nonTransientDeclaredMemberProperties
+        memberProperties
             .mapNotNull { value(it)?.let { v -> key(it, javaClass.kotlin) to v } }
 
     fun toMap() =

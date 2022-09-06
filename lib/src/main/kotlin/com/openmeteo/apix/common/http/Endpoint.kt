@@ -10,6 +10,7 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 abstract class Endpoint(
+    @Transient
     val context: URL,
 ) : Http<InputStream>, Query {
 
