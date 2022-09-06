@@ -38,7 +38,7 @@ open class Elevation(
         latitude.zip(longitude)
 
     @Serializable
-    class Response(
+    open class Response(
         val elevation: FloatArray,
     )
 
