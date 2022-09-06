@@ -11,7 +11,7 @@ fun interface Http<out T> {
     /**
      * A simple response callback
      */
-    fun response(connection: HttpsURLConnection) : T
+    fun response(connection: HttpsURLConnection): T
 
     /**
      * Open a new HTTPS connection

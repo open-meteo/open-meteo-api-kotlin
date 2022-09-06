@@ -23,6 +23,7 @@ value class TimeZone private constructor(
         val auto = TimeZone("auto")
         fun getTimeZone(id: String) =
             TimeZone(java.util.TimeZone.getTimeZone(id))
+
         fun getTimeZone(id: ZoneId) =
             TimeZone(java.util.TimeZone.getTimeZone(id))
     }

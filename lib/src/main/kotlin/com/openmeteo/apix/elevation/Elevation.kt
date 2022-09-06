@@ -40,8 +40,9 @@ open class Elevation(
     }
 
     @Transient
-    val coordinates get() =
-        latitude.zip(longitude)
+    val coordinates
+        get() =
+            latitude.zip(longitude)
 
     @Serializable
     open class Response(

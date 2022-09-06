@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializable
 enum class ContentFormat {
     @SerialName("json")
     Json,
+
     @SerialName("protobuf")
     ProtoBuf,
 }

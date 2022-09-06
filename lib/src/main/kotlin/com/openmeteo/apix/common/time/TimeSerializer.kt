@@ -11,6 +11,6 @@ object TimeSerializer : KSerializer<Time> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Time", PrimitiveKind.LONG)
 
-    override fun serialize(encoder: Encoder, value: Time) = encoder.encodeLong(value.time/1000)
+    override fun serialize(encoder: Encoder, value: Time) = encoder.encodeLong(value.time / 1000)
     override fun deserialize(decoder: Decoder): Time = Time(decoder.decodeLong())
 }

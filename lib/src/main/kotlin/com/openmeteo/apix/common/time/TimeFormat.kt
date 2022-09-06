@@ -12,6 +12,7 @@ import kotlinx.serialization.Serializable
 enum class TimeFormat {
     @SerialName("iso8601")
     Iso8601,
+
     @SerialName("unixtime")
     UnixTime,
 }

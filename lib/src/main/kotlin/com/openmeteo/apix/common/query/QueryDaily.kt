@@ -1,6 +1,7 @@
 package com.openmeteo.apix.common.query
 
-interface QueryDaily {
+interface QueryDaily : Query {
     val daily: Iterable<Options>
+
     interface Options
 }

@@ -1,6 +1,7 @@
 package com.openmeteo.apix.common.query
 
-interface QueryHourly {
+interface QueryHourly : QueryTimeZone {
     val hourly: Iterable<Options>
+
     interface Options
 }

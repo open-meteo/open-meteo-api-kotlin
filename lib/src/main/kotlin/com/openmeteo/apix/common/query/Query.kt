@@ -22,7 +22,7 @@ interface Query {
             key(property, T::class)
 
         @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-        internal fun value(any: Any?) : String =
+        internal fun value(any: Any?): String =
             when (any) {
                 is Iterable<*> -> any.joinToString(",") { value(it) }
                 is Enum<*> -> any.javaClass.kotlin.serializer()
@@ -35,16 +35,17 @@ interface Query {
     private fun value(property: KProperty1<Query, *>) =
         property.get(this)?.let { Companion.value(it) }
 
-    private val memberProperties get() =
-        javaClass.kotlin.memberProperties
-            .filter { !it.hasAnnotation<Transient>() }
+    private val memberProperties
+        get() =
+            javaClass.kotlin.memberProperties
+                .filter { !it.hasAnnotation<Transient>() }
 
     /**
      * Returns the object properties as a list of key-value pairs.
      *
      * Please note that pairs with null values are filtered out.
      */
-    fun toList () =
+    fun toList() =
         memberProperties
             .mapNotNull { value(it)?.let { v -> key(it, javaClass.kotlin) to v } }
 
