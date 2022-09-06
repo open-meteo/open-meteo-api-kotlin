@@ -34,7 +34,9 @@ open class Elevation(
     )
 
     init {
+        require(latitude.size in 1..100)
         require(longitude.size == latitude.size)
+        // require(longitude.size in 1..100)` // if (x in 0..100 && y == x) then (y in 0..100)
     }
 
     @Transient
