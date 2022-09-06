@@ -7,8 +7,8 @@ import kotlinx.serialization.Transient
 import java.net.URL
 
 open class Elevation(
-    val latitude: Iterable<Float>,
-    val longitude: Iterable<Float>,
+    val latitude: Collection<Float>,
+    val longitude: Collection<Float>,
     context: URL = Companion.context,
 ) : Endpoint(context) {
 
@@ -17,7 +17,7 @@ open class Elevation(
     }
 
     constructor(
-        coordinates: Pair<Iterable<Float>, Iterable<Float>>,
+        coordinates: Pair<Collection<Float>, Collection<Float>>,
         context: URL = Companion.context,
     ) : this(
         coordinates.first,
@@ -32,6 +32,10 @@ open class Elevation(
         coordinates.unzip(),
         context,
     )
+
+    init {
+        require(longitude.size == latitude.size)
+    }
 
     @Transient
     val coordinates get() =
