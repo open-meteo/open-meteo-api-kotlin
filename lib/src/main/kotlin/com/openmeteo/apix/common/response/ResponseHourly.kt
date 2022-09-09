@@ -6,13 +6,13 @@ import kotlinx.serialization.SerialName
 
 interface ResponseHourly : ResponseTimeZone {
     @SerialName("hourly_units")
-    val hourlyUnits: Units
+    val hourlyUnits: Units?
 
     @SerialName("hourly")
-    val hourlyValues: Values
+    val hourlyValues: Values?
 
     interface Units {
-        val time: TimeFormat
+        val time: TimeFormat // this should always be UnixTime
     }
 
     interface Values {

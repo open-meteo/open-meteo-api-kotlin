@@ -6,10 +6,10 @@ import kotlinx.serialization.SerialName
 
 interface ResponseDaily : Response {
     @SerialName("daily_units")
-    val dailyUnits: Units
+    val dailyUnits: Units?
 
     @SerialName("daily")
-    val dailyValues: Values
+    val dailyValues: Values?
 
     interface Units {
         val time: TimeFormat
