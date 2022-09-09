@@ -5,5 +5,5 @@ import kotlinx.serialization.SerialName
 
 interface QueryTimeZone : Query {
     @SerialName("timezone")
-    val timeZone: TimeZone
+    val timeZone: TimeZone?
 }
