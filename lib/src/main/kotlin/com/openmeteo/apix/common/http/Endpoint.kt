@@ -55,7 +55,7 @@ abstract class Endpoint(
         runCatching { query.toURL(context) }
             .mapCatching { get(it) }
 
-    internal inline operator fun <reified T> invoke(extra: Query? = null) =
+    internal inline fun <reified T> query(extra: Query? = null) =
         with(extra?.let { this + it } ?: this) {
             get<T>(this).mapCatching {
                 if (this is QueryContentFormat && format == ContentFormat.ProtoBuf) protoBuf(it)

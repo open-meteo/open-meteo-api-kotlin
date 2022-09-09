@@ -52,7 +52,6 @@ open class GeocodingGet(
         val admin4: String? = null,
     )
 
-    operator fun invoke() = invoke<Response>()
-    operator fun invoke(query: Query) = invoke<Response>(query)
+    operator fun invoke(query: Query? = null) = query<Response>(query)
 
 }

@@ -35,7 +35,6 @@ open class GeocodingSearch(
         override val generationTimeMs: Float,
     ) : ResponseGenerationTimed
 
-    operator fun invoke() = invoke<Response>()
-    operator fun invoke(query: Query) = invoke<Response>(query)
+    operator fun invoke(query: Query? = null) = query<Response>(query)
 
 }

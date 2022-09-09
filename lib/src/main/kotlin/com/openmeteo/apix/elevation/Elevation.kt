@@ -49,6 +49,6 @@ open class Elevation(
         val elevation: FloatArray,
     )
 
-    operator fun invoke() = invoke<Response>()
-    operator fun invoke(query: Query) = invoke<Response>(query)
+    operator fun invoke(query: Query? = null) = query<Response>(query)
+
 }
