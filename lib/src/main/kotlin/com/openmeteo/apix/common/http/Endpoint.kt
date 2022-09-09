@@ -56,7 +56,7 @@ abstract class Endpoint(
             .mapCatching { get(it) }
 
     internal inline fun <reified T> query(extra: Query? = null) =
-        with(extra?.let { this + it } ?: this) {
+        with(extra?.plus( this ) ?: this) {
             get<T>(this).mapCatching {
                 if (this is QueryContentFormat && format == ContentFormat.ProtoBuf) protoBuf(it)
                 else json<T>(it)
