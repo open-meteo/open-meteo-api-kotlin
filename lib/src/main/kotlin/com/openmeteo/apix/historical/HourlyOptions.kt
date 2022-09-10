@@ -71,4 +71,3 @@ enum class HourlyOptions : QueryHourly.Options {
     @SerialName("soil_moisture_100_to_255cm")
     SoilMoisture100To255cm,
 }
-

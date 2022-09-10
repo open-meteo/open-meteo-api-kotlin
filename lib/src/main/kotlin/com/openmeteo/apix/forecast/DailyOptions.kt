@@ -41,4 +41,3 @@ enum class DailyOptions : QueryDaily.Options {
     @SerialName("et0_fao_evapotranspiration")
     Et0FaoEvapotranspiration,
 }
-

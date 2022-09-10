@@ -167,4 +167,3 @@ enum class HourlyOptions : QueryHourly.Options {
     @SerialName("divergence_of_wind_50hPa")
     DivergenceOfWind50hPa,
 }
-

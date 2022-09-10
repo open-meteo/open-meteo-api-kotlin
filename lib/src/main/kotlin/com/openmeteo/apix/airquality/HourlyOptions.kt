@@ -39,4 +39,3 @@ enum class HourlyOptions : QueryHourly.Options {
     @SerialName("ragweed_pollen")
     RagweedPollen,
 }
-

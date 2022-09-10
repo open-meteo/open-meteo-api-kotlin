@@ -29,4 +29,3 @@ enum class HourlyOptions : QueryHourly.Options {
     @SerialName("swell_wave_peak_period")
     SwellWavePeakPeriod,
 }
-

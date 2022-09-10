@@ -1,5 +1,7 @@
 #!/bin/bash
 
+package="com.openmeteo.apix"
+
 # list all checkboxes matching a name (hourly/daily) in a doc page
 list() {
   if [ -v 'name' ]; then
@@ -25,9 +27,9 @@ CamelCase() {
   cat | sed -r 's/(^|_)(\w)/\U\2/g' # https://stackoverflow.com/a/34420162/9373031
 }
 
-# convert snake_case to CamelCase and append comma
-enumNames() {
-  cat | CamelCase | suffix ','
+# convert snake_case to camelCase
+camelCase() {
+  cat | sed -r 's/(_)(\w)/\U\2/g'
 }
 
 # wrap the serial name
@@ -36,24 +38,45 @@ SerialName() {
 }
 
 # join the list values with serial names and enum names and prepare enum
-enum() {
+options() {
   values="$(list)"
   serialNames="$(echo "$values" | SerialName)"
-  enumNames="$(echo "$values" | enumNames)"
+  options="$(echo "$values" | CamelCase | suffix ',')"
   cat <<END
-package com.openmeteo.apix.$endpoint
+package $package.$endpoint
 
-import com.openmeteo.apix.common.query.Query${name^}
+import $package.common.query.Query${name^}
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 enum class ${name^}Options : Query${name^}.Options {
 END
-  paste -d $'\n' <(echo "$serialNames") <(echo "$enumNames") \
+  paste -d $'\n' <(echo "$serialNames") <(echo "$options") \
   | prefix "    "
   echo "}"
-  echo
+}
+
+units() {
+  values="$(list)"
+  serialNames="$(echo "$values" | SerialName)"
+  units="$(echo "$values" | camelCase | prefix "val " | suffix ': Unit? = null,')"
+  cat <<END
+package $package.$endpoint
+
+import $package.common.response.Response${name^}
+import $package.common.time.TimeFormat
+import $package.common.units.Unit
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+class ${name^}Units(
+    override val time: TimeFormat,
+END
+  paste -d $'\n' <(echo "$serialNames") <(echo "$units") \
+  | prefix "    "
+  echo ") : Response${name^}.Units"
 }
 
 declare -A docs=(
@@ -65,7 +88,7 @@ declare -A docs=(
 )
 
 # should run in project root
-cd "lib/src/main/kotlin/com/openmeteo/apix" || exit 1
+cd "lib/src/main/kotlin/$(echo "$package" | tr '.' '/')" || exit 1
 
 # fetch only once html
 mkdir tmp
@@ -75,12 +98,14 @@ done
 
 name="hourly"
 for endpoint in airquality ecmwf forecast historical marine; do
-  enum < "tmp/$endpoint.html" > "$endpoint/HourlyOptions.kt"
+  options < "tmp/$endpoint.html" > "$endpoint/HourlyOptions.kt"
+  units < "tmp/$endpoint.html" > "$endpoint/HourlyUnits.kt"
 done
 
 name="daily"
 for endpoint in forecast historical marine; do
-  enum < "tmp/$endpoint.html" > "$endpoint/DailyOptions.kt"
+  options < "tmp/$endpoint.html" > "$endpoint/DailyOptions.kt"
+  units < "tmp/$endpoint.html" > "$endpoint/DailyUnits.kt"
 done
 
 # delete html

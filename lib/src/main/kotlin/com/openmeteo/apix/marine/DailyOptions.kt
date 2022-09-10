@@ -29,4 +29,3 @@ enum class DailyOptions : QueryDaily.Options {
     @SerialName("swell_wave_peak_period_max")
     SwellWavePeakPeriodMax,
 }
-

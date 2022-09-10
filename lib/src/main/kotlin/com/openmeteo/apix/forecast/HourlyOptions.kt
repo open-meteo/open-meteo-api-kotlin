@@ -373,4 +373,3 @@ enum class HourlyOptions : QueryHourly.Options {
     @SerialName("geopotential_height_30hPa")
     GeopotentialHeight30hPa,
 }
-
