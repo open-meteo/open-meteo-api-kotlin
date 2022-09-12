@@ -81,18 +81,17 @@ values() {
 package $package.$endpoint
 
 import $package.common.response.Response${name^}
-import $package.common.time.TimeFormat
-import $package.common.units.Unit
+import $package.common.time.Time
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class ${name^}Units(
-    override val time: TimeFormat,
+class ${name^}Values(
+    override val time: Array<Time>,
 END
-  paste -d $'\n' <(echo "$serialNames") <(echo "$units") \
+  paste -d $'\n' <(echo "$serialNames") <(echo "$values") \
   | prefix "    "
-  echo ") : Response${name^}.Units"
+  echo ") : Response${name^}.Values"
 }
 
 group() {
@@ -100,8 +99,10 @@ group() {
   serialNames="$(echo "$listed" | SerialName)"
   options < "tmp/$endpoint.html" > "$endpoint/${name^}Options.kt"
   units < "tmp/$endpoint.html" > "$endpoint/${name^}Units.kt"
+  values < "tmp/$endpoint.html" > "$endpoint/${name^}Values.kt"
   if [ "$name" == "daily" ]; then
     sed -i -r 's/(sunrise|sunset): Unit/\1: TimeFormat/' "$endpoint/DailyUnits.kt"
+    sed -i -r 's/(sunrise|sunset): Array<Float\?>/\1: Array<Time\?>/' "$endpoint/DailyValues.kt"
   fi
 }
 
