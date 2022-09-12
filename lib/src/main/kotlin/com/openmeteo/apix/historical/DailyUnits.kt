@@ -18,9 +18,9 @@ class DailyUnits(
     @SerialName("apparent_temperature_min")
     val apparentTemperatureMin: Unit? = null,
     @SerialName("sunrise")
-    val sunrise: Unit? = null,
+    val sunrise: TimeFormat? = null,
     @SerialName("sunset")
-    val sunset: Unit? = null,
+    val sunset: TimeFormat? = null,
     @SerialName("shortwave_radiation_sum")
     val shortwaveRadiationSum: Unit? = null,
     @SerialName("precipitation_sum")

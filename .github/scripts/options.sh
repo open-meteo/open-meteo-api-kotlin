@@ -39,9 +39,7 @@ SerialName() {
 
 # join the list values with serial names and enum names and prepare enum
 options() {
-  values="$(list)"
-  serialNames="$(echo "$values" | SerialName)"
-  options="$(echo "$values" | CamelCase | suffix ',')"
+  options="$(echo "$listed" | CamelCase | suffix ',')"
   cat <<END
 package $package.$endpoint
 
@@ -58,9 +56,7 @@ END
 }
 
 units() {
-  values="$(list)"
-  serialNames="$(echo "$values" | SerialName)"
-  units="$(echo "$values" | camelCase | prefix "val " | suffix ': Unit? = null,')"
+  units="$(echo "$listed" | camelCase | prefix "val " | suffix ': Unit? = null,')"
   cat <<END
 package $package.$endpoint
 
@@ -79,6 +75,36 @@ END
   echo ") : Response${name^}.Units"
 }
 
+values() {
+  values="$(echo "$listed" | camelCase | prefix "val " | suffix ': Array<Float?>? = null,')"
+  cat <<END
+package $package.$endpoint
+
+import $package.common.response.Response${name^}
+import $package.common.time.TimeFormat
+import $package.common.units.Unit
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+class ${name^}Units(
+    override val time: TimeFormat,
+END
+  paste -d $'\n' <(echo "$serialNames") <(echo "$units") \
+  | prefix "    "
+  echo ") : Response${name^}.Units"
+}
+
+group() {
+  listed="$(list)"
+  serialNames="$(echo "$listed" | SerialName)"
+  options < "tmp/$endpoint.html" > "$endpoint/${name^}Options.kt"
+  units < "tmp/$endpoint.html" > "$endpoint/${name^}Units.kt"
+  if [ "$name" == "daily" ]; then
+    sed -i -r 's/(sunrise|sunset): Unit/\1: TimeFormat/' "$endpoint/DailyUnits.kt"
+  fi
+}
+
 declare -A docs=(
   [airquality]="https://open-meteo.com/en/docs/air-quality-api"
   [ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
@@ -90,7 +116,7 @@ declare -A docs=(
 # should run in project root
 cd "lib/src/main/kotlin/$(echo "$package" | tr '.' '/')" || exit 1
 
-# fetch only once html
+# fetch html only once
 mkdir tmp
 for endpoint in "${!docs[@]}"; do
   curl -s "${docs[$endpoint]}" > "tmp/$endpoint.html"
@@ -98,14 +124,12 @@ done
 
 name="hourly"
 for endpoint in airquality ecmwf forecast historical marine; do
-  options < "tmp/$endpoint.html" > "$endpoint/HourlyOptions.kt"
-  units < "tmp/$endpoint.html" > "$endpoint/HourlyUnits.kt"
+  group < "tmp/$endpoint.html"
 done
 
 name="daily"
 for endpoint in forecast historical marine; do
-  options < "tmp/$endpoint.html" > "$endpoint/DailyOptions.kt"
-  units < "tmp/$endpoint.html" > "$endpoint/DailyUnits.kt"
+  group < "tmp/$endpoint.html"
 done
 
 # delete html
