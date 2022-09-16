@@ -21,7 +21,7 @@ object Gfs {
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<Hourly>? = null,
-        override val daily: Iterable<QueryDaily.Options>?,
+        override val daily: Iterable<Daily>?,
         override val currentWeather: Boolean? = null,
         val temperatureUnit: TemperatureUnit? = null,
         val windSpeedUnit: WindSpeedUnit? = null,

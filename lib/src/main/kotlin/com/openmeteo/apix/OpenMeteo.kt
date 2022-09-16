@@ -2,11 +2,9 @@ package com.openmeteo.apix
 
 import com.openmeteo.apix.airquality.AirQuality
 import com.openmeteo.apix.airquality.Domains
-import com.openmeteo.apix.airquality.Hourly
 import com.openmeteo.apix.common.http.Endpoint
 import com.openmeteo.apix.common.query.City
 import com.openmeteo.apix.common.query.QueryCoordinates
-import com.openmeteo.apix.common.query.QueryDaily
 import com.openmeteo.apix.common.time.Date
 import com.openmeteo.apix.common.time.TimeZone
 import com.openmeteo.apix.common.units.PrecipitationUnit
@@ -71,7 +69,7 @@ class OpenMeteo(
     fun airQuality(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<Hourly>? = null,
+        hourly: Iterable<com.openmeteo.apix.airquality.Hourly>? = null,
         domains: Domains? = null,
         timeZone: TimeZone? = null,
         startDate: Date? = null,
@@ -102,7 +100,7 @@ class OpenMeteo(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
         hourly: Iterable<com.openmeteo.apix.forecast.Hourly>? = null,
-        daily: Iterable<QueryDaily.Options>?,
+        daily: Iterable<com.openmeteo.apix.forecast.Daily>?,
         currentWeather: Boolean? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
@@ -129,7 +127,7 @@ class OpenMeteo(
         latitude: Float,
         longitude: Float,
         hourly: Iterable<com.openmeteo.apix.gfs.Hourly>? = null,
-        daily: Iterable<QueryDaily.Options>?,
+        daily: Iterable<com.openmeteo.apix.gfs.Daily>?,
         currentWeather: Boolean? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
