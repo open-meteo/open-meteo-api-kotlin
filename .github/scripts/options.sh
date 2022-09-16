@@ -52,6 +52,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class $endpoint${name^} : Options {
+    @SerialName("time")
+    Time,
 END
   paste -d $'\n' <(echo "$serialNames") <(echo "$options") \
   | prefix "    "
