@@ -1,8 +1,12 @@
 package com.openmeteo.apix
 
 import com.openmeteo.apix.airquality.AirQuality
+import com.openmeteo.apix.airquality.Domains
+import com.openmeteo.apix.airquality.Hourly
 import com.openmeteo.apix.common.http.Endpoint
 import com.openmeteo.apix.common.query.QueryCoordinates
+import com.openmeteo.apix.common.time.Date
+import com.openmeteo.apix.common.time.TimeZone
 import com.openmeteo.apix.elevation.Elevation
 import com.openmeteo.apix.geocoding.GeocodingGet
 import com.openmeteo.apix.geocoding.GeocodingSearch
@@ -40,6 +44,18 @@ class OpenMeteo(
 
     operator fun invoke(query: GeocodingSearch.Query) =
         geocodingSearch.query<GeocodingSearch.Response>(query)
+
+    fun airQuality(
+        latitude: Float,
+        longitude: Float,
+        hourly: Iterable<Hourly>? = null,
+        domains: Domains? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+    ) = invoke(AirQuality.Query(latitude, longitude, hourly, domains, timeZone,
+        startDate, endDate, pastDays))
 
     fun elevation(
         vararg coordinates: Pair<Float, Float>,
