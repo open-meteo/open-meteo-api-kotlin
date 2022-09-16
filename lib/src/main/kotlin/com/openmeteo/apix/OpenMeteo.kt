@@ -17,6 +17,7 @@ import com.openmeteo.apix.geocoding.GeocodingGet
 import com.openmeteo.apix.geocoding.GeocodingSearch
 import com.openmeteo.apix.gfs.Gfs
 import com.openmeteo.apix.historical.Historical
+import com.openmeteo.apix.marine.Marine
 
 class OpenMeteo(
     override val latitude: Float = 0f,
@@ -29,6 +30,7 @@ class OpenMeteo(
     val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
     val gfs: Endpoint = Endpoint(Gfs.context),
     val historical: Endpoint = Endpoint(Historical.context),
+    val marine: Endpoint = Endpoint(Marine.context),
 ) : QueryCoordinates {
 
     constructor(coordinates: Pair<Float, Float>) : this(
@@ -69,6 +71,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Historical.Query) =
         historical.query<Historical.Response>(query)
+
+    operator fun invoke(query: Marine.Query) =
+        marine.query<Marine.Response>(query)
 
     fun airQuality(
         latitude: Float = this.latitude,
@@ -158,5 +163,16 @@ class OpenMeteo(
         endDate: Date? = null,
     ) = invoke(Historical.Query(latitude, longitude, hourly, daily, temperatureUnit,
         windSpeedUnit, precipitationUnit, timeZone, startDate, endDate))
+
+    fun marine(
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+        hourly: Iterable<com.openmeteo.apix.marine.Hourly>? = null,
+        daily: Iterable<com.openmeteo.apix.marine.Daily>? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+    ) = invoke(Marine.Query(latitude, longitude, hourly, daily, timeZone, startDate,
+        endDate))
 
 }
