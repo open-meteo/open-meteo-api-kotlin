@@ -31,7 +31,9 @@ Please note that this regex is also used in the github "Release" workflow to ver
 
 ### Files
 
-> :warning: The project is still in early development: expect commits breaking code anyway
+> **Warning**
+> 
+> The project is still in early development: expect commits breaking code anyway
 
 A commit shall not break any code. If possible, it should only contain related changes:
 
