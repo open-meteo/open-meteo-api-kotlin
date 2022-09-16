@@ -5,6 +5,7 @@ import com.openmeteo.apix.airquality.Domains
 import com.openmeteo.apix.airquality.Hourly
 import com.openmeteo.apix.common.http.Endpoint
 import com.openmeteo.apix.common.query.QueryCoordinates
+import com.openmeteo.apix.common.query.QueryDaily
 import com.openmeteo.apix.common.time.Date
 import com.openmeteo.apix.common.time.TimeZone
 import com.openmeteo.apix.common.units.PrecipitationUnit
@@ -12,6 +13,7 @@ import com.openmeteo.apix.common.units.TemperatureUnit
 import com.openmeteo.apix.common.units.WindSpeedUnit
 import com.openmeteo.apix.ecmwf.Ecmwf
 import com.openmeteo.apix.elevation.Elevation
+import com.openmeteo.apix.forecast.Forecast
 import com.openmeteo.apix.geocoding.GeocodingGet
 import com.openmeteo.apix.geocoding.GeocodingSearch
 
@@ -21,6 +23,7 @@ class OpenMeteo(
     val airQuality: Endpoint = Endpoint(AirQuality.context),
     val ecmwf: Endpoint = Endpoint(Ecmwf.context),
     val elevation: Endpoint = Endpoint(Elevation.context),
+    val forecast: Endpoint = Endpoint(Forecast.context),
     val geocodingGet: Endpoint = Endpoint(GeocodingGet.context),
     val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
 ) : QueryCoordinates {
@@ -46,6 +49,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Elevation.Query) =
         elevation.query<Elevation.Response>(query)
+
+    operator fun invoke(query: Forecast.Query) =
+        forecast.query<Forecast.Response>(query)
 
     operator fun invoke(query: GeocodingGet.Query) =
         geocodingGet.query<GeocodingGet.Response>(query)
@@ -82,6 +88,23 @@ class OpenMeteo(
     fun elevation(
         vararg coordinates: Pair<Float, Float>,
     ) = invoke(Elevation.Query(*coordinates))
+
+    fun forecast(
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+        hourly: Iterable<com.openmeteo.apix.forecast.Hourly>? = null,
+        daily: Iterable<QueryDaily.Options>?,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+    ) = invoke(Forecast.Query(latitude, longitude, hourly, daily, currentWeather,
+        temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
+        endDate, pastDays))
 
     fun geocoding(
         id: Int,
