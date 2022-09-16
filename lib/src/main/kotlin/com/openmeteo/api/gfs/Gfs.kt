@@ -43,6 +43,7 @@ object Gfs {
     class Response(
         override val latitude: Float,
         override val longitude: Float,
+        val elevation: Float,
         @SerialName("utc_offset_seconds")
         override val utcOffsetSeconds: Int,
         @SerialName("timezone")
