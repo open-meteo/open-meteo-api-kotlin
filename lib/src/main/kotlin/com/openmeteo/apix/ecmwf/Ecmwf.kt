@@ -16,7 +16,7 @@ import java.net.URL
 
 object Ecmwf {
 
-    val context = URL("https://air-quality-api.open-meteo.com/v1/air-quality")
+    val context = URL("https://api.open-meteo.com/v1/ecmwf")
 
     class Query(
         override val latitude: Float,
