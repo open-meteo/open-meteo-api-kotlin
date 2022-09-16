@@ -29,7 +29,8 @@ object Gfs {
         override val timeZone: TimeZone? = null,
         override val startDate: Date? = null,
         override val endDate: Date? = null,
-        override val pastDays: Int? = null,
+        @SerialName("past_days")
+        val pastDays: Int? = null,
         @SerialName("forecast_days")
         val forecastDays: Int? = null,
     ) : QueryCoordinates,
