@@ -18,8 +18,8 @@ object AirQuality {
     class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val hourly: Iterable<Hourly>? = null,
-        val domains: Domains? = null,
+        override val hourly: Iterable<AirQualityHourly>? = null,
+        val domains: AirQualityDomains? = null,
         override val timeZone: TimeZone? = null,
         override val startDate: Date? = null,
         override val endDate: Date? = null,
@@ -40,13 +40,13 @@ object AirQuality {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<Hourly, Unit>? = null,
+        override val hourlyUnits: Map<AirQualityHourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<AirQualityHourly, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<Hourly>,
+        ResponseHourly<AirQualityHourly>,
         ResponseGenerationTimed
 
 }

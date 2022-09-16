@@ -1,11 +1,11 @@
 package com.openmeteo.api.marine
 
-import com.openmeteo.api.common.query.QueryHourly
+import com.openmeteo.api.common.query.QueryHourly.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Hourly : QueryHourly.Options {
+enum class MarineHourly : Options {
     @SerialName("wave_height")
     WaveHeight,
     @SerialName("wave_direction")

@@ -20,8 +20,8 @@ object Gfs {
     class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val hourly: Iterable<Hourly>? = null,
-        override val daily: Iterable<Daily>?,
+        override val hourly: Iterable<GfsHourly>? = null,
+        override val daily: Iterable<GfsDaily>? = null,
         override val currentWeather: Boolean? = null,
         val temperatureUnit: TemperatureUnit? = null,
         val windSpeedUnit: WindSpeedUnit? = null,
@@ -50,20 +50,20 @@ object Gfs {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<Hourly, Unit>? = null,
+        override val hourlyUnits: Map<GfsHourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<GfsHourly, Array<Double?>>? = null,
         @SerialName("daily_units")
-        override val dailyUnits: Map<Daily, Unit>?,
+        override val dailyUnits: Map<GfsDaily, Unit>?,
         @SerialName("daily")
-        override val dailyValues: Map<Daily, Array<Double?>>?,
+        override val dailyValues: Map<GfsDaily, Array<Double?>>?,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")
         override val currentWeather: CurrentWeather,
     ) : ResponseCoordinates,
-        ResponseHourly<Hourly>,
-        ResponseDaily<Daily>,
+        ResponseHourly<GfsHourly>,
+        ResponseDaily<GfsDaily>,
         ResponseCurrentWeather,
         ResponseGenerationTimed
 

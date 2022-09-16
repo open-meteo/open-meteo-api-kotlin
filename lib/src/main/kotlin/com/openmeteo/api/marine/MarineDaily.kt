@@ -1,11 +1,11 @@
 package com.openmeteo.api.marine
 
-import com.openmeteo.api.common.query.QueryDaily
+import com.openmeteo.api.common.query.QueryDaily.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Daily : QueryDaily.Options {
+enum class MarineDaily : Options {
     @SerialName("wave_height_max")
     WaveHeightMax,
     @SerialName("wave_direction_dominant")

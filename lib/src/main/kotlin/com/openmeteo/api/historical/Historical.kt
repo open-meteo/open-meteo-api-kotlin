@@ -22,8 +22,8 @@ object Historical {
     class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val hourly: Iterable<Hourly>? = null,
-        override val daily: Iterable<Daily>? = null,
+        override val hourly: Iterable<HistoricalHourly>? = null,
+        override val daily: Iterable<HistoricalDaily>? = null,
         val temperatureUnit: TemperatureUnit? = null,
         val windSpeedUnit: WindSpeedUnit? = null,
         val precipitationUnit: PrecipitationUnit? = null,
@@ -46,18 +46,18 @@ object Historical {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<Hourly, Unit>? = null,
+        override val hourlyUnits: Map<HistoricalHourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<HistoricalHourly, Array<Double?>>? = null,
         @SerialName("daily_units")
-        override val dailyUnits: Map<Daily, Unit>? = null,
+        override val dailyUnits: Map<HistoricalDaily, Unit>? = null,
         @SerialName("daily")
-        override val dailyValues: Map<Daily, Array<Double?>>? = null,
+        override val dailyValues: Map<HistoricalDaily, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<Hourly>,
-        ResponseDaily<Daily>,
+        ResponseHourly<HistoricalHourly>,
+        ResponseDaily<HistoricalDaily>,
         ResponseGenerationTimed
 
 }

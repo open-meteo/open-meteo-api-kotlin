@@ -1,7 +1,8 @@
 package com.openmeteo.api
 
 import com.openmeteo.api.airquality.AirQuality
-import com.openmeteo.api.airquality.Domains
+import com.openmeteo.api.airquality.AirQualityDomains
+import com.openmeteo.api.airquality.AirQualityHourly
 import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.query.QueryCoordinates
@@ -11,13 +12,22 @@ import com.openmeteo.api.common.units.PrecipitationUnit
 import com.openmeteo.api.common.units.TemperatureUnit
 import com.openmeteo.api.common.units.WindSpeedUnit
 import com.openmeteo.api.ecmwf.Ecmwf
+import com.openmeteo.api.ecmwf.EcmwfHourly
 import com.openmeteo.api.elevation.Elevation
 import com.openmeteo.api.forecast.Forecast
+import com.openmeteo.api.forecast.ForecastDaily
+import com.openmeteo.api.forecast.ForecastHourly
 import com.openmeteo.api.geocoding.GeocodingGet
 import com.openmeteo.api.geocoding.GeocodingSearch
 import com.openmeteo.api.gfs.Gfs
+import com.openmeteo.api.gfs.GfsDaily
+import com.openmeteo.api.gfs.GfsHourly
 import com.openmeteo.api.historical.Historical
+import com.openmeteo.api.historical.HistoricalDaily
+import com.openmeteo.api.historical.HistoricalHourly
 import com.openmeteo.api.marine.Marine
+import com.openmeteo.api.marine.MarineDaily
+import com.openmeteo.api.marine.MarineHourly
 
 class OpenMeteo(
     override val latitude: Float = 0f,
@@ -78,8 +88,8 @@ class OpenMeteo(
     fun airQuality(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<com.openmeteo.api.airquality.Hourly>? = null,
-        domains: Domains? = null,
+        hourly: Iterable<AirQualityHourly>? = null,
+        domains: AirQualityDomains? = null,
         timeZone: TimeZone? = null,
         startDate: Date? = null,
         endDate: Date? = null,
@@ -90,7 +100,7 @@ class OpenMeteo(
     fun ecmwf(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<com.openmeteo.api.ecmwf.Hourly>? = null,
+        hourly: Iterable<EcmwfHourly>? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
         precipitationUnit: PrecipitationUnit? = null,
@@ -109,8 +119,8 @@ class OpenMeteo(
     fun forecast(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<com.openmeteo.api.forecast.Hourly>? = null,
-        daily: Iterable<com.openmeteo.api.forecast.Daily>?,
+        hourly: Iterable<ForecastHourly>? = null,
+        daily: Iterable<ForecastDaily>? = null,
         currentWeather: Boolean? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
@@ -136,8 +146,8 @@ class OpenMeteo(
     fun gfs(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<com.openmeteo.api.gfs.Hourly>? = null,
-        daily: Iterable<com.openmeteo.api.gfs.Daily>?,
+        hourly: Iterable<GfsHourly>? = null,
+        daily: Iterable<GfsDaily>? = null,
         currentWeather: Boolean? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
@@ -154,8 +164,8 @@ class OpenMeteo(
     fun historical(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<com.openmeteo.api.historical.Hourly>? = null,
-        daily: Iterable<com.openmeteo.api.historical.Daily>? = null,
+        hourly: Iterable<HistoricalHourly>? = null,
+        daily: Iterable<HistoricalDaily>? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
         precipitationUnit: PrecipitationUnit? = null,
@@ -168,8 +178,8 @@ class OpenMeteo(
     fun marine(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
-        hourly: Iterable<com.openmeteo.api.marine.Hourly>? = null,
-        daily: Iterable<com.openmeteo.api.marine.Daily>? = null,
+        hourly: Iterable<MarineHourly>? = null,
+        daily: Iterable<MarineDaily>? = null,
         timeZone: TimeZone? = null,
         startDate: Date? = null,
         endDate: Date? = null,

@@ -21,7 +21,7 @@ object Ecmwf {
     class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val hourly: Iterable<Hourly>? = null,
+        override val hourly: Iterable<EcmwfHourly>? = null,
         val temperatureUnit: TemperatureUnit? = null,
         val windSpeedUnit: WindSpeedUnit? = null,
         val precipitationUnit: PrecipitationUnit? = null,
@@ -45,13 +45,13 @@ object Ecmwf {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<Hourly, Unit>? = null,
+        override val hourlyUnits: Map<EcmwfHourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<EcmwfHourly, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<Hourly>,
+        ResponseHourly<EcmwfHourly>,
         ResponseGenerationTimed
 
 }

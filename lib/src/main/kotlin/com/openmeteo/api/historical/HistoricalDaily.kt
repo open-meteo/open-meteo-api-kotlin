@@ -1,13 +1,11 @@
-package com.openmeteo.api.gfs
+package com.openmeteo.api.historical
 
-import com.openmeteo.api.common.query.QueryDaily
+import com.openmeteo.api.common.query.QueryDaily.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Daily : QueryDaily.Options {
-    @SerialName("weathercode")
-    Weathercode,
+enum class HistoricalDaily : Options {
     @SerialName("temperature_2m_max")
     Temperature2mMax,
     @SerialName("temperature_2m_min")
@@ -20,12 +18,12 @@ enum class Daily : QueryDaily.Options {
     Sunrise,
     @SerialName("sunset")
     Sunset,
+    @SerialName("shortwave_radiation_sum")
+    ShortwaveRadiationSum,
     @SerialName("precipitation_sum")
     PrecipitationSum,
     @SerialName("rain_sum")
     RainSum,
-    @SerialName("showers_sum")
-    ShowersSum,
     @SerialName("snowfall_sum")
     SnowfallSum,
     @SerialName("precipitation_hours")
@@ -36,8 +34,6 @@ enum class Daily : QueryDaily.Options {
     Windgusts10mMax,
     @SerialName("winddirection_10m_dominant")
     Winddirection10mDominant,
-    @SerialName("shortwave_radiation_sum")
-    ShortwaveRadiationSum,
     @SerialName("et0_fao_evapotranspiration")
     Et0FaoEvapotranspiration,
 }

@@ -20,8 +20,8 @@ object Forecast {
     class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val hourly: Iterable<Hourly>? = null,
-        override val daily: Iterable<Daily>?,
+        override val hourly: Iterable<ForecastHourly>? = null,
+        override val daily: Iterable<ForecastDaily>? = null,
         override val currentWeather: Boolean? = null,
         val temperatureUnit: TemperatureUnit? = null,
         val windSpeedUnit: WindSpeedUnit? = null,
@@ -48,20 +48,20 @@ object Forecast {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<Hourly, Unit>? = null,
+        override val hourlyUnits: Map<ForecastHourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<ForecastHourly, Array<Double?>>? = null,
         @SerialName("daily_units")
-        override val dailyUnits: Map<Daily, Unit>?,
+        override val dailyUnits: Map<ForecastDaily, Unit>?,
         @SerialName("daily")
-        override val dailyValues: Map<Daily, Array<Double?>>?,
+        override val dailyValues: Map<ForecastDaily, Array<Double?>>?,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")
         override val currentWeather: CurrentWeather,
     ) : ResponseCoordinates,
-        ResponseHourly<Hourly>,
-        ResponseDaily<Daily>,
+        ResponseHourly<ForecastHourly>,
+        ResponseDaily<ForecastDaily>,
         ResponseCurrentWeather,
         ResponseGenerationTimed
 

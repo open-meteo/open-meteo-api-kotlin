@@ -1,6 +1,6 @@
 #!/bin/bash
 
-package="com.openmeteo.apix"
+package="com.openmeteo.api"
 
 # list all checkboxes matching a name (hourly/daily) in a doc page
 list() {
@@ -44,14 +44,14 @@ _options() {
   options="$(echo "$listed" | CamelCase | suffix ',')"
   {
   cat <<END
-package $package.$endpoint
+package $package.${endpoint,,}
 
-import $package.common.query.Query${name^}
+import $package.common.query.Query${name^}.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class ${name^} : Query${name^}.Options {
+enum class $endpoint${name^} : Options {
 END
   paste -d $'\n' <(echo "$serialNames") <(echo "$options") \
   | prefix "    "
@@ -60,16 +60,16 @@ END
 }
 
 options() {
-  _options < "tmp/$endpoint.html" > "$endpoint/${name^}.kt"
+  _options < "tmp/$endpoint.html" > "${endpoint,,}/$endpoint${name^}.kt"
 }
 
 declare -A docs=(
-  [airquality]="https://open-meteo.com/en/docs/air-quality-api"
-  [ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
-  [forecast]="https://open-meteo.com/en/docs"
-  [historical]="https://open-meteo.com/en/docs/historical-weather-api"
-  [marine]="https://open-meteo.com/en/docs/marine-weather-api"
-  [gfs]="https://open-meteo.com/en/docs/gfs-api"
+  [AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
+  [Ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
+  [Forecast]="https://open-meteo.com/en/docs"
+  [Historical]="https://open-meteo.com/en/docs/historical-weather-api"
+  [Marine]="https://open-meteo.com/en/docs/marine-weather-api"
+  [Gfs]="https://open-meteo.com/en/docs/gfs-api"
 )
 
 # should run in project root
@@ -82,12 +82,12 @@ for endpoint in "${!docs[@]}"; do
 done
 
 name="hourly"
-for endpoint in airquality ecmwf forecast historical marine gfs; do
+for endpoint in AirQuality Ecmwf Forecast Historical Marine Gfs; do
   options
 done
 
 name="daily"
-for endpoint in forecast historical marine gfs; do
+for endpoint in Forecast Historical Marine Gfs; do
   options
 done
 

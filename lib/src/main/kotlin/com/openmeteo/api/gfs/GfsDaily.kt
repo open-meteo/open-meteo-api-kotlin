@@ -1,11 +1,11 @@
-package com.openmeteo.api.forecast
+package com.openmeteo.api.gfs
 
-import com.openmeteo.api.common.query.QueryDaily
+import com.openmeteo.api.common.query.QueryDaily.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Daily : QueryDaily.Options {
+enum class GfsDaily : Options {
     @SerialName("weathercode")
     Weathercode,
     @SerialName("temperature_2m_max")

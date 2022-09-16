@@ -1,19 +1,13 @@
 package com.openmeteo.api.forecast
 
-import com.openmeteo.api.common.query.QueryHourly
+import com.openmeteo.api.common.query.QueryHourly.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Hourly : QueryHourly.Options {
+enum class ForecastHourly : Options {
     @SerialName("temperature_2m")
     Temperature2m,
-    @SerialName("temperature_80m")
-    Temperature80m,
-    @SerialName("temperature_120m")
-    Temperature120m,
-    @SerialName("temperature_180m")
-    Temperature180m,
     @SerialName("relativehumidity_2m")
     Relativehumidity2m,
     @SerialName("dewpoint_2m")
@@ -74,6 +68,12 @@ enum class Hourly : QueryHourly.Options {
     Winddirection180m,
     @SerialName("windgusts_10m")
     Windgusts10m,
+    @SerialName("temperature_80m")
+    Temperature80m,
+    @SerialName("temperature_120m")
+    Temperature120m,
+    @SerialName("temperature_180m")
+    Temperature180m,
     @SerialName("soil_temperature_0cm")
     SoilTemperature0cm,
     @SerialName("soil_temperature_6cm")

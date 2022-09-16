@@ -19,8 +19,8 @@ object Marine {
     class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val hourly: Iterable<Hourly>? = null,
-        override val daily: Iterable<Daily>? = null,
+        override val hourly: Iterable<MarineHourly>? = null,
+        override val daily: Iterable<MarineDaily>? = null,
         override val timeZone: TimeZone? = null,
         override val startDate: Date? = null,
         override val endDate: Date? = null,
@@ -42,18 +42,18 @@ object Marine {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<Hourly, Unit>? = null,
+        override val hourlyUnits: Map<MarineHourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<MarineHourly, Array<Double?>>? = null,
         @SerialName("daily_units")
-        override val dailyUnits: Map<Daily, Unit>? = null,
+        override val dailyUnits: Map<MarineDaily, Unit>? = null,
         @SerialName("daily")
-        override val dailyValues: Map<Daily, Array<Double?>>? = null,
+        override val dailyValues: Map<MarineDaily, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<Hourly>,
-        ResponseDaily<Daily>,
+        ResponseHourly<MarineHourly>,
+        ResponseDaily<MarineDaily>,
         ResponseGenerationTimed
 
 }

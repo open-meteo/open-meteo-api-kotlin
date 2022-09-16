@@ -1,11 +1,11 @@
 package com.openmeteo.api.ecmwf
 
-import com.openmeteo.api.common.query.QueryHourly
+import com.openmeteo.api.common.query.QueryHourly.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Hourly : QueryHourly.Options {
+enum class EcmwfHourly : Options {
     @SerialName("pressure_msl")
     PressureMsl,
     @SerialName("surface_air_pressure")

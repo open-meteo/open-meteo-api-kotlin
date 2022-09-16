@@ -1,11 +1,11 @@
 package com.openmeteo.api.gfs
 
-import com.openmeteo.api.common.query.QueryHourly
+import com.openmeteo.api.common.query.QueryHourly.Options
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Hourly : QueryHourly.Options {
+enum class GfsHourly : Options {
     @SerialName("temperature_2m")
     Temperature2m,
     @SerialName("relativehumidity_2m")
