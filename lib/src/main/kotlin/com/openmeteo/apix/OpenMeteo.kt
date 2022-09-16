@@ -124,8 +124,8 @@ class OpenMeteo(
     ) = invoke(GeocodingSearch.Query(name, count, language))
 
     fun gfs(
-        latitude: Float,
-        longitude: Float,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
         hourly: Iterable<com.openmeteo.apix.gfs.Hourly>? = null,
         daily: Iterable<com.openmeteo.apix.gfs.Daily>?,
         currentWeather: Boolean? = null,
