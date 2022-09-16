@@ -1,10 +1,18 @@
 package com.openmeteo.apix.common.units
 
+import com.openmeteo.apix.common.time.TimeFormat
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Unit {
+enum class Unit(vararg val alias: @Contextual Any) {
+    @SerialName("iso8601")
+    Iso8601(TimeFormat.Iso8601),
+
+    @SerialName("unixtime")
+    UnixTime(TimeFormat.UnixTime),
+
     @SerialName("")
     Dimensionless,
 
@@ -13,6 +21,30 @@ enum class Unit {
 
     @SerialName("°")
     DecimalDegrees,
+
+    @SerialName("°C")
+    Celsius(TemperatureUnit.Celsius),
+
+    @SerialName("°F")
+    Fahrenheit(TemperatureUnit.Fahrenheit),
+
+    @SerialName("mm")
+    Millimeters(PrecipitationUnit.Millimeters),
+
+    @SerialName("inch")
+    Inches(PrecipitationUnit.Inches),
+
+    @SerialName("km/h")
+    KilometresPerHour(WindSpeedUnit.KilometresPerHour),
+
+    @SerialName("m/s")
+    MetresPerSeconds(WindSpeedUnit.MetresPerSeconds),
+
+    @SerialName("mph")
+    MilesPerHour(WindSpeedUnit.MilesPerHour),
+
+    @SerialName("knots")
+    Knots(WindSpeedUnit.Knots),
 
     @SerialName("cm")
     Centimeters,
@@ -39,5 +71,8 @@ enum class Unit {
     Hectopascals,
 
     @SerialName("kPa")
-    Kilopascals,
+    Kilopascals;
+
+    fun aliasOf(other: Any) =
+        other in alias
 }

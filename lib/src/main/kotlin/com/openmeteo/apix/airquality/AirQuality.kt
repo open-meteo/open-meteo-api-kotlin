@@ -7,6 +7,7 @@ import com.openmeteo.apix.common.response.ResponseGenerationTimed
 import com.openmeteo.apix.common.response.ResponseHourly
 import com.openmeteo.apix.common.time.Date
 import com.openmeteo.apix.common.time.TimeZone
+import com.openmeteo.apix.common.units.Unit
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.net.URL
@@ -14,7 +15,7 @@ import java.net.URL
 class AirQuality(
     override val latitude: Float,
     override val longitude: Float,
-    override val hourly: Iterable<HourlyOptions>? = null,
+    override val hourly: Iterable<Hourly>? = null,
     val domains: Domains? = null,
     override val timeZone: TimeZone? = null,
     override val startDate: Date? = null,
@@ -42,13 +43,13 @@ class AirQuality(
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: HourlyUnits? = null,
+        override val hourlyUnits: Map<Hourly, Unit>? = null,
         @SerialName("hourly")
-        override val hourlyValues: HourlyValues? = null,
+        override val hourlyValues: Map<Hourly, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly,
+        ResponseHourly<Hourly>,
         ResponseGenerationTimed
 
     operator fun invoke(query: Query? = null) = query<Response>(query)

@@ -5,9 +5,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class HourlyOptions : QueryHourly.Options {
+enum class Hourly : QueryHourly.Options {
     @SerialName("temperature_2m")
     Temperature2m,
+    @SerialName("temperature_80m")
+    Temperature80m,
+    @SerialName("temperature_120m")
+    Temperature120m,
+    @SerialName("temperature_180m")
+    Temperature180m,
     @SerialName("relativehumidity_2m")
     Relativehumidity2m,
     @SerialName("dewpoint_2m")

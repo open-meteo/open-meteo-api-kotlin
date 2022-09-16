@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class HourlyOptions : QueryHourly.Options {
+enum class Hourly : QueryHourly.Options {
     @SerialName("wave_height")
     WaveHeight,
     @SerialName("wave_direction")

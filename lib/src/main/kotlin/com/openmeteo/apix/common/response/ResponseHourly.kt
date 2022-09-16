@@ -1,21 +1,12 @@
 package com.openmeteo.apix.common.response
 
-import com.openmeteo.apix.common.time.Time
-import com.openmeteo.apix.common.time.TimeFormat
+import com.openmeteo.apix.common.units.Unit
 import kotlinx.serialization.SerialName
 
-interface ResponseHourly : ResponseTimeZone {
+interface ResponseHourly<E: Enum<E>> : ResponseTimeZone {
     @SerialName("hourly_units")
-    val hourlyUnits: Units?
+    val hourlyUnits: Map<E, Unit>?
 
     @SerialName("hourly")
-    val hourlyValues: Values?
-
-    interface Units {
-        val time: TimeFormat // this should always be UnixTime
-    }
-
-    interface Values {
-        val time: Array<Time>
-    }
+    val hourlyValues: Map<E, Array<Double?>>?
 }

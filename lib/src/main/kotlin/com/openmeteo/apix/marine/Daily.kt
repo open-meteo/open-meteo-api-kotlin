@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class DailyOptions : QueryDaily.Options {
+enum class Daily : QueryDaily.Options {
     @SerialName("wave_height_max")
     WaveHeightMax,
     @SerialName("wave_direction_dominant")

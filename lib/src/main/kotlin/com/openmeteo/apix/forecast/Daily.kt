@@ -1,11 +1,13 @@
-package com.openmeteo.apix.historical
+package com.openmeteo.apix.forecast
 
 import com.openmeteo.apix.common.query.QueryDaily
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class DailyOptions : QueryDaily.Options {
+enum class Daily : QueryDaily.Options {
+    @SerialName("weathercode")
+    Weathercode,
     @SerialName("temperature_2m_max")
     Temperature2mMax,
     @SerialName("temperature_2m_min")
@@ -18,12 +20,12 @@ enum class DailyOptions : QueryDaily.Options {
     Sunrise,
     @SerialName("sunset")
     Sunset,
-    @SerialName("shortwave_radiation_sum")
-    ShortwaveRadiationSum,
     @SerialName("precipitation_sum")
     PrecipitationSum,
     @SerialName("rain_sum")
     RainSum,
+    @SerialName("showers_sum")
+    ShowersSum,
     @SerialName("snowfall_sum")
     SnowfallSum,
     @SerialName("precipitation_hours")
@@ -34,6 +36,8 @@ enum class DailyOptions : QueryDaily.Options {
     Windgusts10mMax,
     @SerialName("winddirection_10m_dominant")
     Winddirection10mDominant,
+    @SerialName("shortwave_radiation_sum")
+    ShortwaveRadiationSum,
     @SerialName("et0_fao_evapotranspiration")
     Et0FaoEvapotranspiration,
 }

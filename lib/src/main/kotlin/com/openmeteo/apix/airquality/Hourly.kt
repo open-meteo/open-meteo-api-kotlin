@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class HourlyOptions : QueryHourly.Options {
+enum class Hourly : QueryHourly.Options {
     @SerialName("pm10")
     Pm10,
     @SerialName("pm2_5")

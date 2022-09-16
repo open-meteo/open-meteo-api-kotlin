@@ -38,8 +38,11 @@ SerialName() {
 }
 
 # join the list values with serial names and enum names and prepare enum
-options() {
+_options() {
+  listed="$(list)"
+  serialNames="$(echo "$listed" | SerialName)"
   options="$(echo "$listed" | CamelCase | suffix ',')"
+  {
   cat <<END
 package $package.$endpoint
 
@@ -48,62 +51,16 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class ${name^}Options : Query${name^}.Options {
+enum class ${name^} : Query${name^}.Options {
 END
   paste -d $'\n' <(echo "$serialNames") <(echo "$options") \
   | prefix "    "
   echo "}"
+  }
 }
 
-units() {
-  units="$(echo "$listed" | camelCase | prefix "val " | suffix ': Unit? = null,')"
-  cat <<END
-package $package.$endpoint
-
-import $package.common.response.Response${name^}
-import $package.common.time.TimeFormat
-import $package.common.units.Unit
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
-class ${name^}Units(
-    override val time: TimeFormat,
-END
-  paste -d $'\n' <(echo "$serialNames") <(echo "$units") \
-  | prefix "    "
-  echo ") : Response${name^}.Units"
-}
-
-values() {
-  values="$(echo "$listed" | camelCase | prefix "val " | suffix ': Array<Float?>? = null,')"
-  cat <<END
-package $package.$endpoint
-
-import $package.common.response.Response${name^}
-import $package.common.time.Time
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
-class ${name^}Values(
-    override val time: Array<Time>,
-END
-  paste -d $'\n' <(echo "$serialNames") <(echo "$values") \
-  | prefix "    "
-  echo ") : Response${name^}.Values"
-}
-
-group() {
-  listed="$(list)"
-  serialNames="$(echo "$listed" | SerialName)"
-  options < "tmp/$endpoint.html" > "$endpoint/${name^}Options.kt"
-  units < "tmp/$endpoint.html" > "$endpoint/${name^}Units.kt"
-  values < "tmp/$endpoint.html" > "$endpoint/${name^}Values.kt"
-  if [ "$name" == "daily" ]; then
-    sed -i -r 's/(sunrise|sunset): Unit/\1: TimeFormat/' "$endpoint/DailyUnits.kt"
-    sed -i -r 's/(sunrise|sunset): Array<Float\?>/\1: Array<Time\?>/' "$endpoint/DailyValues.kt"
-  fi
+options() {
+  _options < "tmp/$endpoint.html" > "$endpoint/${name^}.kt"
 }
 
 declare -A docs=(
@@ -125,12 +82,12 @@ done
 
 name="hourly"
 for endpoint in airquality ecmwf forecast historical marine; do
-  group < "tmp/$endpoint.html"
+  options
 done
 
 name="daily"
 for endpoint in forecast historical marine; do
-  group < "tmp/$endpoint.html"
+  options
 done
 
 # delete html
