@@ -1,27 +1,35 @@
 package com.openmeteo.api.common.time
 
 import kotlinx.serialization.Serializable
-import java.util.*
+import java.time.ZoneId
 
 /**
- * A [SimpleTimeZone] class wrapper
+ * A [TimeZone] class wrapper
  *
- * The constructor uses [java.util.TimeZone.getTimeZone] to resolve arguments
- * Please note that "auto" is a valid string id
+ * Please note that null is used as an internal value to represent the `"auto"` option
  */
-@Serializable(with = TimeZoneSerializer::class)
-class TimeZone(rawOffset: Int, id: String) : SimpleTimeZone(rawOffset, id) {
-    constructor(id: String = "auto") : this(0, id) {
-        if (id == "auto") return
-        val tz = java.util.TimeZone.getTimeZone(id)
-        this.rawOffset = tz.rawOffset
-        this.id = tz.id
+@Serializable
+@JvmInline
+value class TimeZone private constructor(
+    val id: String = "auto"
+) {
+    constructor(
+        timeZone: java.util.TimeZone? = null
+    ) : this(
+        timeZone?.id ?: "auto"
+    )
+
+    companion object {
+        val auto = TimeZone("auto")
+        fun getTimeZone(id: String) =
+            TimeZone(java.util.TimeZone.getTimeZone(id))
+
+        fun getTimeZone(id: ZoneId) =
+            TimeZone(java.util.TimeZone.getTimeZone(id))
     }
 
-    constructor(zoneId: java.time.ZoneId) : this(0, zoneId.id) {
-        val tz = java.util.TimeZone.getTimeZone(zoneId)
-        this.rawOffset = tz.rawOffset
-    }
+    val timeZone: java.util.TimeZone?
+        get() = java.util.TimeZone.getTimeZone(id)
 
     override fun toString(): String = id
 }

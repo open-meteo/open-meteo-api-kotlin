@@ -1,0 +1,61 @@
+package com.openmeteo.api.common.http
+
+import com.openmeteo.api.common.query.Query
+import com.openmeteo.api.common.query.QueryContentFormat
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Transient
+import kotlinx.serialization.decodeFromByteArray
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
+import java.io.InputStream
+import java.net.URL
+import javax.net.ssl.HttpsURLConnection
+
+class Endpoint(
+    @Transient
+    val context: URL,
+) : Http<InputStream> {
+
+    /**
+     * Parse JSON from a [String]
+     */
+    inline fun <reified T> json(string: String) =
+        Json.decodeFromString<T>(string)
+
+    /**
+     * Parse JSON from an [InputStream]
+     */
+    inline fun <reified T> json(inputStream: InputStream) =
+        json<T>(inputStream.use { it.bufferedReader().readText() })
+
+    /**
+     * Parse ProtoBuf from an [InputStream]
+     */
+    @OptIn(ExperimentalSerializationApi::class)
+    inline fun <reified T> protoBuf(inputStream: InputStream) =
+        ProtoBuf.decodeFromByteArray<T>(inputStream.readAllBytes())
+
+    /**
+     * Handle responses based on their status code:
+     * - 200: return the inputStream
+     * - 400: parse JSON error as [BadRequest]
+     * - else: return a generic error with the url and the response code/message
+     */
+    override fun response(connection: HttpsURLConnection): InputStream =
+        with(connection) {
+            when (responseCode) {
+                200 -> inputStream
+                400 -> throw json<BadRequest>(errorStream)
+                else -> throw Error("`$url` response code: $responseCode ($responseMessage)")
+            }
+        }
+
+    inline fun <reified T> query(query: Query) =
+        runCatching { query.toURL(context) }
+            .mapCatching { get(it) }
+            .mapCatching {
+                if (query is QueryContentFormat && query.format == ContentFormat.ProtoBuf) protoBuf(it)
+                else json<T>(it)
+            }
+}

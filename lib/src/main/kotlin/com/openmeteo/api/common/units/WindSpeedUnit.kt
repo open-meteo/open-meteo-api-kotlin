@@ -3,18 +3,17 @@ package com.openmeteo.api.common.units
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * The unit that should be used for wind speeds
- */
 @Serializable
 enum class WindSpeedUnit {
     @SerialName("km/h")
-    kmh,
+    KilometresPerHour,
 
     @SerialName("m/s")
-    ms,
-    mph,
+    MetresPerSeconds,
+
+    @SerialName("mph")
+    MilesPerHour,
 
     @SerialName("knots")
-    kn,
+    Knots,
 }

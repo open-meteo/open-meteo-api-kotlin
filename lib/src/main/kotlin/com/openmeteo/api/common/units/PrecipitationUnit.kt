@@ -1,18 +1,13 @@
 package com.openmeteo.api.common.units
 
-/**
- * The unit used for precipitations
- *
- * When used as an endpoint parameter cm "becomes" mm through `?.param()`
- */
-enum class PrecipitationUnit {
-    cm,
-    mm,
-    inch;
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-    /**
-     * Called only when the unit is used as parameter
-     */
-    fun param() =
-        takeUnless { it == cm } ?: mm
+@Serializable
+enum class PrecipitationUnit {
+    @SerialName("mm")
+    Millimeters,
+
+    @SerialName("inch")
+    Inches,
 }
