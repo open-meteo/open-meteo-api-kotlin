@@ -46,8 +46,8 @@ class OpenMeteo(
         geocodingSearch.query<GeocodingSearch.Response>(query)
 
     fun airQuality(
-        latitude: Float,
-        longitude: Float,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
         hourly: Iterable<Hourly>? = null,
         domains: Domains? = null,
         timeZone: TimeZone? = null,
