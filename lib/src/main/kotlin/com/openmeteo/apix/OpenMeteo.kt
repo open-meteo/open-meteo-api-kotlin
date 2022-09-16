@@ -4,6 +4,7 @@ import com.openmeteo.apix.airquality.AirQuality
 import com.openmeteo.apix.airquality.Domains
 import com.openmeteo.apix.airquality.Hourly
 import com.openmeteo.apix.common.http.Endpoint
+import com.openmeteo.apix.common.query.City
 import com.openmeteo.apix.common.query.QueryCoordinates
 import com.openmeteo.apix.common.query.QueryDaily
 import com.openmeteo.apix.common.time.Date
@@ -35,6 +36,8 @@ class OpenMeteo(
         coordinates.first,
         coordinates.second,
     )
+
+    constructor(city: City) : this(city.coordinates)
 
     constructor(name: String) : this(
         Endpoint(GeocodingSearch.context)
