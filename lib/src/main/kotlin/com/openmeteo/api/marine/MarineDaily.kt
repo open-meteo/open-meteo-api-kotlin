@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class MarineDaily : Options {
+    @SerialName("time")
+    Time,
     @SerialName("wave_height_max")
     WaveHeightMax,
     @SerialName("wave_direction_dominant")

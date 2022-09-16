@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class HistoricalDaily : Options {
+    @SerialName("time")
+    Time,
     @SerialName("temperature_2m_max")
     Temperature2mMax,
     @SerialName("temperature_2m_min")

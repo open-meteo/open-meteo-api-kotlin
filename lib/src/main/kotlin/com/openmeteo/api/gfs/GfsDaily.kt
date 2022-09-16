@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class GfsDaily : Options {
+    @SerialName("time")
+    Time,
     @SerialName("weathercode")
     Weathercode,
     @SerialName("temperature_2m_max")

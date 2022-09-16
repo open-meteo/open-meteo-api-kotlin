@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class ForecastDaily : Options {
+    @SerialName("time")
+    Time,
     @SerialName("weathercode")
     Weathercode,
     @SerialName("temperature_2m_max")

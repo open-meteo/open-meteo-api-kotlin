@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class AirQualityHourly : Options {
+    @SerialName("time")
+    Time,
     @SerialName("pm10")
     Pm10,
     @SerialName("pm2_5")

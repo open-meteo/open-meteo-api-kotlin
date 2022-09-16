@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class MarineHourly : Options {
+    @SerialName("time")
+    Time,
     @SerialName("wave_height")
     WaveHeight,
     @SerialName("wave_direction")

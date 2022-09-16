@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class EcmwfHourly : Options {
+    @SerialName("time")
+    Time,
     @SerialName("pressure_msl")
     PressureMsl,
     @SerialName("surface_air_pressure")
