@@ -16,7 +16,7 @@ import com.openmeteo.apix.forecast.Forecast
 import com.openmeteo.apix.geocoding.GeocodingGet
 import com.openmeteo.apix.geocoding.GeocodingSearch
 import com.openmeteo.apix.gfs.Gfs
-import kotlinx.serialization.SerialName
+import com.openmeteo.apix.historical.Historical
 
 class OpenMeteo(
     override val latitude: Float = 0f,
@@ -28,6 +28,7 @@ class OpenMeteo(
     val geocodingGet: Endpoint = Endpoint(GeocodingGet.context),
     val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
     val gfs: Endpoint = Endpoint(Gfs.context),
+    val historical: Endpoint = Endpoint(Historical.context),
 ) : QueryCoordinates {
 
     constructor(coordinates: Pair<Float, Float>) : this(
@@ -65,6 +66,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Gfs.Query) =
         gfs.query<Gfs.Response>(query)
+
+    operator fun invoke(query: Historical.Query) =
+        historical.query<Historical.Response>(query)
 
     fun airQuality(
         latitude: Float = this.latitude,
@@ -140,5 +144,19 @@ class OpenMeteo(
     ) = invoke(Gfs.Query(latitude, longitude, hourly, daily, currentWeather,
         temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
         endDate, pastDays, forecastDays))
+
+    fun historical(
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+        hourly: Iterable<com.openmeteo.apix.historical.Hourly>? = null,
+        daily: Iterable<com.openmeteo.apix.historical.Daily>? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+    ) = invoke(Historical.Query(latitude, longitude, hourly, daily, temperatureUnit,
+        windSpeedUnit, precipitationUnit, timeZone, startDate, endDate))
 
 }
