@@ -55,9 +55,9 @@ object Gfs {
         @SerialName("hourly")
         override val hourlyValues: Map<GfsHourly, Array<Double?>>? = null,
         @SerialName("daily_units")
-        override val dailyUnits: Map<GfsDaily, Unit>?,
+        override val dailyUnits: Map<GfsDaily, Unit>? = null,
         @SerialName("daily")
-        override val dailyValues: Map<GfsDaily, Array<Double?>>?,
+        override val dailyValues: Map<GfsDaily, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")

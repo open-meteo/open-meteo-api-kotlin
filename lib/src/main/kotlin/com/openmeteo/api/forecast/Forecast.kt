@@ -53,9 +53,9 @@ object Forecast {
         @SerialName("hourly")
         override val hourlyValues: Map<ForecastHourly, Array<Double?>>? = null,
         @SerialName("daily_units")
-        override val dailyUnits: Map<ForecastDaily, Unit>?,
+        override val dailyUnits: Map<ForecastDaily, Unit>? = null,
         @SerialName("daily")
-        override val dailyValues: Map<ForecastDaily, Array<Double?>>?,
+        override val dailyValues: Map<ForecastDaily, Array<Double?>>? = null,
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")
