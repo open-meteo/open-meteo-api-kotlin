@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 interface ResponseCurrentWeather : Response {
     @SerialName("current_weather")
-    val currentWeather: CurrentWeather
+    val currentWeather: CurrentWeather?
 
     @Serializable
     open class CurrentWeather(

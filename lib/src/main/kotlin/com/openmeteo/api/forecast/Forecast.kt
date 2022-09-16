@@ -58,7 +58,7 @@ object Forecast {
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")
-        override val currentWeather: CurrentWeather,
+        override val currentWeather: CurrentWeather? = null,
     ) : ResponseCoordinates,
         ResponseHourly<ForecastHourly>,
         ResponseDaily<ForecastDaily>,
