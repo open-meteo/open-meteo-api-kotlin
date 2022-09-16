@@ -102,7 +102,8 @@ class OpenMeteo(
         windSpeedUnit, precipitationUnit, timeZone, startDate, endDate, pastDays))
 
     fun elevation(
-        vararg coordinates: Pair<Float, Float>,
+        vararg coordinates: Pair<Float, Float> =
+            arrayOf(this.latitude to this.longitude),
     ) = invoke(Elevation.Query(*coordinates))
 
     fun forecast(
