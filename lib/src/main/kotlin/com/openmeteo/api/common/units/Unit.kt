@@ -16,6 +16,9 @@ enum class Unit(vararg val alias: @Contextual Any) {
     @SerialName("")
     Dimensionless,
 
+    @SerialName("wmo code")
+    WeatherCode,
+
     @SerialName("%")
     Percentage,
 
@@ -71,7 +74,27 @@ enum class Unit(vararg val alias: @Contextual Any) {
     Hectopascals,
 
     @SerialName("kPa")
-    Kilopascals;
+    Kilopascals,
+
+    @SerialName("J/kg")
+    JoulesPerKilogram,
+
+    @SerialName("m³/m³")
+    CubeMetersPerCubeMeter,
+
+    @SerialName("MJ/m²")
+    MegajoulesPerSquareMeter,
+
+    @SerialName("gpm")
+    GeoPotentialMeters,
+
+    @SerialName("s⁻¹")
+    SecondsInverse,
+
+    @SerialName("g/kg")
+    GramsPerKilogram,
+
+    ;
 
     fun aliasOf(other: Any) =
         other in alias
