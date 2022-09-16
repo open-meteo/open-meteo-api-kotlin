@@ -69,6 +69,7 @@ declare -A docs=(
   [forecast]="https://open-meteo.com/en/docs"
   [historical]="https://open-meteo.com/en/docs/historical-weather-api"
   [marine]="https://open-meteo.com/en/docs/marine-weather-api"
+  [gfs]="https://open-meteo.com/en/docs/gfs-api"
 )
 
 # should run in project root
@@ -81,12 +82,12 @@ for endpoint in "${!docs[@]}"; do
 done
 
 name="hourly"
-for endpoint in airquality ecmwf forecast historical marine; do
+for endpoint in airquality ecmwf forecast historical marine gfs; do
   options
 done
 
 name="daily"
-for endpoint in forecast historical marine; do
+for endpoint in forecast historical marine gfs; do
   options
 done
 
