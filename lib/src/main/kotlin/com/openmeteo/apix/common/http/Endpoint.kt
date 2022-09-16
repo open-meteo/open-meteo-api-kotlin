@@ -12,28 +12,28 @@ import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-abstract class Endpoint(
+class Endpoint(
     @Transient
     val context: URL,
-) : Http<InputStream>, Query {
+) : Http<InputStream> {
 
     /**
      * Parse JSON from a [String]
      */
-    private inline fun <reified T> json(string: String) =
+    inline fun <reified T> json(string: String) =
         Json.decodeFromString<T>(string)
 
     /**
      * Parse JSON from an [InputStream]
      */
-    private inline fun <reified T> json(inputStream: InputStream) =
+    inline fun <reified T> json(inputStream: InputStream) =
         json<T>(inputStream.use { it.bufferedReader().readText() })
 
     /**
      * Parse ProtoBuf from an [InputStream]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    private inline fun <reified T> protoBuf(inputStream: InputStream) =
+    inline fun <reified T> protoBuf(inputStream: InputStream) =
         ProtoBuf.decodeFromByteArray<T>(inputStream.readAllBytes())
 
     /**
@@ -51,15 +51,11 @@ abstract class Endpoint(
             }
         }
 
-    private inline fun <reified T> get(query: Query = this) =
+    inline fun <reified T> query(query: Query) =
         runCatching { query.toURL(context) }
             .mapCatching { get(it) }
-
-    internal inline fun <reified T> query(extra: Query? = null) =
-        with(extra?.plus( this ) ?: this) {
-            get<T>(this).mapCatching {
-                if (this is QueryContentFormat && format == ContentFormat.ProtoBuf) protoBuf(it)
+            .mapCatching {
+                if (query is QueryContentFormat && query.format == ContentFormat.ProtoBuf) protoBuf(it)
                 else json<T>(it)
             }
-        }
 }

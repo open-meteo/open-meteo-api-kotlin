@@ -1,31 +1,37 @@
 package com.openmeteo.apix.geocoding
 
 import com.openmeteo.apix.common.http.ContentFormat
-import com.openmeteo.apix.common.http.Endpoint
-import com.openmeteo.apix.common.query.Query
-import com.openmeteo.apix.common.query.QueryContentFormat
 import com.openmeteo.apix.common.response.ResponseGenerationTimed
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.net.URL
 
-open class GeocodingSearch(
-    val name: String,
-    @SerialName("count")
-    val count: Int? = null,
-    val language: String? = null,
-    context: URL = Companion.context,
-) : Endpoint(context),
-    QueryContentFormat {
+object GeocodingSearch {
 
-    override val format: ContentFormat = ContentFormat.ProtoBuf
+    val context = URL("https://geocoding-api.open-meteo.com/v1/search")
 
-    companion object {
-        val context = URL("https://geocoding-api.open-meteo.com/v1/search")
-    }
+    open class Query internal constructor(
+        val name: String,
+        val count: Int? = null,
+        val format: ContentFormat? = null,
+        val language: String? = null,
+    ) : com.openmeteo.apix.common.query.Query {
 
-    init {
-        count?.let { require(it in 1..100) }
+        constructor(
+            name: String,
+            count: Int? = null,
+            language: String? = null,
+        ) : this(
+            name,
+            count,
+            ContentFormat.ProtoBuf,
+            language,
+        )
+
+        init {
+            require(count in 1..100)
+        }
+
     }
 
     @Serializable
@@ -34,7 +40,5 @@ open class GeocodingSearch(
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseGenerationTimed
-
-    operator fun invoke(query: Query? = null) = query<Response>(query)
 
 }

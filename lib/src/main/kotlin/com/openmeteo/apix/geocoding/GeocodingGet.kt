@@ -1,20 +1,17 @@
 package com.openmeteo.apix.geocoding
 
-import com.openmeteo.apix.common.http.Endpoint
-import com.openmeteo.apix.common.query.Query
 import com.openmeteo.apix.common.time.TimeZone
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.net.URL
 
-open class GeocodingGet(
-    val id: Int,
-    context: URL = Companion.context,
-) : Endpoint(context) {
+object GeocodingGet {
 
-    companion object {
-        val context = URL("https://geocoding-api.open-meteo.com/v1/get")
-    }
+    val context = URL("https://geocoding-api.open-meteo.com/v1/get")
+
+    open class Query(
+        val id: Int,
+    ) : com.openmeteo.apix.common.query.Query
 
     @Serializable
     open class Response(
@@ -51,7 +48,5 @@ open class GeocodingGet(
         val admin3: String? = null,
         val admin4: String? = null,
     )
-
-    operator fun invoke(query: Query? = null) = query<Response>(query)
 
 }

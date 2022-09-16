@@ -1,6 +1,5 @@
 package com.openmeteo.apix.airquality
 
-import com.openmeteo.apix.common.http.Endpoint
 import com.openmeteo.apix.common.query.*
 import com.openmeteo.apix.common.response.ResponseCoordinates
 import com.openmeteo.apix.common.response.ResponseGenerationTimed
@@ -12,25 +11,22 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.net.URL
 
-class AirQuality(
-    override val latitude: Float,
-    override val longitude: Float,
-    override val hourly: Iterable<Hourly>? = null,
-    val domains: Domains? = null,
-    override val timeZone: TimeZone? = null,
-    override val startDate: Date? = null,
-    override val endDate: Date? = null,
-    override val pastDays: Int? = null,
-    context: URL = Companion.context,
-) : Endpoint(context),
-    QueryCoordinates,
-    QueryHourly,
-    QueryDateRange,
-    QueryTimeFormat {
+object AirQuality {
 
-    companion object {
-        val context = URL("https://air-quality-api.open-meteo.com/v1/air-quality")
-    }
+    val context = URL("https://air-quality-api.open-meteo.com/v1/air-quality")
+
+    class Query(
+        override val latitude: Float,
+        override val longitude: Float,
+        override val hourly: Iterable<Hourly>? = null,
+        val domains: Domains? = null,
+        override val timeZone: TimeZone? = null,
+        override val startDate: Date? = null,
+        override val endDate: Date? = null,
+        override val pastDays: Int? = null,
+    ) : QueryCoordinates,
+        QueryHourly,
+        QueryDateRange
 
     @Serializable
     class Response(
@@ -51,7 +47,5 @@ class AirQuality(
     ) : ResponseCoordinates,
         ResponseHourly<Hourly>,
         ResponseGenerationTimed
-
-    operator fun invoke(query: Query? = null) = query<Response>(query)
 
 }
