@@ -1,7 +1,7 @@
 package com.openmeteo.api.common.response
 
-import com.openmeteo.api.common.weather.WeatherCode
 import com.openmeteo.api.common.time.Time
+import com.openmeteo.api.common.weather.WeatherCode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

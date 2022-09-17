@@ -1,6 +1,8 @@
 package com.openmeteo.api.airquality
 
-import com.openmeteo.api.common.query.*
+import com.openmeteo.api.common.query.QueryCoordinates
+import com.openmeteo.api.common.query.QueryDateRange
+import com.openmeteo.api.common.query.QueryHourly
 import com.openmeteo.api.common.response.ResponseCoordinates
 import com.openmeteo.api.common.response.ResponseGenerationTimed
 import com.openmeteo.api.common.response.ResponseHourly
