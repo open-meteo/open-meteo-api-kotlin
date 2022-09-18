@@ -4,12 +4,15 @@ import com.openmeteo.api.airquality.AirQuality
 import com.openmeteo.api.airquality.AirQualityDomains
 import com.openmeteo.api.airquality.AirQualityHourly
 import com.openmeteo.api.common.http.Endpoint
-import com.openmeteo.api.common.query.City
-import com.openmeteo.api.common.query.QueryCoordinates
+import com.openmeteo.api.common.query.*
+import com.openmeteo.api.common.response.ResponseCoordinates
+import com.openmeteo.api.common.response.ResponseDaily
+import com.openmeteo.api.common.response.ResponseHourly
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.TimeZone
 import com.openmeteo.api.common.units.PrecipitationUnit
 import com.openmeteo.api.common.units.TemperatureUnit
+import com.openmeteo.api.common.units.Unit
 import com.openmeteo.api.common.units.WindSpeedUnit
 import com.openmeteo.api.ecmwf.Ecmwf
 import com.openmeteo.api.ecmwf.EcmwfHourly
@@ -28,6 +31,7 @@ import com.openmeteo.api.historical.HistoricalHourly
 import com.openmeteo.api.marine.Marine
 import com.openmeteo.api.marine.MarineDaily
 import com.openmeteo.api.marine.MarineHourly
+import kotlinx.serialization.SerialName
 
 class OpenMeteo(
     override val latitude: Float = 0f,
@@ -86,20 +90,22 @@ class OpenMeteo(
         marine.query<Marine.Response>(query)
 
     fun airQuality(
-        latitude: Float = this.latitude,
-        longitude: Float = this.longitude,
         hourly: Iterable<AirQualityHourly>? = null,
         domains: AirQualityDomains? = null,
         timeZone: TimeZone? = null,
         startDate: Date? = null,
         endDate: Date? = null,
         pastDays: Int? = null,
-    ) = invoke(AirQuality.Query(latitude, longitude, hourly, domains, timeZone,
-        startDate, endDate, pastDays))
-
-    fun ecmwf(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
+    ) = invoke(
+        AirQuality.Query(
+            latitude, longitude, hourly, domains, timeZone,
+            startDate, endDate, pastDays
+        )
+    )
+
+    fun ecmwf(
         hourly: Iterable<EcmwfHourly>? = null,
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
@@ -108,8 +114,14 @@ class OpenMeteo(
         startDate: Date? = null,
         endDate: Date? = null,
         pastDays: Int? = null,
-    ) = invoke(Ecmwf.Query(latitude, longitude, hourly, temperatureUnit,
-        windSpeedUnit, precipitationUnit, timeZone, startDate, endDate, pastDays))
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Ecmwf.Query(
+            latitude, longitude, hourly, temperatureUnit,
+            windSpeedUnit, precipitationUnit, timeZone, startDate, endDate, pastDays
+        )
+    )
 
     fun elevation(
         vararg coordinates: Pair<Float, Float> =
@@ -117,8 +129,6 @@ class OpenMeteo(
     ) = invoke(Elevation.Query(*coordinates))
 
     fun forecast(
-        latitude: Float = this.latitude,
-        longitude: Float = this.longitude,
         hourly: Iterable<ForecastHourly>? = null,
         daily: Iterable<ForecastDaily>? = null,
         currentWeather: Boolean? = null,
@@ -129,9 +139,15 @@ class OpenMeteo(
         startDate: Date? = null,
         endDate: Date? = null,
         pastDays: Int? = null,
-    ) = invoke(Forecast.Query(latitude, longitude, hourly, daily, currentWeather,
-        temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
-        endDate, pastDays))
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Forecast.Query(
+            latitude, longitude, hourly, daily, currentWeather,
+            temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
+            endDate, pastDays
+        )
+    )
 
     fun geocoding(
         id: Int,
@@ -144,8 +160,6 @@ class OpenMeteo(
     ) = invoke(GeocodingSearch.Query(name, count, language))
 
     fun gfs(
-        latitude: Float = this.latitude,
-        longitude: Float = this.longitude,
         hourly: Iterable<GfsHourly>? = null,
         daily: Iterable<GfsDaily>? = null,
         currentWeather: Boolean? = null,
@@ -157,13 +171,17 @@ class OpenMeteo(
         endDate: Date? = null,
         pastDays: Int? = null,
         forecastDays: Int? = null,
-    ) = invoke(Gfs.Query(latitude, longitude, hourly, daily, currentWeather,
-        temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
-        endDate, pastDays, forecastDays))
-
-    fun historical(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
+    ) = invoke(
+        Gfs.Query(
+            latitude, longitude, hourly, daily, currentWeather,
+            temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
+            endDate, pastDays, forecastDays
+        )
+    )
+
+    fun historical(
         hourly: Iterable<HistoricalHourly>? = null,
         daily: Iterable<HistoricalDaily>? = null,
         temperatureUnit: TemperatureUnit? = null,
@@ -172,18 +190,28 @@ class OpenMeteo(
         timeZone: TimeZone? = null,
         startDate: Date? = null,
         endDate: Date? = null,
-    ) = invoke(Historical.Query(latitude, longitude, hourly, daily, temperatureUnit,
-        windSpeedUnit, precipitationUnit, timeZone, startDate, endDate))
-
-    fun marine(
         latitude: Float = this.latitude,
         longitude: Float = this.longitude,
+    ) = invoke(
+        Historical.Query(
+            latitude, longitude, hourly, daily, temperatureUnit,
+            windSpeedUnit, precipitationUnit, timeZone, startDate, endDate
+        )
+    )
+
+    fun marine(
         hourly: Iterable<MarineHourly>? = null,
         daily: Iterable<MarineDaily>? = null,
         timeZone: TimeZone? = null,
         startDate: Date? = null,
         endDate: Date? = null,
-    ) = invoke(Marine.Query(latitude, longitude, hourly, daily, timeZone, startDate,
-        endDate))
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Marine.Query(
+            latitude, longitude, hourly, daily, timeZone, startDate,
+            endDate
+        )
+    )
 
 }
