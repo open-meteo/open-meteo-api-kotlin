@@ -51,20 +51,20 @@ object Gfs {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<GfsHourly, Unit>? = null,
+        override val hourlyUnits: Map<GfsHourly, Unit> = emptyMap(),
         @SerialName("hourly")
-        override val hourlyValues: Map<GfsHourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<GfsHourly, Array<Double?>> = emptyMap(),
         @SerialName("daily_units")
-        override val dailyUnits: Map<GfsDaily, Unit>? = null,
+        override val dailyUnits: Map<GfsDaily, Unit> = emptyMap(),
         @SerialName("daily")
-        override val dailyValues: Map<GfsDaily, Array<Double?>>? = null,
+        override val dailyValues: Map<GfsDaily, Array<Double?>> = emptyMap(),
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")
         override val currentWeather: CurrentWeather? = null,
     ) : ResponseCoordinates,
-        ResponseHourly<GfsHourly>,
-        ResponseDaily<GfsDaily>,
+        ResponseHourly,
+        ResponseDaily,
         ResponseCurrentWeather,
         ResponseGenerationTimed
 

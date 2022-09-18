@@ -46,18 +46,18 @@ object Marine {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<MarineHourly, Unit>? = null,
+        override val hourlyUnits: Map<MarineHourly, Unit> = emptyMap(),
         @SerialName("hourly")
-        override val hourlyValues: Map<MarineHourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<MarineHourly, Array<Double?>> = emptyMap(),
         @SerialName("daily_units")
-        override val dailyUnits: Map<MarineDaily, Unit>? = null,
+        override val dailyUnits: Map<MarineDaily, Unit> = emptyMap(),
         @SerialName("daily")
-        override val dailyValues: Map<MarineDaily, Array<Double?>>? = null,
+        override val dailyValues: Map<MarineDaily, Array<Double?>> = emptyMap(),
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<MarineHourly>,
-        ResponseDaily<MarineDaily>,
+        ResponseHourly,
+        ResponseDaily,
         ResponseGenerationTimed
 
 }

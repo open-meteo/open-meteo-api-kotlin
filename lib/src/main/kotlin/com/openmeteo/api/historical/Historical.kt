@@ -49,18 +49,18 @@ object Historical {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<HistoricalHourly, Unit>? = null,
+        override val hourlyUnits: Map<HistoricalHourly, Unit> = emptyMap(),
         @SerialName("hourly")
-        override val hourlyValues: Map<HistoricalHourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<HistoricalHourly, Array<Double?>> = emptyMap(),
         @SerialName("daily_units")
-        override val dailyUnits: Map<HistoricalDaily, Unit>? = null,
+        override val dailyUnits: Map<HistoricalDaily, Unit> = emptyMap(),
         @SerialName("daily")
-        override val dailyValues: Map<HistoricalDaily, Array<Double?>>? = null,
+        override val dailyValues: Map<HistoricalDaily, Array<Double?>> = emptyMap(),
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<HistoricalHourly>,
-        ResponseDaily<HistoricalDaily>,
+        ResponseHourly,
+        ResponseDaily,
         ResponseGenerationTimed
 
 }

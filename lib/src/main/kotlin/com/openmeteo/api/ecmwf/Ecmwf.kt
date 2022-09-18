@@ -47,13 +47,13 @@ object Ecmwf {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<EcmwfHourly, Unit>? = null,
+        override val hourlyUnits: Map<EcmwfHourly, Unit> = emptyMap(),
         @SerialName("hourly")
-        override val hourlyValues: Map<EcmwfHourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<EcmwfHourly, Array<Double?>> = emptyMap(),
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<EcmwfHourly>,
+        ResponseHourly,
         ResponseGenerationTimed
 
 }

@@ -42,13 +42,13 @@ object AirQuality {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<AirQualityHourly, Unit>? = null,
+        override val hourlyUnits: Map<AirQualityHourly, Unit> = emptyMap(),
         @SerialName("hourly")
-        override val hourlyValues: Map<AirQualityHourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<AirQualityHourly, Array<Double?>> = emptyMap(),
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
     ) : ResponseCoordinates,
-        ResponseHourly<AirQualityHourly>,
+        ResponseHourly,
         ResponseGenerationTimed
 
 }

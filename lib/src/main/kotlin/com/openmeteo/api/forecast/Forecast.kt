@@ -49,20 +49,20 @@ object Forecast {
         @SerialName("timezone_abbreviation")
         override val timeZoneAbbreviation: String,
         @SerialName("hourly_units")
-        override val hourlyUnits: Map<ForecastHourly, Unit>? = null,
+        override val hourlyUnits: Map<ForecastHourly, Unit> = emptyMap(),
         @SerialName("hourly")
-        override val hourlyValues: Map<ForecastHourly, Array<Double?>>? = null,
+        override val hourlyValues: Map<ForecastHourly, Array<Double?>> = emptyMap(),
         @SerialName("daily_units")
-        override val dailyUnits: Map<ForecastDaily, Unit>? = null,
+        override val dailyUnits: Map<ForecastDaily, Unit> = emptyMap(),
         @SerialName("daily")
-        override val dailyValues: Map<ForecastDaily, Array<Double?>>? = null,
+        override val dailyValues: Map<ForecastDaily, Array<Double?>> = emptyMap(),
         @SerialName("generationtime_ms")
         override val generationTimeMs: Float,
         @SerialName("current_weather")
         override val currentWeather: CurrentWeather? = null,
     ) : ResponseCoordinates,
-        ResponseHourly<ForecastHourly>,
-        ResponseDaily<ForecastDaily>,
+        ResponseHourly,
+        ResponseDaily,
         ResponseCurrentWeather,
         ResponseGenerationTimed
 
