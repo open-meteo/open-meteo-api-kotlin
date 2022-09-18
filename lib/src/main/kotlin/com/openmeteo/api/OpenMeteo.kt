@@ -240,9 +240,9 @@ class OpenMeteo(
         ResponseDaily
 
     operator fun invoke(
-        hourly: Iterable<QueryHourly.Options>? = null,
-        daily: Iterable<QueryDaily.Options>? = null,
-        timeZone: TimeZone? = null,
+        hourly: Iterable<QueryHourly.Options> = emptyList(),
+        daily: Iterable<QueryDaily.Options> = emptyList(),
+        timeZone: TimeZone? = TimeZone.auto.takeIf { daily.any() },
         startDate: Date? = null,
         endDate: Date? = null,
         pastDays: Int? = null,
@@ -357,6 +357,7 @@ class OpenMeteo(
         val dailyValues = dailyResponses
             .map { it.dailyValues }
             .reduce { acc, map -> acc + map }
+
 
 
         AnyResponse(
