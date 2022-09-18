@@ -34,24 +34,15 @@ fun main() {
 
    val openMeteo = OpenMeteo(City.Amsterdam)
 
-   val forecast = openMeteo.forecast(
-      hourly = listOf(ForecastHourly.Rain, ForecastHourly.Weathercode),
+   val response = openMeteo(
+      ForecastHourly.Rain,
+      ForecastHourly.Weathercode,
+      AirQualityHourly.Ozone,
+      MarineDaily.WaveHeightMax,
    ).getOrThrow()
-
-   val hourlyValues = forecast.hourlyValues!!
-
-   val values = hourlyValues.values
-   val size = hourlyValues[ForecastHourly.Time]!!.size - 1
-
-   for (key in hourlyValues.keys) {
-      print("$key\t")
-   }
-   println()
-   for (i in 0..size) {
-      values.forEach { print("${it[i]}\t") }
-      println()
-   }
-
+   
+   // ... do stuff with response.hourlyValues and .dailyValues
+   
 }
 ```
 
