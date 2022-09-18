@@ -214,4 +214,186 @@ class OpenMeteo(
         )
     )
 
+    private inline fun <reified T> separate(iterable: Iterable<Any>?) =
+        iterable?.filterIsInstance<T>()?.ifEmpty { null }
+
+    class AnyResponse(
+        override val latitude: Float,
+        override val longitude: Float,
+        val elevation: Float? = null,
+        @SerialName("utc_offset_seconds")
+        override val utcOffsetSeconds: Int,
+        @SerialName("timezone")
+        override val timeZone: TimeZone,
+        @SerialName("timezone_abbreviation")
+        override val timeZoneAbbreviation: String,
+        @SerialName("hourly_units")
+        override val hourlyUnits: Map<out QueryHourly.Options, Unit> = emptyMap(),
+        @SerialName("hourly")
+        override val hourlyValues: Map<out QueryHourly.Options, Array<Double?>> = emptyMap(),
+        @SerialName("daily_units")
+        override val dailyUnits: Map<out QueryDaily.Options, Unit> = emptyMap(),
+        @SerialName("daily")
+        override val dailyValues: Map<out QueryDaily.Options, Array<Double?>> = emptyMap(),
+    ) : ResponseCoordinates,
+        ResponseHourly,
+        ResponseDaily
+
+    operator fun invoke(
+        hourly: Iterable<QueryHourly.Options>? = null,
+        daily: Iterable<QueryDaily.Options>? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        forecastDays: Int? = null,
+        domains: AirQualityDomains? = null,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = runCatching {
+
+        val airQualityHourly = separate<AirQualityHourly>(hourly)
+        val airQualityResponse = airQualityHourly?.let {
+            airQuality(
+                airQualityHourly, domains, timeZone, startDate, endDate,
+                pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
+        val ecmwfHourly = separate<EcmwfHourly>(hourly)
+        val ecmwfResponse = ecmwfHourly?.let {
+            ecmwf(
+                ecmwfHourly, temperatureUnit, windSpeedUnit, precipitationUnit,
+                timeZone, startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
+        val forecastHourly = separate<ForecastHourly>(hourly)
+        val forecastDaily = separate<ForecastDaily>(daily)
+        // if both are null return null, else return hourly *or* daily
+        val forecastResponse = (forecastHourly ?: forecastDaily)?.let {
+            forecast(
+                forecastHourly, forecastDaily, currentWeather,
+                temperatureUnit, windSpeedUnit, precipitationUnit, timeZone,
+                startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
+        val gfsHourly = separate<GfsHourly>(hourly)
+        val gfsDaily = separate<GfsDaily>(daily)
+        val gfsResponse = (gfsHourly ?: gfsDaily)?.let {
+            gfs(
+                gfsHourly, gfsDaily, currentWeather, temperatureUnit,
+                windSpeedUnit, precipitationUnit, timeZone, startDate, endDate,
+                pastDays, forecastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
+        val historicalHourly = separate<HistoricalHourly>(hourly)
+        val historicalDaily = separate<HistoricalDaily>(daily)
+        val historicalResponse = (historicalHourly ?: historicalDaily)?.let {
+            historical(
+                historicalHourly, historicalDaily, temperatureUnit,
+                windSpeedUnit, precipitationUnit, timeZone, startDate, endDate,
+                latitude, longitude
+            ).getOrThrow()
+        }
+
+        val marineHourly = separate<MarineHourly>(hourly)
+        val marineDaily = separate<MarineDaily>(daily)
+        val marineResponse = (marineHourly ?: marineDaily)?.let {
+            marine(
+                marineHourly, marineDaily, timeZone, startDate, endDate,
+                latitude, longitude
+            ).getOrThrow()
+        }
+
+        val hourlyResponses: List<ResponseHourly> = listOfNotNull(
+            airQualityResponse,
+            ecmwfResponse,
+            forecastResponse,
+            gfsResponse,
+            historicalResponse,
+            marineResponse,
+        )
+
+        val dailyResponses: List<ResponseDaily> = listOfNotNull(
+            forecastResponse,
+            gfsResponse,
+            historicalResponse,
+            marineResponse,
+        )
+
+        val responses = (hourlyResponses + dailyResponses)
+            // we don't want duplicates
+            .toSet().toList()
+
+        if (responses.isEmpty())
+            throw Error("No request was performed! No valid option")
+
+        val elevation = forecastResponse?.elevation
+            ?: gfsResponse?.elevation
+
+        val utcOffsetSeconds = hourlyResponses[0].utcOffsetSeconds
+        val timeZone0 = hourlyResponses[0].timeZone
+        val timeZoneAbbreviation = hourlyResponses[0].timeZoneAbbreviation
+
+        val hourlyUnits = hourlyResponses
+            .map { it.hourlyUnits }
+            .reduce { acc, map -> acc + map }
+
+        val hourlyValues = hourlyResponses
+            .map { it.hourlyValues }
+            .reduce { acc, map -> acc + map }
+
+        val dailyUnits = dailyResponses
+            .map { it.dailyUnits }
+            .reduce { acc, map -> acc + map }
+
+        val dailyValues = dailyResponses
+            .map { it.dailyValues }
+            .reduce { acc, map -> acc + map }
+
+
+        AnyResponse(
+            latitude,
+            longitude,
+            elevation,
+            utcOffsetSeconds,
+            timeZone0,
+            timeZoneAbbreviation,
+            hourlyUnits,
+            hourlyValues,
+            dailyUnits,
+            dailyValues,
+        )
+
+    }
+
+    operator fun invoke(
+        vararg options: Query.Options,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        forecastDays: Int? = null,
+        domains: AirQualityDomains? = null,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        options.filterIsInstance<QueryHourly.Options>(),
+        options.filterIsInstance<QueryDaily.Options>(),
+        timeZone, startDate, endDate, pastDays, forecastDays, domains,
+        currentWeather, temperatureUnit, windSpeedUnit, precipitationUnit,
+        latitude, longitude,
+    )
+
 }
