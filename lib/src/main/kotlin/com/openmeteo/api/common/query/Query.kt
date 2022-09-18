@@ -71,4 +71,5 @@ interface Query {
             }
         }
 
+    interface Options
 }
