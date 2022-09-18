@@ -13,7 +13,7 @@ interface Query {
         internal fun key(property: KProperty1<Query, *>, kClass: KClass<*>) =
             property.findAnnotation<SerialName>()?.value
                 ?: kClass.superclasses.firstNotNullOfOrNull { superClass ->
-                    superClass.declaredMemberProperties
+                    superClass.memberProperties
                         .firstOrNull { it.name == property.name }
                         ?.findAnnotation<SerialName>()?.value
                 } ?: property.name
