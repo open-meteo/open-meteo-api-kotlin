@@ -27,12 +27,21 @@ while read -r commit; do
   [ "${type: -1}" == "!" ] && touch body/!
   type="${type/%\!/}" # trim '!' at the end
 
+  # scope shall be at the end of the string
+  [ "${type/%(*)/}" != "$type" ] \
+  && scope="${type#*\(}" \
+  || scope=")"
+
+  scope="${scope:: -1}"
+
+  type="${type%%\(*}"
+
   [ ! -v "types[$type]" ] \
   && echo "Warning: in commit '${url:2:7}': '$type' is not a mapped type!" 1>&2 \
   && continue
 
   title="${c[@]:2}"
-  echo " - ${c[0]} - ${title^}" >> "body/$type"
+  echo " - ${c[0]} - ${title^} ${scope:+_($scope)_}" >> "body/$type"
 
 done < commits
 
