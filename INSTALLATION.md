@@ -21,7 +21,7 @@ allprojects {
 
 ```gradle
 dependencies {
-	implementation 'com.open-meteo:open-meteo-api-kotlin:0.2.0-alpha.2'
+	implementation 'com.open-meteo:open-meteo-api-kotlin:0.2.0-alpha.3'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencyResolutionManagement {
 
 ```gradle
 dependencies {
-	implementation 'com.open-meteo:open-meteo-api-kotlin:0.2.0-alpha.2'
+	implementation 'com.open-meteo:open-meteo-api-kotlin:0.2.0-alpha.3'
 }
 ```
 
@@ -66,6 +66,6 @@ dependencies {
 <dependency>
 	<groupId>com.open-meteo</groupId>
 	<artifactId>open-meteo-api-kotlin</artifactId>
-	<version>0.2.0-alpha.2</version>
+	<version>0.2.0-alpha.3</version>
 </dependency>
 ```
