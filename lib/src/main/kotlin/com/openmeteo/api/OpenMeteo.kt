@@ -395,7 +395,8 @@ class OpenMeteo(
 
     operator fun invoke(
         vararg options: Query.Options,
-        timeZone: TimeZone? = null,
+        timeZone: TimeZone? =
+            TimeZone.auto.takeIf { options.any { it is QueryDaily.Options } },
         startDate: Date? = null,
         endDate: Date? = null,
         pastDays: Int? = null,
