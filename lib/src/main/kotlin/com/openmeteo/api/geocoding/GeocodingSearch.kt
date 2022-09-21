@@ -1,6 +1,7 @@
 package com.openmeteo.api.geocoding
 
 import com.openmeteo.api.common.http.ContentFormat
+import com.openmeteo.api.common.query.QueryContentFormat
 import com.openmeteo.api.common.response.ResponseGenerationTimed
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,9 +14,9 @@ object GeocodingSearch {
     open class Query internal constructor(
         val name: String,
         val count: Int? = null,
-        val format: ContentFormat? = null,
+        override val format: ContentFormat? = ContentFormat.ProtoBuf,
         val language: String? = null,
-    ) : com.openmeteo.api.common.query.Query {
+    ) : QueryContentFormat {
 
         constructor(
             name: String,
