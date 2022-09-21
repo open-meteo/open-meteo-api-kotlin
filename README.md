@@ -29,20 +29,20 @@ Here's a quick example:
 ```kotlin
 import com.openmeteo.api.OpenMeteo
 
-fun main() {
+OpenMeteo("Amsterdam")
+   .currentWeather(TemperatureUnit.Fahrenheit)
+   .getOrNull()?.run {
 
-   val openMeteo = OpenMeteo(City.Amsterdam)
+      println("+-- $city")
+      println("| Coordinates: [ $latitude, $longitude ]")
+      currentWeather?.run {
+         println("| Timestamp:   $time")
+         println("| Temperature: $temperature°F")
+         println("| Message:     $weatherCode")
+         println("+")
+      }
 
-   val response = openMeteo(
-      ForecastHourly.Rain,
-      ForecastHourly.Weathercode,
-      AirQualityHourly.Ozone,
-      MarineDaily.WaveHeightMax,
-   ).getOrThrow()
-   
-   // ... do stuff with response.hourlyValues and .dailyValues
-   
-}
+   }
 ```
 
 <!-- The library includes some examples in the [tests](lib/src/test/kotlin/com/openmeteo/api). -->
