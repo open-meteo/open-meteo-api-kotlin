@@ -62,6 +62,16 @@ class OpenMeteo(
             ?: Pair(0f, 0f)
     )
 
+    var coordinates
+        get() =
+            latitude to longitude
+        set(pair) =
+            pair.run {
+                latitude = first
+                longitude = second
+            }
+
+
     operator fun invoke(query: AirQuality.Query) =
         airQuality.query<AirQuality.Response>(query)
 
