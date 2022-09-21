@@ -36,15 +36,7 @@ import kotlinx.serialization.SerialName
 class OpenMeteo(
     override var latitude: Float = 0f,
     override var longitude: Float = 0f,
-    val airQuality: Endpoint = Endpoint(AirQuality.context),
-    val ecmwf: Endpoint = Endpoint(Ecmwf.context),
-    val elevation: Endpoint = Endpoint(Elevation.context),
-    val forecast: Endpoint = Endpoint(Forecast.context),
-    val geocodingGet: Endpoint = Endpoint(GeocodingGet.context),
-    val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
-    val gfs: Endpoint = Endpoint(Gfs.context),
-    val historical: Endpoint = Endpoint(Historical.context),
-    val marine: Endpoint = Endpoint(Marine.context),
+    val endpoints: Endpoints = Endpoints(),
 ) : QueryCoordinates {
 
     constructor(coordinates: Pair<Float, Float>) : this(
@@ -62,6 +54,18 @@ class OpenMeteo(
             ?: Pair(0f, 0f)
     )
 
+    class Endpoints(
+        val airQuality: Endpoint = Endpoint(AirQuality.context),
+        val ecmwf: Endpoint = Endpoint(Ecmwf.context),
+        val elevation: Endpoint = Endpoint(Elevation.context),
+        val forecast: Endpoint = Endpoint(Forecast.context),
+        val geocodingGet: Endpoint = Endpoint(GeocodingGet.context),
+        val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
+        val gfs: Endpoint = Endpoint(Gfs.context),
+        val historical: Endpoint = Endpoint(Historical.context),
+        val marine: Endpoint = Endpoint(Marine.context),
+    )
+
     var coordinates
         get() =
             latitude to longitude
@@ -73,31 +77,31 @@ class OpenMeteo(
 
 
     operator fun invoke(query: AirQuality.Query) =
-        airQuality.query<AirQuality.Response>(query)
+        endpoints.airQuality.query<AirQuality.Response>(query)
 
     operator fun invoke(query: Ecmwf.Query) =
-        ecmwf.query<Ecmwf.Response>(query)
+        endpoints.ecmwf.query<Ecmwf.Response>(query)
 
     operator fun invoke(query: Elevation.Query) =
-        elevation.query<Elevation.Response>(query)
+        endpoints.elevation.query<Elevation.Response>(query)
 
     operator fun invoke(query: Forecast.Query) =
-        forecast.query<Forecast.Response>(query)
+        endpoints.forecast.query<Forecast.Response>(query)
 
     operator fun invoke(query: GeocodingGet.Query) =
-        geocodingGet.query<GeocodingGet.Response>(query)
+        endpoints.geocodingGet.query<GeocodingGet.Response>(query)
 
     operator fun invoke(query: GeocodingSearch.Query) =
-        geocodingSearch.query<GeocodingSearch.Response>(query)
+        endpoints.geocodingSearch.query<GeocodingSearch.Response>(query)
 
     operator fun invoke(query: Gfs.Query) =
-        gfs.query<Gfs.Response>(query)
+        endpoints.gfs.query<Gfs.Response>(query)
 
     operator fun invoke(query: Historical.Query) =
-        historical.query<Historical.Response>(query)
+        endpoints.historical.query<Historical.Response>(query)
 
     operator fun invoke(query: Marine.Query) =
-        marine.query<Marine.Response>(query)
+        endpoints.marine.query<Marine.Response>(query)
 
     fun airQuality(
         hourly: Iterable<AirQualityHourly>? = null,
