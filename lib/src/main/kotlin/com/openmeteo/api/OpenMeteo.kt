@@ -34,8 +34,8 @@ import com.openmeteo.api.marine.MarineHourly
 import kotlinx.serialization.SerialName
 
 class OpenMeteo(
-    override val latitude: Float = 0f,
-    override val longitude: Float = 0f,
+    override var latitude: Float = 0f,
+    override var longitude: Float = 0f,
     val airQuality: Endpoint = Endpoint(AirQuality.context),
     val ecmwf: Endpoint = Endpoint(Ecmwf.context),
     val elevation: Endpoint = Endpoint(Elevation.context),
