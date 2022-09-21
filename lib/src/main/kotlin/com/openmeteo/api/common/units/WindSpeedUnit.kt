@@ -5,15 +5,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class WindSpeedUnit {
-    @SerialName("km/h")
+    @SerialName("kmh")
     KilometresPerHour,
 
-    @SerialName("m/s")
+    @SerialName("ms")
     MetresPerSeconds,
 
     @SerialName("mph")
     MilesPerHour,
 
-    @SerialName("knots")
+    @SerialName("kn")
     Knots,
 }
