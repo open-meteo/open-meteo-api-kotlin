@@ -225,6 +225,20 @@ class OpenMeteo(
         )
     )
 
+    fun currentWeather(
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Forecast.Query(
+            latitude, longitude,null, null,true,
+            temperatureUnit, windSpeedUnit, precipitationUnit, timeZone
+        )
+    )
+
     private inline fun <reified T> separate(iterable: Iterable<Any>?) =
         iterable?.filterIsInstance<T>()?.ifEmpty { null }
 
