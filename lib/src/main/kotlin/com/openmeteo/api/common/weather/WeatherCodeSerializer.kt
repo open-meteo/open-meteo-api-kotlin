@@ -17,7 +17,6 @@ object WeatherCodeSerializer : KSerializer<WeatherCode> {
     override fun serialize(encoder: Encoder, value: WeatherCode) = encoder.encodeShort(value.code)
     override fun deserialize(decoder: Decoder): WeatherCode {
         val code = decoder.decodeFloat().toInt().toShort()
-        return WeatherCode.values()
-            .firstOrNull { it.code == code } ?: WeatherCode.UNKNOWN
+        return WeatherCode.from(code)
     }
 }

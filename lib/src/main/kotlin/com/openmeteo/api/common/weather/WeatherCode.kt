@@ -38,4 +38,11 @@ enum class WeatherCode(val code: Short, val message: String) {
     THUNDERSTORM_HEAVY_HAIL(99, "Thunderstorm with heavy hail");
 
     override fun toString(): String = message
+
+    companion object {
+        fun from(code: Short) = values()
+            .firstOrNull { it.code == code } ?: UNKNOWN
+        fun from(code: Int) = from(code.toShort())
+        fun from(code: Double) = from(code.toInt())
+    }
 }
