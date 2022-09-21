@@ -22,18 +22,24 @@ interface Query {
             key(property, T::class)
 
         @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-        internal fun value(any: Any?): String =
+        internal fun value(any: Any?): String? =
             when (any) {
-                is Iterable<*> -> any.joinToString(",") { value(it) }
-                is Enum<*> -> any.javaClass.kotlin.serializer()
-                    .descriptor.getElementName(any.ordinal)
+                is Iterable<*> -> any
+                    .mapNotNull { value(it) }
+                    .takeUnless { it.isEmpty() }
+                    ?.joinToString(",")
+                is Enum<*> -> runCatching {
+                    any.javaClass.kotlin.serializer()
+                        .descriptor.getElementName(any.ordinal)
+                }.getOrNull()
+                null -> null
                 else -> any.toString()
             }
 
     }
 
     private fun value(property: KProperty1<Query, *>) =
-        property.get(this)?.let { Companion.value(it) }
+        Companion.value(property.get(this))
 
     private val memberProperties
         get() =
