@@ -20,7 +20,7 @@ object GeocodingGet {
         private val _3: String? = null,
         val latitude: Float, // #4
         val longitude: Float, // #5
-        val ranking: Float, // #6
+        private val ranking: Float? = null, // #6
         val elevation: Float, // #7
         // https://www.geonames.org/export/codes.html enum?
         @SerialName("feature_code")
