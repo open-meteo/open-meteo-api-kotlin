@@ -17,7 +17,7 @@ object Forecast {
 
     val context = URL("https://api.open-meteo.com/v1/forecast")
 
-    class Query(
+    open class Query(
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<ForecastHourly>? = null,
@@ -38,7 +38,7 @@ object Forecast {
         QueryDateRange
 
     @Serializable
-    class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         val elevation: Float,

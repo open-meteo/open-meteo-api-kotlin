@@ -17,7 +17,7 @@ object Gfs {
 
     val context = URL("https://api.open-meteo.com/v1/gfs")
 
-    class Query(
+    open class Query(
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<GfsHourly>? = null,
@@ -40,7 +40,7 @@ object Gfs {
         QueryDateRange
 
     @Serializable
-    class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         val elevation: Float,

@@ -22,7 +22,7 @@ object Historical {
 
     val context = URL("https://archive-api.open-meteo.com/v1/era5")
 
-    class Query(
+    open class Query(
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<HistoricalHourly>? = null,
@@ -39,7 +39,7 @@ object Historical {
         QueryDateRange
 
     @Serializable
-    class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         @SerialName("utc_offset_seconds")

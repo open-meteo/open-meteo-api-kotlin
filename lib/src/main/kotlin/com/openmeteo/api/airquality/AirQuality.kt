@@ -17,7 +17,7 @@ object AirQuality {
 
     val context = URL("https://air-quality-api.open-meteo.com/v1/air-quality")
 
-    class Query(
+    open class Query(
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<AirQualityHourly>? = null,
@@ -32,7 +32,7 @@ object AirQuality {
         QueryDateRange
 
     @Serializable
-    class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         @SerialName("utc_offset_seconds")

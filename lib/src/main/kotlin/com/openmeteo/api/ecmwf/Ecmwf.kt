@@ -20,7 +20,7 @@ object Ecmwf {
 
     val context = URL("https://api.open-meteo.com/v1/ecmwf")
 
-    class Query(
+    open class Query(
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<EcmwfHourly>? = null,
@@ -37,7 +37,7 @@ object Ecmwf {
         QueryDateRange
 
     @Serializable
-    class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         @SerialName("utc_offset_seconds")

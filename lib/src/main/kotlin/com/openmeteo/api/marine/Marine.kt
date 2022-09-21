@@ -19,7 +19,7 @@ object Marine {
 
     val context = URL("https://marine-api.open-meteo.com/v1/marine")
 
-    class Query(
+    open class Query(
         override val latitude: Float,
         override val longitude: Float,
         override val hourly: Iterable<MarineHourly>? = null,
@@ -35,7 +35,7 @@ object Marine {
         QueryDateRange
 
     @Serializable
-    class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         @SerialName("utc_offset_seconds")
