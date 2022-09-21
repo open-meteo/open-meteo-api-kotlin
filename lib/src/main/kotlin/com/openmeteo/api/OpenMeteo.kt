@@ -5,9 +5,7 @@ import com.openmeteo.api.airquality.AirQualityDomains
 import com.openmeteo.api.airquality.AirQualityHourly
 import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.query.*
-import com.openmeteo.api.common.response.ResponseCoordinates
-import com.openmeteo.api.common.response.ResponseDaily
-import com.openmeteo.api.common.response.ResponseHourly
+import com.openmeteo.api.common.response.*
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.TimeZone
 import com.openmeteo.api.common.units.PrecipitationUnit
@@ -74,7 +72,6 @@ class OpenMeteo(
                 latitude = first
                 longitude = second
             }
-
 
     operator fun invoke(query: AirQuality.Query) =
         endpoints.airQuality.query<AirQuality.Response>(query)
@@ -249,9 +246,12 @@ class OpenMeteo(
         override val dailyUnits: Map<out QueryDaily.Options, Unit> = emptyMap(),
         @SerialName("daily")
         override val dailyValues: Map<out QueryDaily.Options, Array<Double?>> = emptyMap(),
+        @SerialName("current_weather")
+        override val currentWeather: ResponseCurrentWeather.CurrentWeather? = null
     ) : ResponseCoordinates,
         ResponseHourly,
-        ResponseDaily
+        ResponseDaily,
+        ResponseCurrentWeather
 
     operator fun invoke(
         hourly: Iterable<QueryHourly.Options> = emptyList(),
@@ -352,6 +352,9 @@ class OpenMeteo(
         val elevation = forecastResponse?.elevation
             ?: gfsResponse?.elevation
 
+        val currentWeather0 = forecastResponse?.currentWeather
+            ?: gfsResponse?.currentWeather
+
         val utcOffsetSeconds = hourlyResponses[0].utcOffsetSeconds
         val timeZone0 = hourlyResponses[0].timeZone
         val timeZoneAbbreviation = hourlyResponses[0].timeZoneAbbreviation
@@ -385,6 +388,7 @@ class OpenMeteo(
             hourlyValues,
             dailyUnits,
             dailyValues,
+            currentWeather0,
         )
 
     }
