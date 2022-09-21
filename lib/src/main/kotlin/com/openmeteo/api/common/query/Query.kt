@@ -2,6 +2,7 @@ package com.openmeteo.api.common.query
 
 import kotlinx.serialization.*
 import java.net.URL
+import java.net.URLEncoder
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.*
@@ -38,6 +39,9 @@ interface Query {
 
     }
 
+    private fun urlEncode(text: String) =
+        URLEncoder.encode(text, "utf-8")
+
     private fun value(property: KProperty1<Query, *>) =
         Companion.value(property.get(this))
 
@@ -59,7 +63,7 @@ interface Query {
         toList().toMap()
 
     fun asString() =
-        toList().joinToString("&", "?") { (k, v) -> "$k=$v" }
+        urlEncode(toList().joinToString("&", "?") { (k, v) -> "$k=$v" })
 
     fun toURL(context: URL) =
         URL(context, "${context.path}${asString()}")
