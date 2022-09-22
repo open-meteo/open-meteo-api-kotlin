@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class Unit(vararg val alias: @Contextual Any) {
+    Unknown,
+
     @SerialName("iso8601")
     Iso8601(TimeFormat.Iso8601),
 
@@ -95,6 +97,11 @@ enum class Unit(vararg val alias: @Contextual Any) {
     GramsPerKilogram,
 
     ;
+    companion object {
+        fun from(that: Any) =
+            values().firstOrNull { it.aliasOf(that) }
+                ?: Unknown
+    }
 
     fun aliasOf(other: Any) =
         other in alias
