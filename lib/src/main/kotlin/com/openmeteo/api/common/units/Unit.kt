@@ -98,9 +98,8 @@ enum class Unit(vararg val alias: @Contextual Any) {
 
     ;
     companion object {
-        fun from(that: Any) =
-            values().firstOrNull { it.aliasOf(that) }
-                ?: Unknown
+        fun from(that: Any) = values()
+            .firstOrNull { it.aliasOf(that) } ?: Unknown
     }
 
     fun aliasOf(other: Any) =
