@@ -5,7 +5,10 @@ import java.net.URL
 import java.net.URLEncoder
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
-import kotlin.reflect.full.*
+import kotlin.reflect.full.findAnnotation
+import kotlin.reflect.full.hasAnnotation
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.superclasses
 
 interface Query {
 

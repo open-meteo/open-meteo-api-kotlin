@@ -5,7 +5,10 @@ import com.openmeteo.api.airquality.AirQualityDomains
 import com.openmeteo.api.airquality.AirQualityHourly
 import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.query.*
-import com.openmeteo.api.common.response.*
+import com.openmeteo.api.common.response.ResponseCoordinates
+import com.openmeteo.api.common.response.ResponseCurrentWeather
+import com.openmeteo.api.common.response.ResponseDaily
+import com.openmeteo.api.common.response.ResponseHourly
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.TimeZone
 import com.openmeteo.api.common.units.PrecipitationUnit
