@@ -68,6 +68,8 @@ options() {
 declare -A docs=(
   [AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
   [Ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
+  [Dwd]="https://open-meteo.com/en/docs/dwd-api"
+  [MeteoFrance]="https://open-meteo.com/en/docs/meteofrance-api"
   [Forecast]="https://open-meteo.com/en/docs"
   [Historical]="https://open-meteo.com/en/docs/historical-weather-api"
   [Marine]="https://open-meteo.com/en/docs/marine-weather-api"
@@ -84,12 +86,12 @@ for endpoint in "${!docs[@]}"; do
 done
 
 name="hourly"
-for endpoint in AirQuality Ecmwf Forecast Historical Marine Gfs; do
+for endpoint in AirQuality Ecmwf Forecast Historical Marine Gfs Dwd MeteoFrance; do
   options
 done
 
 name="daily"
-for endpoint in Forecast Historical Marine Gfs; do
+for endpoint in Forecast Historical Marine Gfs Dwd MeteoFrance; do
   options
 done
 
