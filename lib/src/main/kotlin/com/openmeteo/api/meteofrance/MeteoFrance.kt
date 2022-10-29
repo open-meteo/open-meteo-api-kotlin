@@ -15,7 +15,7 @@ import java.net.URL
 
 object MeteoFrance {
 
-    val context = URL("https://api.open-meteo.com/v1/dwd-icon")
+    val context = URL("https://api.open-meteo.com/v1/meteofrance")
 
     open class Query(
         override val latitude: Float,
