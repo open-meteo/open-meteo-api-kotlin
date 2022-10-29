@@ -35,6 +35,9 @@ import com.openmeteo.api.historical.HistoricalHourly
 import com.openmeteo.api.marine.Marine
 import com.openmeteo.api.marine.MarineDaily
 import com.openmeteo.api.marine.MarineHourly
+import com.openmeteo.api.meteofrance.MeteoFrance
+import com.openmeteo.api.meteofrance.MeteoFranceHourly
+import com.openmeteo.api.meteofrance.MeteoFranceDaily
 import kotlinx.serialization.SerialName
 
 class OpenMeteo(
@@ -69,6 +72,7 @@ class OpenMeteo(
         val gfs: Endpoint = Endpoint(Gfs.context),
         val historical: Endpoint = Endpoint(Historical.context),
         val marine: Endpoint = Endpoint(Marine.context),
+        val meteoFrance: Endpoint = Endpoint(MeteoFrance.context),
     )
 
     var coordinates
@@ -109,6 +113,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Marine.Query) =
         endpoints.marine.query<Marine.Response>(query)
+
+    operator fun invoke(query: MeteoFrance.Query) =
+        endpoints.meteoFrance.query<MeteoFrance.Response>(query)
 
     fun airQuality(
         hourly: Iterable<AirQualityHourly>? = null,
@@ -256,6 +263,27 @@ class OpenMeteo(
         )
     )
 
+    fun meteoFrance(
+        hourly: Iterable<MeteoFranceHourly>? = null,
+        daily: Iterable<MeteoFranceDaily>? = null,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        MeteoFrance.Query(
+            latitude, longitude, hourly, daily, currentWeather,
+            temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
+            endDate, pastDays
+        )
+    )
+
     fun currentWeather(
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
@@ -382,6 +410,16 @@ class OpenMeteo(
             ).getOrThrow()
         }
 
+        val meteoFranceHourly = separate<MeteoFranceHourly>(hourly)
+        val meteoFranceDaily = separate<MeteoFranceDaily>(daily)
+        val meteoFranceResponse = (meteoFranceHourly ?: meteoFranceDaily)?.let {
+            meteoFrance(
+                meteoFranceHourly, meteoFranceDaily, currentWeather,
+                temperatureUnit, windSpeedUnit, precipitationUnit, timeZone,
+                startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
         val hourlyResponses: List<ResponseHourly> = listOfNotNull(
             airQualityResponse,
             dwdResponse,
@@ -390,6 +428,7 @@ class OpenMeteo(
             gfsResponse,
             historicalResponse,
             marineResponse,
+            meteoFranceResponse,
         )
 
         val dailyResponses: List<ResponseDaily> = listOfNotNull(
@@ -398,6 +437,7 @@ class OpenMeteo(
             gfsResponse,
             historicalResponse,
             marineResponse,
+            meteoFranceResponse,
         )
 
         val responses = (hourlyResponses + dailyResponses)
@@ -410,10 +450,12 @@ class OpenMeteo(
         val elevation = dwdResponse?.elevation
             ?: forecastResponse?.elevation
             ?: gfsResponse?.elevation
+            ?: meteoFranceResponse?.elevation
 
         val currentWeather0 = dwdResponse?.currentWeather
             ?: forecastResponse?.currentWeather
             ?: gfsResponse?.currentWeather
+            ?: meteoFranceResponse?.currentWeather
 
         val utcOffsetSeconds = hourlyResponses[0].utcOffsetSeconds
         val timeZone0 = hourlyResponses[0].timeZone
@@ -434,8 +476,6 @@ class OpenMeteo(
         val dailyValues = dailyResponses
             .map { it.dailyValues }
             .reduce { acc, map -> acc + map }
-
-
 
         AnyResponse(
             latitude,
