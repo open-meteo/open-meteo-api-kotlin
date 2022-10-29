@@ -15,6 +15,9 @@ import com.openmeteo.api.common.units.PrecipitationUnit
 import com.openmeteo.api.common.units.TemperatureUnit
 import com.openmeteo.api.common.units.Unit
 import com.openmeteo.api.common.units.WindSpeedUnit
+import com.openmeteo.api.dwd.Dwd
+import com.openmeteo.api.dwd.DwdHourly
+import com.openmeteo.api.dwd.DwdDaily
 import com.openmeteo.api.ecmwf.Ecmwf
 import com.openmeteo.api.ecmwf.EcmwfHourly
 import com.openmeteo.api.elevation.Elevation
@@ -57,6 +60,7 @@ class OpenMeteo(
 
     class Endpoints(
         val airQuality: Endpoint = Endpoint(AirQuality.context),
+        val dwd: Endpoint = Endpoint(Dwd.context),
         val ecmwf: Endpoint = Endpoint(Ecmwf.context),
         val elevation: Endpoint = Endpoint(Elevation.context),
         val forecast: Endpoint = Endpoint(Forecast.context),
@@ -78,6 +82,9 @@ class OpenMeteo(
 
     operator fun invoke(query: AirQuality.Query) =
         endpoints.airQuality.query<AirQuality.Response>(query)
+
+    operator fun invoke(query: Dwd.Query) =
+        endpoints.dwd.query<Dwd.Response>(query)
 
     operator fun invoke(query: Ecmwf.Query) =
         endpoints.ecmwf.query<Ecmwf.Response>(query)
@@ -116,6 +123,27 @@ class OpenMeteo(
         AirQuality.Query(
             latitude, longitude, hourly, domains, timeZone,
             startDate, endDate, pastDays
+        )
+    )
+
+    fun dwd(
+        hourly: Iterable<DwdHourly>? = null,
+        daily: Iterable<DwdDaily>? = null,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Dwd.Query(
+            latitude, longitude, hourly, daily, currentWeather,
+            temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
+            endDate, pastDays
         )
     )
 
@@ -295,6 +323,17 @@ class OpenMeteo(
             ).getOrThrow()
         }
 
+        val dwdHourly = separate<DwdHourly>(hourly)
+        val dwdDaily = separate<DwdDaily>(daily)
+        // if both are null return null, else return hourly *or* daily
+        val dwdResponse = (dwdHourly ?: dwdDaily)?.let {
+            dwd(
+                dwdHourly, dwdDaily, currentWeather,
+                temperatureUnit, windSpeedUnit, precipitationUnit, timeZone,
+                startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
         val ecmwfHourly = separate<EcmwfHourly>(hourly)
         val ecmwfResponse = ecmwfHourly?.let {
             ecmwf(
@@ -345,6 +384,7 @@ class OpenMeteo(
 
         val hourlyResponses: List<ResponseHourly> = listOfNotNull(
             airQualityResponse,
+            dwdResponse,
             ecmwfResponse,
             forecastResponse,
             gfsResponse,
@@ -353,6 +393,7 @@ class OpenMeteo(
         )
 
         val dailyResponses: List<ResponseDaily> = listOfNotNull(
+            dwdResponse,
             forecastResponse,
             gfsResponse,
             historicalResponse,
@@ -366,10 +407,12 @@ class OpenMeteo(
         if (responses.isEmpty())
             throw Error("No request was performed! No valid option")
 
-        val elevation = forecastResponse?.elevation
+        val elevation = dwdResponse?.elevation
+            ?: forecastResponse?.elevation
             ?: gfsResponse?.elevation
 
-        val currentWeather0 = forecastResponse?.currentWeather
+        val currentWeather0 = dwdResponse?.currentWeather
+            ?: forecastResponse?.currentWeather
             ?: gfsResponse?.currentWeather
 
         val utcOffsetSeconds = hourlyResponses[0].utcOffsetSeconds
