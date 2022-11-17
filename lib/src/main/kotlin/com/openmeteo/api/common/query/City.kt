@@ -1,5 +1,8 @@
 package com.openmeteo.api.common.query
 
+/**
+ * Hardcoded coordinates of the biggest cities in the world
+ */
 enum class City(
     override val latitude: Float,
     override val longitude: Float,
