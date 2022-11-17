@@ -12,6 +12,10 @@ import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
+/**
+ * An API endpoint with a context [URL] which can automatically parse response
+ * data of a GET request with a [Query]
+ */
 class Endpoint(
     @Transient
     val context: URL,
@@ -51,6 +55,11 @@ class Endpoint(
             }
         }
 
+    /**
+     * GET, with a [Query], the endpoint context url and parse the response data
+     * (from the specified query format or, if not a [QueryContentFormat], from
+     * json) as the reified generic type
+     */
     inline fun <reified T> query(query: Query) =
         runCatching { query.toURL(context) }
             .mapCatching { get(it) }
