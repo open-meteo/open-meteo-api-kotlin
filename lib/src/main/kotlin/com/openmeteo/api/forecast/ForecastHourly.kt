@@ -42,6 +42,8 @@ enum class ForecastHourly : Options {
     CloudcoverMid,
     @SerialName("cloudcover_high")
     CloudcoverHigh,
+    @SerialName("visibility")
+    Visibility,
     @SerialName("evapotranspiration")
     Evapotranspiration,
     @SerialName("et0_fao_evapotranspiration")
