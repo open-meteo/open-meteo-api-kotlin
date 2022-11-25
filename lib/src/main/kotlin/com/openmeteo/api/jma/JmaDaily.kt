@@ -1,0 +1,35 @@
+package com.openmeteo.api.jma
+
+import com.openmeteo.api.common.query.QueryDaily.Options
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+enum class JmaDaily : Options {
+    @SerialName("time")
+    Time,
+    @SerialName("temperature_2m_max")
+    Temperature2mMax,
+    @SerialName("temperature_2m_min")
+    Temperature2mMin,
+    @SerialName("apparent_temperature_max")
+    ApparentTemperatureMax,
+    @SerialName("apparent_temperature_min")
+    ApparentTemperatureMin,
+    @SerialName("sunrise")
+    Sunrise,
+    @SerialName("sunset")
+    Sunset,
+    @SerialName("precipitation_sum")
+    PrecipitationSum,
+    @SerialName("precipitation_hours")
+    PrecipitationHours,
+    @SerialName("windspeed_10m_max")
+    Windspeed10mMax,
+    @SerialName("winddirection_10m_dominant")
+    Winddirection10mDominant,
+    @SerialName("shortwave_radiation_sum")
+    ShortwaveRadiationSum,
+    @SerialName("et0_fao_evapotranspiration")
+    Et0FaoEvapotranspiration,
+}
