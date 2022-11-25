@@ -21,6 +21,8 @@ import com.openmeteo.api.dwd.DwdDaily
 import com.openmeteo.api.ecmwf.Ecmwf
 import com.openmeteo.api.ecmwf.EcmwfHourly
 import com.openmeteo.api.elevation.Elevation
+import com.openmeteo.api.flood.Flood
+import com.openmeteo.api.flood.FloodDaily
 import com.openmeteo.api.forecast.Forecast
 import com.openmeteo.api.forecast.ForecastDaily
 import com.openmeteo.api.forecast.ForecastHourly
@@ -66,6 +68,7 @@ class OpenMeteo(
         val dwd: Endpoint = Endpoint(Dwd.context),
         val ecmwf: Endpoint = Endpoint(Ecmwf.context),
         val elevation: Endpoint = Endpoint(Elevation.context),
+        val flood: Endpoint = Endpoint(Flood.context),
         val forecast: Endpoint = Endpoint(Forecast.context),
         val geocodingGet: Endpoint = Endpoint(GeocodingGet.context),
         val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
@@ -95,6 +98,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Elevation.Query) =
         endpoints.elevation.query<Elevation.Response>(query)
+
+    operator fun invoke(query: Flood.Query) =
+        endpoints.flood.query<Flood.Response>(query)
 
     operator fun invoke(query: Forecast.Query) =
         endpoints.forecast.query<Forecast.Response>(query)
@@ -176,6 +182,16 @@ class OpenMeteo(
         vararg coordinates: Pair<Float, Float> =
             arrayOf(this.latitude to this.longitude),
     ) = invoke(Elevation.Query(*coordinates))
+
+    fun flood(
+        daily: Iterable<FloodDaily>? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Flood.Query(latitude, longitude, daily, startDate, endDate)
+    )
 
     fun forecast(
         hourly: Iterable<ForecastHourly>? = null,
@@ -370,6 +386,13 @@ class OpenMeteo(
             ).getOrThrow()
         }
 
+        val floodDaily = separate<FloodDaily>(daily)
+        val floodResponse = floodDaily?.let {
+            flood(
+                floodDaily, startDate, endDate, latitude, longitude
+            ).getOrThrow()
+        }
+
         val forecastHourly = separate<ForecastHourly>(hourly)
         val forecastDaily = separate<ForecastDaily>(daily)
         // if both are null return null, else return hourly *or* daily
@@ -433,6 +456,7 @@ class OpenMeteo(
 
         val dailyResponses: List<ResponseDaily> = listOfNotNull(
             dwdResponse,
+            floodResponse,
             forecastResponse,
             gfsResponse,
             historicalResponse,
