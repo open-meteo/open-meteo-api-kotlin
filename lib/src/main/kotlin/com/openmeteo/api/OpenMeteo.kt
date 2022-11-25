@@ -46,6 +46,8 @@ import com.openmeteo.api.marine.MarineHourly
 import com.openmeteo.api.meteofrance.MeteoFrance
 import com.openmeteo.api.meteofrance.MeteoFranceHourly
 import com.openmeteo.api.meteofrance.MeteoFranceDaily
+import com.openmeteo.api.metno.MetNo
+import com.openmeteo.api.metno.MetNoHourly
 import kotlinx.serialization.SerialName
 
 class OpenMeteo(
@@ -84,6 +86,7 @@ class OpenMeteo(
         val jma: Endpoint = Endpoint(Jma.context),
         val marine: Endpoint = Endpoint(Marine.context),
         val meteoFrance: Endpoint = Endpoint(MeteoFrance.context),
+        val metNo: Endpoint = Endpoint(MetNo.context),
     )
 
     var coordinates
@@ -136,6 +139,9 @@ class OpenMeteo(
 
     operator fun invoke(query: MeteoFrance.Query) =
         endpoints.meteoFrance.query<MeteoFrance.Response>(query)
+
+    operator fun invoke(query: MetNo.Query) =
+        endpoints.metNo.query<MetNo.Response>(query)
 
     fun airQuality(
         hourly: Iterable<AirQualityHourly>? = null,
@@ -356,6 +362,24 @@ class OpenMeteo(
         )
     )
 
+    fun metNo(
+        hourly: Iterable<MetNoHourly>? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        MetNo.Query(
+            latitude, longitude, hourly, temperatureUnit, windSpeedUnit,
+            precipitationUnit, timeZone, startDate, endDate, pastDays
+        )
+    )
+
     fun currentWeather(
         temperatureUnit: TemperatureUnit? = null,
         windSpeedUnit: WindSpeedUnit? = null,
@@ -521,6 +545,14 @@ class OpenMeteo(
             ).getOrThrow()
         }
 
+        val metNoHourly = separate<MetNoHourly>(daily)
+        val metNoResponse = metNoHourly?.let {
+            metNo(
+                metNoHourly, temperatureUnit, windSpeedUnit, precipitationUnit,
+                timeZone, startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
         val hourlyResponses: List<ResponseHourly> = listOfNotNull(
             airQualityResponse,
             dwdResponse,
@@ -532,6 +564,7 @@ class OpenMeteo(
             jmaResponse,
             marineResponse,
             meteoFranceResponse,
+            metNoResponse,
         )
 
         val dailyResponses: List<ResponseDaily> = listOfNotNull(
