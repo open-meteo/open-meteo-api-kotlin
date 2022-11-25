@@ -26,6 +26,9 @@ import com.openmeteo.api.flood.FloodDaily
 import com.openmeteo.api.forecast.Forecast
 import com.openmeteo.api.forecast.ForecastDaily
 import com.openmeteo.api.forecast.ForecastHourly
+import com.openmeteo.api.gem.Gem
+import com.openmeteo.api.gem.GemDaily
+import com.openmeteo.api.gem.GemHourly
 import com.openmeteo.api.geocoding.GeocodingGet
 import com.openmeteo.api.geocoding.GeocodingSearch
 import com.openmeteo.api.gfs.Gfs
@@ -70,6 +73,7 @@ class OpenMeteo(
         val elevation: Endpoint = Endpoint(Elevation.context),
         val flood: Endpoint = Endpoint(Flood.context),
         val forecast: Endpoint = Endpoint(Forecast.context),
+        val gem: Endpoint = Endpoint(Gem.context),
         val geocodingGet: Endpoint = Endpoint(GeocodingGet.context),
         val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
         val gfs: Endpoint = Endpoint(Gfs.context),
@@ -104,6 +108,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Forecast.Query) =
         endpoints.forecast.query<Forecast.Response>(query)
+
+    operator fun invoke(query: Gem.Query) =
+        endpoints.gem.query<Gem.Response>(query)
 
     operator fun invoke(query: GeocodingGet.Query) =
         endpoints.geocodingGet.query<GeocodingGet.Response>(query)
@@ -208,6 +215,27 @@ class OpenMeteo(
         longitude: Float = this.longitude,
     ) = invoke(
         Forecast.Query(
+            latitude, longitude, hourly, daily, currentWeather,
+            temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
+            endDate, pastDays
+        )
+    )
+
+    fun gem(
+        hourly: Iterable<GemHourly>? = null,
+        daily: Iterable<GemDaily>? = null,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Gem.Query(
             latitude, longitude, hourly, daily, currentWeather,
             temperatureUnit, windSpeedUnit, precipitationUnit, timeZone, startDate,
             endDate, pastDays
@@ -404,6 +432,17 @@ class OpenMeteo(
             ).getOrThrow()
         }
 
+        val gemHourly = separate<GemHourly>(hourly)
+        val gemDaily = separate<GemDaily>(daily)
+        // if both are null return null, else return hourly *or* daily
+        val gemResponse = (gemHourly ?: gemDaily)?.let {
+            gem(
+                gemHourly, gemDaily, currentWeather,
+                temperatureUnit, windSpeedUnit, precipitationUnit, timeZone,
+                startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
         val gfsHourly = separate<GfsHourly>(hourly)
         val gfsDaily = separate<GfsDaily>(daily)
         val gfsResponse = (gfsHourly ?: gfsDaily)?.let {
@@ -448,6 +487,7 @@ class OpenMeteo(
             dwdResponse,
             ecmwfResponse,
             forecastResponse,
+            gemResponse,
             gfsResponse,
             historicalResponse,
             marineResponse,
@@ -458,6 +498,7 @@ class OpenMeteo(
             dwdResponse,
             floodResponse,
             forecastResponse,
+            gemResponse,
             gfsResponse,
             historicalResponse,
             marineResponse,
@@ -477,6 +518,7 @@ class OpenMeteo(
             ?: meteoFranceResponse?.elevation
 
         val currentWeather0 = dwdResponse?.currentWeather
+            ?: gemResponse?.currentWeather
             ?: forecastResponse?.currentWeather
             ?: gfsResponse?.currentWeather
             ?: meteoFranceResponse?.currentWeather
