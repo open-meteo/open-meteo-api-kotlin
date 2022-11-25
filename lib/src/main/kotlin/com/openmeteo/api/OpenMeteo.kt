@@ -37,6 +37,9 @@ import com.openmeteo.api.gfs.GfsHourly
 import com.openmeteo.api.historical.Historical
 import com.openmeteo.api.historical.HistoricalDaily
 import com.openmeteo.api.historical.HistoricalHourly
+import com.openmeteo.api.jma.Jma
+import com.openmeteo.api.jma.JmaDaily
+import com.openmeteo.api.jma.JmaHourly
 import com.openmeteo.api.marine.Marine
 import com.openmeteo.api.marine.MarineDaily
 import com.openmeteo.api.marine.MarineHourly
@@ -78,6 +81,7 @@ class OpenMeteo(
         val geocodingSearch: Endpoint = Endpoint(GeocodingSearch.context),
         val gfs: Endpoint = Endpoint(Gfs.context),
         val historical: Endpoint = Endpoint(Historical.context),
+        val jma: Endpoint = Endpoint(Jma.context),
         val marine: Endpoint = Endpoint(Marine.context),
         val meteoFrance: Endpoint = Endpoint(MeteoFrance.context),
     )
@@ -123,6 +127,9 @@ class OpenMeteo(
 
     operator fun invoke(query: Historical.Query) =
         endpoints.historical.query<Historical.Response>(query)
+
+    operator fun invoke(query: Jma.Query) =
+        endpoints.jma.query<Jma.Response>(query)
 
     operator fun invoke(query: Marine.Query) =
         endpoints.marine.query<Marine.Response>(query)
@@ -289,6 +296,27 @@ class OpenMeteo(
         Historical.Query(
             latitude, longitude, hourly, daily, temperatureUnit,
             windSpeedUnit, precipitationUnit, timeZone, startDate, endDate
+        )
+    )
+
+    fun jma(
+        hourly: Iterable<JmaHourly>? = null,
+        daily: Iterable<JmaDaily>? = null,
+        currentWeather: Boolean? = null,
+        temperatureUnit: TemperatureUnit? = null,
+        windSpeedUnit: WindSpeedUnit? = null,
+        precipitationUnit: PrecipitationUnit? = null,
+        timeZone: TimeZone? = null,
+        startDate: Date? = null,
+        endDate: Date? = null,
+        pastDays: Int? = null,
+        latitude: Float = this.latitude,
+        longitude: Float = this.longitude,
+    ) = invoke(
+        Jma.Query(
+            latitude, longitude, hourly, daily, currentWeather, temperatureUnit,
+            windSpeedUnit, precipitationUnit, timeZone, startDate, endDate,
+            pastDays
         )
     )
 
@@ -463,6 +491,17 @@ class OpenMeteo(
             ).getOrThrow()
         }
 
+        val jmaHourly = separate<JmaHourly>(hourly)
+        val jmaDaily = separate<JmaDaily>(daily)
+        // if both are null return null, else return hourly *or* daily
+        val jmaResponse = (jmaHourly ?: jmaDaily)?.let {
+            jma(
+                jmaHourly, jmaDaily, currentWeather,
+                temperatureUnit, windSpeedUnit, precipitationUnit, timeZone,
+                startDate, endDate, pastDays, latitude, longitude
+            ).getOrThrow()
+        }
+
         val marineHourly = separate<MarineHourly>(hourly)
         val marineDaily = separate<MarineDaily>(daily)
         val marineResponse = (marineHourly ?: marineDaily)?.let {
@@ -490,6 +529,7 @@ class OpenMeteo(
             gemResponse,
             gfsResponse,
             historicalResponse,
+            jmaResponse,
             marineResponse,
             meteoFranceResponse,
         )
@@ -501,6 +541,7 @@ class OpenMeteo(
             gemResponse,
             gfsResponse,
             historicalResponse,
+            jmaResponse,
             marineResponse,
             meteoFranceResponse,
         )
