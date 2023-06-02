@@ -98,7 +98,7 @@ interface Query {
      * URL encode the query as `?key0=value0&key1=value1&...keyN=valueN` format
      */
     fun asString() =
-        urlEncode(toList().joinToString("&", "?") { (k, v) -> "$k=$v" })
+        toList().joinToString("&", "?") { (k, v) -> "$k=${urlEncode(v)}" }
 
     /**
      * Replace the context [URL] query with this one
