@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 /**
  * A [Date] which is ISO-8601 formatted when converted to string
  *
- * Eases `start_date` and `end_date` params
+ * Eases `start_date` and `end_date` params creation
  */
 class Date(date: Long) : java.util.Date(date) {
 
