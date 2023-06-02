@@ -113,6 +113,30 @@ sealed interface Query {
     }
 
     /**
+     * Query for resources that can be retrieved from past days.
+     */
+    sealed interface PastDays : Query {
+
+        /**
+         * The number of days in the past to query.
+         */
+        @SerialName("past_days")
+        val pastDays: Int?
+    }
+
+    /**
+     * Query for resources that can be retrieved from future days.
+     */
+    sealed interface ForecastDays : Query {
+
+        /**
+         * The number of days in the future to query.
+         */
+        @SerialName("forecast_days")
+        val forecastDays: Int?
+    }
+
+    /**
      * Query for resources that may pick the content format.
      */
     sealed interface ContentFormat : Query {
