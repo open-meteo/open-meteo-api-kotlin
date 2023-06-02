@@ -18,6 +18,12 @@ interface ResponseCurrentWeather : Response {
         @SerialName("winddirection")
         val windDirection: Float,
         @SerialName("weathercode")
-        val weatherCode: WeatherCode
+        val weatherCode: WeatherCode,
+        /**
+         * Whether the time step has daylight
+         */
+        @SerialName("is_day")
+        @Serializable(with = IntAsBoolean::class)
+        val isDay: Boolean,
     )
 }
