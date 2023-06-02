@@ -4,12 +4,10 @@ import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.TimeFormat.UnixTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 import java.net.URLEncoder.encode
 
-@Serializable
 sealed interface Query {
 
     /**
@@ -45,7 +43,7 @@ sealed interface Query {
     /**
      * Query for resources that have a timezone field.
      */
-    interface TimeZone : Query {
+    sealed interface TimeZone : Query {
         /**
          * The timezone to optionally use.
          */
@@ -56,7 +54,7 @@ sealed interface Query {
     /**
      * Query for resources that have (formatted) time fields.
      */
-    interface TimeFormat : Query {
+    sealed interface TimeFormat : Query {
         /**
          * The time format that should be used in the response.
          *
@@ -69,7 +67,7 @@ sealed interface Query {
     /**
      * Query for resources that have daily fields.
      */
-    interface Daily : TimeFormat {
+    sealed interface Daily : TimeFormat {
         /**
          * The daily fields queried.
          */
@@ -84,7 +82,7 @@ sealed interface Query {
     /**
      * Query for resources that have hourly fields.
      */
-    interface Hourly : TimeFormat {
+    sealed interface Hourly : TimeFormat {
         /**
          * The hourly fields queried.
          */
@@ -99,7 +97,7 @@ sealed interface Query {
     /**
      * Query for resources that can be retrieved in a specific date range.
      */
-    interface DateRange : Query {
+    sealed interface DateRange : Query {
 
         /**
          * The start date of the range.
@@ -117,7 +115,7 @@ sealed interface Query {
     /**
      * Query for resources that may pick the content format.
      */
-    interface ContentFormat : Query {
+    sealed interface ContentFormat : Query {
         /**
          * The requested content format.
          */
@@ -127,12 +125,12 @@ sealed interface Query {
     /**
      * Query for location-based resources.
      */
-    interface Coordinate : com.openmeteo.apix.Coordinate, Query
+    sealed interface Coordinate : com.openmeteo.apix.Coordinate, Query
 
     /**
      * Query for resources that may include the current weather in the response.
      */
-    interface CurrentWeather : Query {
+    sealed interface CurrentWeather : Query {
         /**
          * Whether to include the current weather in the response or not.
          */
