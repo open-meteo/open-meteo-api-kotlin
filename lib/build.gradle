@@ -6,8 +6,8 @@ plugins {
 }
 
 dependencies {
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.4.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.5.1'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.10'
 }
@@ -17,7 +17,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId = 'com.open-meteo'
             artifactId = 'open-meteo-api-kotlin'
-            version = '0.2.0-alpha.4'
+            version = '0.5.0-alpha.0'
 
             from components.java
         }
