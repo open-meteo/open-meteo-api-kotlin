@@ -5,7 +5,6 @@ import com.openmeteo.api.common.query.QueryContentFormat
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Transient
 import kotlinx.serialization.decodeFromByteArray
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
@@ -20,6 +19,12 @@ class Endpoint(
     @Transient
     val context: URL,
 ) : Http<InputStream> {
+
+    companion object {
+        val Json = Json {
+            ignoreUnknownKeys = true
+        }
+    }
 
     /**
      * Parse JSON from a [String]
