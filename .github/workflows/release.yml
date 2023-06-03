@@ -41,7 +41,7 @@ jobs:
         echo >> commits
 
     - name: Generate body
-      run: .github/scripts/body.sh > body.md
+      run: .github/scripts/changelog.sh > body.md
 
     - name: Append changelog link to body
       run: |
