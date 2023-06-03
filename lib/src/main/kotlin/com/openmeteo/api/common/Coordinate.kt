@@ -1,4 +1,4 @@
-package com.openmeteo.apix
+package com.openmeteo.api.common
 
 interface Coordinate {
     val latitude: Float

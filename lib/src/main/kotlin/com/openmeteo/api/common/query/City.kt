@@ -1,12 +1,11 @@
 package com.openmeteo.api.common.query
 
-/**
- * Hardcoded coordinates of the biggest cities in the world
- */
+import com.openmeteo.api.common.Coordinate
+
 enum class City(
     override val latitude: Float,
     override val longitude: Float,
-) : QueryCoordinates {
+) : Coordinate {
     Berlin(52.5235f, 13.4115f),
     Paris(48.8567f, 2.3510f),
     London(51.5002f, -0.1262f),
@@ -73,5 +72,8 @@ enum class City(
     Canberra(-35.2820f, 149.1286f),
     Wellington(-41.2865f, 174.7762f);
 
+    /**
+     * Coordinates bundled in a [Pair]
+     */
     val coordinates get() = latitude to longitude
 }

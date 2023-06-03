@@ -1,4 +1,4 @@
-package com.openmeteo.api.common.response
+package com.openmeteo.api.common.time
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -7,10 +7,10 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-object IntAsBoolean : KSerializer<Boolean> {
+object DateSerializer : KSerializer<Date> {
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("IntAsBoolean", PrimitiveKind.BOOLEAN)
+        PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: Boolean) = encoder.encodeBoolean(value)
-    override fun deserialize(decoder: Decoder): Boolean = decoder.decodeInt() != 0
+    override fun serialize(encoder: Encoder, value: Date) = encoder.encodeString(value.toString())
+    override fun deserialize(decoder: Decoder): Date = Date(decoder.decodeString())
 }

@@ -4,15 +4,17 @@ import kotlinx.serialization.Serializable
 import java.time.ZoneId
 
 /**
- * A [TimeZone] class wrapper
- *
- * Please note that null is used as an internal value to represent the `"auto"` option
+ * A [java.util.TimeZone] class wrapper.
  */
 @Serializable
 @JvmInline
-value class TimeZone private constructor(
+value class Timezone private constructor(
     val id: String = "auto"
 ) {
+
+    /**
+     * `null` is translated to the `"auto"` option.
+     */
     constructor(
         timeZone: java.util.TimeZone? = null
     ) : this(
@@ -20,12 +22,12 @@ value class TimeZone private constructor(
     )
 
     companion object {
-        val auto = TimeZone("auto")
+        val auto = Timezone("auto")
         fun getTimeZone(id: String) =
-            TimeZone(java.util.TimeZone.getTimeZone(id))
+            Timezone(java.util.TimeZone.getTimeZone(id))
 
         fun getTimeZone(id: ZoneId) =
-            TimeZone(java.util.TimeZone.getTimeZone(id))
+            Timezone(java.util.TimeZone.getTimeZone(id))
     }
 
     val timeZone: java.util.TimeZone?

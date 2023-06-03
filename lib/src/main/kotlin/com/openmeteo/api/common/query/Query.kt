@@ -1,123 +1,176 @@
 package com.openmeteo.api.common.query
 
-import kotlinx.serialization.*
+import com.openmeteo.api.common.time.Date
+import com.openmeteo.api.common.time.TimeFormat.UnixTime
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.properties.Properties
+import kotlinx.serialization.properties.encodeToStringMap
 import java.net.URL
-import java.net.URLEncoder
-import kotlin.reflect.KClass
-import kotlin.reflect.KProperty1
-import kotlin.reflect.full.findAnnotation
-import kotlin.reflect.full.hasAnnotation
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.full.superclasses
+import java.net.URLEncoder.encode
 
-/**
- * An HTTP query
- */
 interface Query {
 
     companion object {
 
         /**
-         * Try to find the SerialName of a key, looping over superclasses
+         * Retrieve a flat [Map] of key-value pairs.
+         * Entries with null values are filtered out.
          */
-        internal fun key(property: KProperty1<Query, *>, kClass: KClass<*>) =
-            // if the property has a custom SerialName get it
-            property.findAnnotation<SerialName>()?.value
-                // else, loop over all superclasses, until a name is found
-                ?: kClass.superclasses.firstNotNullOfOrNull { superClass ->
-                    superClass.memberProperties
-                        // if a superclass has the property we're looking for
-                        .firstOrNull { it.name == property.name }
-                        // if the property has a custom SerialName get it
-                        ?.findAnnotation<SerialName>()?.value
-                } ?: property.name // default to its name
+        @OptIn(ExperimentalSerializationApi::class)
+        inline fun <reified T : Query> toMap(query: T) =
+            Properties.encodeToStringMap(query)
+                .filter { (k) -> k != "type" }
 
         /**
-         * Get the key name from a reified type
+         * Like `.toMap().toList()`
          */
-        internal inline fun <reified T> key(property: KProperty1<Query, *>) =
-            key(property, T::class)
+        inline fun <reified T : Query> toList(query: T) =
+            toMap(query).toList()
 
         /**
-         * Stringify a value (arrays are ',' joined, enums are looked up for
-         * [SerialName]s; nulls are only filtered out from arrays)
+         * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
+         *
+         * Values are URL encoded.
          */
-        @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-        internal fun value(any: Any?): String? =
-            when (any) {
-                is Iterable<*> -> any
-                    .mapNotNull { value(it) }
-                    .takeUnless { it.isEmpty() }
-                    ?.joinToString(",")
-                is Enum<*> -> runCatching {
-                    any.javaClass.kotlin.serializer()
-                        .descriptor.getElementName(any.ordinal)
-                }.getOrNull()
-                null -> null
-                else -> any.toString()
+        inline fun <reified T : Query> asString(query: T) =
+            toList(query).joinToString("&", "?") { (k, v) ->
+                "$k=${encode(v, "utf-8")}"
             }
+
+        /**
+         * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
+         *
+         * Values are URL encoded.
+         */
+        inline fun <reified T : Query> toURL(query: T, context: URL) =
+            URL(context, "${context.path}${asString(query)}")
 
     }
 
     /**
-     * Useful to convert, for example, spaces to "%20"
+     * A parent type for [Daily] and [Hourly] options.
      */
-    private fun urlEncode(text: String) =
-        URLEncoder.encode(text, "utf-8")
-
-    /**
-     * Calls the value companion method with `this` values
-     */
-    private fun value(property: KProperty1<Query, *>) =
-        Companion.value(property.get(this))
-
-    /**
-     * Get all non-Transient properties
-     */
-    private val memberProperties
-        get() =
-            javaClass.kotlin.memberProperties
-                .filter { !it.hasAnnotation<Transient>() }
-
-    /**
-     * Returns the object properties as a list of key-value pairs.
-     *
-     * Please note that pairs with null values are filtered out.
-     */
-    fun toList() =
-        memberProperties
-            .mapNotNull { value(it)?.let { v -> key(it, javaClass.kotlin) to v } }
-
-    /**
-     * Like `.toList().toMap()`
-     */
-    fun toMap() =
-        toList().toMap()
-
-    /**
-     * URL encode the query as `?key0=value0&key1=value1&...keyN=valueN` format
-     */
-    fun asString() =
-        toList().joinToString("&", "?") { (k, v) -> "$k=${urlEncode(v)}" }
-
-    /**
-     * Replace the context [URL] query with this one
-     */
-    fun toURL(context: URL) =
-        URL(context, "${context.path}${asString()}")
-
-    /**
-     * Please note that the resulting object won't inherit the actual properties,
-     * instead it will override the [toList()](Query.toList()) method, which is
-     * used by all other methods, hence avoiding overrides.
-     */
-    operator fun plus(other: Query) =
-        toList().let {
-            object : Query {
-                override fun toList(): List<Pair<String, String>> =
-                    it + other.toList()
-            }
-        }
-
     interface Options
+
+    /**
+     * Query for resources that have a timezone field.
+     */
+    interface Timezone : Query {
+        /**
+         * The timezone to optionally use.
+         */
+        val timezone: com.openmeteo.api.common.time.Timezone?
+    }
+
+    /**
+     * Query for resources that have (formatted) time fields.
+     */
+    interface TimeFormat : Query {
+        /**
+         * The time format that should be used in the response.
+         *
+         * Hardcoded to unix time, since it is easier to parse.
+         */
+        @SerialName("timeformat")
+        val timeFormat get() = UnixTime
+    }
+
+    /**
+     * Query for resources that have daily fields.
+     */
+    interface Daily : TimeFormat {
+        /**
+         * The daily fields queried.
+         */
+        val daily: Iterable<Options>?
+
+        /**
+         * A generic type to identify [Daily] options.
+         */
+        interface Options : Query.Options
+    }
+
+    /**
+     * Query for resources that have hourly fields.
+     */
+    interface Hourly : TimeFormat {
+        /**
+         * The hourly fields queried.
+         */
+        val hourly: Iterable<Options>?
+
+        /**
+         * A generic type to identify [Hourly] options.
+         */
+        interface Options : Query.Options
+    }
+
+    /**
+     * Query for resources that can be retrieved in a specific date range.
+     */
+    interface DateRange : Query {
+
+        /**
+         * The start date of the range.
+         */
+        @SerialName("start_date")
+        val startDate: Date?
+
+        /**
+         * The end date of the range.
+         */
+        @SerialName("end_date")
+        val endDate: Date?
+    }
+
+    /**
+     * Query for resources that can be retrieved from past days.
+     */
+    interface PastDays : Query {
+
+        /**
+         * The number of days in the past to query.
+         */
+        @SerialName("past_days")
+        val pastDays: Int?
+    }
+
+    /**
+     * Query for resources that can be retrieved from future days.
+     */
+    interface ForecastDays : Query {
+
+        /**
+         * The number of days in the future to query.
+         */
+        @SerialName("forecast_days")
+        val forecastDays: Int?
+    }
+
+    /**
+     * Query for resources that may pick the content format.
+     */
+    interface ContentFormat : Query {
+        /**
+         * The requested content format.
+         */
+        val format: com.openmeteo.api.common.http.ContentFormat? get() = null
+    }
+
+    /**
+     * Query for location-based resources.
+     */
+    interface Coordinate : com.openmeteo.api.common.Coordinate, Query
+
+    /**
+     * Query for resources that may include the current weather in the response.
+     */
+    interface CurrentWeather : Query {
+        /**
+         * Whether to include the current weather in the response or not.
+         */
+        @SerialName("current_weather")
+        val currentWeather: Boolean?
+    }
 }

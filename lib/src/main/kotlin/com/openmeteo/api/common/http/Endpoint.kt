@@ -1,11 +1,11 @@
 package com.openmeteo.api.common.http
 
 import com.openmeteo.api.common.query.Query
-import com.openmeteo.api.common.query.QueryContentFormat
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Transient
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNamingStrategy
 import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.net.URL
@@ -21,8 +21,10 @@ class Endpoint(
 ) : Http<InputStream> {
 
     companion object {
+        @OptIn(ExperimentalSerializationApi::class)
         val Json = Json {
             ignoreUnknownKeys = true
+            namingStrategy = JsonNamingStrategy.SnakeCase
         }
     }
 
@@ -62,14 +64,14 @@ class Endpoint(
 
     /**
      * GET, with a [Query], the endpoint context url and parse the response data
-     * (from the specified query format or, if not a [QueryContentFormat], from
-     * json) as the reified generic type
+     * (from the specified query format or, if undefined, from json)
      */
-    inline fun <reified T> query(query: Query) =
-        runCatching { query.toURL(context) }
+    inline fun <reified R, reified Q : Query> query(query: Q) =
+        runCatching { Query.toURL(query, context) }
             .mapCatching { get(it) }
             .mapCatching {
-                if (query is QueryContentFormat && query.format == ContentFormat.ProtoBuf) protoBuf(it)
-                else json<T>(it)
+                if (query is Query.ContentFormat && query.format == ContentFormat.ProtoBuf)
+                    protoBuf<R>(it)
+                else json<R>(it)
             }
 }
