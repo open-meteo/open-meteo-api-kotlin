@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Usage from project root dir:
+# .github/scripts/version.sh bump 0.1.2-alpha.3
+
 bump() {
   [ -v "version" ] || exit 1
 
