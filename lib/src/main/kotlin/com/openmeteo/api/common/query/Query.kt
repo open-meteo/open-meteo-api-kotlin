@@ -152,4 +152,35 @@ interface Query {
          */
         val currentWeather: Boolean?
     }
+
+    /**
+     * Query for resources that may include temperature values
+     */
+    interface TemperatureUnit : Query {
+        /**
+         * The requested temperature unit
+         */
+        val temperatureUnit: com.openmeteo.api.common.units.TemperatureUnit
+    }
+
+    /**
+     * Query for resources that may include wind speed values
+     */
+    interface WindSpeedUnit : Query {
+        /**
+         * The requested wind speed unit
+         */
+        val windSpeedUnit: com.openmeteo.api.common.units.WindSpeedUnit
+    }
+
+    /**
+     * Query for resources that may include wind speed values
+     */
+    interface PrecipitationUnit : Query {
+        /**
+         * The requested wind speed unit
+         */
+        val precipitationUnit: com.openmeteo.api.common.units.PrecipitationUnit
+    }
+
 }
