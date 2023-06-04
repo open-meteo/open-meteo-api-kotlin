@@ -3,7 +3,10 @@ package com.openmeteo.api
 import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
+import com.openmeteo.api.common.units.PrecipitationUnit
+import com.openmeteo.api.common.units.TemperatureUnit
 import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.WindSpeedUnit
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.net.URL
@@ -31,8 +34,15 @@ object Forecast {
         @SerialName("current_weather")
         override val currentWeather: Boolean? = null,
         override val timezone: Timezone? = null,
+        @SerialName("temperature_unit")
+        override val temperatureUnit: TemperatureUnit,
+        @SerialName("windspeed_unit")
+        override val windSpeedUnit: WindSpeedUnit,
+        @SerialName("precipitation_unit")
+        override val precipitationUnit: PrecipitationUnit,
     ) : Q.Coordinate, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
-        Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone
+        Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone,
+        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit
 
     @Serializable
     data class Response(
