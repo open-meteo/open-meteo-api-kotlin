@@ -23,9 +23,8 @@ class QueryTest {
     class Programmer(
         val name: String,
         val surname: String,
-        @Serializable(with = ListAsString::class)
         @SerialName("languages")
-        val programmingLanguages: List<String>,
+        val programmingLanguages: String,
     ) : Query
 
     @Test
@@ -36,7 +35,7 @@ class QueryTest {
             "JavaScript",
             "HTML",
             "CSS",
-        ))
+        ).joinToString(","))
         // Do not worry, %2C is the URL encoded comma: it gets decoded properly before splitting
         //assertEquals("?name=John&languages=Kotlin,Java,JavaScript,HTML,CSS&surname=Doe",
         assertEquals("?name=John&surname=Doe&languages=Kotlin%2CJava%2CJavaScript%2CHTML%2CCSS",
