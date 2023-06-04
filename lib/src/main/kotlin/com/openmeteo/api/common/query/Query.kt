@@ -2,7 +2,6 @@ package com.openmeteo.api.common.query
 
 import com.openmeteo.api.common.time.Date
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 import java.net.URL
@@ -99,13 +98,11 @@ interface Query {
         /**
          * The start date of the range.
          */
-        @SerialName("start_date")
         val startDate: Date?
 
         /**
          * The end date of the range.
          */
-        @SerialName("end_date")
         val endDate: Date?
     }
 
@@ -117,7 +114,6 @@ interface Query {
         /**
          * The number of days in the past to query.
          */
-        @SerialName("past_days")
         val pastDays: Int?
     }
 
@@ -129,7 +125,6 @@ interface Query {
         /**
          * The number of days in the future to query.
          */
-        @SerialName("forecast_days")
         val forecastDays: Int?
     }
 
@@ -155,7 +150,6 @@ interface Query {
         /**
          * Whether to include the current weather in the response or not.
          */
-        @SerialName("current_weather")
         val currentWeather: Boolean?
     }
 }
