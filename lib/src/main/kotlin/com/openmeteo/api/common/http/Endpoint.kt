@@ -15,7 +15,7 @@ import javax.net.ssl.HttpsURLConnection
  * An API endpoint with a context [URL] which can automatically parse response
  * data of a GET request with a [Query]
  */
-class Endpoint(
+open class Endpoint(
     @Transient
     val context: URL,
 ) : Http<InputStream> {

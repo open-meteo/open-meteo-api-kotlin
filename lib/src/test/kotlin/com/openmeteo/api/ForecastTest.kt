@@ -1,7 +1,6 @@
 package com.openmeteo.api
 
 import com.openmeteo.api.common.Options
-import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.Unit
@@ -10,10 +9,6 @@ import kotlin.test.assertContains
 import kotlin.test.assertEquals
 
 class ForecastTest {
-
-    companion object {
-        val forecast = Endpoint(Forecast.context)
-    }
 
     @Test
     fun `Amsterdam, with past day`() {

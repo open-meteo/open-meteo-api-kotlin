@@ -1,6 +1,7 @@
 package com.openmeteo.api
 
 import com.openmeteo.api.common.Options
+import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.PrecipitationUnit
@@ -13,7 +14,9 @@ import java.net.URL
 import com.openmeteo.api.common.Response as R
 import com.openmeteo.api.common.query.Query as Q
 
-object Forecast {
+object Forecast : Endpoint(
+    URL("https://api.open-meteo.com/v1/forecast")
+) {
 
     val context = URL("https://api.open-meteo.com/v1/forecast")
 
