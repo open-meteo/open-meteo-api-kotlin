@@ -25,8 +25,7 @@ interface Response {
      * Resource which generation is timed.
      */
     interface GenerationTimed : Response {
-        @SerialName("generationtime_ms")
-        val generationTimeMs: Float
+        val generationtimeMs: Float
     }
 
     /**
