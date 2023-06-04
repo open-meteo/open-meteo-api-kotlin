@@ -18,7 +18,7 @@ object Forecast : Endpoint(
     URL("https://api.open-meteo.com/v1/forecast")
 ) {
 
-    val context = URL("https://api.open-meteo.com/v1/forecast")
+    operator fun invoke(query: Query) = query<Response, Query>(query)
 
     @Serializable
     open class Query(
