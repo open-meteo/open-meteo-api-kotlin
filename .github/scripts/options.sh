@@ -22,62 +22,49 @@ suffix() {
   cat | sed "s/$/$1/"
 }
 
-# convert snake_case to CamelCase
+# convert snake_case to CamelCase, enum values
 CamelCase() {
   cat | sed -r 's/(^|_)(\w)/\U\2/g' # https://stackoverflow.com/a/34420162/9373031
 }
 
-# convert snake_case to camelCase
+# convert snake_case to camelCase, property names
 camelCase() {
   cat | sed -r 's/(_)(\w)/\U\2/g'
-}
-
-# wrap the serial name
-SerialName() {
-  cat | prefix '@SerialName("' | suffix '")'
 }
 
 # join the list values with serial names and enum names and prepare enum
 _options() {
   listed="$(list)"
-  serialNames="$(echo "$listed" | SerialName)"
-  options="$(echo "$listed" | CamelCase | suffix ',')"
+  properties="$(echo "$listed" | camelCase | prefix 'const val ')"
+  values="$(echo "$listed" | prefix '"' | suffix '"')"
   {
   cat <<END
-package $package.${endpoint,,}
-
-import $package.common.query.Query${name^}.Options
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
 @Serializable
-enum class $endpoint${name^} : Options {
-    @SerialName("time")
-    Time,
+object ${name^} : Options.${name^} {
 END
-  paste -d $'\n' <(echo "$serialNames") <(echo "$options") \
+  paste -d $'=' <(echo "$properties") <(echo "$values") \
   | prefix "    "
   echo "}"
   }
 }
 
 options() {
-  _options < "tmp/$endpoint.html" > "${endpoint,,}/$endpoint${name^}.kt"
+  _options < "tmp/$endpoint.html" #> "${endpoint,,}/$endpoint${name^}.kt"
 }
 
 declare -A docs=(
-  [AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
-  [Ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
-  [Dwd]="https://open-meteo.com/en/docs/dwd-api"
-  [MeteoFrance]="https://open-meteo.com/en/docs/meteofrance-api"
+  #[AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
+  #[Ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
+  #[Dwd]="https://open-meteo.com/en/docs/dwd-api"
+  #[MeteoFrance]="https://open-meteo.com/en/docs/meteofrance-api"
   [Forecast]="https://open-meteo.com/en/docs"
-  [Historical]="https://open-meteo.com/en/docs/historical-weather-api"
-  [Marine]="https://open-meteo.com/en/docs/marine-weather-api"
-  [Gfs]="https://open-meteo.com/en/docs/gfs-api"
-  [Jma]="https://open-meteo.com/en/docs/jma-api"
-  [MetNo]="https://open-meteo.com/en/docs/metno-api"
-  [Gem]="https://open-meteo.com/en/docs/gem-api"
-  [Flood]="https://open-meteo.com/en/docs/flood-api"
+  #[Historical]="https://open-meteo.com/en/docs/historical-weather-api"
+  #[Marine]="https://open-meteo.com/en/docs/marine-weather-api"
+  #[Gfs]="https://open-meteo.com/en/docs/gfs-api"
+  #[Jma]="https://open-meteo.com/en/docs/jma-api"
+  #[MetNo]="https://open-meteo.com/en/docs/metno-api"
+  #[Gem]="https://open-meteo.com/en/docs/gem-api"
+  #[Flood]="https://open-meteo.com/en/docs/flood-api"
 )
 
 # should run in project root
@@ -90,12 +77,14 @@ for endpoint in "${!docs[@]}"; do
 done
 
 name="hourly"
-for endpoint in AirQuality Ecmwf Forecast Historical Marine Gfs Dwd MeteoFrance Jma MetNo Gem; do
+for endpoint in Forecast; do
   options
 done
 
+echo # new line
+
 name="daily"
-for endpoint in Forecast Historical Marine Gfs Dwd MeteoFrance Jma Gem Flood; do
+for endpoint in Forecast; do
   options
 done
 
