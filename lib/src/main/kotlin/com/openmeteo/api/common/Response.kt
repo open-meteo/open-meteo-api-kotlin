@@ -71,4 +71,8 @@ interface Response {
             val isDay: Boolean,
         )
     }
+
+    interface Elevation {
+        val elevation: Float
+    }
 }
