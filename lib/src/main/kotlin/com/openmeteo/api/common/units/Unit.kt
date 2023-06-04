@@ -1,6 +1,5 @@
 package com.openmeteo.api.common.units
 
-import com.openmeteo.api.common.time.TimeFormat
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,7 +8,7 @@ import kotlinx.serialization.Serializable
 enum class Unit(vararg val alias: @Contextual Any) {
     Unknown,
     @SerialName("unixtime")
-    UnixTime(TimeFormat.UnixTime),
+    UnixTime,
     @SerialName("")
     Dimensionless,
     @SerialName("wmo code")

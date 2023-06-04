@@ -1,7 +1,6 @@
 package com.openmeteo.api.common.query
 
 import com.openmeteo.api.common.time.Date
-import com.openmeteo.api.common.time.TimeFormat.UnixTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.properties.Properties
@@ -21,6 +20,13 @@ interface Query {
         inline fun <reified T : Query> toMap(query: T) =
             Properties.encodeToStringMap(query)
                 .filter { (k) -> k != "type" }
+                .let {
+                    // if resource has timestamps
+                    if (query is TimeFormat)
+                        // always force unix timestamps
+                        it.plus("timeformat" to "unixtime")
+                    else it
+                }
 
         /**
          * Like `.toMap().toList()`
@@ -60,16 +66,10 @@ interface Query {
 
     /**
      * Query for resources that have (formatted) time fields.
+     *
+     * Used internally to hardcode Unix timestamps.
      */
-    interface TimeFormat : Query {
-        /**
-         * The time format that should be used in the response.
-         *
-         * Hardcoded to unix time, since it is easier to parse.
-         */
-        @SerialName("timeformat")
-        val timeFormat get() = UnixTime
-    }
+    interface TimeFormat : Query
 
     /**
      * Query for resources that have daily fields.
