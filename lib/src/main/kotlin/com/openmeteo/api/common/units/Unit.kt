@@ -8,8 +8,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class Unit(vararg val alias: @Contextual Any) {
     Unknown,
-    @SerialName("iso8601")
-    Iso8601(TimeFormat.Iso8601),
     @SerialName("unixtime")
     UnixTime(TimeFormat.UnixTime),
     @SerialName("")
