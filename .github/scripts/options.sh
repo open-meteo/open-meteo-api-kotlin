@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# run from root dir with `endpoint=ForecastOrOther .github/scripts/options.sh`
+
+declare -A docs=(
+  [Forecast]="https://open-meteo.com/en/docs"
+  [Historical]="https://open-meteo.com/en/docs/historical-weather-api"
+  [Marine]="https://open-meteo.com/en/docs/marine-weather-api"
+  [ClimateChange]="https://open-meteo.com/en/docs/climate-api"
+  [AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
+  [Flood]="https://open-meteo.com/en/docs/flood-api"
+)
+
 package="com.openmeteo.api"
 
 # list all checkboxes matching a name (hourly/daily) in a doc page
@@ -52,41 +63,20 @@ options() {
   _options < "tmp/$endpoint.html" #> "${endpoint,,}/$endpoint${name^}.kt"
 }
 
-declare -A docs=(
-  #[AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
-  #[Ecmwf]="https://open-meteo.com/en/docs/ecmwf-api"
-  #[Dwd]="https://open-meteo.com/en/docs/dwd-api"
-  #[MeteoFrance]="https://open-meteo.com/en/docs/meteofrance-api"
-  [Forecast]="https://open-meteo.com/en/docs"
-  #[Historical]="https://open-meteo.com/en/docs/historical-weather-api"
-  #[Marine]="https://open-meteo.com/en/docs/marine-weather-api"
-  #[Gfs]="https://open-meteo.com/en/docs/gfs-api"
-  #[Jma]="https://open-meteo.com/en/docs/jma-api"
-  #[MetNo]="https://open-meteo.com/en/docs/metno-api"
-  #[Gem]="https://open-meteo.com/en/docs/gem-api"
-  #[Flood]="https://open-meteo.com/en/docs/flood-api"
-)
-
 # should run in project root
 cd "lib/src/main/kotlin/$(echo "$package" | tr '.' '/')" || exit 1
 
 # fetch html only once
 mkdir tmp
-for endpoint in "${!docs[@]}"; do
-  curl -s "${docs[$endpoint]}" > "tmp/$endpoint.html"
-done
+curl -s "${docs[$endpoint]}" > "tmp/$endpoint.html"
 
 name="hourly"
-for endpoint in Forecast; do
-  options
-done
+options
 
 echo # new line
 
 name="daily"
-for endpoint in Forecast; do
-  options
-done
+options
 
 # delete html
 rm -rf tmp
