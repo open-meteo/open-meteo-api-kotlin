@@ -40,7 +40,8 @@ object Forecast {
         override val windSpeedUnit: WindSpeedUnit? = null,
         @SerialName("precipitation_unit")
         override val precipitationUnit: PrecipitationUnit? = null,
-    ) : Q.Coordinate, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
+        override val elevation: Float? = null,
+    ) : Q.Coordinate, Q.Elevation, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
         Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone,
         Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit
 
@@ -59,8 +60,8 @@ object Forecast {
         override val hourlyUnits: Map<String, Unit> = mapOf(),
         @SerialName("hourly")
         override val hourlyValues: Map<String, Array<Double?>> = mapOf(),
-        override val currentWeather: com.openmeteo.api.common.Response.CurrentWeather.CurrentWeather? = null,
-    ) : R.Coordinate, R.GenerationTimed, R.TimeZone, R.Elevation, R.Daily, R.Hourly, R.CurrentWeather
+        override val currentWeather: R.CurrentWeather.CurrentWeather? = null,
+    ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily, R.Hourly, R.CurrentWeather
 
     @Serializable
     object Daily : Options.Daily {

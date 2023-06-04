@@ -72,7 +72,11 @@ interface Response {
         )
     }
 
-    interface Elevation {
-        val elevation: Float
+    /**
+     * Elevation-based resource.
+     */
+    interface Elevation : com.openmeteo.api.common.Elevation {
+        override val elevation: Float // not nullable, since it's always returned!
     }
+
 }

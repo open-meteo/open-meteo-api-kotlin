@@ -144,6 +144,11 @@ interface Query {
     interface Coordinate : com.openmeteo.api.common.Coordinate, Query
 
     /**
+     * Query for elevation-based resources.  Defaults to a 90 meters model.
+     */
+    interface Elevation : com.openmeteo.api.common.Elevation
+
+    /**
      * Query for resources that may include the current weather in the response.
      */
     interface CurrentWeather : Query {
