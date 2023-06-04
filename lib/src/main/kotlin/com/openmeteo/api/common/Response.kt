@@ -1,6 +1,5 @@
 package com.openmeteo.api.common
 
-import com.openmeteo.api.common.query.Query
 import com.openmeteo.api.common.time.Time
 import com.openmeteo.api.common.units.Unit
 import kotlinx.serialization.SerialName
@@ -34,16 +33,16 @@ interface Response {
      * Resources that may have daily data entries.
      */
     interface Daily : Response {
-        val dailyUnits: Map<out Query.Daily.Options, Unit>
-        val dailyValues: Map<out Query.Daily.Options, Array<Double?>>
+        val dailyUnits: Map<String, Unit>
+        val dailyValues: Map<String, Array<Double?>>
     }
 
     /**
      * Resources that may have hourly data entries.
      */
     interface Hourly : Response {
-        val hourlyUnits: Map<out Query.Hourly.Options, Unit>
-        val hourlyValues: Map<out Query.Hourly.Options, Array<Double?>>
+        val hourlyUnits: Map<String, Unit>
+        val hourlyValues: Map<String, Array<Double?>>
     }
 
     /**

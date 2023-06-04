@@ -49,11 +49,6 @@ interface Query {
     }
 
     /**
-     * A parent type for [Daily] and [Hourly] options.
-     */
-    interface Options
-
-    /**
      * Query for resources that have a timezone field.
      */
     interface Timezone : Query {
@@ -83,12 +78,7 @@ interface Query {
         /**
          * The daily fields queried.
          */
-        val daily: Iterable<Options>?
-
-        /**
-         * A generic type to identify [Daily] options.
-         */
-        interface Options : Query.Options
+        val daily: String?
     }
 
     /**
@@ -98,12 +88,7 @@ interface Query {
         /**
          * The hourly fields queried.
          */
-        val hourly: Iterable<Options>?
-
-        /**
-         * A generic type to identify [Hourly] options.
-         */
-        interface Options : Query.Options
+        val hourly: String?
     }
 
     /**
