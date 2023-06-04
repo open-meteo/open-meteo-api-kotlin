@@ -35,11 +35,11 @@ object Forecast {
         override val currentWeather: Boolean? = null,
         override val timezone: Timezone? = null,
         @SerialName("temperature_unit")
-        override val temperatureUnit: TemperatureUnit,
+        override val temperatureUnit: TemperatureUnit? = null,
         @SerialName("windspeed_unit")
-        override val windSpeedUnit: WindSpeedUnit,
+        override val windSpeedUnit: WindSpeedUnit? = null,
         @SerialName("precipitation_unit")
-        override val precipitationUnit: PrecipitationUnit,
+        override val precipitationUnit: PrecipitationUnit? = null,
     ) : Q.Coordinate, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
         Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone,
         Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit

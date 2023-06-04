@@ -160,7 +160,7 @@ interface Query {
         /**
          * The requested temperature unit
          */
-        val temperatureUnit: com.openmeteo.api.common.units.TemperatureUnit
+        val temperatureUnit: com.openmeteo.api.common.units.TemperatureUnit?
     }
 
     /**
@@ -170,7 +170,7 @@ interface Query {
         /**
          * The requested wind speed unit
          */
-        val windSpeedUnit: com.openmeteo.api.common.units.WindSpeedUnit
+        val windSpeedUnit: com.openmeteo.api.common.units.WindSpeedUnit?
     }
 
     /**
@@ -180,7 +180,7 @@ interface Query {
         /**
          * The requested wind speed unit
          */
-        val precipitationUnit: com.openmeteo.api.common.units.PrecipitationUnit
+        val precipitationUnit: com.openmeteo.api.common.units.PrecipitationUnit?
     }
 
 }
