@@ -41,8 +41,9 @@ object Forecast {
         @SerialName("precipitation_unit")
         override val precipitationUnit: PrecipitationUnit? = null,
         override val elevation: Float? = null,
+        override val models: String? = null,
     ) : Q.Coordinate, Q.Elevation, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
-        Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone,
+        Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone, Q.Models,
         Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit
 
     @Serializable
@@ -62,6 +63,32 @@ object Forecast {
         override val hourlyValues: Map<String, Array<Double?>> = mapOf(),
         override val currentWeather: R.CurrentWeather.CurrentWeather? = null,
     ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily, R.Hourly, R.CurrentWeather
+
+    @Serializable
+    object Models : Options.Models {
+        const val bestMatch="best_match"
+        const val ecmwfIfs04="ecmwf_ifs04"
+        const val metnoNordic="metno_nordic"
+        const val gfsSeamless="gfs_seamless"
+        const val gfsGlobal="gfs_global"
+        const val gfsHrrr="gfs_hrrr"
+        const val jmaSeamless="jma_seamless"
+        const val jmaMsm="jma_msm"
+        const val jmaGsm="jma_gsm"
+        const val iconSeamless="icon_seamless"
+        const val iconGlobal="icon_global"
+        const val iconEu="icon_eu"
+        const val iconD2="icon_d2"
+        const val gemSeamless="gem_seamless"
+        const val gemGlobal="gem_global"
+        const val gemRegional="gem_regional"
+        const val gemHrdpsContinental="gem_hrdps_continental"
+        const val meteofranceSeamless="meteofrance_seamless"
+        const val meteofranceArpegeWorld="meteofrance_arpege_world"
+        const val meteofranceArpegeEurope="meteofrance_arpege_europe"
+        const val meteofranceAromeFrance="meteofrance_arome_france"
+        const val meteofranceAromeFranceHd="meteofrance_arome_france_hd"
+    }
 
     @Serializable
     object Daily : Options.Daily {

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# run from root dir with `endpoint=ForecastOrOther .github/scripts/options.sh`
+# run from root dir with `models="" endpoint=Forecast .github/scripts/options.sh`
 
 declare -A docs=(
   [Forecast]="https://open-meteo.com/en/docs"
@@ -69,6 +69,13 @@ cd "lib/src/main/kotlin/$(echo "$package" | tr '.' '/')" || exit 1
 # fetch html only once
 mkdir tmp
 curl -s "${docs[$endpoint]}" > "tmp/$endpoint.html"
+
+if [ -v models ]; then
+  name="models"
+  options
+
+  echo # new line
+fi
 
 name="hourly"
 options

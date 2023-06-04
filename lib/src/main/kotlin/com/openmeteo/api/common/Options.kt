@@ -2,11 +2,17 @@ package com.openmeteo.api.common
 
 import com.openmeteo.api.common.Options.Daily
 import com.openmeteo.api.common.Options.Hourly
+import com.openmeteo.api.common.Options.Models
 
 /**
- * A parent type for [Daily] and [Hourly] options.
+ * A parent type for [Models], [Daily], [Hourly] options.
  */
 interface Options {
+
+    /**
+     * A generic type to identify [Models] options.
+     */
+    interface Models : Options
 
     /**
      * A generic type to identify [Daily] options.

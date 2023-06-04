@@ -188,4 +188,11 @@ interface Query {
         val precipitationUnit: com.openmeteo.api.common.units.PrecipitationUnit?
     }
 
+    /**
+     * Query for resources that can use different data models.
+     */
+    interface Models : Query {
+        val models: String?
+    }
+
 }
