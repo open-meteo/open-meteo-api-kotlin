@@ -63,6 +63,10 @@ enum class Unit(vararg val alias: @Contextual Any) {
     SecondsInverse,
     @SerialName("g/kg")
     GramsPerKilogram,
+    @SerialName("USAQI")
+    UnitedStatesAirQualityIndex,
+    @SerialName("EAQI")
+    EuropeanAirQualityIndex,
     ;
     companion object {
         fun from(that: Any) = values()
