@@ -16,7 +16,7 @@ class HistoricalTest {
         val query = Historical.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = Options.list(Forecast.Hourly) { of(
+            hourly = Options.list(Historical.Hourly) { of(
                 temperature2m
             ) },
             startDate = Date("2020-01-01"),
