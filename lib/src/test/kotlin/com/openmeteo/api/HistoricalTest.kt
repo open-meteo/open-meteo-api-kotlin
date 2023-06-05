@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 class HistoricalTest {
 
     @Test
-    fun `Amsterdam, 1st january 2000, no models`() {
+    fun `Amsterdam, 1st January 2020, no models`() {
         val query = Historical.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
