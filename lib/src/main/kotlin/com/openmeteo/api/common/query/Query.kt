@@ -192,6 +192,9 @@ interface Query {
      * Query for resources that can use different data models.
      */
     interface Models : Query {
+        /**
+         * The requested model
+         */
         val models: String?
     }
 
