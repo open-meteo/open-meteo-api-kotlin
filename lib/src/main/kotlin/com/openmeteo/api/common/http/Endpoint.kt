@@ -1,5 +1,6 @@
 package com.openmeteo.api.common.http
 
+import com.openmeteo.api.common.Response
 import com.openmeteo.api.common.query.Query
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Transient
@@ -66,7 +67,7 @@ open class Endpoint(
      * GET, with a [Query], the endpoint context url and parse the response data
      * (from the specified query format or, if undefined, from json)
      */
-    inline fun <reified R, reified Q : Query> query(query: Q) =
+    inline fun <reified R : Response, reified Q : Query> query(query: Q) =
         runCatching { Query.toURL(query, context) }
             .mapCatching { get(it) }
             .mapCatching {
