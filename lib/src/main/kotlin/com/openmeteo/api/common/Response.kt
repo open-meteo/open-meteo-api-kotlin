@@ -1,9 +1,6 @@
 package com.openmeteo.api.common
 
-import com.openmeteo.api.common.time.Time
 import com.openmeteo.api.common.units.Unit
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
 interface Response {
 
@@ -48,28 +45,10 @@ interface Response {
      * Resource which may contain the current weather status.
      */
     interface CurrentWeather : Response {
-
         /**
          * The current weather.
          */
-        val currentWeather: CurrentWeather?
-
-        @Serializable
-        open class CurrentWeather(
-            val time: Time,
-            val temperature: Float,
-            @SerialName("windspeed")
-            val windSpeed: Float,
-            @SerialName("winddirection")
-            val windDirection: Float,
-            @SerialName("weathercode")
-            val weatherCode: WeatherCode,
-            /**
-             * Whether the time step has daylight
-             */
-            @Serializable(with = IntAsBoolean::class)
-            val isDay: Boolean,
-        )
+        val currentWeather: com.openmeteo.api.common.CurrentWeather?
     }
 
     /**

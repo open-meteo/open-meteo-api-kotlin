@@ -1,5 +1,6 @@
 package com.openmeteo.api
 
+import com.openmeteo.api.common.CurrentWeather
 import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.time.Date
@@ -57,7 +58,7 @@ object Historical : Endpoint(
         override val hourlyUnits: Map<String, Unit> = mapOf(),
         @SerialName("hourly")
         override val hourlyValues: Map<String, Array<Double?>> = mapOf(),
-        override val currentWeather: R.CurrentWeather.CurrentWeather? = null,
+        override val currentWeather: CurrentWeather? = null,
     ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily, R.Hourly, R.CurrentWeather
 
     @Serializable
