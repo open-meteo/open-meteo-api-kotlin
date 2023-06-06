@@ -19,7 +19,7 @@ import javax.net.ssl.HttpsURLConnection
 open class Endpoint(
     @Transient
     val context: URL,
-) : Http<InputStream> {
+) {
 
     companion object {
         @OptIn(ExperimentalSerializationApi::class)
@@ -49,12 +49,18 @@ open class Endpoint(
         ProtoBuf.decodeFromByteArray<T>(inputStream.readAllBytes())
 
     /**
+     * Open a new HTTPS connection
+     */
+    private fun connect(url: URL) =
+        url.openConnection() as HttpsURLConnection
+
+    /**
      * Handle responses based on their status code:
      * - 200: return the inputStream
      * - 400: parse JSON error as [BadRequest]
      * - else: return a generic error with the url and the response code/message
      */
-    override fun response(connection: HttpsURLConnection): InputStream =
+    private fun response(connection: HttpsURLConnection): InputStream =
         with(connection) {
             when (responseCode) {
                 200 -> inputStream
@@ -62,6 +68,12 @@ open class Endpoint(
                 else -> throw Error("`$url` response code: $responseCode ($responseMessage)")
             }
         }
+
+    /**
+     * GET some data from the url
+     */
+    fun get(url: URL) =
+        response(connect(url))
 
     /**
      * GET, with a [Query], the endpoint context url and parse the response data
