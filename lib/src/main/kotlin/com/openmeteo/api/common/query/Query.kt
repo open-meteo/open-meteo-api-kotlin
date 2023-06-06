@@ -195,4 +195,14 @@ interface Query {
         val models: String?
     }
 
+    /**
+     * Query for resources that can have different cell selection.
+     */
+    interface CellSelection : Query {
+        /**
+         * The requested cell selection
+         */
+        val cellSelection: com.openmeteo.api.common.CellSelection?
+    }
+
 }

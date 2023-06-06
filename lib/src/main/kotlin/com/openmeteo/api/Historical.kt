@@ -1,5 +1,6 @@
 package com.openmeteo.api
 
+import com.openmeteo.api.common.CellSelection
 import com.openmeteo.api.common.CurrentWeather
 import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.http.Endpoint
@@ -40,8 +41,9 @@ object Historical : Endpoint(
         override val precipitationUnit: PrecipitationUnit? = null,
         override val elevation: Float? = null,
         override val models: String? = null,
+        override val cellSelection: CellSelection? = null,
     ) : Q.Coordinate, Q.Elevation, Q.DateRange, Q.Daily, Q.Hourly, Q.TimeFormat, Q.Timezone,
-        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.Models
+        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.Models, Q.CellSelection
 
     @Serializable
     data class Response(
