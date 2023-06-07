@@ -64,7 +64,7 @@ object Historical : Endpoint(
     ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily, R.Hourly, R.CurrentWeather
 
     @Serializable
-    object Models : Options.Models {
+    object Models : Options.Models, Options.Listable<Models>() {
         const val bestMatch="best_match"
         const val era5="era5"
         const val era5Land="era5_land"
@@ -73,7 +73,7 @@ object Historical : Endpoint(
     }
 
     @Serializable
-    object Daily : Options.Daily {
+    object Daily : Options.Daily, Options.Listable<Daily>() {
         const val weathercode="weathercode"
         const val temperature2mMax="temperature_2m_max"
         const val temperature2mMin="temperature_2m_min"
@@ -101,7 +101,7 @@ object Historical : Endpoint(
     }
 
     @Serializable
-    object Hourly : Options.Hourly {
+    object Hourly : Options.Hourly, Options.Listable<Hourly>() {
         const val temperature2m="temperature_2m"
         const val relativehumidity2m="relativehumidity_2m"
         const val dewpoint2m="dewpoint_2m"

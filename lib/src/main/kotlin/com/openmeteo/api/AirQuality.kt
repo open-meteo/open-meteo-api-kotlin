@@ -57,7 +57,7 @@ object AirQuality : Endpoint(
     }
 
     @Serializable
-    object Hourly : Options.Hourly {
+    object Hourly : Options.Hourly, Options.Listable<Hourly>() {
         const val pm10="pm10"
         const val pm25="pm2_5"
         const val carbonMonoxide="carbon_monoxide"

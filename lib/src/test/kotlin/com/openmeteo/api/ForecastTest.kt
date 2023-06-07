@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.Unit
@@ -15,7 +14,7 @@ class ForecastTest {
         val query = Forecast.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            daily = Options.list(Forecast.Daily) { of(
+            daily = Forecast.Daily.list { of(
                 weathercode, sunrise, sunset, temperature2mMax, temperature2mMin
             ) },
             timezone = Timezone.auto,

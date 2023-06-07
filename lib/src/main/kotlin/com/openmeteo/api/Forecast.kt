@@ -97,7 +97,7 @@ object Forecast : Endpoint(
     }
 
     @Serializable
-    object Daily : Options.Daily {
+    object Daily : Options.Daily, Options.Listable<Daily>() {
         const val weathercode="weathercode"
         const val temperature2mMax="temperature_2m_max"
         const val temperature2mMin="temperature_2m_min"
@@ -121,7 +121,7 @@ object Forecast : Endpoint(
     }
 
     @Serializable
-    object Hourly : Options.Hourly {
+    object Hourly : Options.Hourly, Options.Listable<Hourly>() {
         const val temperature2m="temperature_2m"
         const val relativehumidity2m="relativehumidity_2m"
         const val dewpoint2m="dewpoint_2m"

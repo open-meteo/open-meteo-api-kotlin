@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.units.Unit
@@ -16,7 +15,7 @@ class AirQualityTest {
         val query = AirQuality.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = Options.list(AirQuality.Hourly) { of(
+            hourly = AirQuality.Hourly.list { of(
                 pm25, usAqi
             ) },
             startDate = Date("2023-01-01"),

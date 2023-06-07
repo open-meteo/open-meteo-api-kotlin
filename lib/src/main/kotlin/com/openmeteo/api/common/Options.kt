@@ -25,13 +25,12 @@ interface Options {
     interface Hourly : Options
 
     /**
-     * Alias of [listOf]
+     * Shorthand for [listOf]
      */
     fun <T> of(vararg options: T) =
         listOf(*options)
 
     companion object {
-
         /**
          * Join a list of options to a string (comma separated)
          */
@@ -41,5 +40,17 @@ interface Options {
             block: T.() -> List<String>
         ) = (scope.run(block) + extra).joinToString(",")
 
+    }
+
+    abstract class Listable<T : Listable<T>> : Options {
+        /**
+         * Join a list of options to a string (comma separated)
+         */
+        @Suppress("UNCHECKED_CAST")
+        inline fun list(
+            vararg extra: Any,
+            block: T.() -> List<String>
+        ) = (((this as? T)?.block() ?: listOf()) + extra)
+            .joinToString(",")
     }
 }

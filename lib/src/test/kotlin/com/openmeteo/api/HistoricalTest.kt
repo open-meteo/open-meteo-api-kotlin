@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.units.Unit
@@ -16,7 +15,7 @@ class HistoricalTest {
         val query = Historical.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = Options.list(Historical.Hourly) { of(
+            hourly = Historical.Hourly.list { of(
                 temperature2m
             ) },
             startDate = Date("2020-01-01"),
@@ -99,12 +98,12 @@ class HistoricalTest {
         val query = Historical.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = Options.list(Historical.Hourly) { of(
+            hourly = Historical.Hourly.list { of(
                 temperature2m
             ) },
             startDate = Date("2020-01-01"),
             endDate = Date("2020-01-01"),
-            models = Options.list(Historical.Models) { of(
+            models = Historical.Models.list { of(
                 era5, cerra
             ) }
         )
