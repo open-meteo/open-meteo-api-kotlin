@@ -14,7 +14,7 @@ class ForecastTest {
         val query = Forecast.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            daily = Forecast.Daily.list { of(
+            daily = Forecast.Daily { listOf(
                 weathercode, sunrise, sunset, temperature2mMax, temperature2mMin
             ) },
             timezone = Timezone.auto,

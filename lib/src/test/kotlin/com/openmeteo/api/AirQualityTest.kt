@@ -15,7 +15,7 @@ class AirQualityTest {
         val query = AirQuality.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = AirQuality.Hourly.list { of(
+            hourly = AirQuality.Hourly { listOf(
                 pm25, usAqi
             ) },
             startDate = Date("2023-01-01"),

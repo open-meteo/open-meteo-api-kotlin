@@ -24,17 +24,11 @@ interface Options {
      */
     interface Hourly : Options
 
-    /**
-     * Shorthand for [listOf]
-     */
-    fun <T> of(vararg options: T) =
-        listOf(*options)
-
     companion object {
         /**
          * Join a list of options to a string (comma separated)
          */
-        fun <T : Options> list(
+        inline operator fun <T : Options> invoke(
             scope: T,
             vararg extra: Any,
             block: T.() -> List<String>
@@ -47,7 +41,7 @@ interface Options {
          * Join a list of options to a string (comma separated)
          */
         @Suppress("UNCHECKED_CAST")
-        inline fun list(
+        inline operator fun invoke(
             vararg extra: Any,
             block: T.() -> List<String>
         ) = (((this as? T)?.block() ?: listOf()) + extra)

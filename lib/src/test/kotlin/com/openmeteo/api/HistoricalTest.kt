@@ -15,7 +15,7 @@ class HistoricalTest {
         val query = Historical.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = Historical.Hourly.list { of(
+            hourly = Historical.Hourly { listOf(
                 temperature2m
             ) },
             startDate = Date("2020-01-01"),
@@ -98,12 +98,12 @@ class HistoricalTest {
         val query = Historical.Query(
             latitude = City.Amsterdam.latitude,
             longitude = City.Amsterdam.longitude,
-            hourly = Historical.Hourly.list { of(
+            hourly = Historical.Hourly { listOf(
                 temperature2m
             ) },
             startDate = Date("2020-01-01"),
             endDate = Date("2020-01-01"),
-            models = Historical.Models.list { of(
+            models = Historical.Models { listOf(
                 era5, cerra
             ) }
         )
