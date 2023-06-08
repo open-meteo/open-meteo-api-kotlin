@@ -33,7 +33,7 @@ object AirQuality : Endpoint(
     ) : Q.Coordinate, Q.Hourly, Q.TimeFormat, Q.DateRange, Q.PastDays, Q.Timezone
 
     @Serializable
-    data class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         override val utcOffsetSeconds: Int,

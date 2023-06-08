@@ -46,7 +46,7 @@ object Historical : Endpoint(
         Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.Models, Q.CellSelection
 
     @Serializable
-    data class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         override val utcOffsetSeconds: Int,

@@ -36,7 +36,7 @@ object Marine : Endpoint(
         Q.DateRange, Q.CellSelection
 
     @Serializable
-    data class Response(
+    open class Response(
         override val latitude: Float,
         override val longitude: Float,
         override val utcOffsetSeconds: Int,
