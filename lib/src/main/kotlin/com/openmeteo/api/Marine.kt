@@ -67,7 +67,7 @@ object Marine : Endpoint(
     }
 
     @Serializable
-    object Daily : Options.Daily {
+    object Daily : Options.Daily, Options.Listable<Daily>() {
         const val waveHeightMax="wave_height_max"
         const val waveDirectionDominant="wave_direction_dominant"
         const val wavePeriodMax="wave_period_max"
