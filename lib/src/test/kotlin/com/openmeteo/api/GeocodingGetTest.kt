@@ -57,4 +57,23 @@ class GeocodingGetTest {
         }
     }
 
+    @Test
+    fun `2921044, Italian translation (Germania, Germany)`() {
+        val query = GeocodingGet.Query(2921044, "it")
+        GeocodingGet(query).getOrThrow().run {
+            assertEquals(2921044, id)
+            assertEquals("Germania", name)
+
+            assertEquals(51.5f, latitude)
+            assertEquals(10.5f, longitude)
+            assertEquals(303f, elevation)
+
+            assertEquals("PCLI", featureCode)
+
+            assertEquals("Germania", country)
+            assertEquals(2921044, countryId)
+            assertEquals("DE", countryCode)
+        }
+    }
+
 }
