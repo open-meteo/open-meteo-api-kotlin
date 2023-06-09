@@ -42,8 +42,10 @@ object Historical : Endpoint(
         override val elevation: Float? = null,
         override val models: String? = null,
         override val cellSelection: CellSelection? = null,
+        override val apikey: String?,
     ) : Q.Coordinate, Q.Elevation, Q.DateRange, Q.Daily, Q.Hourly, Q.TimeFormat, Q.Timezone,
-        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.Models, Q.CellSelection
+        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.Models, Q.CellSelection,
+        Q.CommercialLicense
 
     @Serializable
     open class Response(

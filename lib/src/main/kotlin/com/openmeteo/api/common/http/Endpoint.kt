@@ -80,11 +80,16 @@ open class Endpoint(
      * (from the specified query format or, if undefined, from json)
      */
     inline fun <reified R : Response, reified Q : Query> query(query: Q) =
-        runCatching { Query.toURL(query, context) }
+        Query.toURL(query, context)
+            .runCatching {
+                // set the "customer-" prefix to the host(name) if an api key was provided
+                val prefix = if (query is Query.CommercialLicense && query.apikey != null)
+                    "customer-" else ""
+                URL(protocol, prefix + host, port, file /* includes query */)
+            }
             .mapCatching { get(it) }
             .mapCatching {
                 if (query is Query.ContentFormat && query.format == ContentFormat.ProtoBuf)
-                    protoBuf<R>(it)
-                else json<R>(it)
+                    protoBuf<R>(it) else json<R>(it)
             }
 }

@@ -48,9 +48,11 @@ object Forecast : Endpoint(
         override val elevation: Float? = null,
         override val models: String? = null,
         override val cellSelection: CellSelection? = null,
+        override val apikey: String?,
     ) : Q.Coordinate, Q.Elevation, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
         Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone, Q.Models,
-        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.CellSelection
+        Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.CellSelection,
+        Q.CommercialLicense
 
     @Serializable
     open class Response(

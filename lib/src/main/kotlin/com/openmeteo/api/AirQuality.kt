@@ -30,7 +30,9 @@ object AirQuality : Endpoint(
         override val pastDays: Int? = null,
         override val timezone: Timezone? = null,
         val domains: String? = null,
-    ) : Q.Coordinate, Q.Hourly, Q.TimeFormat, Q.DateRange, Q.PastDays, Q.Timezone
+        override val apikey: String?,
+    ) : Q.Coordinate, Q.Hourly, Q.TimeFormat, Q.DateRange, Q.PastDays, Q.Timezone,
+        Q.CommercialLicense
 
     @Serializable
     open class Response(

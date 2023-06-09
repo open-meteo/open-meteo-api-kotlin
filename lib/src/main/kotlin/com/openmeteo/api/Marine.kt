@@ -35,8 +35,9 @@ object Marine : Endpoint(
         override val cellSelection: CellSelection? = null,
         @SerialName("length_unit")
         override val lengthUnit: LengthUnit? = null,
+        override val apikey: String? = null,
     ) : Q.Coordinate, Q.Daily, Q.Hourly, Q.TimeFormat, Q.Timezone, Q.PastDays,
-        Q.DateRange, Q.CellSelection, Q.LengthUnit
+        Q.DateRange, Q.CellSelection, Q.LengthUnit, Q.CommercialLicense
 
     @Serializable
     open class Response(

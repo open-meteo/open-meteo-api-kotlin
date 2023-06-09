@@ -218,4 +218,17 @@ interface Query {
         val cellSelection: com.openmeteo.api.common.CellSelection?
     }
 
+    /**
+     * Query that may be retrieved with a commercial license (api key)
+     */
+    interface CommercialLicense : Query {
+        /**
+         * The api key (commercial usage)
+         * When commerical usage use `customer-` prefix on all domains:
+         * - `https://customer-archive-api.open-meteo.com/v1/archive`
+         * - `https://customer-marine-api.open-meteo.com/v1/marine`
+         */
+        val apikey: String?
+    }
+
 }
