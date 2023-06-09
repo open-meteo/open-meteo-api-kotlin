@@ -224,7 +224,7 @@ interface Query {
     interface CommercialLicense : Query {
         /**
          * The api key (commercial usage)
-         * When commerical usage use `customer-` prefix on all domains:
+         * Commercial usage appends `customer-` as prefix on all domains:
          * - `https://customer-archive-api.open-meteo.com/v1/archive`
          * - `https://customer-marine-api.open-meteo.com/v1/marine`
          */
