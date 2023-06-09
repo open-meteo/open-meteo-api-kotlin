@@ -79,12 +79,12 @@ open class Endpoint(
      * GET, with a [Query], the endpoint context url and parse the response data
      * (from the specified query format or, if undefined, from json)
      */
-    inline fun <reified R : Response, reified Q : Query> query(query: Q) =
+    inline fun <reified R : Response, reified Q : Query> query(query: Q, context: URL = this.context) =
         Query.toURL(query, context)
             .runCatching {
                 // set the "customer-" prefix to the host(name) if an api key was provided
                 val prefix = if (query is Query.CommercialLicense && query.apikey != null)
-                    "customer-" else ""
+                    "customer-" else "" // TODO: what if context isn't the default one?
                 URL(protocol, prefix + host, port, file /* includes query */)
             }
             .mapCatching { get(it) }

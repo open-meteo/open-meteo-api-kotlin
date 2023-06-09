@@ -17,7 +17,8 @@ object Marine : Endpoint(
     URL("https://marine-api.open-meteo.com/v1/marine")
 ) {
 
-    operator fun invoke(query: Query) = query<Response, Query>(query)
+    operator fun invoke(query: Query, context: URL = this.context) =
+        query<Response, Query>(query, context)
 
     @Serializable
     open class Query(

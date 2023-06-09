@@ -15,7 +15,8 @@ object AirQuality : Endpoint(
     URL("https://air-quality-api.open-meteo.com/v1/air-quality")
 ) {
 
-    operator fun invoke(query: Query) = query<Response, Query>(query)
+    operator fun invoke(query: Query, context: URL = this.context) =
+        query<Response, Query>(query, context)
 
     @Serializable
     open class Query(
