@@ -36,9 +36,7 @@ class QueryTest {
             "HTML",
             "CSS",
         ).joinToString(","))
-        // Do not worry, %2C is the URL encoded comma: it gets decoded properly before splitting
-        //assertEquals("?name=John&languages=Kotlin,Java,JavaScript,HTML,CSS&surname=Doe",
-        assertEquals("?name=John&surname=Doe&languages=Kotlin%2CJava%2CJavaScript%2CHTML%2CCSS",
+        assertEquals("?name=John&languages=Kotlin,Java,JavaScript,HTML,CSS&surname=Doe",
             Query.asString(programmer))
     }
     @Serializable

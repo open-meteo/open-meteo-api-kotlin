@@ -5,11 +5,17 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 import java.net.URL
-import java.net.URLEncoder.encode
+import java.net.URLEncoder
 
 interface Query {
 
     companion object {
+
+        /**
+         * Stringify and URL encode a value.
+         */
+        fun encode(value: Any, encoding: String = "utf-8") : String? =
+            URLEncoder.encode(value.toString(), encoding)
 
         /**
          * Retrieve a flat [Map] of key-value pairs.
@@ -36,12 +42,11 @@ interface Query {
         /**
          * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
          *
-         * Values are URL encoded.
+         * To URL encode values use the [encode] method.
          */
         inline fun <reified T : Query> asString(query: T) =
-            toList(query).joinToString("&", "?") { (k, v) ->
-                "$k=${encode(v, "utf-8")}"
-            }
+            toList(query)
+                .joinToString("&", "?") { (k, v) -> "$k=$v" }
 
         /**
          * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
