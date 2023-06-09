@@ -135,7 +135,7 @@ interface Query {
         /**
          * The requested content format.
          */
-        val format: com.openmeteo.api.common.http.ContentFormat? get() = null
+        val format: com.openmeteo.api.common.http.ContentFormat?
     }
 
     /**
