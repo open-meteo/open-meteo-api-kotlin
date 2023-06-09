@@ -31,7 +31,7 @@ object AirQuality : Endpoint(
         override val pastDays: Int? = null,
         override val timezone: Timezone? = null,
         val domains: String? = null,
-        override val apikey: String?,
+        override val apikey: String? = null,
     ) : Q.Coordinate, Q.Hourly, Q.TimeFormat, Q.DateRange, Q.PastDays, Q.Timezone,
         Q.CommercialLicense
 

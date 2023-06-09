@@ -18,7 +18,7 @@ object GeocodingSearch : Endpoint(
         val name: String,
         val count: Int? = null,
         val language: String? = null,
-        override val apikey: String?,
+        override val apikey: String? = null,
         override val format: ContentFormat? = ContentFormat.ProtoBuf,
     ) : Q.ContentFormat, Q.CommercialLicense {
         init {
