@@ -28,7 +28,7 @@ object GeocodingGet : Endpoint(
         private val _3: String? = null,             // #03
         override val latitude: Float,               // #04
         override val longitude: Float,              // #05
-        val ranking: Float,                         // #06
+        val ranking: Float? = null,                 // #06
         override val elevation: Float,              // #07
         // https://www.geonames.org/export/codes.html enum?
         val featureCode: String,                    // #08
