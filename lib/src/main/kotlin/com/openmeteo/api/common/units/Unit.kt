@@ -36,7 +36,9 @@ enum class Unit(vararg val alias: @Contextual Any) {
     @SerialName("cm")
     Centimeters,
     @SerialName("m")
-    Meters,
+    Meters(LengthUnit.Metric),
+    @SerialName("ft")
+    Feet(LengthUnit.Imperial),
     @SerialName("W/m²")
     WattPerSquareMeter,
     @SerialName("μg/m³")

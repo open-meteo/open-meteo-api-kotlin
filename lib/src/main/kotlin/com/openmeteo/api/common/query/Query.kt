@@ -189,6 +189,16 @@ interface Query {
     }
 
     /**
+     * Query for resources that may include lengths
+     */
+    interface LengthUnit : Query {
+        /**
+         * The requested length unit
+         */
+        val lengthUnit: com.openmeteo.api.common.units.LengthUnit?
+    }
+
+    /**
      * Query for resources that can use different data models.
      */
     interface Models : Query {

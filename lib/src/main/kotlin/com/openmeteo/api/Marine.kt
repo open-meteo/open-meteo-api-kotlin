@@ -5,6 +5,7 @@ import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
+import com.openmeteo.api.common.units.LengthUnit
 import com.openmeteo.api.common.units.Unit
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -32,8 +33,10 @@ object Marine : Endpoint(
         override val pastDays: Int? = null,
         override val timezone: Timezone? = null,
         override val cellSelection: CellSelection? = null,
+        @SerialName("length_unit")
+        override val lengthUnit: LengthUnit? = null,
     ) : Q.Coordinate, Q.Daily, Q.Hourly, Q.TimeFormat, Q.Timezone, Q.PastDays,
-        Q.DateRange, Q.CellSelection
+        Q.DateRange, Q.CellSelection, Q.LengthUnit
 
     @Serializable
     open class Response(
