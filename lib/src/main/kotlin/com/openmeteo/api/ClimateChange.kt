@@ -16,7 +16,7 @@ import com.openmeteo.api.common.Response as R
 import com.openmeteo.api.common.query.Query as Q
 
 object ClimateChange : Endpoint(
-    URL("https://marine-api.open-meteo.com/v1/marine")
+    URL("https://climate-api.open-meteo.com/v1/climate")
 ) {
 
     operator fun invoke(query: Query, context: URL = this.context) =
