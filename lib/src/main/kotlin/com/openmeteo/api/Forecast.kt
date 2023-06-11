@@ -25,31 +25,31 @@ object Forecast : Endpoint(
 
     @Serializable
     open class Query(
-        override val latitude: Float,
-        override val longitude: Float,
-        override val daily: String? = null,
-        override val hourly: String? = null,
+        override var latitude: Float,
+        override var longitude: Float,
+        override var daily: String? = null,
+        override var hourly: String? = null,
         @SerialName("start_date")
-        override val startDate: Date? = null,
+        override var startDate: Date? = null,
         @SerialName("end_date")
-        override val endDate: Date? = null,
+        override var endDate: Date? = null,
         @SerialName("past_days")
-        override val pastDays: Int? = null,
+        override var pastDays: Int? = null,
         @SerialName("forecast_days")
-        override val forecastDays: Int? = null,
+        override var forecastDays: Int? = null,
         @SerialName("current_weather")
-        override val currentWeather: Boolean? = null,
-        override val timezone: Timezone? = null,
+        override var currentWeather: Boolean? = null,
+        override var timezone: Timezone? = null,
         @SerialName("temperature_unit")
-        override val temperatureUnit: TemperatureUnit? = null,
+        override var temperatureUnit: TemperatureUnit? = null,
         @SerialName("windspeed_unit")
-        override val windSpeedUnit: WindSpeedUnit? = null,
+        override var windSpeedUnit: WindSpeedUnit? = null,
         @SerialName("precipitation_unit")
-        override val precipitationUnit: PrecipitationUnit? = null,
-        override val elevation: Float? = null,
-        override val models: String? = null,
-        override val cellSelection: CellSelection? = null,
-        override val apikey: String? = null,
+        override var precipitationUnit: PrecipitationUnit? = null,
+        override var elevation: Float? = null,
+        override var models: String? = null,
+        override var cellSelection: CellSelection? = null,
+        override var apikey: String? = null,
     ) : Q.Coordinate, Q.Elevation, Q.Daily, Q.Hourly, Q.TimeFormat, Q.DateRange,
         Q.PastDays, Q.ForecastDays, Q.CurrentWeather, Q.Timezone, Q.Models,
         Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.CellSelection,

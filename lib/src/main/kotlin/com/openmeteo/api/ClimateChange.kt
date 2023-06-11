@@ -24,25 +24,25 @@ object ClimateChange : Endpoint(
 
     @Serializable
     open class Query(
-        override val latitude: Float,
-        override val longitude: Float,
-        override val models: String,
+        override var latitude: Float,
+        override var longitude: Float,
+        override var models: String,
         @SerialName("start_date")
-        override val startDate: Date,
+        override var startDate: Date,
         @SerialName("end_date")
-        override val endDate: Date,
-        override val daily: String? = null,
+        override var endDate: Date,
+        override var daily: String? = null,
         @SerialName("temperature_unit")
-        override val temperatureUnit: TemperatureUnit? = null,
+        override var temperatureUnit: TemperatureUnit? = null,
         @SerialName("windspeed_unit")
-        override val windSpeedUnit: WindSpeedUnit? = null,
+        override var windSpeedUnit: WindSpeedUnit? = null,
         @SerialName("precipitation_unit")
-        override val precipitationUnit: PrecipitationUnit? = null,
-        override val elevation: Float? = null,
+        override var precipitationUnit: PrecipitationUnit? = null,
+        override var elevation: Float? = null,
         @SerialName("disable_bias_correction")
-        val disableBiasCorrection: Boolean? = null,
-        override val cellSelection: CellSelection? = null,
-        override val apikey: String? = null,
+        var disableBiasCorrection: Boolean? = null,
+        override var cellSelection: CellSelection? = null,
+        override var apikey: String? = null,
     ) : Q.Coordinate, Q.Elevation, Q.Daily, Q.TimeFormat, Q.DateRange, Q.Models,
         Q.TemperatureUnit, Q.WindSpeedUnit, Q.PrecipitationUnit, Q.CellSelection,
         Q.CommercialLicense

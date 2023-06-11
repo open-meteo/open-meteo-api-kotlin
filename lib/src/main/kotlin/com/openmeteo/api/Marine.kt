@@ -22,21 +22,21 @@ object Marine : Endpoint(
 
     @Serializable
     open class Query(
-        override val latitude: Float,
-        override val longitude: Float,
-        override val daily: String? = null,
-        override val hourly: String? = null,
+        override var latitude: Float,
+        override var longitude: Float,
+        override var daily: String? = null,
+        override var hourly: String? = null,
         @SerialName("start_date")
-        override val startDate: Date? = null,
+        override var startDate: Date? = null,
         @SerialName("end_date")
-        override val endDate: Date? = null,
+        override var endDate: Date? = null,
         @SerialName("past_days")
-        override val pastDays: Int? = null,
-        override val timezone: Timezone? = null,
-        override val cellSelection: CellSelection? = null,
+        override var pastDays: Int? = null,
+        override var timezone: Timezone? = null,
+        override var cellSelection: CellSelection? = null,
         @SerialName("length_unit")
-        override val lengthUnit: LengthUnit? = null,
-        override val apikey: String? = null,
+        override var lengthUnit: LengthUnit? = null,
+        override var apikey: String? = null,
     ) : Q.Coordinate, Q.Daily, Q.Hourly, Q.TimeFormat, Q.Timezone, Q.PastDays,
         Q.DateRange, Q.CellSelection, Q.LengthUnit, Q.CommercialLicense
 

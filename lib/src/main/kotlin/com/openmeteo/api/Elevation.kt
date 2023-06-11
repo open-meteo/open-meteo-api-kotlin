@@ -16,9 +16,9 @@ object Elevation : Endpoint(
 
     @Serializable
     open class Query private constructor(
-        val latitude: String,
-        val longitude: String,
-        override val apikey: String? = null,
+        var latitude: String,
+        var longitude: String,
+        override var apikey: String? = null,
     ) : Q.CommercialLicense {
         constructor(latitude: Float, longitude: Float, apikey: String? = null)
         : this(latitude.toString(), longitude.toString(), apikey)

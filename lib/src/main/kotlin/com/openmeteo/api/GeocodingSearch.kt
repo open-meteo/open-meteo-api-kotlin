@@ -15,11 +15,11 @@ object GeocodingSearch : Endpoint(
 
     @Serializable
     open class Query(
-        val name: String,
-        val count: Int? = null,
-        val language: String? = null,
-        override val apikey: String? = null,
-        override val format: ContentFormat? = ContentFormat.ProtoBuf,
+        var name: String,
+        var count: Int? = null,
+        var language: String? = null,
+        override var apikey: String? = null,
+        override var format: ContentFormat? = ContentFormat.ProtoBuf,
     ) : Q.ContentFormat, Q.CommercialLicense {
         init {
             require(name.length > 1)

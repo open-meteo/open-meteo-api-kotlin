@@ -16,10 +16,10 @@ object GeocodingGet : Endpoint(
 
     @Serializable
     open class Query(
-        val id: Int,
-        val language: String? = null,
-        override val apikey: String? = null,
-        override val format: ContentFormat? = ContentFormat.ProtoBuf,
+        var id: Int,
+        var language: String? = null,
+        override var apikey: String? = null,
+        override var format: ContentFormat? = ContentFormat.ProtoBuf,
     ) : Q.ContentFormat, Q.CommercialLicense
 
     @Serializable

@@ -21,21 +21,21 @@ object Flood : Endpoint(
 
     @Serializable
     open class Query(
-        override val latitude: Float,
-        override val longitude: Float,
-        override val daily: String? = null,
+        override var latitude: Float,
+        override var longitude: Float,
+        override var daily: String? = null,
         @SerialName("past_days")
-        override val pastDays: Int? = null,
+        override var pastDays: Int? = null,
         @SerialName("forecast_days")
-        override val forecastDays: Int? = null,
+        override var forecastDays: Int? = null,
         @SerialName("start_date")
-        override val startDate: Date? = null,
+        override var startDate: Date? = null,
         @SerialName("end_date")
-        override val endDate: Date? = null,
-        val ensemble: Boolean? = null,
-        override val models: String? = null,
-        override val cellSelection: CellSelection? = null,
-        override val apikey: String? = null,
+        override var endDate: Date? = null,
+        var ensemble: Boolean? = null,
+        override var models: String? = null,
+        override var cellSelection: CellSelection? = null,
+        override var apikey: String? = null,
     ) : Q.Coordinate, Q.Daily, Q.TimeFormat, Q.PastDays, Q.ForecastDays,
         Q.DateRange, Q.CellSelection, Q.CommercialLicense, Q.Models
 

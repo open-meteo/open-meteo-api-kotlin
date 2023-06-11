@@ -20,18 +20,18 @@ object AirQuality : Endpoint(
 
     @Serializable
     open class Query(
-        override val latitude: Float,
-        override val longitude: Float,
-        override val hourly: String? = null,
+        override var latitude: Float,
+        override var longitude: Float,
+        override var hourly: String? = null,
         @SerialName("start_date")
-        override val startDate: Date? = null,
+        override var startDate: Date? = null,
         @SerialName("end_date")
-        override val endDate: Date? = null,
+        override var endDate: Date? = null,
         @SerialName("past_days")
-        override val pastDays: Int? = null,
-        override val timezone: Timezone? = null,
-        val domains: String? = null,
-        override val apikey: String? = null,
+        override var pastDays: Int? = null,
+        override var timezone: Timezone? = null,
+        var domains: String? = null,
+        override var apikey: String? = null,
     ) : Q.Coordinate, Q.Hourly, Q.TimeFormat, Q.DateRange, Q.PastDays, Q.Timezone,
         Q.CommercialLicense
 
