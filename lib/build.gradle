@@ -18,7 +18,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId = 'com.open-meteo'
             artifactId = 'open-meteo-api-kotlin'
-            version = '0.6.0-alpha.1'
+            version = '0.7.0-alpha.0'
 
             from components.java
         }
