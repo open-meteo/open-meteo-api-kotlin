@@ -74,7 +74,7 @@ object Forecast : Endpoint(
     ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily, R.Hourly, R.CurrentWeather
 
     @Serializable
-    object Models : Options.Models {
+    object Models : Options.Models, Options.Listable<Models>() {
         const val bestMatch="best_match"
         const val ecmwfIfs04="ecmwf_ifs04"
         const val metnoNordic="metno_nordic"
