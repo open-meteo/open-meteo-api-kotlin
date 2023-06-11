@@ -51,6 +51,7 @@ object ClimateChange : Endpoint(
     open class Response(
         override val latitude: Float,
         override val longitude: Float,
+        override val elevation: Float,
         override val utcOffsetSeconds: Int,
         override val timezone: Timezone,
         override val timezoneAbbreviation: String,
@@ -58,7 +59,7 @@ object ClimateChange : Endpoint(
         override val dailyUnits: Map<String, Unit> = mapOf(),
         @SerialName("daily")
         override val dailyValues: Map<String, Array<Double?>> = mapOf(),
-    ) : R.Coordinate, R.GenerationTimed, R.TimeZone, R.Daily
+    ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily
 
     @Serializable
     object Models : Options.Models, Options.Listable<Models>() {
