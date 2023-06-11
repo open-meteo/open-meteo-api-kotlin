@@ -51,7 +51,7 @@ _options() {
   {
   cat <<END
 @Serializable
-object ${name^} : Options.${name^} {
+object ${name^} : Options.${name^}, Options.Listable<${name^}>() {
 END
   paste -d $'=' <(echo "$properties") <(echo "$values") \
   | prefix "    "
