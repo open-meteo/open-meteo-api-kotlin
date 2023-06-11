@@ -2,6 +2,7 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.Options
 import com.openmeteo.api.common.http.Endpoint
+import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.Units
@@ -17,6 +18,22 @@ object AirQuality : Endpoint(
 
     operator fun invoke(query: Query, context: URL = this.context) =
         query<Response, Query>(query, context)
+
+    operator fun invoke(
+        city: City,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = this(city.latitude, city.longitude, context, query)
+
+    operator fun invoke(
+        latitude: Float,
+        longitude: Float,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = Query(latitude, longitude).let {
+        it.query()
+        this(it, context)
+    }
 
     @Serializable
     open class Query(

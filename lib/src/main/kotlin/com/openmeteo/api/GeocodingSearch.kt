@@ -14,6 +14,15 @@ object GeocodingSearch : Endpoint(
     operator fun invoke(query: Query, context: URL = this.context) =
         query<Response, Query>(query, context)
 
+    operator fun invoke(
+        name: String,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = Query(name).let {
+        it.query()
+        this(it, context)
+    }
+
     @Serializable
     open class Query(
         var name: String,
