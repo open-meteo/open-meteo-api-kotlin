@@ -26,11 +26,12 @@ object ClimateChange : Endpoint(
     open class Query(
         override val latitude: Float,
         override val longitude: Float,
-        override val daily: String? = null,
+        override val models: String,
         @SerialName("start_date")
-        override val startDate: Date? = null,
+        override val startDate: Date,
         @SerialName("end_date")
-        override val endDate: Date? = null,
+        override val endDate: Date,
+        override val daily: String? = null,
         @SerialName("temperature_unit")
         override val temperatureUnit: TemperatureUnit? = null,
         @SerialName("windspeed_unit")
@@ -38,7 +39,6 @@ object ClimateChange : Endpoint(
         @SerialName("precipitation_unit")
         override val precipitationUnit: PrecipitationUnit? = null,
         override val elevation: Float? = null,
-        override val models: String? = null,
         @SerialName("disable_bias_correction")
         val disableBiasCorrection: Boolean? = null,
         override val cellSelection: CellSelection? = null,
