@@ -9,6 +9,7 @@ declare -A docs=(
   [ClimateChange]="https://open-meteo.com/en/docs/climate-api"
   [AirQuality]="https://open-meteo.com/en/docs/air-quality-api"
   [Flood]="https://open-meteo.com/en/docs/flood-api"
+  [Ensemble]="https://open-meteo.com/en/docs/ensemble-api"
 )
 
 package="com.openmeteo.api"
