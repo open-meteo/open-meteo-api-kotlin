@@ -1,6 +1,6 @@
 package com.openmeteo.api.common
 
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 
 interface Response {
 
@@ -29,7 +29,7 @@ interface Response {
      * Resources that may have daily data entries.
      */
     interface Daily : Response {
-        val dailyUnits: Map<String, Unit>
+        val dailyUnits: Map<String, Units>
         val dailyValues: Map<String, Array<Double?>>
     }
 
@@ -37,7 +37,7 @@ interface Response {
      * Resources that may have hourly data entries.
      */
     interface Hourly : Response {
-        val hourlyUnits: Map<String, Unit>
+        val hourlyUnits: Map<String, Units>
         val hourlyValues: Map<String, Array<Double?>>
     }
 

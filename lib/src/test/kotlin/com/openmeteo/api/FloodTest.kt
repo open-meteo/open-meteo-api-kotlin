@@ -2,7 +2,7 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
@@ -36,14 +36,14 @@ class FloodTest {
             with(Flood.Daily) {
                 assertEquals(
                     dailyUnits, mapOf(
-                        "time" to Unit.UnixTime,
-                        riverDischarge to Unit.CubeMetersPerSecond,
-                        riverDischargeMean to Unit.CubeMetersPerSecond,
-                        riverDischargeMedian to Unit.CubeMetersPerSecond,
-                        riverDischargeMax to Unit.CubeMetersPerSecond,
-                        riverDischargeMin to Unit.CubeMetersPerSecond,
-                        riverDischargeP25 to Unit.CubeMetersPerSecond,
-                        riverDischargeP75 to Unit.CubeMetersPerSecond,
+                        "time" to Units.UnixTime,
+                        riverDischarge to Units.CubeMetersPerSecond,
+                        riverDischargeMean to Units.CubeMetersPerSecond,
+                        riverDischargeMedian to Units.CubeMetersPerSecond,
+                        riverDischargeMax to Units.CubeMetersPerSecond,
+                        riverDischargeMin to Units.CubeMetersPerSecond,
+                        riverDischargeP25 to Units.CubeMetersPerSecond,
+                        riverDischargeP75 to Units.CubeMetersPerSecond,
                     )
                 )
                 assertContains(dailyValues, "time")

@@ -7,7 +7,7 @@ import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.PrecipitationUnit
 import com.openmeteo.api.common.units.TemperatureUnit
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import com.openmeteo.api.common.units.WindSpeedUnit
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -56,7 +56,7 @@ object ClimateChange : Endpoint(
         override val timezone: Timezone,
         override val timezoneAbbreviation: String,
         override val generationtimeMs: Float,
-        override val dailyUnits: Map<String, Unit> = mapOf(),
+        override val dailyUnits: Map<String, Units> = mapOf(),
         @SerialName("daily")
         override val dailyValues: Map<String, Array<Double?>> = mapOf(),
     ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Daily

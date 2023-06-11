@@ -7,7 +7,7 @@ import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.PrecipitationUnit
 import com.openmeteo.api.common.units.TemperatureUnit
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import com.openmeteo.api.common.units.WindSpeedUnit
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -59,7 +59,7 @@ object Ensemble : Endpoint(
         override val timezoneAbbreviation: String,
         override val generationtimeMs: Float,
         override val elevation: Float,
-        override val hourlyUnits: Map<String, Unit> = mapOf(),
+        override val hourlyUnits: Map<String, Units> = mapOf(),
         @SerialName("hourly")
         override val hourlyValues: Map<String, Array<Double?>> = mapOf(),
     ) : R.Coordinate, R.Elevation, R.GenerationTimed, R.TimeZone, R.Hourly

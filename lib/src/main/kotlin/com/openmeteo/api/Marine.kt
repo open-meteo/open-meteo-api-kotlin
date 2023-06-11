@@ -6,7 +6,7 @@ import com.openmeteo.api.common.http.Endpoint
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.LengthUnit
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.net.URL
@@ -48,10 +48,10 @@ object Marine : Endpoint(
         override val timezone: Timezone,
         override val timezoneAbbreviation: String,
         override val generationtimeMs: Float,
-        override val dailyUnits: Map<String, Unit> = mapOf(),
+        override val dailyUnits: Map<String, Units> = mapOf(),
         @SerialName("daily")
         override val dailyValues: Map<String, Array<Double?>> = mapOf(),
-        override val hourlyUnits: Map<String, Unit> = mapOf(),
+        override val hourlyUnits: Map<String, Units> = mapOf(),
         @SerialName("hourly")
         override val hourlyValues: Map<String, Array<Double?>> = mapOf(),
     ) : R.Coordinate, R.GenerationTimed, R.TimeZone, R.Daily, R.Hourly

@@ -2,7 +2,7 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Timezone
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
@@ -28,12 +28,12 @@ class ForecastTest {
             assertEquals("CEST", timezoneAbbreviation)
             assertEquals(17f, elevation)
             assert(dailyUnits.equals(mapOf(
-                "time" to Unit.UnixTime,
-                "weathercode" to Unit.WeatherCode,
-                "sunrise" to Unit.UnixTime,
-                "sunset" to Unit.UnixTime,
-                "temperature_2m_max" to Unit.Celsius,
-                "temperature_2m_min" to Unit.Celsius,
+                "time" to Units.UnixTime,
+                "weathercode" to Units.WeatherCode,
+                "sunrise" to Units.UnixTime,
+                "sunset" to Units.UnixTime,
+                "temperature_2m_max" to Units.Celsius,
+                "temperature_2m_min" to Units.Celsius,
             )))
             assertContains(dailyValues, "time")
             assertContains(dailyValues, "weathercode")

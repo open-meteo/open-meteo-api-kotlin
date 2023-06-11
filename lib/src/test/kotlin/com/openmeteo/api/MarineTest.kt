@@ -4,7 +4,7 @@ import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.LengthUnit
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
@@ -41,18 +41,18 @@ class MarineTest {
             with(Marine.Hourly) {
                 assertEquals(
                     hourlyUnits, mapOf(
-                        "time" to Unit.UnixTime,
-                        waveHeight to Unit.Feet,
-                        waveDirection to Unit.DecimalDegrees,
-                        wavePeriod to Unit.Seconds,
-                        windWaveHeight to Unit.Feet,
-                        windWaveDirection to Unit.DecimalDegrees,
-                        windWavePeriod to Unit.Seconds,
-                        windWavePeakPeriod to Unit.Seconds,
-                        swellWaveHeight to Unit.Feet,
-                        swellWaveDirection to Unit.DecimalDegrees,
-                        swellWavePeriod to Unit.Seconds,
-                        swellWavePeakPeriod to Unit.Seconds,
+                        "time" to Units.UnixTime,
+                        waveHeight to Units.Feet,
+                        waveDirection to Units.DecimalDegrees,
+                        wavePeriod to Units.Seconds,
+                        windWaveHeight to Units.Feet,
+                        windWaveDirection to Units.DecimalDegrees,
+                        windWavePeriod to Units.Seconds,
+                        windWavePeakPeriod to Units.Seconds,
+                        swellWaveHeight to Units.Feet,
+                        swellWaveDirection to Units.DecimalDegrees,
+                        swellWavePeriod to Units.Seconds,
+                        swellWavePeakPeriod to Units.Seconds,
                     )
                 )
                 assertContains(hourlyValues, "time")
@@ -407,18 +407,18 @@ class MarineTest {
             with(Marine.Daily) {
                 assertEquals(
                     dailyUnits, mapOf(
-                        "time" to Unit.UnixTime,
-                        waveHeightMax to Unit.Feet,
-                        waveDirectionDominant to Unit.DecimalDegrees,
-                        wavePeriodMax to Unit.Seconds,
-                        windWaveHeightMax to Unit.Feet,
-                        windWaveDirectionDominant to Unit.DecimalDegrees,
-                        windWavePeriodMax to Unit.Seconds,
-                        windWavePeakPeriodMax to Unit.Seconds,
-                        swellWaveHeightMax to Unit.Feet,
-                        swellWaveDirectionDominant to Unit.DecimalDegrees,
-                        swellWavePeriodMax to Unit.Seconds,
-                        swellWavePeakPeriodMax to Unit.Seconds,
+                        "time" to Units.UnixTime,
+                        waveHeightMax to Units.Feet,
+                        waveDirectionDominant to Units.DecimalDegrees,
+                        wavePeriodMax to Units.Seconds,
+                        windWaveHeightMax to Units.Feet,
+                        windWaveDirectionDominant to Units.DecimalDegrees,
+                        windWavePeriodMax to Units.Seconds,
+                        windWavePeakPeriodMax to Units.Seconds,
+                        swellWaveHeightMax to Units.Feet,
+                        swellWaveDirectionDominant to Units.DecimalDegrees,
+                        swellWavePeriodMax to Units.Seconds,
+                        swellWavePeakPeriodMax to Units.Seconds,
                     )
                 )
                 assertContains(dailyValues, "time")

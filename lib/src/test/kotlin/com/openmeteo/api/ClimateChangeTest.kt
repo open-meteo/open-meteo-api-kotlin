@@ -2,7 +2,7 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -30,9 +30,9 @@ class ClimateChangeTest {
             assertEquals("GMT", timezoneAbbreviation)
             assertEquals(17f, elevation)
             assertEquals(mapOf(
-                "time" to Unit.UnixTime,
-                "temperature_2m_max_MRI_AGCM3_2_S" to Unit.Celsius,
-                "temperature_2m_max_MPI_ESM1_2_XR" to Unit.Celsius,
+                "time" to Units.UnixTime,
+                "temperature_2m_max_MRI_AGCM3_2_S" to Units.Celsius,
+                "temperature_2m_max_MPI_ESM1_2_XR" to Units.Celsius,
             ), dailyUnits)
             assertEquals(-631152000.0, dailyValues["time"]!![0])
             assertEquals(2556057600.0, dailyValues["time"]!!.last())

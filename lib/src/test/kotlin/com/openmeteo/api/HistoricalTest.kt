@@ -2,7 +2,7 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
@@ -30,8 +30,8 @@ class HistoricalTest {
                 assertEquals("GMT", timezoneAbbreviation)
                 assertEquals(17f, elevation)
                 assert(hourlyUnits == mapOf(
-                        "time" to Unit.UnixTime,
-                        "temperature_2m" to Unit.Celsius,
+                        "time" to Units.UnixTime,
+                        "temperature_2m" to Units.Celsius,
                     )
                 )
                 assertContains(hourlyValues, "time")
@@ -115,9 +115,9 @@ class HistoricalTest {
             assertEquals("GMT", timezoneAbbreviation)
             assertEquals(17f, elevation)
             assert(hourlyUnits == mapOf(
-                    "time" to Unit.UnixTime,
-                    "temperature_2m_era5" to Unit.Celsius,
-                    "temperature_2m_cerra" to Unit.Celsius,
+                    "time" to Units.UnixTime,
+                    "temperature_2m_era5" to Units.Celsius,
+                    "temperature_2m_cerra" to Units.Celsius,
                 )
             )
             assertContains(hourlyValues, "time")

@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class Unit(vararg val alias: @Contextual Any) {
+enum class Units(vararg val alias: @Contextual Any) {
     Unknown,
     @SerialName("unixtime")
     UnixTime,

@@ -2,7 +2,7 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
-import com.openmeteo.api.common.units.Unit
+import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
@@ -28,9 +28,9 @@ class AirQualityTest {
             assertEquals("GMT", timezone.id)
             assertEquals("GMT", timezoneAbbreviation)
             assert(hourlyUnits == mapOf(
-                    "time" to Unit.UnixTime,
-                    AirQuality.Hourly.pm25 to Unit.MicroGramsPerCubeMeter,
-                    AirQuality.Hourly.usAqi to Unit.UnitedStatesAirQualityIndex,
+                    "time" to Units.UnixTime,
+                    AirQuality.Hourly.pm25 to Units.MicroGramsPerCubeMeter,
+                    AirQuality.Hourly.usAqi to Units.UnitedStatesAirQualityIndex,
                 )
             )
             assertContains(hourlyValues, "time")
