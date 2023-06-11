@@ -69,7 +69,10 @@ enum class Unit(vararg val alias: @Contextual Any) {
     UnitedStatesAirQualityIndex,
     @SerialName("EAQI")
     EuropeanAirQualityIndex,
+    @SerialName("m³/s")
+    CubeMetersPerSecond,
     ;
+
     companion object {
         fun from(that: Any) = values()
             .firstOrNull { it.aliasOf(that) } ?: Unknown
