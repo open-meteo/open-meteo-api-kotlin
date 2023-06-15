@@ -40,6 +40,8 @@ object GeocodingSearch : Endpoint(
     open class Response(
         val results: Array<GeocodingGet.Response>,
         override val generationtimeMs: Float,
-    ) : R.GenerationTimed
+    ) : R.GenerationTimed {
+        operator fun component1(): Array<GeocodingGet.Response> = results
+    }
 
 }
