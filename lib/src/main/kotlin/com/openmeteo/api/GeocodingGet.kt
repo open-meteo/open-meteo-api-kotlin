@@ -18,7 +18,7 @@ object GeocodingGet : Endpoint(
     operator fun invoke(
         id: Int,
         context: URL = this.context,
-        query: Query.() -> Unit,
+        query: Query.() -> Unit = {},
     ) = Query(id).let {
         it.query()
         this(it, context)
