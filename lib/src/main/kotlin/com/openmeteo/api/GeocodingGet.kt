@@ -50,7 +50,7 @@ object GeocodingGet : Endpoint(
         val admin3Id: Int? = null,                  // #12
         val admin4Id: Int? = null,                  // #13
         val timezone: Timezone? = null,             // #14
-        val population: Int,                        // #15
+        val population: Int? = null,                // #15
         private val alternativeNames: Int? = null,  // #16
         val postcodes: Array<String>,               // #17
         val countryId: Int,                         // #18
