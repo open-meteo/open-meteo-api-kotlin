@@ -32,7 +32,7 @@ interface Options {
             scope: T,
             vararg extra: Any,
             block: T.() -> List<String>
-        ) = (scope.run(block) + extra).joinToString(",")
+        ) = (scope.block() + extra).joinToString(",")
 
     }
 
