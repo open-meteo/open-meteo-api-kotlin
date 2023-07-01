@@ -41,7 +41,6 @@ class ForecastTest {
             assertContains(dailyValues, "sunset")
             assertContains(dailyValues, "temperature_2m_max")
             assertContains(dailyValues, "temperature_2m_min")
-            val daylight = 0
         }
     }
 
