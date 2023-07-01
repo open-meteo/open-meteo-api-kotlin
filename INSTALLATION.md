@@ -25,28 +25,6 @@ dependencies {
 }
 ```
 
-## Android
-
-1. Add the JitPack repository to your settings.gradle file:
-
-```gradle
-dependencyResolutionManagement {
-	...
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
-
-2. Add the dependency:
-
-```gradle
-dependencies {
-	implementation 'com.open-meteo:open-meteo-api-kotlin:0.7.1-alpha.1'
-}
-```
-
 ## Maven
 
 1. Add the JitPack repository to your build file:
