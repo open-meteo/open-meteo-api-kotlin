@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
@@ -12,8 +11,8 @@ class EnsembleTest {
     @Test
     fun `Amsterdam, 1st June 2023`() {
         val query = Ensemble.Query(
-            latitude = City.Amsterdam.latitude,
-            longitude = City.Amsterdam.longitude,
+            latitude = 52.3738f,
+            longitude = 4.8910f,
             hourly = Ensemble.Hourly { listOf(
                 temperature2m,
             ) },

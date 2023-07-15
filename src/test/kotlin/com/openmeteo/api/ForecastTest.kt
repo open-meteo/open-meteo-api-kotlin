@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
@@ -12,8 +11,8 @@ class ForecastTest {
     @Test
     fun `Amsterdam, with past day`() {
         val query = Forecast.Query(
-            latitude = City.Amsterdam.latitude,
-            longitude = City.Amsterdam.longitude,
+            latitude = 52.3738f,
+            longitude = 4.8910f,
             daily = Forecast.Daily { listOf(
                 weathercode, sunrise, sunset, temperature2mMax, temperature2mMin
             ) },

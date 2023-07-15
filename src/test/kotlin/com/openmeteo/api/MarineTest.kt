@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.time.Timezone
 import com.openmeteo.api.common.units.LengthUnit
@@ -15,8 +14,8 @@ class MarineTest {
     @Test
     fun `Amsterdam, 1st January 2023, imperial length units`() {
         val query = Marine.Query(
-            latitude = City.Amsterdam.latitude,
-            longitude = City.Amsterdam.longitude,
+            latitude = 52.3738f,
+            longitude = 4.8910f,
             hourly = Marine.Hourly { listOf(
                 waveHeight, waveDirection, wavePeriod,
                 windWaveHeight, windWaveDirection, windWavePeriod, windWavePeakPeriod,

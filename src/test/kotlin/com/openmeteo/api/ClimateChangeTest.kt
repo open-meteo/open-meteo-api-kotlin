@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
@@ -11,8 +10,8 @@ class ClimateChangeTest {
     @Test
     fun `Amsterdam, 1st January 1950 - 31st december 2050`() {
         val query = ClimateChange.Query(
-            latitude = City.Amsterdam.latitude,
-            longitude = City.Amsterdam.longitude,
+            latitude = 52.3738f,
+            longitude = 4.8910f,
             models = ClimateChange.Models { listOf(
                 MRIAGCM32S, MPIESM12XR,
             ) },

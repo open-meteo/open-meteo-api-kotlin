@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import com.openmeteo.api.common.units.Units
 import kotlin.test.Test
@@ -13,8 +12,8 @@ class HistoricalTest {
     @Test
     fun `Amsterdam, 1st January 2020, no models`() {
         val query = Historical.Query(
-            latitude = City.Amsterdam.latitude,
-            longitude = City.Amsterdam.longitude,
+            latitude = 52.3738f,
+            longitude = 4.8910f,
             hourly = Historical.Hourly { listOf(
                 temperature2m
             ) },
@@ -96,8 +95,8 @@ class HistoricalTest {
     @Test
     fun `Amsterdam, 1st January 2020, with models`() {
         val query = Historical.Query(
-            latitude = City.Amsterdam.latitude,
-            longitude = City.Amsterdam.longitude,
+            latitude = 52.3738f,
+            longitude = 4.8910f,
             hourly = Historical.Hourly { listOf(
                 temperature2m
             ) },
