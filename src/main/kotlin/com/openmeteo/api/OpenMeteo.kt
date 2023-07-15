@@ -1,6 +1,5 @@
 package com.openmeteo.api
 
-import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import java.net.URL
 
@@ -44,11 +43,19 @@ open class OpenMeteo(
 
     companion object {
 
+        @Deprecated(
+            "Language setting is pointless with the id: we only care about coordinates (floats)!",
+            ReplaceWith("OpenMeteo(id, apikey)"),
+            DeprecationLevel.WARNING
+        )
         operator fun invoke(id: Int, language: String? = null, apikey: String? = null) =
             GeocodingGet(id) {
                 this.language = language
                 this.apikey = apikey
             }.map { OpenMeteo(it.latitude, it.longitude, apikey) }
+
+        operator fun invoke(id: Int, apikey: String? = null) =
+            GeocodingGet(id) { this.apikey = apikey }.map { OpenMeteo(it.latitude, it.longitude, apikey) }
 
         /**
          * Search a location with the Geocoding API.
