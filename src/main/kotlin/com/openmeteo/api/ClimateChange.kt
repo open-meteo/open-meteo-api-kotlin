@@ -28,9 +28,10 @@ object ClimateChange : Endpoint(
         models: String,
         startDate: Date,
         endDate: Date,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = this(city.latitude, city.longitude, models, startDate, endDate, context, query)
+    ) = this(city.latitude, city.longitude, models, startDate, endDate, apikey, context, query)
 
     inline operator fun invoke(
         latitude: Float,
@@ -38,9 +39,10 @@ object ClimateChange : Endpoint(
         models: String,
         startDate: Date,
         endDate: Date,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(latitude, longitude, models, startDate, endDate).let {
+    ) = Query(latitude, longitude, models, startDate, endDate, apikey = apikey).let {
         it.query()
         this(it, context)
     }

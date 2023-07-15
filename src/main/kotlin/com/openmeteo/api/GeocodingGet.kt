@@ -17,9 +17,10 @@ object GeocodingGet : Endpoint(
 
     inline operator fun invoke(
         id: Int,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit = {},
-    ) = Query(id).let {
+    ) = Query(id, apikey = apikey).let {
         it.query()
         this(it, context)
     }

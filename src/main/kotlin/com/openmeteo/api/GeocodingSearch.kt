@@ -16,9 +16,10 @@ object GeocodingSearch : Endpoint(
 
     inline operator fun invoke(
         name: String,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(name).let {
+    ) = Query(name, apikey = apikey).let {
         it.query()
         this(it, context)
     }

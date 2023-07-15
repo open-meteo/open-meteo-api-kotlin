@@ -21,16 +21,18 @@ object AirQuality : Endpoint(
 
     inline operator fun invoke(
         city: City,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = this(city.latitude, city.longitude, context, query)
+    ) = this(city.latitude, city.longitude, apikey, context, query)
 
     inline operator fun invoke(
         latitude: Float,
         longitude: Float,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(latitude, longitude).let {
+    ) = Query(latitude, longitude, apikey = apikey).let {
         it.query()
         this(it, context)
     }

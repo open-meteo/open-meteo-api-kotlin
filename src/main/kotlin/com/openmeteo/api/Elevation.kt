@@ -22,9 +22,10 @@ object Elevation : Endpoint(
     inline operator fun invoke(
         latitude: Float,
         longitude: Float,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(latitude, longitude).let {
+    ) = Query(latitude, longitude, apikey).let {
         it.query()
         this(it, context)
     }
@@ -35,9 +36,10 @@ object Elevation : Endpoint(
     inline operator fun invoke(
         latitudes: List<Float>,
         longitudes: List<Float>,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(latitudes, longitudes).let {
+    ) = Query(latitudes, longitudes, apikey).let {
         it.query()
         this(it, context)
     }
@@ -48,9 +50,10 @@ object Elevation : Endpoint(
      */
     inline operator fun invoke(
         vararg coordinates: Coordinate,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(*coordinates).let {
+    ) = Query(*coordinates, apikey = apikey).let {
         it.query()
         this(it, context)
     }
@@ -61,9 +64,10 @@ object Elevation : Endpoint(
      */
     inline operator fun invoke(
         vararg coordinates: Pair<Float, Float>,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(*coordinates).let {
+    ) = Query(*coordinates, apikey = apikey).let {
         it.query()
         this(it, context)
     }

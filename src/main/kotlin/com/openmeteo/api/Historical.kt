@@ -28,18 +28,20 @@ object Historical : Endpoint(
         city: City,
         startDate: Date,
         endDate: Date,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = this(city.latitude, city.longitude, startDate, endDate, context, query)
+    ) = this(city.latitude, city.longitude, startDate, endDate, apikey, context, query)
 
     inline operator fun invoke(
         latitude: Float,
         longitude: Float,
         startDate: Date,
         endDate: Date,
+        apikey: String? = null,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(latitude, longitude, startDate, endDate).let {
+    ) = Query(latitude, longitude, startDate, endDate, apikey = apikey).let {
         it.query()
         this(it, context)
     }
