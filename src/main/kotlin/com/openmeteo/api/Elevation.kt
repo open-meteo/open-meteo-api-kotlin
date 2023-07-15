@@ -2,8 +2,6 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.Coordinate
 import com.openmeteo.api.common.http.Endpoint
-import com.openmeteo.api.common.query.City
-import com.openmeteo.api.common.time.Date
 import kotlinx.serialization.Serializable
 import java.net.URL
 import com.openmeteo.api.common.Response as R
