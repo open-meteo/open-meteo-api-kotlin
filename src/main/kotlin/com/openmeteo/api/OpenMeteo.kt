@@ -1,5 +1,6 @@
 package com.openmeteo.api
 
+import com.openmeteo.api.common.query.City
 import com.openmeteo.api.common.time.Date
 import java.net.URL
 
