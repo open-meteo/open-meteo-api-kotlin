@@ -23,6 +23,17 @@ object ClimateChange : Endpoint(
     operator fun invoke(query: Query, context: URL = this.context) =
         query<Response, Query>(query, context)
 
+    @Deprecated(
+        "Hardcoded Cities are deprecated: use the geocoding API instead!",
+        ReplaceWith(
+            """
+                GeocodingSearch(...) { count = 1 }.getOrThrow().results[0]
+                    .let { ClimateChange(it.latitude, it.longitude, apikey, context, query) }
+            """,
+            "com.openmeteo.api.GeocodingSearch"
+        ),
+        DeprecationLevel.WARNING
+    )
     inline operator fun invoke(
         city: City,
         models: String,

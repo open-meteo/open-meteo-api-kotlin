@@ -2,6 +2,14 @@ package com.openmeteo.api.common.query
 
 import com.openmeteo.api.common.Coordinate
 
+@Deprecated(
+    "Hardcoded Cities are deprecated: use the geocoding API instead!",
+    ReplaceWith(
+        "GeocodingSearch(...) { count = 1 }.getOrThrow().results[0]",
+        "com.openmeteo.api.GeocodingSearch"
+    ),
+    DeprecationLevel.WARNING
+)
 enum class City(
     override val latitude: Float,
     override val longitude: Float,

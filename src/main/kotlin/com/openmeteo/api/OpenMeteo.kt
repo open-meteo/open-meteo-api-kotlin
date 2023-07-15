@@ -34,6 +34,11 @@ open class OpenMeteo(
     var apikey: String? = null,
 ) {
 
+    @Deprecated(
+        "Hardcoded Cities are deprecated: use the geocoding API instead!",
+        ReplaceWith("OpenMeteo(..., language, apikey)"),
+        DeprecationLevel.WARNING
+    )
     constructor(city: City, apikey: String? = null)
         : this(city.latitude, city.longitude, apikey)
 
