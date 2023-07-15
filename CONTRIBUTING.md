@@ -60,6 +60,7 @@ A stricter variation of the [Conventional Commits 1.0.0](https://www.conventiona
    - `chore` changes not source or test code (eg: update dependencies)
    - `build` changes the build config or development tools
    - `revert` reverts a previous commit
+   - `perf` boosts executable performance
  - `!` can be placed after `<type>` if the commit includes breaking changes (bump `<major>`)
 
 If the `<type>` field is not valid/missing, the commit won't be inserted in the release notes.
