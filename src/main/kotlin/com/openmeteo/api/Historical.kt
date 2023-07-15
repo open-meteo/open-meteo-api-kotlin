@@ -26,16 +26,20 @@ object Historical : Endpoint(
 
     inline operator fun invoke(
         city: City,
+        startDate: Date,
+        endDate: Date,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = this(city.latitude, city.longitude, context, query)
+    ) = this(city.latitude, city.longitude, startDate, endDate, context, query)
 
     inline operator fun invoke(
         latitude: Float,
         longitude: Float,
+        startDate: Date,
+        endDate: Date,
         context: URL = this.context,
         query: Query.() -> Unit,
-    ) = Query(latitude, longitude).let {
+    ) = Query(latitude, longitude, startDate, endDate).let {
         it.query()
         this(it, context)
     }
@@ -44,12 +48,12 @@ object Historical : Endpoint(
     open class Query(
         override var latitude: Float,
         override var longitude: Float,
+        @SerialName("start_date")
+        override var startDate: Date,
+        @SerialName("end_date")
+        override var endDate: Date,
         override var daily: String? = null,
         override var hourly: String? = null,
-        @SerialName("start_date")
-        override var startDate: Date? = null,
-        @SerialName("end_date")
-        override var endDate: Date? = null,
         override var timezone: Timezone? = null,
         @SerialName("temperature_unit")
         override var temperatureUnit: TemperatureUnit? = null,
