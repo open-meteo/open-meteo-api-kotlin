@@ -15,7 +15,7 @@ object GeocodingGet : Endpoint(
     operator fun invoke(query: Query, context: URL = this.context) =
         query<Response, Query>(query, context)
 
-    operator fun invoke(
+    inline operator fun invoke(
         id: Int,
         context: URL = this.context,
         query: Query.() -> Unit = {},
