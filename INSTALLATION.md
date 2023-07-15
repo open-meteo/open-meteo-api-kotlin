@@ -21,7 +21,7 @@ allprojects {
 
 ```gradle
 dependencies {
-	implementation 'com.open-meteo:open-meteo-api-kotlin:0.7.1-alpha.3'
+	implementation 'com.open-meteo:open-meteo-api-kotlin:0.7.1-alpha.4'
 }
 ```
 
@@ -44,6 +44,6 @@ dependencies {
 <dependency>
 	<groupId>com.open-meteo</groupId>
 	<artifactId>open-meteo-api-kotlin</artifactId>
-	<version>0.7.1-alpha.3</version>
+	<version>0.7.1-alpha.4</version>
 </dependency>
 ```
