@@ -2,6 +2,8 @@ package com.openmeteo.api
 
 import com.openmeteo.api.common.Coordinate
 import com.openmeteo.api.common.http.Endpoint
+import com.openmeteo.api.common.query.City
+import com.openmeteo.api.common.time.Date
 import kotlinx.serialization.Serializable
 import java.net.URL
 import com.openmeteo.api.common.Response as R
@@ -13,6 +15,58 @@ object Elevation : Endpoint(
 
     operator fun invoke(query: Query, context: URL = this.context) =
         query<Response, Query>(query, context)
+
+    /**
+     * Quickly call the Elevation API.
+     */
+    inline operator fun invoke(
+        latitude: Float,
+        longitude: Float,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = Query(latitude, longitude).let {
+        it.query()
+        this(it, context)
+    }
+
+    /**
+     * Quickly call the Elevation API.
+     */
+    inline operator fun invoke(
+        latitudes: List<Float>,
+        longitudes: List<Float>,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = Query(latitudes, longitudes).let {
+        it.query()
+        this(it, context)
+    }
+
+    /**
+     * Quickly call the Elevation API.
+     * @param coordinates The list of coordinates
+     */
+    inline operator fun invoke(
+        vararg coordinates: Coordinate,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = Query(*coordinates).let {
+        it.query()
+        this(it, context)
+    }
+
+    /**
+     * Quickly call the Elevation API.
+     * @param coordinates The list of coordinates pairs
+     */
+    inline operator fun invoke(
+        vararg coordinates: Pair<Float, Float>,
+        context: URL = this.context,
+        query: Query.() -> Unit,
+    ) = Query(*coordinates).let {
+        it.query()
+        this(it, context)
+    }
 
     @Serializable
     open class Query private constructor(
