@@ -8,8 +8,10 @@ import kotlinx.serialization.SerialName
 enum class CellSelection {
     @SerialName("land")
     Land,
+
     @SerialName("sea")
     Sea,
+
     @SerialName("nearest")
     Nearest,
 }

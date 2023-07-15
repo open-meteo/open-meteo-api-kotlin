@@ -46,10 +46,13 @@ interface Response {
              * Glue units and values together into a map of keys (eg: temperature_2m) and unit/values
              */
             @ExperimentalGluedUnitTimeStepValues
-            internal fun glue(units:  Map<String, Units>, values: Map<String, Array<Double?>>) : Map<String, UnitTimeStepValues> {
+            internal fun glue(
+                units: Map<String, Units>,
+                values: Map<String, Array<Double?>>
+            ): Map<String, UnitTimeStepValues> {
                 if (values.size != units.size)
                     throw Error("Malformed data: units and values size do not match! We either didn't get enough units or enough values!")
-                    // TODO: add option to magically fix shit on its own.
+                // TODO: add option to magically fix shit on its own.
                 if (values.isEmpty())
                     return emptyMap()
                 // get just the time keys array
@@ -59,9 +62,11 @@ interface Response {
                     .map { Time(it) }
                 // filter time away! We don't need it in the map values
                 return values.filterKeys { it != "time" }
-                    .mapValues { (k, v) -> UnitTimeStepValues(
-                        units.getValue(k), // make sure that each keys exists in the units value
-                        time.zip(v).toMap()) // create a map with the time as keys and the values as... values :)
+                    .mapValues { (k, v) ->
+                        UnitTimeStepValues(
+                            units.getValue(k), // make sure that each keys exists in the units value
+                            time.zip(v).toMap()
+                        ) // create a map with the time as keys and the values as... values :)
                     }
             }
         }
@@ -73,9 +78,11 @@ interface Response {
     interface Daily : Response {
         val dailyUnits: Map<String, Units>
         val dailyValues: Map<String, Array<Double?>>
+
         @ExperimentalGluedUnitTimeStepValues
-        val daily get() = UnitTimeStepValues
-            .glue(dailyUnits, dailyValues)
+        val daily
+            get() = UnitTimeStepValues
+                .glue(dailyUnits, dailyValues)
     }
 
     /**
@@ -84,9 +91,11 @@ interface Response {
     interface Hourly : Response {
         val hourlyUnits: Map<String, Units>
         val hourlyValues: Map<String, Array<Double?>>
+
         @ExperimentalGluedUnitTimeStepValues
-        val hourly get() = UnitTimeStepValues
-            .glue(hourlyUnits, hourlyValues)
+        val hourly
+            get() = UnitTimeStepValues
+                .glue(hourlyUnits, hourlyValues)
     }
 
     /**

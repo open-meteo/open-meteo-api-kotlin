@@ -88,32 +88,32 @@ object Marine : Endpoint(
 
     @Serializable
     object Hourly : Options.Hourly, Options.Listable<Hourly>() {
-        const val waveHeight="wave_height"
-        const val waveDirection="wave_direction"
-        const val wavePeriod="wave_period"
-        const val windWaveHeight="wind_wave_height"
-        const val windWaveDirection="wind_wave_direction"
-        const val windWavePeriod="wind_wave_period"
-        const val windWavePeakPeriod="wind_wave_peak_period"
-        const val swellWaveHeight="swell_wave_height"
-        const val swellWaveDirection="swell_wave_direction"
-        const val swellWavePeriod="swell_wave_period"
-        const val swellWavePeakPeriod="swell_wave_peak_period"
+        const val waveHeight = "wave_height"
+        const val waveDirection = "wave_direction"
+        const val wavePeriod = "wave_period"
+        const val windWaveHeight = "wind_wave_height"
+        const val windWaveDirection = "wind_wave_direction"
+        const val windWavePeriod = "wind_wave_period"
+        const val windWavePeakPeriod = "wind_wave_peak_period"
+        const val swellWaveHeight = "swell_wave_height"
+        const val swellWaveDirection = "swell_wave_direction"
+        const val swellWavePeriod = "swell_wave_period"
+        const val swellWavePeakPeriod = "swell_wave_peak_period"
     }
 
     @Serializable
     object Daily : Options.Daily, Options.Listable<Daily>() {
-        const val waveHeightMax="wave_height_max"
-        const val waveDirectionDominant="wave_direction_dominant"
-        const val wavePeriodMax="wave_period_max"
-        const val windWaveHeightMax="wind_wave_height_max"
-        const val windWaveDirectionDominant="wind_wave_direction_dominant"
-        const val windWavePeriodMax="wind_wave_period_max"
-        const val windWavePeakPeriodMax="wind_wave_peak_period_max"
-        const val swellWaveHeightMax="swell_wave_height_max"
-        const val swellWaveDirectionDominant="swell_wave_direction_dominant"
-        const val swellWavePeriodMax="swell_wave_period_max"
-        const val swellWavePeakPeriodMax="swell_wave_peak_period_max"
+        const val waveHeightMax = "wave_height_max"
+        const val waveDirectionDominant = "wave_direction_dominant"
+        const val wavePeriodMax = "wave_period_max"
+        const val windWaveHeightMax = "wind_wave_height_max"
+        const val windWaveDirectionDominant = "wind_wave_direction_dominant"
+        const val windWavePeriodMax = "wind_wave_period_max"
+        const val windWavePeakPeriodMax = "wind_wave_peak_period_max"
+        const val swellWaveHeightMax = "swell_wave_height_max"
+        const val swellWaveDirectionDominant = "swell_wave_direction_dominant"
+        const val swellWavePeriodMax = "swell_wave_period_max"
+        const val swellWavePeakPeriodMax = "swell_wave_peak_period_max"
     }
 
 }

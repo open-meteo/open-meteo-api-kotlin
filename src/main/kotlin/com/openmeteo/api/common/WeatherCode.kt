@@ -42,6 +42,7 @@ enum class WeatherCode(val code: Short, val message: String) {
     companion object {
         fun from(code: Short) = values()
             .firstOrNull { it.code == code } ?: Unknown
+
         fun from(code: Int) = from(code.toShort())
         fun from(code: Double) = from(code.toInt())
     }

@@ -15,7 +15,7 @@ class GeocodingSearchTest {
         )
         GeocodingSearch(query).getOrThrow().run {
             assertEquals(1, results.size)
-            with (results[0]) {
+            with(results[0]) {
                 assertEquals(2950159, id)
                 assertEquals("Berlino", name)
 

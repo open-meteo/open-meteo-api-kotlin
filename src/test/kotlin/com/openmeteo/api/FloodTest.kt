@@ -14,16 +14,18 @@ class FloodTest {
         val query = Flood.Query(
             latitude = 52.3738f,
             longitude = 4.8910f,
-            daily = Flood.Daily { listOf(
-                riverDischarge,
-                riverDischargeMean, riverDischargeMedian,
-                riverDischargeMax, riverDischargeMin,
-                riverDischargeP25, riverDischargeP75
-            ) },
+            daily = Flood.Daily {
+                listOf(
+                    riverDischarge,
+                    riverDischargeMean, riverDischargeMedian,
+                    riverDischargeMax, riverDischargeMin,
+                    riverDischargeP25, riverDischargeP75
+                )
+            },
             startDate = Date("2023-01-01"),
             endDate = Date("2023-01-01"),
             models = Flood.Models {
-                listOf( seamlessV3 )
+                listOf(seamlessV3)
             }
         )
         Flood(query).getOrThrow().run {

@@ -29,16 +29,21 @@ class QueryTest {
 
     @Test
     fun lists() {
-        val programmer = Programmer("John", "Doe", listOf(
-            "Kotlin",
-            "Java",
-            "JavaScript",
-            "HTML",
-            "CSS",
-        ).joinToString(","))
-        assertEquals("?name=John&languages=Kotlin,Java,JavaScript,HTML,CSS&surname=Doe",
-            Query.asString(programmer))
+        val programmer = Programmer(
+            "John", "Doe", listOf(
+                "Kotlin",
+                "Java",
+                "JavaScript",
+                "HTML",
+                "CSS",
+            ).joinToString(",")
+        )
+        assertEquals(
+            "?name=John&languages=Kotlin,Java,JavaScript,HTML,CSS&surname=Doe",
+            Query.asString(programmer)
+        )
     }
+
     @Serializable
     class Timezone(
         override val timezone: com.openmeteo.api.common.time.Timezone?

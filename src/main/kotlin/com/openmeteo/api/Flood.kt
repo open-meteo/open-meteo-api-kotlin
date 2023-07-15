@@ -83,9 +83,9 @@ object Flood : Endpoint(
     ) : R.Coordinate, R.GenerationTimed, R.TimeZone, R.Daily
 
     object Models : Options.Models, Options.Listable<Models>() {
-        const val seamlessV3="seamless_v3"
-        const val forecastV3="forecast_v3"
-        const val consolidatedV3="consolidated_v3"
+        const val seamlessV3 = "seamless_v3"
+        const val forecastV3 = "forecast_v3"
+        const val consolidatedV3 = "consolidated_v3"
         //const val seamlessV4="seamless_v4"
         //const val forecastV4="forecast_v4"
         //const val consolidatedV4="consolidated_v4"
@@ -93,13 +93,13 @@ object Flood : Endpoint(
 
     @Serializable
     object Daily : Options.Daily, Options.Listable<Daily>() {
-        const val riverDischarge="river_discharge"
-        const val riverDischargeMean="river_discharge_mean"
-        const val riverDischargeMedian="river_discharge_median"
-        const val riverDischargeMax="river_discharge_max"
-        const val riverDischargeMin="river_discharge_min"
-        const val riverDischargeP25="river_discharge_p25"
-        const val riverDischargeP75="river_discharge_p75"
+        const val riverDischarge = "river_discharge"
+        const val riverDischargeMean = "river_discharge_mean"
+        const val riverDischargeMedian = "river_discharge_median"
+        const val riverDischargeMax = "river_discharge_max"
+        const val riverDischargeMin = "river_discharge_min"
+        const val riverDischargeP25 = "river_discharge_p25"
+        const val riverDischargeP75 = "river_discharge_p75"
     }
 
 }

@@ -16,16 +16,20 @@ class MarineTest {
         val query = Marine.Query(
             latitude = 52.3738f,
             longitude = 4.8910f,
-            hourly = Marine.Hourly { listOf(
-                waveHeight, waveDirection, wavePeriod,
-                windWaveHeight, windWaveDirection, windWavePeriod, windWavePeakPeriod,
-                swellWaveHeight, swellWaveDirection, swellWavePeriod, swellWavePeakPeriod,
-            ) },
-            daily = Marine.Daily { listOf(
-                waveHeightMax, waveDirectionDominant, wavePeriodMax,
-                windWaveHeightMax, windWaveDirectionDominant, windWavePeriodMax, windWavePeakPeriodMax,
-                swellWaveHeightMax, swellWaveDirectionDominant, swellWavePeriodMax, swellWavePeakPeriodMax,
-            ) },
+            hourly = Marine.Hourly {
+                listOf(
+                    waveHeight, waveDirection, wavePeriod,
+                    windWaveHeight, windWaveDirection, windWavePeriod, windWavePeakPeriod,
+                    swellWaveHeight, swellWaveDirection, swellWavePeriod, swellWavePeakPeriod,
+                )
+            },
+            daily = Marine.Daily {
+                listOf(
+                    waveHeightMax, waveDirectionDominant, wavePeriodMax,
+                    windWaveHeightMax, windWaveDirectionDominant, windWavePeriodMax, windWavePeakPeriodMax,
+                    swellWaveHeightMax, swellWaveDirectionDominant, swellWavePeriodMax, swellWavePeakPeriodMax,
+                )
+            },
             startDate = Date("2023-01-01"),
             endDate = Date("2023-01-01"),
             timezone = Timezone.getTimeZone("Europe/Berlin"),
@@ -437,7 +441,7 @@ class MarineTest {
                 assertContains(dailyValues, windWavePeakPeriodMax)
                 assertContentEquals(arrayOf(2.6), dailyValues[windWavePeakPeriodMax])
                 assertContains(dailyValues, swellWaveHeightMax)
-                assertContentEquals(arrayOf(1.05,), dailyValues[swellWaveHeightMax])
+                assertContentEquals(arrayOf(1.05), dailyValues[swellWaveHeightMax])
                 assertContains(dailyValues, swellWaveDirectionDominant)
                 assertContentEquals(arrayOf(268.0), dailyValues[swellWaveDirectionDominant])
                 assertContains(dailyValues, swellWavePeriodMax)

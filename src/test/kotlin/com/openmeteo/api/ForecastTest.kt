@@ -13,9 +13,11 @@ class ForecastTest {
         val query = Forecast.Query(
             latitude = 52.3738f,
             longitude = 4.8910f,
-            daily = Forecast.Daily { listOf(
-                weathercode, sunrise, sunset, temperature2mMax, temperature2mMin
-            ) },
+            daily = Forecast.Daily {
+                listOf(
+                    weathercode, sunrise, sunset, temperature2mMax, temperature2mMin
+                )
+            },
             timezone = Timezone.auto,
             pastDays = 1,
         )
@@ -26,14 +28,18 @@ class ForecastTest {
             assertEquals("Europe/Amsterdam", timezone.id)
             assertEquals("CEST", timezoneAbbreviation)
             assertEquals(17f, elevation)
-            assert(dailyUnits.equals(mapOf(
-                "time" to Units.UnixTime,
-                "weathercode" to Units.WeatherCode,
-                "sunrise" to Units.UnixTime,
-                "sunset" to Units.UnixTime,
-                "temperature_2m_max" to Units.Celsius,
-                "temperature_2m_min" to Units.Celsius,
-            )))
+            assert(
+                dailyUnits.equals(
+                    mapOf(
+                        "time" to Units.UnixTime,
+                        "weathercode" to Units.WeatherCode,
+                        "sunrise" to Units.UnixTime,
+                        "sunset" to Units.UnixTime,
+                        "temperature_2m_max" to Units.Celsius,
+                        "temperature_2m_min" to Units.Celsius,
+                    )
+                )
+            )
             assertContains(dailyValues, "time")
             assertContains(dailyValues, "weathercode")
             assertContains(dailyValues, "sunrise")

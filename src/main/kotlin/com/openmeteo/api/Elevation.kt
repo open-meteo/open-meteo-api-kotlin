@@ -78,28 +78,28 @@ object Elevation : Endpoint(
     ) : Q.CommercialLicense {
 
         constructor(latitude: Float, longitude: Float, apikey: String? = null)
-            : this(latitude.toString(), longitude.toString(), apikey)
+                : this(latitude.toString(), longitude.toString(), apikey)
 
         constructor(latitudes: List<Float>, longitudes: List<Float>, apikey: String? = null)
-            : this(
-                latitudes.joinToString(","),
-                longitudes.joinToString(","),
-                apikey,
-            )
+                : this(
+            latitudes.joinToString(","),
+            longitudes.joinToString(","),
+            apikey,
+        )
 
         constructor(vararg coordinates: Coordinate, apikey: String? = null)
-            : this(
-                coordinates.map { it.latitude },
-                coordinates.map { it.longitude },
-                apikey,
-            )
+                : this(
+            coordinates.map { it.latitude },
+            coordinates.map { it.longitude },
+            apikey,
+        )
 
         constructor(vararg coordinates: Pair<Float, Float>, apikey: String? = null)
-            : this(
-                coordinates.map { it.first },
-                coordinates.map { it.second },
-                apikey,
-            )
+                : this(
+            coordinates.map { it.first },
+            coordinates.map { it.second },
+            apikey,
+        )
 
     }
 

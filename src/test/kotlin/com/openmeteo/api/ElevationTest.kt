@@ -12,9 +12,11 @@ class ElevationTest {
             52.52f to 13.41f,
         )
         Elevation(query).getOrThrow().run {
-            assertContentEquals(floatArrayOf(
-                0f, 38f
-            ), elevation)
+            assertContentEquals(
+                floatArrayOf(
+                    0f, 38f
+                ), elevation
+            )
         }
     }
 
@@ -25,9 +27,11 @@ class ElevationTest {
             longitudes = listOf(0f, 13.41f),
         )
         Elevation(query).getOrThrow().run {
-            assertContentEquals(floatArrayOf(
-                0f, 38f
-            ), elevation)
+            assertContentEquals(
+                floatArrayOf(
+                    0f, 38f
+                ), elevation
+            )
         }
     }
 

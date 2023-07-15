@@ -14,7 +14,7 @@ interface Query {
         /**
          * Stringify and URL encode a value.
          */
-        fun encode(value: Any, encoding: String = "utf-8") : String? =
+        fun encode(value: Any, encoding: String = "utf-8"): String? =
             URLEncoder.encode(value.toString(), encoding)
 
         /**

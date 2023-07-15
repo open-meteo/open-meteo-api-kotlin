@@ -40,7 +40,7 @@ open class OpenMeteo(
         DeprecationLevel.WARNING
     )
     constructor(city: City, apikey: String? = null)
-        : this(city.latitude, city.longitude, apikey)
+            : this(city.latitude, city.longitude, apikey)
 
     companion object {
 
