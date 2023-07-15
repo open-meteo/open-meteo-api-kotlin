@@ -9,7 +9,7 @@ import java.net.URL
  *
  * Usage example:
  * ```
- * @OptIn(Response.UnitTimeStepValues.GlueUnitTimeStepValues::class)
+ * @OptIn(Response.GlueUnitTimeStepValues::class)
  * fun main() {
  *     val om = OpenMeteo("Trieste", "it").getOrThrow()
  *     val forecast = om.forecast {

@@ -31,6 +31,9 @@ interface Response {
     @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
     annotation class ExperimentalGluedUnitTimeStepValues // Opt-in requirement annotation
 
+    /**
+     * A weather data "column" holding the values and their unit.
+     */
     @ExperimentalGluedUnitTimeStepValues
     class UnitTimeStepValues(
         val unit: Units,
