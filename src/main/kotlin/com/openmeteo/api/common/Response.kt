@@ -26,21 +26,23 @@ interface Response {
         val generationtimeMs: Float
     }
 
+    @RequiresOptIn(message = "This API is experimental. It may be changed in the future without notice.")
+    @Retention(AnnotationRetention.BINARY)
+    @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+    annotation class ExperimentalGluedUnitTimeStepValues // Opt-in requirement annotation
+
+    @ExperimentalGluedUnitTimeStepValues
     class UnitTimeStepValues(
         val unit: Units,
         val values: Map<Time, Double?>
     ) {
-        @RequiresOptIn(message = "This API is experimental. It may be changed in the future without notice.")
-        @Retention(AnnotationRetention.BINARY)
-        @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
-        annotation class GlueUnitTimeStepValues // Opt-in requirement annotation
 
         companion object {
 
             /**
              * Glue units and values together into a map of keys (eg: temperature_2m) and unit/values
              */
-            @GlueUnitTimeStepValues
+            @ExperimentalGluedUnitTimeStepValues
             internal fun glue(units:  Map<String, Units>, values: Map<String, Array<Double?>>) : Map<String, UnitTimeStepValues> {
                 if (values.size != units.size)
                     throw Error("Malformed data: units and values size do not match! We either didn't get enough units or enough values!")
@@ -68,7 +70,7 @@ interface Response {
     interface Daily : Response {
         val dailyUnits: Map<String, Units>
         val dailyValues: Map<String, Array<Double?>>
-        @UnitTimeStepValues.GlueUnitTimeStepValues
+        @ExperimentalGluedUnitTimeStepValues
         val daily get() = UnitTimeStepValues
             .glue(dailyUnits, dailyValues)
     }
@@ -79,7 +81,7 @@ interface Response {
     interface Hourly : Response {
         val hourlyUnits: Map<String, Units>
         val hourlyValues: Map<String, Array<Double?>>
-        @UnitTimeStepValues.GlueUnitTimeStepValues
+        @ExperimentalGluedUnitTimeStepValues
         val hourly get() = UnitTimeStepValues
             .glue(hourlyUnits, hourlyValues)
     }
