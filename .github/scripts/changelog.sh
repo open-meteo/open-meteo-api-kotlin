@@ -1,13 +1,13 @@
 declare -A types=(
   [fix]=":bug: Fixes"
   [feat]=":rocket: New features"
-  # [refactor]=":building_construction: Refactoring"
+  [refactor]=":building_construction: Refactoring"
   [build]=":hammer: Build"
   [test]=":test_tube: Tests"
   [chore]=":wrench: Chores"
   [docs]=":orange_book: Docs"
-  # [perf]=":zap: Performance"
-  # [style]=":art: Style"
+  [perf]=":zap: Performance"
+  [style]=":art: Style"
 )
 
 # [ -d body ] && rm -rf body # useful when debugging
