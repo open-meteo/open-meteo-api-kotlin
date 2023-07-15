@@ -20,13 +20,13 @@ object Flood : Endpoint(
     operator fun invoke(query: Query, context: URL = this.context) =
         query<Response, Query>(query, context)
 
-    operator fun invoke(
+    inline operator fun invoke(
         city: City,
         context: URL = this.context,
         query: Query.() -> Unit,
     ) = this(city.latitude, city.longitude, context, query)
 
-    operator fun invoke(
+    inline operator fun invoke(
         latitude: Float,
         longitude: Float,
         context: URL = this.context,
