@@ -74,6 +74,9 @@ interface Response {
                     }
             }
         }
+
+        operator fun component1() = unit
+        operator fun component2() = values
     }
 
     /**
