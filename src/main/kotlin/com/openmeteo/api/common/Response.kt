@@ -48,12 +48,16 @@ interface Response {
             @ExperimentalGluedUnitTimeStepValues
             internal fun glue(
                 units: Map<String, Units>,
-                values: Map<String, Array<Double?>>
+                values: Map<String, Array<Double?>>,
             ): Map<String, UnitTimeStepValues> {
-                if (values.size != units.size)
-                    throw Error("Malformed data: units and values size do not match! We either didn't get enough units or enough values!")
-                // TODO: add option to magically fix shit on its own.
-                if (values.isEmpty())
+                // if we have too many keys in values drop the not common ones
+                if (units.size < values.size)
+                    return glue(units, values.filterKeys((units.keys intersect values.keys)::contains)) // retry
+                // if we have too many keys in units drop the not common ones
+                if (units.size > values.size)
+                    return glue(units.filterKeys((units.keys intersect values.keys)::contains), values) // retry
+                // if we don't have any data at this point we can safely return an empty map
+                if (units.isEmpty())
                     return emptyMap()
                 // get just the time keys array
                 val time = values.getValue("time")
@@ -64,7 +68,7 @@ interface Response {
                 return values.filterKeys { it != "time" }
                     .mapValues { (k, v) ->
                         UnitTimeStepValues(
-                            units.getValue(k), // make sure that each keys exists in the units value
+                            units[k]!!, // no need to check if key exists, we already fixed shit in the beginning!
                             time.zip(v).toMap()
                         ) // create a map with the time as keys and the values as... values :)
                     }
