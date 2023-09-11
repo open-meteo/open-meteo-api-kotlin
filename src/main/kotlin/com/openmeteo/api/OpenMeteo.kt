@@ -9,9 +9,13 @@ import java.net.URL
  *
  * Usage example:
  * ```
- * @OptIn(Response.GlueUnitTimeStepValues::class)
+ * import com.openmeteo.api.common.Response
+ * import com.openmeteo.api.common.time.Timezone
+ * import com.openmeteo.api.common.units.TemperatureUnit
+
+ * @OptIn(Response.ExperimentalGluedUnitTimeStepValues::class)
  * fun main() {
- *     val om = OpenMeteo("Trieste", "it").getOrThrow()
+ *     val om = OpenMeteo("Trieste", "it")
  *     val forecast = om.forecast {
  *         daily = Forecast.Daily {
  *             listOf(temperature2mMin, temperature2mMax)
