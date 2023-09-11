@@ -25,8 +25,8 @@ object Marine : Endpoint(
         "Hardcoded Cities are deprecated: use the geocoding API instead!",
         ReplaceWith(
             """
-                GeocodingSearch(...) { count = 1 }.getOrThrow().results[0]
-                    .let { Marine(it.latitude, it.longitude, apikey, context, query) }
+                GeocodingSearch.first(...).getOrNull()
+                    ?.let { Marine(it.latitude, it.longitude, apikey, context, query) }
             """,
             "com.openmeteo.api.GeocodingSearch"
         ),

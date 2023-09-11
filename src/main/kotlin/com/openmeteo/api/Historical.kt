@@ -28,8 +28,8 @@ object Historical : Endpoint(
         "Hardcoded Cities are deprecated: use the geocoding API instead!",
         ReplaceWith(
             """
-                GeocodingSearch(...) { count = 1 }.getOrThrow().results[0]
-                    .let { Historical(it.latitude, it.longitude, startDate, endDate, apikey, context, query) }
+                GeocodingSearch.first(...).getOrNull()
+                    ?.let { Historical(it.latitude, it.longitude, startDate, endDate, apikey, context, query) }
             """,
             "com.openmeteo.api.GeocodingSearch"
         ),

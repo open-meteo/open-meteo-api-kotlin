@@ -76,14 +76,9 @@ open class OpenMeteo(
          * @param apikey The optional API key.
          */
         operator fun invoke(location: String, language: String? = null, apikey: String? = null) =
-            GeocodingSearch(location) {
-                this.language = language
-                this.count = 1
-                this.apikey = apikey
-            }.mapCatching { (results) ->
-                if (results.isEmpty()) throw Error("No results!")
-                OpenMeteo(results[0].latitude, results[0].longitude, apikey)
-            }
+            GeocodingSearch.first(location, apikey) {this.language = language }.getOrNull()?.let {
+                OpenMeteo(it.latitude, it.longitude, apikey)
+            } ?: throw Error("No results!")
 
     }
 

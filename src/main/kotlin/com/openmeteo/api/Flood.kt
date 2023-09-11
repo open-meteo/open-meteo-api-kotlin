@@ -24,8 +24,8 @@ object Flood : Endpoint(
         "Hardcoded Cities are deprecated: use the geocoding API instead!",
         ReplaceWith(
             """
-                GeocodingSearch(...) { count = 1 }.getOrThrow().results[0]
-                    .let { Flood(it.latitude, it.longitude, apikey, context, query) }
+                GeocodingSearch.first(...).getOrNull()
+                    ?.let { Flood(it.latitude, it.longitude, apikey, context, query) }
             """,
             "com.openmeteo.api.GeocodingSearch"
         ),
