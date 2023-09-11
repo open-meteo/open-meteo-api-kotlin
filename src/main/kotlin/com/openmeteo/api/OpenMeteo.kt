@@ -35,12 +35,30 @@ import java.net.URL
  * @param latitude The stored location latitude.
  * @param longitude The stored location longitude.
  * @param apikey The optional API key.
+ * @param contexts A list of URL endpoints contexts for all the implemented APIs.
  */
 open class OpenMeteo(
     var latitude: Float,
     var longitude: Float,
     var apikey: String? = null,
+    var contexts: Contexts = Contexts(),
 ) {
+
+    /**
+     * A list of URL endpoints contexts for all the implemented APIs.
+     */
+    class Contexts(
+        var airQuality: URL = AirQuality.context,
+        var climateChange: URL = ClimateChange.context,
+        var elevation: URL = Elevation.context,
+        var ensemble: URL = Ensemble.context,
+        var flood: URL = Flood.context,
+        var forecast: URL = Forecast.context,
+        var geocodingGet: URL = GeocodingGet.context,
+        var geocodingSearch: URL = GeocodingSearch.context,
+        var historical: URL = Historical.context,
+        var marine: URL = Marine.context,
+    )
 
     @Deprecated(
         "Hardcoded Cities are deprecated: use the geocoding API instead!",
@@ -68,8 +86,9 @@ open class OpenMeteo(
          * @param id The location unique id.
          * @param apikey The optional API key.
          */
-        operator fun invoke(id: Int, apikey: String? = null) =
-            GeocodingGet(id) { this.apikey = apikey }.map { OpenMeteo(it.latitude, it.longitude, apikey) }
+        operator fun invoke(id: Int, apikey: String? = null, contexts: Contexts = Contexts()) =
+            GeocodingGet(id, apikey, contexts.geocodingGet) { }
+                .map { OpenMeteo(it.latitude, it.longitude, apikey, contexts) }
 
         /**
          * Search a location with the Geocoding API. Fetches one element and uses its coordinates by default.
@@ -79,10 +98,11 @@ open class OpenMeteo(
          * language). Note that language is only used in the query and is **not stored**.
          * @param apikey The optional API key.
          */
-        operator fun invoke(location: String, language: String? = null, apikey: String? = null) =
-            GeocodingSearch.first(location, apikey) {this.language = language }.getOrNull()?.let {
-                OpenMeteo(it.latitude, it.longitude, apikey)
-            } ?: throw Error("No results!")
+        operator fun invoke(location: String, language: String? = null, apikey: String? = null, contexts: Contexts = Contexts()) =
+            GeocodingSearch.first(location, apikey, contexts.geocodingSearch) {this.language = language }
+                .getOrNull()?.let {
+                    OpenMeteo(it.latitude, it.longitude, apikey)
+                } ?: throw Error("No results!")
 
     }
 
@@ -92,7 +112,7 @@ open class OpenMeteo(
      * @param query The query modifier.
      */
     inline fun airQuality(
-        context: URL = AirQuality.context,
+        context: URL = contexts.airQuality,
         query: AirQuality.Query.() -> Unit,
     ) = AirQuality(latitude, longitude, apikey, context, query)
 
@@ -108,7 +128,7 @@ open class OpenMeteo(
         models: String,
         startDate: Date,
         endDate: Date,
-        context: URL = ClimateChange.context,
+        context: URL = contexts.climateChange,
         query: ClimateChange.Query.() -> Unit,
     ) = ClimateChange(latitude, longitude, models, startDate, endDate, apikey, context, query)
 
@@ -118,7 +138,7 @@ open class OpenMeteo(
      * @param query The query modifier.
      */
     inline fun elevation(
-        context: URL = Elevation.context,
+        context: URL = contexts.elevation,
         query: Elevation.Query.() -> Unit,
     ) = Elevation(latitude, longitude, apikey, context, query)
 
@@ -128,7 +148,7 @@ open class OpenMeteo(
      * @param query The query modifier.
      */
     inline fun ensemble(
-        context: URL = Ensemble.context,
+        context: URL = contexts.ensemble,
         query: Ensemble.Query.() -> Unit,
     ) = Ensemble(latitude, longitude, apikey, context, query)
 
@@ -138,7 +158,7 @@ open class OpenMeteo(
      * @param query The query modifier.
      */
     inline fun flood(
-        context: URL = Flood.context,
+        context: URL = contexts.flood,
         query: Flood.Query.() -> Unit,
     ) = Flood(latitude, longitude, apikey, context, query)
 
@@ -148,7 +168,7 @@ open class OpenMeteo(
      * @param query The query modifier.
      */
     inline fun forecast(
-        context: URL = Forecast.context,
+        context: URL = contexts.forecast,
         query: Forecast.Query.() -> Unit,
     ) = Forecast(latitude, longitude, apikey, context, query)
 
@@ -162,7 +182,7 @@ open class OpenMeteo(
     inline fun historical(
         startDate: Date,
         endDate: Date,
-        context: URL = Historical.context,
+        context: URL = contexts.historical,
         query: Historical.Query.() -> Unit,
     ) = Historical(latitude, longitude, startDate, endDate, apikey, context, query)
 
@@ -172,7 +192,7 @@ open class OpenMeteo(
      * @param query The query modifier.
      */
     inline fun marine(
-        context: URL = Marine.context,
+        context: URL = contexts.marine,
         query: Marine.Query.() -> Unit,
     ) = Marine(latitude, longitude, apikey, context, query)
 
