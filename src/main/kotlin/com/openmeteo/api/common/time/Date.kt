@@ -16,7 +16,7 @@ class Date(date: Long) : java.util.Date(date) {
     /**
      * The `yyyy-MM-dd` ISO date formatter
      */
-    companion object Format : SimpleDateFormat("yyyy-MM-dd")
+    private companion object Format : SimpleDateFormat("yyyy-MM-dd")
 
     /**
      * @param date A more "common" [java.util.Date]
