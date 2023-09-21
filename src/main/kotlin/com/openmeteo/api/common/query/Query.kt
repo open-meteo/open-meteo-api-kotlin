@@ -43,6 +43,7 @@ interface Query {
          * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
          *
          * To URL encode values use the [encode] method.
+         * Note that key names (usually) don't need to be URL encoded.
          */
         inline fun <reified T : Query> asString(query: T) =
             toList(query)
@@ -51,7 +52,7 @@ interface Query {
         /**
          * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
          *
-         * Values are URL encoded.
+         * TODO: Values should be URL encoded.
          */
         inline fun <reified T : Query> toURL(query: T, context: URL) =
             URL(context, "${context.path}${asString(query)}")
