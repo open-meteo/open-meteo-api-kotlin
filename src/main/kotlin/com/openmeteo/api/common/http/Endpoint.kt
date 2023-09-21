@@ -22,6 +22,9 @@ open class Endpoint(
 ) {
 
     companion object {
+        /**
+         * The default JSON parser with snake case naming strategy set
+         */
         @OptIn(ExperimentalSerializationApi::class)
         val Json = Json {
             ignoreUnknownKeys = true
