@@ -7,6 +7,7 @@ import kotlinx.serialization.Transient
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
+import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.protobuf.ProtoBuf
 import java.io.InputStream
 import java.net.URL
@@ -41,8 +42,9 @@ open class Endpoint(
     /**
      * Parse JSON from an [InputStream]
      */
+    @OptIn(ExperimentalSerializationApi::class)
     inline fun <reified T> json(inputStream: InputStream) =
-        json<T>(inputStream.use { it.bufferedReader().readText() })
+        Json.decodeFromStream<T>(inputStream)
 
     /**
      * Parse ProtoBuf from an [InputStream]
