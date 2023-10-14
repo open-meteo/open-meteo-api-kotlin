@@ -16,7 +16,6 @@ jobs:
       with:
         path: docs
         repository: open-meteo/open-meteo-website
-        ref: refs/heads/release
         # only fetch the docs folder
         sparse-checkout: |
           src/routes/en/docs
