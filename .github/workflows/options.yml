@@ -1,0 +1,26 @@
+name: Release
+
+on: workflow_dispatch
+
+jobs:
+
+  options:
+    name: Options
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - name: Checkout open-meteo website repo
+      id: checkout
+      uses: actions/checkout@v4
+      with:
+        path: docs
+        repository: open-meteo/open-meteo-website
+        ref: refs/heads/release
+        # only fetch the docs folder
+        sparse-checkout: |
+          src/routes/en/docs
+        sparse-checkout-cone-mode: false
+
+    - name: List folder structure
+      run: ls -lhas docs
