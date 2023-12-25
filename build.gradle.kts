@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.serialization") version "1.9.21"
+    id("io.gitlab.arturbosch.detekt") version("1.23.3")
     `maven-publish`
 }
 
@@ -21,4 +22,8 @@ publishing {
             artifactId = "open-meteo-api-kotlin"
         }
     }
+}
+
+detekt {
+    autoCorrect = true
 }
