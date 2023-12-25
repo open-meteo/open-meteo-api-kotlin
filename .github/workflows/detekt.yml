@@ -1,0 +1,19 @@
+name: 'Detekt'
+on:
+  push: {}
+  pull_request: {}
+jobs:
+  detekt:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Set up JDK'
+        uses: 'actions/setup-java@v4'
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+      - id: 'Execute Detekt'
+        uses: 'gradle/gradle-build-action@v2'
+        with:
+          arguments: 'detekt'

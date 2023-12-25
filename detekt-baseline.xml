@@ -1,0 +1,202 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ConstructorParameterNaming:GeocodingGet.kt$GeocodingGet.Response$private val _3: String? = null</ID>
+    <ID>ForbiddenComment:Endpoint.kt$Endpoint$// TODO: what if context isn't the default one?</ID>
+    <ID>ForbiddenComment:ForecastTest.kt$ForecastTest$// assertEquals(utcOffsetSeconds, 7200) // TODO: changes based on summer time?</ID>
+    <ID>ForbiddenComment:Query.kt$Query.Companion$* Encode the query as `?key0=value0&amp;key1=value1&amp;...keyN=valueN`. * * TODO: Values should be URL encoded.</ID>
+    <ID>LongMethod:AirQualityTest.kt$AirQualityTest$@Test fun `Amsterdam, 1st January 2023, cams Europe domain`()</ID>
+    <ID>LongMethod:EnsembleTest.kt$EnsembleTest$@Test fun `Amsterdam, 1st June 2023`()</ID>
+    <ID>LongMethod:HistoricalTest.kt$HistoricalTest$@Test fun `Amsterdam, 1st January 2020, no models`()</ID>
+    <ID>LongMethod:HistoricalTest.kt$HistoricalTest$@Test fun `Amsterdam, 1st January 2020, with models`()</ID>
+    <ID>LongMethod:MarineTest.kt$MarineTest$@Test fun `Amsterdam, 1st January 2023, imperial length units`()</ID>
+    <ID>LongParameterList:AirQuality.kt$AirQuality.Query$( override var latitude: Float, override var longitude: Float, override var hourly: String? = null, @SerialName("start_date") override var startDate: Date? = null, @SerialName("end_date") override var endDate: Date? = null, @SerialName("past_days") override var pastDays: Int? = null, override var timezone: Timezone? = null, var domains: String? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:AirQuality.kt$AirQuality.Response$( override val latitude: Float, override val longitude: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val hourlyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("hourly") override val hourlyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), )</ID>
+    <ID>LongParameterList:ClimateChange.kt$ClimateChange$( city: City, models: String, startDate: Date, endDate: Date, apikey: String? = null, context: URL = this.context, query: Query.() -&gt; Unit, )</ID>
+    <ID>LongParameterList:ClimateChange.kt$ClimateChange$( latitude: Float, longitude: Float, models: String, startDate: Date, endDate: Date, apikey: String? = null, context: URL = this.context, query: Query.() -&gt; Unit, )</ID>
+    <ID>LongParameterList:ClimateChange.kt$ClimateChange.Query$( override var latitude: Float, override var longitude: Float, override var models: String, @SerialName("start_date") override var startDate: Date, @SerialName("end_date") override var endDate: Date, override var daily: String? = null, @SerialName("temperature_unit") override var temperatureUnit: TemperatureUnit? = null, @SerialName("windspeed_unit") override var windSpeedUnit: WindSpeedUnit? = null, @SerialName("precipitation_unit") override var precipitationUnit: PrecipitationUnit? = null, override var elevation: Float? = null, @SerialName("disable_bias_correction") var disableBiasCorrection: Boolean? = null, override var cellSelection: CellSelection? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:ClimateChange.kt$ClimateChange.Response$( override val latitude: Float, override val longitude: Float, override val elevation: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val dailyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("daily") override val dailyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), )</ID>
+    <ID>LongParameterList:Ensemble.kt$Ensemble.Query$( override var latitude: Float, override var longitude: Float, override var hourly: String? = null, @SerialName("start_date") override var startDate: Date? = null, @SerialName("end_date") override var endDate: Date? = null, @SerialName("past_days") override var pastDays: Int? = null, @SerialName("forecast_days") override var forecastDays: Int? = null, override var timezone: Timezone? = null, @SerialName("temperature_unit") override var temperatureUnit: TemperatureUnit? = null, @SerialName("windspeed_unit") override var windSpeedUnit: WindSpeedUnit? = null, @SerialName("precipitation_unit") override var precipitationUnit: PrecipitationUnit? = null, override var elevation: Float? = null, override var models: String? = null, override var cellSelection: CellSelection? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:Ensemble.kt$Ensemble.Response$( override val latitude: Float, override val longitude: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val elevation: Float, override val hourlyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("hourly") override val hourlyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), )</ID>
+    <ID>LongParameterList:Flood.kt$Flood.Query$( override var latitude: Float, override var longitude: Float, override var daily: String? = null, @SerialName("past_days") override var pastDays: Int? = null, @SerialName("forecast_days") override var forecastDays: Int? = null, @SerialName("start_date") override var startDate: Date? = null, @SerialName("end_date") override var endDate: Date? = null, var ensemble: Boolean? = null, override var models: String? = null, override var cellSelection: CellSelection? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:Flood.kt$Flood.Response$( override val latitude: Float, override val longitude: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val dailyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("daily") override val dailyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), )</ID>
+    <ID>LongParameterList:Forecast.kt$Forecast.Query$( override var latitude: Float, override var longitude: Float, override var daily: String? = null, override var hourly: String? = null, @SerialName("start_date") override var startDate: Date? = null, @SerialName("end_date") override var endDate: Date? = null, @SerialName("past_days") override var pastDays: Int? = null, @SerialName("forecast_days") override var forecastDays: Int? = null, @SerialName("current_weather") override var currentWeather: Boolean? = null, override var timezone: Timezone? = null, @SerialName("temperature_unit") override var temperatureUnit: TemperatureUnit? = null, @SerialName("windspeed_unit") override var windSpeedUnit: WindSpeedUnit? = null, @SerialName("precipitation_unit") override var precipitationUnit: PrecipitationUnit? = null, override var elevation: Float? = null, override var models: String? = null, override var cellSelection: CellSelection? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:Forecast.kt$Forecast.Response$( override val latitude: Float, override val longitude: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val elevation: Float, override val dailyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("daily") override val dailyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), override val hourlyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("hourly") override val hourlyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), override val currentWeather: CurrentWeather? = null, )</ID>
+    <ID>LongParameterList:GeocodingGet.kt$GeocodingGet.Response$( // Proto order number val id: Int, // #01 val name: String, // #02 private val _3: String? = null, // #03 override val latitude: Float, // #04 override val longitude: Float, // #05 val ranking: Float? = null, // #06 override val elevation: Float, // #07 // https://www.geonames.org/export/codes.html enum? val featureCode: String, // #08 // https://en.wikipedia.org/wiki/List_of_FIPS_country_codes enum? val countryCode: String, // #09 val admin1Id: Int? = null, // #10 val admin2Id: Int? = null, // #11 val admin3Id: Int? = null, // #12 val admin4Id: Int? = null, // #13 val timezone: Timezone? = null, // #14 val population: Int? = null, // #15 private val alternativeNames: Int? = null, // #16 val postcodes: Array&lt;String&gt;, // #17 val countryId: Int, // #18 val country: String, // #19 val admin1: String? = null, // #20 val admin2: String? = null, // #21 val admin3: String? = null, // #22 val admin4: String? = null, // #23 )</ID>
+    <ID>LongParameterList:Historical.kt$Historical$( city: City, startDate: Date, endDate: Date, apikey: String? = null, context: URL = this.context, query: Query.() -&gt; Unit, )</ID>
+    <ID>LongParameterList:Historical.kt$Historical$( latitude: Float, longitude: Float, startDate: Date, endDate: Date, apikey: String? = null, context: URL = this.context, query: Query.() -&gt; Unit, )</ID>
+    <ID>LongParameterList:Historical.kt$Historical.Query$( override var latitude: Float, override var longitude: Float, @SerialName("start_date") override var startDate: Date, @SerialName("end_date") override var endDate: Date, override var daily: String? = null, override var hourly: String? = null, override var timezone: Timezone? = null, @SerialName("temperature_unit") override var temperatureUnit: TemperatureUnit? = null, @SerialName("windspeed_unit") override var windSpeedUnit: WindSpeedUnit? = null, @SerialName("precipitation_unit") override var precipitationUnit: PrecipitationUnit? = null, override var elevation: Float? = null, override var models: String? = null, override var cellSelection: CellSelection? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:Historical.kt$Historical.Response$( override val latitude: Float, override val longitude: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val elevation: Float, override val dailyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("daily") override val dailyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), override val hourlyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("hourly") override val hourlyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), override val currentWeather: CurrentWeather? = null, )</ID>
+    <ID>LongParameterList:Marine.kt$Marine.Query$( override var latitude: Float, override var longitude: Float, override var daily: String? = null, override var hourly: String? = null, @SerialName("start_date") override var startDate: Date? = null, @SerialName("end_date") override var endDate: Date? = null, @SerialName("past_days") override var pastDays: Int? = null, override var timezone: Timezone? = null, override var cellSelection: CellSelection? = null, @SerialName("length_unit") override var lengthUnit: LengthUnit? = null, override var apikey: String? = null, )</ID>
+    <ID>LongParameterList:Marine.kt$Marine.Response$( override val latitude: Float, override val longitude: Float, override val utcOffsetSeconds: Int, override val timezone: Timezone, override val timezoneAbbreviation: String, override val generationtimeMs: Float, override val dailyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("daily") override val dailyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), override val hourlyUnits: Map&lt;String, Units&gt; = mapOf(), @SerialName("hourly") override val hourlyValues: Map&lt;String, Array&lt;Double?&gt;&gt; = mapOf(), )</ID>
+    <ID>LongParameterList:OpenMeteo.kt$OpenMeteo.Contexts$( var airQuality: URL = AirQuality.context, var climateChange: URL = ClimateChange.context, var elevation: URL = Elevation.context, var ensemble: URL = Ensemble.context, var flood: URL = Flood.context, var forecast: URL = Forecast.context, var geocodingGet: URL = GeocodingGet.context, var geocodingSearch: URL = GeocodingSearch.context, var historical: URL = Historical.context, var marine: URL = Marine.context, )</ID>
+    <ID>MagicNumber:City.kt$City.AbuDhabi$24.4764f</ID>
+    <ID>MagicNumber:City.kt$City.AbuDhabi$54.3705f</ID>
+    <ID>MagicNumber:City.kt$City.Algiers$3.0597f</ID>
+    <ID>MagicNumber:City.kt$City.Algiers$36.7755f</ID>
+    <ID>MagicNumber:City.kt$City.Amsterdam$4.8910f</ID>
+    <ID>MagicNumber:City.kt$City.Amsterdam$52.3738f</ID>
+    <ID>MagicNumber:City.kt$City.Ankara$32.8560f</ID>
+    <ID>MagicNumber:City.kt$City.Ankara$39.9439f</ID>
+    <ID>MagicNumber:City.kt$City.Asuncion$25.3005f</ID>
+    <ID>MagicNumber:City.kt$City.Asuncion$57.6362f</ID>
+    <ID>MagicNumber:City.kt$City.Athens$23.7166f</ID>
+    <ID>MagicNumber:City.kt$City.Athens$37.9792f</ID>
+    <ID>MagicNumber:City.kt$City.Baghdad$33.3157f</ID>
+    <ID>MagicNumber:City.kt$City.Baghdad$44.3922f</ID>
+    <ID>MagicNumber:City.kt$City.Berlin$13.4115f</ID>
+    <ID>MagicNumber:City.kt$City.Berlin$52.5235f</ID>
+    <ID>MagicNumber:City.kt$City.Bern$46.9480f</ID>
+    <ID>MagicNumber:City.kt$City.Bern$7.4481f</ID>
+    <ID>MagicNumber:City.kt$City.Bogota$4.6473f</ID>
+    <ID>MagicNumber:City.kt$City.Bogota$74.0962f</ID>
+    <ID>MagicNumber:City.kt$City.Brasilia$15.7801f</ID>
+    <ID>MagicNumber:City.kt$City.Brasilia$47.9292f</ID>
+    <ID>MagicNumber:City.kt$City.Brussels$4.3676f</ID>
+    <ID>MagicNumber:City.kt$City.Brussels$50.8371f</ID>
+    <ID>MagicNumber:City.kt$City.Budapest$19.0408f</ID>
+    <ID>MagicNumber:City.kt$City.Budapest$47.4984f</ID>
+    <ID>MagicNumber:City.kt$City.BuenosAires$34.6118f</ID>
+    <ID>MagicNumber:City.kt$City.BuenosAires$58.4173f</ID>
+    <ID>MagicNumber:City.kt$City.Cairo$30.0571f</ID>
+    <ID>MagicNumber:City.kt$City.Cairo$31.2272f</ID>
+    <ID>MagicNumber:City.kt$City.Canberra$149.1286f</ID>
+    <ID>MagicNumber:City.kt$City.Canberra$35.2820f</ID>
+    <ID>MagicNumber:City.kt$City.Chicago$41.85f</ID>
+    <ID>MagicNumber:City.kt$City.Chicago$87.65f</ID>
+    <ID>MagicNumber:City.kt$City.CiudadDeMexico$19.4271f</ID>
+    <ID>MagicNumber:City.kt$City.CiudadDeMexico$99.1276f</ID>
+    <ID>MagicNumber:City.kt$City.Copenhagen$12.5681f</ID>
+    <ID>MagicNumber:City.kt$City.Copenhagen$55.6763f</ID>
+    <ID>MagicNumber:City.kt$City.Dhaka$23.7106f</ID>
+    <ID>MagicNumber:City.kt$City.Dhaka$90.3978f</ID>
+    <ID>MagicNumber:City.kt$City.Dublin$53.3441f</ID>
+    <ID>MagicNumber:City.kt$City.Dublin$6.2675f</ID>
+    <ID>MagicNumber:City.kt$City.Houston$29.76f</ID>
+    <ID>MagicNumber:City.kt$City.Houston$95.36f</ID>
+    <ID>MagicNumber:City.kt$City.Jakarta$106.8063f</ID>
+    <ID>MagicNumber:City.kt$City.Jakarta$6.1862f</ID>
+    <ID>MagicNumber:City.kt$City.Jerusalem$31.7857f</ID>
+    <ID>MagicNumber:City.kt$City.Jerusalem$35.2007f</ID>
+    <ID>MagicNumber:City.kt$City.Kabul$34.5155f</ID>
+    <ID>MagicNumber:City.kt$City.Kabul$69.1952f</ID>
+    <ID>MagicNumber:City.kt$City.Kathmandu$27.7058f</ID>
+    <ID>MagicNumber:City.kt$City.Kathmandu$85.3157f</ID>
+    <ID>MagicNumber:City.kt$City.Kiev$30.5367f</ID>
+    <ID>MagicNumber:City.kt$City.Kiev$50.4422f</ID>
+    <ID>MagicNumber:City.kt$City.KualaLumpur$101.7077f</ID>
+    <ID>MagicNumber:City.kt$City.KualaLumpur$3.1502f</ID>
+    <ID>MagicNumber:City.kt$City.Lima$12.0931f</ID>
+    <ID>MagicNumber:City.kt$City.Lima$77.0465f</ID>
+    <ID>MagicNumber:City.kt$City.Lisabon$38.7072f</ID>
+    <ID>MagicNumber:City.kt$City.Lisabon$9.1355f</ID>
+    <ID>MagicNumber:City.kt$City.London$0.1262f</ID>
+    <ID>MagicNumber:City.kt$City.London$51.5002f</ID>
+    <ID>MagicNumber:City.kt$City.LosAngeles$118.24f</ID>
+    <ID>MagicNumber:City.kt$City.LosAngeles$34.05f</ID>
+    <ID>MagicNumber:City.kt$City.Luanda$13.2306f</ID>
+    <ID>MagicNumber:City.kt$City.Luanda$8.8159f</ID>
+    <ID>MagicNumber:City.kt$City.Madrid$3.7033f</ID>
+    <ID>MagicNumber:City.kt$City.Madrid$40.4167f</ID>
+    <ID>MagicNumber:City.kt$City.Montevideo$34.8941f</ID>
+    <ID>MagicNumber:City.kt$City.Montevideo$56.0675f</ID>
+    <ID>MagicNumber:City.kt$City.Moscow$37.6176f</ID>
+    <ID>MagicNumber:City.kt$City.Moscow$55.7558f</ID>
+    <ID>MagicNumber:City.kt$City.Nairobi$1.2762f</ID>
+    <ID>MagicNumber:City.kt$City.Nairobi$36.7965f</ID>
+    <ID>MagicNumber:City.kt$City.NewDelhi$28.6353f</ID>
+    <ID>MagicNumber:City.kt$City.NewDelhi$77.2250f</ID>
+    <ID>MagicNumber:City.kt$City.NewYork$40.71f</ID>
+    <ID>MagicNumber:City.kt$City.NewYork$74.01f</ID>
+    <ID>MagicNumber:City.kt$City.Oslo$10.7387f</ID>
+    <ID>MagicNumber:City.kt$City.Oslo$59.9138f</ID>
+    <ID>MagicNumber:City.kt$City.Ottawa$45.4235f</ID>
+    <ID>MagicNumber:City.kt$City.Ottawa$75.6979f</ID>
+    <ID>MagicNumber:City.kt$City.Paris$2.3510f</ID>
+    <ID>MagicNumber:City.kt$City.Paris$48.8567f</ID>
+    <ID>MagicNumber:City.kt$City.Peking$116.3958f</ID>
+    <ID>MagicNumber:City.kt$City.Peking$39.9056f</ID>
+    <ID>MagicNumber:City.kt$City.Philadelphia$39.95f</ID>
+    <ID>MagicNumber:City.kt$City.Philadelphia$75.16f</ID>
+    <ID>MagicNumber:City.kt$City.Phoenix$112.07f</ID>
+    <ID>MagicNumber:City.kt$City.Phoenix$33.45f</ID>
+    <ID>MagicNumber:City.kt$City.Pretoria$25.7463f</ID>
+    <ID>MagicNumber:City.kt$City.Pretoria$28.1876f</ID>
+    <ID>MagicNumber:City.kt$City.Reykjavik$21.8952f</ID>
+    <ID>MagicNumber:City.kt$City.Reykjavik$64.1353f</ID>
+    <ID>MagicNumber:City.kt$City.Rome$12.4823f</ID>
+    <ID>MagicNumber:City.kt$City.Rome$41.8955f</ID>
+    <ID>MagicNumber:City.kt$City.Sacramento$121.4871f</ID>
+    <ID>MagicNumber:City.kt$City.Sacramento$38.5737f</ID>
+    <ID>MagicNumber:City.kt$City.Santiago$33.4691f</ID>
+    <ID>MagicNumber:City.kt$City.Santiago$70.6420f</ID>
+    <ID>MagicNumber:City.kt$City.Seoul$126.9828f</ID>
+    <ID>MagicNumber:City.kt$City.Seoul$37.5139f</ID>
+    <ID>MagicNumber:City.kt$City.Singapore$1.2894f</ID>
+    <ID>MagicNumber:City.kt$City.Singapore$103.8500f</ID>
+    <ID>MagicNumber:City.kt$City.Sofia$23.3238f</ID>
+    <ID>MagicNumber:City.kt$City.Sofia$42.7105f</ID>
+    <ID>MagicNumber:City.kt$City.Stockholm$18.0645f</ID>
+    <ID>MagicNumber:City.kt$City.Stockholm$59.3328f</ID>
+    <ID>MagicNumber:City.kt$City.Teheran$35.7061f</ID>
+    <ID>MagicNumber:City.kt$City.Teheran$51.4358f</ID>
+    <ID>MagicNumber:City.kt$City.Tiflis$41.7010f</ID>
+    <ID>MagicNumber:City.kt$City.Tiflis$44.7930f</ID>
+    <ID>MagicNumber:City.kt$City.Tokyo$139.6823f</ID>
+    <ID>MagicNumber:City.kt$City.Tokyo$35.6785f</ID>
+    <ID>MagicNumber:City.kt$City.Tripoli$13.1897f</ID>
+    <ID>MagicNumber:City.kt$City.Tripoli$32.8830f</ID>
+    <ID>MagicNumber:City.kt$City.UlanBator$106.9220f</ID>
+    <ID>MagicNumber:City.kt$City.UlanBator$47.9138f</ID>
+    <ID>MagicNumber:City.kt$City.Vancouver$123.12f</ID>
+    <ID>MagicNumber:City.kt$City.Vancouver$49.25f</ID>
+    <ID>MagicNumber:City.kt$City.Vienna$16.3728f</ID>
+    <ID>MagicNumber:City.kt$City.Vienna$48.2092f</ID>
+    <ID>MagicNumber:City.kt$City.Warsaw$21.0122f</ID>
+    <ID>MagicNumber:City.kt$City.Warsaw$52.2297f</ID>
+    <ID>MagicNumber:City.kt$City.Washington$38.8921f</ID>
+    <ID>MagicNumber:City.kt$City.Washington$77.0241f</ID>
+    <ID>MagicNumber:City.kt$City.Wellington$174.7762f</ID>
+    <ID>MagicNumber:City.kt$City.Wellington$41.2865f</ID>
+    <ID>MagicNumber:City.kt$City.Windhoek$17.0805f</ID>
+    <ID>MagicNumber:City.kt$City.Windhoek$22.5749f</ID>
+    <ID>MagicNumber:Endpoint.kt$Endpoint$200</ID>
+    <ID>MagicNumber:Endpoint.kt$Endpoint$400</ID>
+    <ID>MagicNumber:Time.kt$Time$1000</ID>
+    <ID>MagicNumber:TimeSerializer.kt$TimeSerializer$1000</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.DepositingRimeFog$48</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.DrizzleDense$55</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.DrizzleLight$51</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.DrizzleModerate$53</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.Fog$45</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.FreezingDrizzleDense$57</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.FreezingDrizzleLight$56</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.FreezingRainHeavy$67</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.FreezingRainLight$66</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.Overcast$3</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.RainHeavy$65</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.RainModerate$63</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.RainShowersModerate$81</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.RainShowersSlight$80</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.RainShowersViolent$82</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.RainSlight$61</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.SnowFallHeavy$75</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.SnowFallModerate$73</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.SnowFallSlight$71</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.SnowGrains$77</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.SnowShowersHeavy$86</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.SnowShowersSlight$85</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.ThunderstormHeavyHail$99</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.ThunderstormSlight$95</ID>
+    <ID>MagicNumber:WeatherCode.kt$WeatherCode.ThunderstormSlightHail$96</ID>
+    <ID>MaxLineLength:OpenMeteo.kt$OpenMeteo.Companion$operator</ID>
+    <ID>MemberNameEqualsClassName:Timezone.kt$Timezone$val timeZone: java.util.TimeZone? get() = java.util.TimeZone.getTimeZone(id)</ID>
+    <ID>ReturnCount:Response.kt$Response.UnitTimeStepValues.Companion$@ExperimentalGluedUnitTimeStepValues internal fun glue( units: Map&lt;String, Units&gt;, values: Map&lt;String, Array&lt;Double?&gt;&gt;, ): Map&lt;String, UnitTimeStepValues&gt;</ID>
+    <ID>TooGenericExceptionThrown:Endpoint.kt$Endpoint$throw Error("`$url` response code: $responseCode ($responseMessage)")</ID>
+    <ID>TooGenericExceptionThrown:OpenMeteo.kt$OpenMeteo.Companion$throw Error("No results!")</ID>
+    <ID>UnusedPrivateProperty:BadRequest.kt$BadRequest$private val error: Boolean</ID>
+    <ID>UnusedPrivateProperty:GeocodingGet.kt$GeocodingGet.Response$private val _3: String? = null</ID>
+    <ID>UnusedPrivateProperty:GeocodingGet.kt$GeocodingGet.Response$private val alternativeNames: Int? = null</ID>
+  </CurrentIssues>
+</SmellBaseline>

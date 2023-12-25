@@ -11,4 +11,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = 'open-meteo-api-kotlin'
+rootProject.name = "open-meteo-api-kotlin"
