@@ -1,4 +1,4 @@
-rootProject.name = "Open-Meteo_SDK"
+rootProject.name = "open-meteo-kmp-sdk"
 include(":shared")
 
 pluginManagement {

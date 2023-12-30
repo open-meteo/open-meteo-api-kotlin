@@ -1,4 +1,4 @@
-# Contributing to the Open-Meteo API Kotlin library
+# Contributing to the Open-Meteo KMP SDK
 
 This document includes a set of guidelines and rules for contributing to the library.
 Feel free to open an issue if you have any doubts.

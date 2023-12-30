@@ -1,6 +1,6 @@
 # Attributions
 
-open-meteo-kotlin is an open-source project that aims to ease the usage of the Open-Meteo APIs.
+open-meteo-kmp-sdk is an open-source project that aims to ease the usage of the Open-Meteo APIs.
 
 This document may not be exhaustive or attribute everyone: feel free to open a pull request to fix or add any missing attributions (eg: code, documentation, APIs...).
 
