@@ -8,8 +8,8 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        kotlin("multiplatform").version("1.9.21")
-        kotlin("plugin.serialization").version("1.9.21")
+        kotlin("multiplatform").version("1.9.22")
+        kotlin("plugin.serialization").version("1.9.22")
         id("com.android.library").version("8.2.0")
     }
 }
@@ -29,6 +29,6 @@ dependencyResolutionManagement {
             library("ktor-client-darwin", "io.ktor:ktor-client-darwin:2.3.7")
             library("ktor-client-js", "io.ktor:ktor-client-js:2.3.7")
             library("ktor-client-core", "io.ktor:ktor-client-core:2.3.7")
-       }
+        }
     }
 }
