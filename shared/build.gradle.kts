@@ -6,7 +6,7 @@ plugins {
 kotlin {
     jvm()
     js(IR) {
-        browser()
+        // browser()
         nodejs()
     }
     linuxX64()
