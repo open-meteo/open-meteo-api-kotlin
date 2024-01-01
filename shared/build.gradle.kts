@@ -65,10 +65,8 @@ kotlin {
     }
 }
 
-android {
-    namespace = "com.openmeteo.sdk"
-    compileSdk = 31
-    defaultConfig {
-        minSdk = 21
-    }
+// Fixes JS issue: https://youtrack.jetbrains.com/issue/KT-49109
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    // rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().download = false // "true" for default behavior
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "20.0.0"
 }
