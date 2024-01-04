@@ -1,10 +1,7 @@
 package com.openmeteo.sdk.common
 
-//import com.openmeteo.sdk.common.time.Time
 import com.openmeteo.sdk.common.units.Units
-import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalTime
 
 interface Response {
 
