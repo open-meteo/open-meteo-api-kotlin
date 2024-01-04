@@ -97,7 +97,7 @@ open class Query {
     /**
      * Query for location-based resources.
      */
-    interface Coordinate : com.openmeteo.sdk.common.Coordinate, Query
+    interface Coordinate : com.openmeteo.sdk.common.Coordinate
 
     /**
      * Query for elevation-based resources.  Defaults to a 90 meters model.
