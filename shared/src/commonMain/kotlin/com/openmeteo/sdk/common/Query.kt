@@ -3,66 +3,16 @@ package com.openmeteo.sdk.common
 //import com.openmeteo.sdk.common.time.Date
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.properties.Properties
-import kotlinx.serialization.properties.encodeToStringMap
+import kotlinx.serialization.properties.encodeToMap
 
+//@Serializable
+//open class Query {
 interface Query {
-
-    companion object {
-
-        /**
-         * Stringify and URL encode a value.
-         */
-        fun encode(value: Any, encoding: String = "utf-8"): String? =
-            // URLEncoder.encode(value.toString(), encoding)
-            value.toString()
-
-        /**
-         * Retrieve a flat [Map] of key-value pairs.
-         * Entries with null values are filtered out.
-         */
-        @OptIn(ExperimentalSerializationApi::class)
-        inline fun <reified T : Query> toMap(query: T) =
-            Properties.encodeToStringMap(query)
-                .filter { (k) -> k != "type" }
-                .let {
-                    // if resource has timestamps
-                    if (query is TimeFormat)
-                        // always force unix timestamps
-                        it.plus("timeformat" to "unixtime")
-                    else it
-                }
-
-        /**
-         * Like `.toMap().toList()`
-         */
-        inline fun <reified T : Query> toList(query: T) =
-            toMap(query).toList()
-
-        /**
-         * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
-         *
-         * To URL encode values use the [encode] method.
-         * Note that key names (usually) don't need to be URL encoded.
-         */
-        inline fun <reified T : Query> asString(query: T) =
-            toList(query)
-                .joinToString("&", "?") { (k, v) -> "$k=$v" }
-
-        /**
-         * Encode the query as `?key0=value0&key1=value1&...keyN=valueN`.
-         *
-         * TODO: Values should be URL encoded.
-         */
-        inline fun <reified T : Query> toURL(query: T, context: String /*URL*/) =
-            // URL(context, "${context.path}${asString(query)}")
-            "$context?${asString(query)}"
-
-    }
 
     /**
      * Query for resources that have a timezone field.
      */
-    interface Timezone : Query {
+    interface Timezone {
         /**
          * The timezone to optionally use.
          */
@@ -74,7 +24,7 @@ interface Query {
      *
      * Used internally to hardcode Unix timestamps.
      */
-    interface TimeFormat : Query
+    interface TimeFormat
 
     /**
      * Query for resources that have daily fields.
@@ -99,7 +49,7 @@ interface Query {
     /**
      * Query for resources that can be retrieved in a specific date range.
      */
-    interface DateRange : Query {
+    interface DateRange {
 
         /**
          * The start date of the range.
@@ -115,7 +65,7 @@ interface Query {
     /**
      * Query for resources that can be retrieved from past days.
      */
-    interface PastDays : Query {
+    interface PastDays {
 
         /**
          * The number of days in the past to query.
@@ -126,7 +76,7 @@ interface Query {
     /**
      * Query for resources that can be retrieved from future days.
      */
-    interface ForecastDays : Query {
+    interface ForecastDays {
 
         /**
          * The number of days in the future to query.
@@ -137,11 +87,11 @@ interface Query {
     /**
      * Query for resources that may pick the content format.
      */
-    interface ContentFormat : Query {
+    interface ContentFormat {
         /**
          * The requested content format.
          */
-        val format: com.openmeteo.sdk.common.http.ContentFormat?
+        val format: com.openmeteo.sdk.common.ContentFormat?
     }
 
     /**
@@ -157,7 +107,7 @@ interface Query {
     /**
      * Query for resources that may include the current weather in the response.
      */
-    interface CurrentWeather : Query {
+    interface CurrentWeather {
         /**
          * Whether to include the current weather in the response or not.
          */
@@ -167,7 +117,7 @@ interface Query {
     /**
      * Query for resources that may include temperature values
      */
-    interface TemperatureUnit : Query {
+    interface TemperatureUnit {
         /**
          * The requested temperature unit
          */
@@ -177,7 +127,7 @@ interface Query {
     /**
      * Query for resources that may include wind speed values
      */
-    interface WindSpeedUnit : Query {
+    interface WindSpeedUnit {
         /**
          * The requested wind speed unit
          */
@@ -187,7 +137,7 @@ interface Query {
     /**
      * Query for resources that may include wind speed values
      */
-    interface PrecipitationUnit : Query {
+    interface PrecipitationUnit {
         /**
          * The requested wind speed unit
          */
@@ -197,7 +147,7 @@ interface Query {
     /**
      * Query for resources that may include lengths
      */
-    interface LengthUnit : Query {
+    interface LengthUnit {
         /**
          * The requested length unit
          */
@@ -207,7 +157,7 @@ interface Query {
     /**
      * Query for resources that can use different data models.
      */
-    interface Models : Query {
+    interface Models {
         /**
          * The requested model
          */
@@ -217,7 +167,7 @@ interface Query {
     /**
      * Query for resources that can have different cell selection.
      */
-    interface CellSelection : Query {
+    interface CellSelection {
         /**
          * The requested cell selection
          */
@@ -227,7 +177,7 @@ interface Query {
     /**
      * Query that may be retrieved with a commercial license (api key)
      */
-    interface CommercialLicense : Query {
+    interface CommercialLicense {
         /**
          * The api key (commercial usage)
          * Commercial usage appends `customer-` as prefix on all domains:
@@ -235,6 +185,28 @@ interface Query {
          * - `https://customer-marine-api.open-meteo.com/v1/marine`
          */
         val apikey: String?
+    }
+
+    companion object {
+
+        /**
+         * Encode a query as an HTTP query string, i.e. `?a=hello_world&b=3&c=true`
+         * Please note that spaces and other special characters should be manually
+         * encoded through the `transform` lambda (defaults to `{ (k, v) -> "$k=$v" }`).
+         * Please note that pairs with `null` values are skipped.
+         * @param value The [Query] to encode.
+         * @param transform The transform function applied to key-value pairs.
+         * @return Empty string if null query, otherwise encoded string.
+         */
+        @OptIn(ExperimentalSerializationApi::class)
+        inline fun <reified T : Query> encodeToString(
+            value: T?,
+            noinline transform: ((Pair<String, Any>) -> String) = { (k, v) -> "$k=$v" }
+        ) =
+            if (value == null) ""
+            else Properties.encodeToMap(value).toList()
+                .joinToString("&", "?", transform = transform)
+
     }
 
 }
