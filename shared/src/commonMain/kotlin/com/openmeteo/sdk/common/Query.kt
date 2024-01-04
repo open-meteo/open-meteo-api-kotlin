@@ -2,12 +2,12 @@ package com.openmeteo.sdk.common
 
 //import com.openmeteo.sdk.common.time.Date
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToMap
 
-//@Serializable
-//open class Query {
-interface Query {
+@Serializable
+open class Query {
 
     /**
      * Query for resources that have a timezone field.
