@@ -1,6 +1,6 @@
 package com.openmeteo.sdk.common
 
-//import com.openmeteo.sdk.common.time.Date
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.properties.Properties
@@ -14,9 +14,9 @@ open class Query {
      */
     interface Timezone {
         /**
-         * The timezone to optionally use.
+         * The timezone to use.
          */
-        //val timezone: com.openmeteo.sdk.common.time.Timezone?
+        val timezone: String?
     }
 
     /**
@@ -54,12 +54,12 @@ open class Query {
         /**
          * The start date of the range.
          */
-        //val startDate: Date?
+        val startDate: LocalDate?
 
         /**
          * The end date of the range.
          */
-        //val endDate: Date?
+        val endDate: LocalDate?
     }
 
     /**
