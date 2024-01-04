@@ -1,4 +1,4 @@
-package com.openmeteo.sdk.common.http
+package com.openmeteo.sdk.common
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
