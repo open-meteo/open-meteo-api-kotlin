@@ -1,4 +1,4 @@
 plugins {
-    kotlin("multiplatform").apply(false)
-    kotlin("plugin.serialization").apply(false)
+    alias(libs.plugins.multiplatform).apply(false)
+    alias(libs.plugins.kotlinx.serialization).apply(false)
 }

@@ -1,72 +1,86 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.kotlinx.serialization)
+    id("convention.publication")
 }
+
+group = "com.openmeteo.sdk"
+version = "1.0"
 
 kotlin {
     jvm()
+
     js(IR) {
-        // browser()
         nodejs()
+        browser {
+            testTask {
+                useKarma {
+                    useChromiumHeadless()
+                }
+            }
+        }
     }
-    linuxX64()
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
+
+    linuxX64 {
+        binaries.staticLib {
+            baseName = "shared"
+        }
+    }
+
 
     sourceSets {
-        /* Main source sets */
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.kotlinx.serialization.properties)
-                implementation(libs.kotlinx.serialization.protobuf)
-                implementation(libs.kotlinx.serialization.json)
-                implementation(libs.kotlinx.datetime)
-                implementation(libs.ktor.client.core)
-            }
+        commonMain.dependencies {
+            implementation(libs.kotlinx.serialization.properties)
+            implementation(libs.kotlinx.serialization.protobuf)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.ktor.core)
         }
-        val jvmMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.okhttp)
-            }
-        }
-        val jsMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.js)
-                implementation(npm("@js-joda/timezone", "2.3.0"))
-            }
-        }
-        val linuxMain by creating {
-            dependencies {
-                implementation(libs.ktor.client.curl)
-            }
-        }
-        val linuxX64Main by getting
 
-        /* Main hierarchy */
-        jvmMain.dependsOn(commonMain)
-        jsMain.dependsOn(commonMain)
-        linuxMain.dependsOn(commonMain)
-        linuxX64Main.dependsOn(linuxMain)
-
-        /* Test source sets */
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
         }
-        val jvmTest by getting
-        val jsTest by getting
-        val linuxTest by creating
-        val linuxX64Test by getting
 
-        /* Test hierarchy */
-        jvmTest.dependsOn(commonTest)
-        jsTest.dependsOn(commonTest)
-        linuxTest.dependsOn(commonTest)
-        linuxX64Test.dependsOn(linuxTest)
+        jvmMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
+
+        jsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
+
+        nativeMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+        }
+
+        nativeTest.dependencies {
+            implementation(libs.kotlinx.coroutines.test)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
+        linuxMain.dependencies {
+            implementation(libs.ktor.client.curl)
+        }
+
     }
-}
 
-// Fixes JS issue: https://youtrack.jetbrains.com/issue/KT-49109
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
-    // rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().download = false // "true" for default behavior
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "20.0.0"
+    //https://kotlinlang.org/docs/native-objc-interop.html#export-of-kdoc-comments-to-generated-objective-c-headers
+    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+        compilations["main"].compilerOptions.options.freeCompilerArgs.add("-Xexport-kdoc")
+    }
+
 }
