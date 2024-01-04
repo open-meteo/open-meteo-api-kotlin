@@ -2,6 +2,9 @@ package com.openmeteo.sdk.common
 
 //import com.openmeteo.sdk.common.time.Time
 import com.openmeteo.sdk.common.units.Units
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalTime
 
 interface Response {
 
@@ -15,7 +18,7 @@ interface Response {
      */
     interface TimeZone : Response {
         val utcOffsetSeconds: Int
-        //val timezone: com.openmeteo.sdk.common.time.Timezone
+        val timezone: kotlinx.datetime.TimeZone
         val timezoneAbbreviation: String
     }
 
@@ -37,8 +40,7 @@ interface Response {
     @ExperimentalGluedUnitTimeStepValues
     class UnitTimeStepValues(
         val unit: Units,
-        //val values: Map<Time, Double?>
-        val values: Map<Double?, Double?>
+        val values: Map<Instant, Double?>
     ) {
 
         companion object {
@@ -63,8 +65,8 @@ interface Response {
                 // get just the time keys array
                 val time = values.getValue("time")
                     .requireNoNulls()
-                    // get Time objects
-                    //.map { Time(it) }
+                    // get Instant objects from epoch seconds
+                    .map { Instant.fromEpochSeconds(it.toLong()) }
                     .map { it }
                 // filter time away! We don't need it in the map values
                 return values.filterKeys { it != "time" }
