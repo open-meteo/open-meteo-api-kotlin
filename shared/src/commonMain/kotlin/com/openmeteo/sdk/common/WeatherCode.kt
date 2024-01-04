@@ -40,8 +40,8 @@ enum class WeatherCode(val code: Short, val message: String) {
     override fun toString(): String = message
 
     companion object {
-        fun from(code: Short) = values()
-            .firstOrNull { it.code == code } ?: Unknown
+        fun from(code: Short) =
+            entries.firstOrNull { it.code == code } ?: Unknown
 
         fun from(code: Int) = from(code.toShort())
         fun from(code: Double) = from(code.toInt())
