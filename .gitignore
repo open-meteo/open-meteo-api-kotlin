@@ -9,3 +9,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+xcuserdata/
+Pods/
+*.jks
+*yarn.lock
