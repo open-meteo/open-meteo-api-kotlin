@@ -35,7 +35,7 @@ interface Response {
      * A weather data "column" holding the values and their unit.
      */
     @ExperimentalGluedUnitTimeStepValues
-    class UnitTimeStepValues(
+    class UnitTimeStepValues private constructor(
         val unit: Units,
         val values: Map<Instant, Double?>
     ) {
@@ -46,7 +46,7 @@ interface Response {
              * Glue units and values together into a map of keys (eg: temperature_2m) and unit/values
              */
             @ExperimentalGluedUnitTimeStepValues
-            internal fun glue(
+            fun glue(
                 units: Map<String, Units>,
                 values: Map<String, Array<Double?>>,
             ): Map<String, UnitTimeStepValues> {
@@ -64,14 +64,15 @@ interface Response {
                     .requireNoNulls()
                     // get Instant objects from epoch seconds
                     .map { Instant.fromEpochSeconds(it.toLong()) }
-                    .map { it }
                 // filter time away! We don't need it in the map values
                 return values.filterKeys { it != "time" }
                     .mapValues { (k, v) ->
                         UnitTimeStepValues(
-                            units[k]!!, // no need to check if key exists, we already fixed shit in the beginning!
+                            // no need to check if key exists, we already fixed shit in the beginning!
+                            units[k]!!,
+                            // create a map with the time as keys and the values as... values :)
                             time.zip(v).toMap()
-                        ) // create a map with the time as keys and the values as... values :)
+                        )
                     }
             }
         }
