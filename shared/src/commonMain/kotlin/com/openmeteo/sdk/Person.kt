@@ -12,7 +12,7 @@ class Person : Table() {
     val name : String? get() = lookupField(4, null ) { string(it + bufferPos) }
     fun nameAsBuffer() : ReadBuffer = vectorAsBuffer(bb, 4, 1)
 
-    val age : Int get() = lookupField(6, 0 ) { bb.getInt(it + bufferPos) }
+    val age : Short get() = lookupField(6, 0 ) { bb.getShort(it + bufferPos) }
 
     companion object {
         fun validateVersion() = VERSION_2_0_8
@@ -21,17 +21,17 @@ class Person : Table() {
         fun asRoot(buffer: ReadWriteBuffer, obj: Person) : Person = obj.init(buffer.getInt(buffer.limit) + buffer.limit, buffer)
 
 
-        fun createPerson(builder: FlatBufferBuilder, nameOffset: Offset<String>, age: Int) : Offset<Person> {
+        fun createPerson(builder: FlatBufferBuilder, nameOffset: Offset<String>, age: Short) : Offset<Person> {
             builder.startTable(2)
-            addAge(builder, age)
             addName(builder, nameOffset)
+            addAge(builder, age)
             return endPerson(builder)
         }
         fun startPerson(builder: FlatBufferBuilder) = builder.startTable(2)
 
         fun addName(builder: FlatBufferBuilder, name: Offset<String>) = builder.add(0, name, 0)
 
-        fun addAge(builder: FlatBufferBuilder, age: Int) = builder.add(1, age, 0)
+        fun addAge(builder: FlatBufferBuilder, age: Short) = builder.add(1, age, 0)
 
         fun endPerson(builder: FlatBufferBuilder) : Offset<Person> {
             val o: Offset<Person> = builder.endTable()
