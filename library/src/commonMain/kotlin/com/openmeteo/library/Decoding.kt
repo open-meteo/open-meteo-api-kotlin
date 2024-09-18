@@ -1,5 +1,7 @@
 package com.openmeteo.library
 
+import com.google.flatbuffers.kotlin.ArrayReadWriteBuffer
+import com.google.flatbuffers.kotlin.ReadWriteBuffer
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.statement.HttpResponse
@@ -51,7 +53,7 @@ internal object Decoding {
 
     internal inline fun <reified Q : Query<Q, R>, reified R> flatbuffers(
         from: String,
-        crossinline decode: (bytes: ByteArray) -> R
+        crossinline asRoot: (buffer: ReadWriteBuffer) -> R
     ): Query<Q, R> = object : Query<Q, R> by query(from, " flatbuffers") {
         override suspend fun decode(response: HttpResponse): List<R> {
             val channel = response.bodyAsChannel()
@@ -61,11 +63,12 @@ internal object Decoding {
                     // Ktor BE Int --> FlatBuffer LE Int
                     val size = channel.readInt().reverseByteOrder()
                     val bytes = channel.readByteArray(size)
+                    val buffer = ArrayReadWriteBuffer(bytes)
 
                     // TODO: what if the byte array is not long enough?!
 
                     // Add entry to the list
-                    val entry = decode(bytes)
+                    val entry = asRoot(buffer)
                     add(entry)
 
                 }

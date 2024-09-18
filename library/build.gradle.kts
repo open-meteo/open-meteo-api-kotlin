@@ -103,6 +103,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.ktor.client.core)
             implementation(project(":sdk"))
+            implementation(project(":flatbuffers"))
         }
 
         commonTest.dependencies {
