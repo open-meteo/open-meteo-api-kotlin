@@ -61,7 +61,7 @@ kotlin {
 
     /* Native targets */
 
-    listOf(
+    /*listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
@@ -92,7 +92,7 @@ kotlin {
         binaries.staticLib {
             baseName = "library"
         }
-    }
+    }*/
 
     sourceSets {
 
@@ -121,7 +121,7 @@ kotlin {
             implementation(libs.ktor.client.js)
         }
 
-        iosMain.dependencies {
+        /*iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
 
@@ -135,7 +135,7 @@ kotlin {
 
         mingwMain.dependencies {
             implementation(libs.ktor.client.winhttp)
-        }
+        }*/
 
     }
 }
