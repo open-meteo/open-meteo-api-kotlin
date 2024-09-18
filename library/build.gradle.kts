@@ -102,6 +102,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.properties)
             implementation(libs.kotlinx.datetime)
             implementation(libs.ktor.client.core)
+            implementation(project(":sdk"))
         }
 
         commonTest.dependencies {

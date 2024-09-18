@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "open-meteo-kmp-sdk"
 include(":library")
+include(":sdk")
+include(":flatbuffers")
