@@ -2,3 +2,7 @@
 	path = .submodules/flatbuffers
 	url = https://github.com/google/flatbuffers
 	branch = master
+[submodule ".submodules/open-meteo-sdk"]
+	path = .submodules/open-meteo-sdk
+	url = https://github.com/open-meteo/sdk
+	branch = main
