@@ -54,7 +54,7 @@ internal object Decoding {
     internal inline fun <reified Q : Query<Q, R>, reified R> flatbuffers(
         from: String,
         crossinline asRoot: (buffer: ReadWriteBuffer) -> R
-    ): Query<Q, R> = object : Query<Q, R> by query(from, " flatbuffers") {
+    ): Query<Q, R> = object : Query<Q, R> by query(from, "flatbuffers") {
         override suspend fun decode(response: HttpResponse): List<R> {
             val channel = response.bodyAsChannel()
             return buildList {
