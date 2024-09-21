@@ -80,7 +80,7 @@ kotlin {
             baseName = "library"
             isStatic = true
         }
-    }
+    }*/
 
     linuxX64 {
         binaries.staticLib {
@@ -92,7 +92,7 @@ kotlin {
         binaries.staticLib {
             baseName = "library"
         }
-    }*/
+    }
 
     sourceSets {
 

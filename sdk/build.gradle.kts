@@ -7,6 +7,20 @@ kotlin {
     jvm()
     js {
         nodejs()
+        browser()
+        binaries.executable()
+    }
+
+    linuxX64 {
+        binaries.staticLib {
+            baseName = "sdk"
+        }
+    }
+
+    mingwX64 {
+        binaries.staticLib {
+            baseName = "sdk"
+        }
     }
 
     sourceSets {
