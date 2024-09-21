@@ -1,7 +1,6 @@
 package com.openmeteo.library
 
 import com.openmeteo.library.serializers.ListAsString
-import com.openmeteo.sdk.Variable
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
