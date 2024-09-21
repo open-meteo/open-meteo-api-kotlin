@@ -1,45 +1,81 @@
 package com.openmeteo.library
 
+import com.openmeteo.library.serializers.ListAsString
+import com.openmeteo.sdk.Variable
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
-import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.Transient
 import kotlinx.serialization.properties.Properties
+import kotlinx.serialization.serializer
 
-internal interface Query<Q : Query<Q, R>, R> {
-    public val client: HttpClient
-    public val format: String
-    public val serializer: SerializationStrategy<Q>
-    public val deserializer: DeserializationStrategy<R>?
-    public suspend fun decode(response: HttpResponse) : List<R>
+/**
+ * A serializable query
+ */
+@Serializable
+public abstract class Query internal constructor(
+    @Transient
+    public val client: HttpClient = HttpClient()
+) {
+
+    public constructor(url: String) : this(
+        HttpClient { defaultRequest { url(url) } }
+    )
 
     /**
-     * Cast this query to a key-value flat map
+     * Encode the query as a Map
      */
-    @OptIn(ExperimentalSerializationApi::class)
-    public fun <Q : Query<Q, *>> Q.toMap() : Map<String, String> =
-        Properties.encodeToStringMap(serializer, this)
+    @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
+    @Suppress("UNCHECKED_CAST")
+    private fun toMap(): Map<String, String> =
+        Properties.encodeToStringMap(this::class.serializer() as SerializationStrategy<Query>, this)
 
     /**
-     * Perform a GET request using the default client and this query
+     * Perform a GET request with this [Query]
      */
-    public suspend fun <Q : Query<Q, *>> Q.get() : HttpResponse =
-        client.get {
+    internal suspend fun query(httpClient: HttpClient, url: String = ""): HttpResponse {
 
-            // Prepare query as mutable map
-            val map = toMap().toMutableMap()
+        // obtain a (mutable) map representing the query
+        val map = toMap().toMutableMap()
 
-            // Append format (delegated properties are not serialized)
-            map["format"] = format
-
-            // Append query parameters, one by one
-            map.forEach { (k, v) ->
-                // TODO: fix elevation endpoint not accepting %2C encoded commas
-                // this.url.parameters.append(k, v)
-                this.url.encodedParameters.append(k, v)
-            }
-
+        // manually append keys assigned through delegation
+        if (this is Expect<*>) {
+            map["format"] = this.format
         }
+
+        // perform GET request
+        return httpClient.get(url) {
+            map.forEach { (k, v) -> this.url.parameters.append(k, v) }
+        }
+
+    }
+
+    /**
+     * A [Query] for a single location
+     */
+    internal interface Coordinates {
+        public val latitude: Float
+        public val longitude: Float
+
+        /**
+         * A [Query] for a multiple locations
+         */
+        public interface Multiple {
+            public val latitude: ListAsString<Float>
+            public val longitude: ListAsString<Float>
+        }
+    }
+
+    /**
+     * A [Query] for hourly data
+     */
+    internal interface Hourly {
+        public val hourly: ListAsString<String>
+    }
+
 }
