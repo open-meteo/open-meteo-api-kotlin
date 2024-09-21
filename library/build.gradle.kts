@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.dokka)
     id("module.publication")
 }
 
@@ -129,7 +130,7 @@ kotlin {
 
         macosMain.dependencies {
             implementation(libs.ktor.client.darwin)
-        }
+        }*/
 
         linuxMain.dependencies {
             implementation(libs.ktor.client.curl)
@@ -137,7 +138,7 @@ kotlin {
 
         mingwMain.dependencies {
             implementation(libs.ktor.client.winhttp)
-        }*/
+        }
 
     }
 }
