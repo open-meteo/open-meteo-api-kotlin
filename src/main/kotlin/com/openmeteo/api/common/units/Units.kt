@@ -44,7 +44,7 @@ enum class Units(vararg val alias: @Contextual Any) {
     @SerialName("mph")
     MilesPerHour(WindSpeedUnit.MilesPerHour),
 
-    @SerialName("knots")
+    @SerialName("kn")
     Knots(WindSpeedUnit.Knots),
 
     @SerialName("cm")
